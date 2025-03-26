@@ -1,0 +1,308 @@
+body {
+    font-family: "Nyte W00 Black";
+}
+
+.landing {
+    background: linear-gradient(#BF161De6, #BF161De6), url(../img/Web/bg-hero.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+#navbar {
+    transition: background-color 0.1s ease, padding 0.1s ease;
+    padding: 1rem 0;
+    background-color: transparent;
+}
+
+.active-dropdown > button {
+    color: #3fd144; /* Warna hijau custom-lightgreen */
+}
+
+.scrolled {
+    background-color: #BF161C !important; /* Darker red when scrolled */
+    padding: 0 0 !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.scrolled .h-14{
+    height: calc(var(--spacing) * 12);
+    transition: 0.3s ease;
+}
+
+.landing-content {
+    width: 100%;
+    padding: 0 6rem;
+    margin-top: 2rem;
+}
+
+.landing-content .grid {
+    gap: 3rem; /* Increase gap between content and image */
+}
+
+#dropdownHoverButton {
+    width: 9rem;
+}
+
+/* Dropdown positioning for desktop */
+.group {
+    position: relative;
+}
+
+.group-hover\:block {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100%;
+    min-width: 10rem;
+    z-index: 50;
+}
+
+#popupModal {
+    background: rgba(0, 0, 0, 0.8); /* Warna hitam transparan */
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 792px) {
+    .landing {
+        align-items: flex-start;
+        padding-top: 80px;
+        text-align: center;
+        padding-bottom: 3rem;
+    }
+
+    .landing-content {
+        padding: 0 2rem;
+        transition: padding-top 0.3s ease;
+    }
+    
+    .landing-content .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .landing h1 {
+        font-size: 2.5rem;
+        margin-top: 4rem;
+    }
+    
+    .landing .text-white {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    
+    .landing .inline-block {
+        margin-top: 1rem;
+    }
+    
+    #navbar {
+        background-color: rgba(191, 22, 29, 0.9);
+    }
+
+    #navbar-sticky {
+        background-color: #BF161C;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 19;
+        padding: 1rem;
+    }
+
+    #navbar-sticky .flex-col {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    #navbar-sticky .group {
+        margin-bottom: 0.5rem;
+        width: 100%;
+        position: relative;
+    }
+    
+    #navbar-sticky button {
+        width: 100%;
+        text-align: left;
+        justify-content: left;
+    }
+    
+    /* Language and Buy Now buttons styling */
+    #navbar-sticky .md1\:flex-row.md1\:items-center {
+        align-items: flex-start;
+    }
+    
+    #navbar-sticky .group.w-full.md1\:w-auto button[type="button"],
+    #navbar-sticky #dropdownHoverButton {
+        width: 9rem;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    #navbar-sticky .group-hover\:block {
+        position: static;
+        left: 0;
+        transform: none;
+        top: auto;
+        margin-top: 0;
+        width: auto;
+        box-shadow: none;
+        margin-inline-start: 2rem;
+        margin-inline-end: 2rem;
+        border-left: 2px solid #eee;
+        text-align: left;
+    }
+    
+    #navbar-sticky .group:hover .group-hover\:block {
+        display: block;
+    }
+
+    /* about */
+    .not-index {
+        margin-top: 4rem;
+        padding: 3rem 2rem;
+    }
+    
+    .not-index h1 {
+        font-size: 3rem;
+        margin-top: 0.5rem;
+    }
+    
+    .not-index .text-xl {
+        font-size: 1.1rem;
+    }
+    
+    .not-index .max-w-4xl, .max-w-2xl {
+        max-width: 90%;
+        margin-top: 2rem;
+    }
+}
+
+/* Mobile styles (320px-640px) */
+@media (min-width: 320px) and (max-width: 640px) {
+    /* General layout adjustments */
+    .landing-content {
+        padding-top: 150px;
+        padding-bottom: 30px;
+    }
+
+    /* Landing content */
+    .landing-content h1 {
+        font-size: 2rem;
+    }
+
+    .landing-content p {
+        font-size: 1rem;
+    }
+
+    /* Section padding */
+    .why-choose-us, .product-category {
+        padding: 40px 0;
+    }
+
+    .max-w-screen-xl {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Typography */
+    h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Card layout */
+    .grid {
+        gap: 1rem;
+    }
+
+    /* Product cards */
+    .product-category .grid > div {
+        max-width: 100%;
+    }
+
+    /* Navigation adjustments */
+    #navbar .max-w-screen-xl {
+        padding: 0.75rem;
+    }
+
+    /* Hero section */
+    .landing .grid {
+        text-align: center;
+    }
+
+    /* Button sizing */
+    .landing-content a {
+        padding: 0.5rem 1.5rem;
+    }
+
+    /* Mengubah layout dari flex-row menjadi flex-col pada mobile */
+    .certification-item .bg-white {
+        flex-direction: column;
+    }
+    
+    /* Mengatur width gambar sertifikasi pada mobile */
+    .certification-item [class*="md\:w-1"] {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    /* Mengatur width konten sertifikasi pada mobile */
+    .certification-item [class*="md\:w-2"] {
+        width: 100%;
+        padding-left: 0;
+    }
+    
+    /* Mengatasi badge yang terpotong dengan mengatur text-wrap */
+    .certification-item .rounded-full {
+        white-space: normal;
+        display: inline-block;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Memberikan padding tambahan untuk badge */
+    .certification-item .bg-blue-500,
+    .certification-item .bg-yellow-500,
+    .certification-item .bg-custom-lightergreen {
+        padding: 0.25rem 0.75rem;
+        line-height: 1.5;
+    }
+    
+    /* Mengatur tombol unduh */
+    .certification-item a.inline-block {
+        margin-top: 1rem;
+        display: block;
+        text-align: center;
+    }
+    
+    /* Carousel indicators */
+    .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        margin: 0 4px;
+    }
+
+    /* about */
+    .not-index {
+        margin-top: 8rem;
+        padding: 2rem 1rem;
+    }
+    
+    .not-index h1 {
+        font-size: 2rem;
+        margin-top: 0.5rem;
+    }
+    
+    .not-index .text-xl {
+        font-size: 1rem;
+    }
+    
+    .not-index .max-w-4xl, .max-w-2xl {
+        max-width: 100%;
+        margin-top: 1.5rem;
+    }
+}
