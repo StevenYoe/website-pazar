@@ -87,58 +87,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <div class="product-grid">
-            <div class="product-item" data-category="Instant Seasoning" data-id="1">
-                <img src="img/menu-1.jpg" alt="Bumbu Instan Ayam Goyeng">
-                <div class="product-overlay">
-                    <h3 class="product-title">Bumbu Instan Ayam Goyeng</h3>
-                    <p class="product-category">Bumbu Instan</p>
-                    <div class="product-links">
-                        <a href="product-details.html?id=1" class="product-link">
-                            Selengkapnya →
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item" data-category="Spices" data-id="2">
-                <img src="img/menu-2.jpg" alt="Lada Hitam">
-                <div class="product-overlay">
-                    <h3 class="product-title">Lada Hitam</h3>
-                    <p class="product-category">Rempah</p>
-                    <div class="product-links">
-                        <a href="product-details.html?id=2" class="product-link">
-                            Selengkapnya →
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item" data-category="Sambal" data-id="3">
-                <img src="img/menu-3.jpg" alt="Sambal Terasi">
-                <div class="product-overlay">
-                    <h3 class="product-title">Sambal Terasi</h3>
-                    <p class="product-category">Sambal</p>
-                    <div class="product-links">
-                        <a href="product-details.html?id=3" class="product-link">
-                            Selengkapnya →
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="product-item" data-category="Special Product" data-id="4">
-                <img src="img/menu-4.jpg" alt="Bumbu Instan Spesial Edition">
-                <div class="product-overlay">
-                    <h3 class="product-title">Bumbu Instan Spesial Edition</h3>
-                    <p class="product-category">Special Product</p>
-                    <div class="product-links">
-                        <a href="product-details.html?id=4" class="product-link">
-                            Selengkapnya →
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    
     </div>
 </section>
 @endsection

@@ -36,6 +36,7 @@
 
 .product-item:hover {
     transform: translateY(-5px);
+    box-shadow: 0 4px 15px #BF161C;
 }
 
 .product-item img {
@@ -44,19 +45,9 @@
     object-fit: cover;
 }
 
-.product-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(17, 31, 77, 0.9);
-    padding: 1.5rem;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.product-item:hover .product-overlay {
+.product-item {
     transform: translateY(0);
+    transition: transform 0.3s ease;;
 }
 
 .product-title {
