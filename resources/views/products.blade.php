@@ -39,7 +39,7 @@
                     <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Ayam Goyeng</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Bumbu Instan</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Bumbu instan berkualitas tinggi untuk membuat masakan rumah dengan rasa autentik</p>
-                    <a href="product-details.html/Bumbu-Instan-Ayam-Goyeng" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/Bumbu-Instan-Ayam-Goyeng" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
             <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Bumbu-Instan-Ayam-Buakar" data-category="Instant Seasoning">
@@ -50,7 +50,7 @@
                     <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Ayam Buakar</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Bumbu Instan</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Bumbu instan berkualitas tinggi untuk membuat masakan rumah dengan rasa autentik</p>
-                    <a href="product-details.html/Bumbu-Instan-Ayam-Buakar" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/Bumbu-Instan-Ayam-Buakar" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
             <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Sambal-Terasi" data-category="Sambal">
@@ -61,7 +61,7 @@
                     <h3 class="text-xl text-black font-bold mb-1">Sambal Terasi</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Sambal</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Sambal dengan cita rasa pedas yang khas untuk pelengkap hidangan favorit</p>
-                    <a href="product-details.html/Sambal-Terasi" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/Sambal-Terasi" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
             <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Lada-Hitam" data-category="Spices">
@@ -72,7 +72,7 @@
                     <h3 class="text-xl text-black font-bold mb-1">Lada Hitam</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Rempah</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Rempah pilihan berkualitas untuk meningkatkan aroma dan cita rasa masakan</p>
-                    <a href="product-details.html/Lada-Hitam" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/Lada-Hitam" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
             <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Bumbu-Instan-Edisi-Spesial" data-category="Special Produk">
@@ -83,7 +83,7 @@
                     <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Edisi Spesial</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Produk Spesial</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Tepung bumbu praktis untuk gorengan renyah dan gurih dalam sekejap</p>
-                    <a href="product-details.html/Bumbu-Instan-Edisi-Spesial" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/Bumbu-Instan-Edisi-Spesial" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
         </div>
