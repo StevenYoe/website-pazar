@@ -1,6 +1,6 @@
 @extends('master')
 
-<!-- Vacancies Header Section -->
+<!-- Career Info Header Section -->
 @section('header')
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">

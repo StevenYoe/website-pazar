@@ -65,7 +65,7 @@
                                     </button>
                                     <div class="absolute left-0 z-10 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 md1:mt-0 mt-0">
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                                            <li><a id="career-info" href="/carrierinfo" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Info Karir</a></li>
+                                            <li><a id="career-info" href="/careerinfo" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Info Karir</a></li>
                                             <li><a id="career-vacancies" href="/vacancies" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Lowongan</a></li>
                                         </ul>
                                     </div>

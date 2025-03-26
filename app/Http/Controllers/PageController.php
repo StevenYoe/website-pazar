@@ -23,8 +23,8 @@ class PageController extends Controller
 		return view('products');
 	}
  
-	public function carrierinfo(){
-		return view('carrierinfo');
+	public function careerinfo(){
+		return view('careerinfo');
 	}
  
 	public function vacancies(){

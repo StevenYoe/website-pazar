@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdownId: 'about-dropdown', 
             activeIds: ['about-pazar']
         },
-        'carrierinfo': {
+        'careerinfo': {
             dropdownId: 'career-dropdown',
             activeIds: ['career-info']
         },
