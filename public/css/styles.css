@@ -66,6 +66,25 @@ body {
     background: rgba(0, 0, 0, 0.8); /* Warna hitam transparan */
 }
 
+.nama-perusahaan {
+    display: block; /* Membuat nama perusahaan menjadi blok */
+    font-weight: bold; /* Contoh: menebalkan nama perusahaan */
+}
+  
+.alamat {
+    display: block; /* Membuat alamat menjadi blok */
+}
+
+.category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px #BF161C;
+}
+
+.category-item {
+    transform: translateY(0);
+    transition: transform 0.3s ease;;
+}
+
 /* Mobile responsive adjustments */
 @media (max-width: 792px) {
     .landing {

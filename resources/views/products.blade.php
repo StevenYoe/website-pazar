@@ -31,59 +31,59 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
-            <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Bumbu-Instan-Ayam-Goyeng" data-category="Instant Seasoning">
+            <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="1" data-category="Instant Seasoning">
                 <div class="h-48 overflow-hidden">
-                    <img src="img/Web/bumbu-instan.jpg" alt="Bumbu Instan Ayam Goyeng" class="w-full h-full object-cover">
+                    <img src="img/Product/bumbu-instan-ayam-goreng.jpg" alt="Bumbu Instan Ayam Goyeng" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Ayam Goyeng</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Bumbu Instan</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Bumbu instan berkualitas tinggi untuk membuat masakan rumah dengan rasa autentik</p>
-                    <a href="product/Bumbu-Instan-Ayam-Goyeng" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/fried-chicken-instant-seasoning" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
-            <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Bumbu-Instan-Ayam-Buakar" data-category="Instant Seasoning">
+            <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Bumbu-Instan-Ayam-Bakar" data-category="Instant Seasoning">
                 <div class="h-48 overflow-hidden">
-                    <img src="img/Web/bumbu-instan.jpg" alt="Bumbu Instan Ayam Buakar" class="w-full h-full object-cover">
+                    <img src="img/Product/bumbu-instan-ayam-bakar.jpg" alt="Bumbu Instan Ayam Bakar" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Ayam Buakar</h3>
+                    <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Ayam Bakar</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Bumbu Instan</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Bumbu instan berkualitas tinggi untuk membuat masakan rumah dengan rasa autentik</p>
-                    <a href="product/Bumbu-Instan-Ayam-Buakar" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/roast-chicken-instant-seasoning" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
             <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Sambal-Terasi" data-category="Sambal">
                 <div class="h-48 overflow-hidden">
-                    <img src="img/Web/sambal.jpg" alt="Sambal Terasi" class="w-full h-full object-cover">
+                    <img src="img/Product/sambal-terasi.jpg" alt="Sambal Terasi" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl text-black font-bold mb-1">Sambal Terasi</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Sambal</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Sambal dengan cita rasa pedas yang khas untuk pelengkap hidangan favorit</p>
-                    <a href="product/Sambal-Terasi" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/sambal-terasi" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
             <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Lada-Hitam" data-category="Spices">
                 <div class="h-48 overflow-hidden">
-                    <img src="img/Web/rempah.jpg" alt="Lada Hitam" class="w-full h-full object-cover">
+                    <img src="img/Product/lada-hitam.jpg" alt="Lada Hitam" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl text-black font-bold mb-1">Lada Hitam</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Rempah</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Rempah pilihan berkualitas untuk meningkatkan aroma dan cita rasa masakan</p>
-                    <a href="product/Lada-Hitam" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/black-pepper" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
             <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Bumbu-Instan-Edisi-Spesial" data-category="Special Produk">
                 <div class="h-48 overflow-hidden">
-                    <img src="img/Web/produk-spesial.jpg" alt="Bumbu Instan Edisi Spesial" class="w-full h-full object-cover">
+                    <img src="img/Product/bumbu-instan-edisi-spesial.jpg" alt="Bumbu Instan Edisi Spesial" class="w-full h-full object-cover">
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
                     <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Edisi Spesial</h3>
                     <h4 class="text-sm text-custom-red font-bold mb-2">Produk Spesial</h4>
                     <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Tepung bumbu praktis untuk gorengan renyah dan gurih dalam sekejap</p>
-                    <a href="product/Bumbu-Instan-Edisi-Spesial" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                    <a href="product/instant-seasoning-special-edition" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                 </div>
             </div>
         </div>

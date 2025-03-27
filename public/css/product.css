@@ -101,21 +101,3 @@
         gap: 1rem;
     }
 }
-
-.product-link {
-    color: white;
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: rgba(242, 244, 247, 0.05);
-    border-radius: 50px;
-    transition: all 0.3s ease;
-}
-
-.product-link:hover {
-    background: #BF161C;
-    transform: translateX(5px);
-}
