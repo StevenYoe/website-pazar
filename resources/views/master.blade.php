@@ -45,16 +45,27 @@
                             <!-- Main Navigation Items -->
                             <div class="flex flex-col md1:flex-row md1:space-x-4 w-full">
                                 <div class="relative group w-full md1:w-auto">
-                                    <button id="about-dropdown" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Tentang Kami
-                                    </button>
-                                    <div class="absolute left-0 z-10 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 md1:mt-0 mt-0">
-                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                                            <li><a id="about-company" href="/company" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Sekilas Perusahaan</a></li>
-                                            <li><a id="about-pazar" href="/history" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Sejarah Pazar</a></li>
-                                            <li><a id="about-products" href="/products" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Produk</a></li>
-                                        </ul>
-                                    </div>
+                                    <a href="/company" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                        Our Company
+                                    </a>
+                                </div>
+
+                                <div class="relative group w-full md1:w-auto">
+                                    <a href="/brand" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                        Our Brand
+                                    </a>
+                                </div>
+
+                                <div class="relative group w-full md1:w-auto">
+                                    <a href="/products" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                        Products
+                                    </a>
+                                </div>
+
+                                <div class="relative group w-full md1:w-auto">
+                                    <a href="/recipes" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                        Recipes
+                                    </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
@@ -115,6 +126,7 @@
                                             <li><a href="https://www.blibli.com/merchant/pazar-seasonings/PAS-70580" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Blibli</a></li>
                                             <li><a href="https://www.lazada.co.id/shop/pazar-seasonings/" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Lazada</a></li>
                                             <li><a href="https://www.tiktok.com/@pazar.seasonings" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Tiktok Shop</a></li>
+                                            <li><a href="https://www.bukalapak.com/u/pazarseasonings_113090" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Bukalapak</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -137,13 +149,13 @@
                     <div class="flex flex-col items-center md:items-start">
                         <img src="img/web/Logo.png" class="h-16 mb-4" alt="Pazar Logo">
                         <h3 class="text-xl font-semibold mb-2">Kantor Pusat</h3>
-                        <a href="https://g.co/kgs/K4ckX4k" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
-                            <span class="nama-perusahaan">PT Pristine Prima Lestari</span>
-                            <span class="alamat">
-                            Jl. Vihara No.2, Curug Kulon,
-                            Kec. Curug, Kabupaten Tangerang,
-                            Banten 15820
-                            </span>
+                        <a href="https://g.co/kgs/K4ckX4k" target="_blank" class="text-center md:text-left text-white dark:text-gray-200 hover:text-custom-lightergreen">
+                            <p class="font-medium">PT Pristine Prima Lestari</p>
+                            <p class="mt-1">
+                                Jl. Vihara No.2, Curug Kulon,<br>
+                                Kec. Curug, Kabupaten Tangerang,<br>
+                                Banten 15820
+                            </p>
                         </a>
                     </div>
                     
@@ -152,14 +164,20 @@
                         <h3 class="text-xl font-semibold mb-4">Hubungi Kami</h3>
                         <div class="flex items-center mb-3">
                             <img src="img/Web/Email.svg" alt="Email Icon" class="h-5 w-5 mr-2">
-                            <a href="#" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
+                            <a href="mailto:info@pazarseasonings.com" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
                                 <span>info@pazarseasonings.com</span>
                             </a>
                         </div>
                         <div class="flex items-center mb-3">
-                        <img src="img/Web/Phone.svg" alt="Phone Icon" class="h-5 w-5 mr-2">
-                            <a href="#" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
+                            <img src="img/Web/Phone.svg" alt="Phone Icon" class="h-5 w-5 mr-2">
+                            <a href="tel:+622159894255" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
                                 <span>+62 21 5989 4255</span>
+                            </a>
+                        </div>
+                        <div class="flex items-center mb-3">
+                            <img src="img/Web/Whatsapp.svg" alt="WhatsApp Icon" class="h-5 w-5 mr-2">
+                            <a href="https://wa.me/628174918835" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
+                                <span>+62 817-4918-835</span>
                             </a>
                         </div>
                     </div>
@@ -171,11 +189,17 @@
                             <a href="https://www.instagram.com/pazarseasonings" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
                                 <img src="img/Web/Instagram.svg" alt="Instagram Icon" class="h-6 w-6">
                             </a>
-                            <a href="https://www.facebook.com/pazarseasonings" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
-                                <img src="img/Web/Facebook.svg" alt="Facebook Icon" class="h-6 w-6">
+                            <a href="https://twitter.com/pazarseasonings" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
+                                <img src="img/Web/X.svg" alt="X (Twitter) Icon" class="h-6 w-6">
                             </a>
-                            <a href="https://wa.me/628174918835" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
-                                <img src="img/Web/Whatsapp.svg" alt="Whatsapp Icon" class="h-6 w-6">
+                            <a href="https://www.tiktok.com/@pazar.seasonings" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
+                                <img src="img/Web/Tiktok.svg" alt="TikTok Icon" class="h-6 w-6">
+                            </a>
+                            <a href="https://www.snackvideo.com/pazarseasonings" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
+                                <img src="img/Web/SnackVideo.svg" alt="SnackVideo Icon" class="h-6 w-6">
+                            </a>
+                            <a href="https://www.lemon8.com/pazarseasonings" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
+                                <img src="img/Web/Lemon8.svg" alt="Lemon8 Icon" class="h-6 w-6">
                             </a>
                         </div>
                     </div>
@@ -185,7 +209,7 @@
             <!-- Copyright Section -->
             <div class="bg-black py-4">
                 <div class="max-w-screen-xl mx-auto px-4 text-center">
-                    <p>&copy; <script>document.write(new Date().getFullYear())</script>  Pazar Seasonings. PT Pristine Prima Lestari. All Rights Reserved.</p>
+                    <p>&copy; <script>document.write(new Date().getFullYear())</script> Pazar Seasonings. PT Pristine Prima Lestari. All Rights Reserved.</p>
                 </div>
             </div>
         </footer>

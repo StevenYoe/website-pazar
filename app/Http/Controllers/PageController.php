@@ -15,12 +15,16 @@ class PageController extends Controller
 		return view('company');
 	}
  
-	public function history(){
-		return view('history');
+	public function brand(){
+		return view('brand');
+	}
+ 
+	public function products(){
+		return view('products');
 	}
 
-    public function products(){
-		return view('products');
+    public function recipes(){
+		return view('recipes');
 	}
  
 	public function careerinfo(){

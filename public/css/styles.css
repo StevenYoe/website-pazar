@@ -325,3 +325,122 @@ body {
         margin-top: 1.5rem;
     }
 }
+
+/* Balanced adjustments for 793px-875px */
+@media (min-width: 793px) and (max-width: 875px) {
+    /* Adjust the navigation container */
+    #navbar .max-w-screen-xl {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    
+    /* Logo size adjustment - slightly smaller but still visible */
+    #navbar .h-14 {
+        height: 3.25rem;  /* 52px - reasonably visible */
+    }
+    
+    /* Remove unnecessary spacing between menu items */
+    .md1\:space-x-4 > * {
+        margin-left: 0.5rem !important;
+        margin-right: 0 !important;
+    }
+    
+    /* Adjust padding around text items without making them too cramped */
+    #navbar-sticky .py-2.px-3 {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        font-size: 0.875rem;  /* 14px - still readable */
+    }
+    
+    /* Make first item flush left */
+    #navbar-sticky .md1\:flex-row > div:first-child {
+        margin-left: 0 !important;
+    }
+    
+    /* Optimize the Buy Now button */
+    #dropdownHoverButton {
+        width: 7.5rem;  /* Still reasonably sized */
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    /* More compact language selector while keeping it readable */
+    #navbar-sticky button[type="button"] {
+        font-size: 0.875rem;
+    }
+    
+    /* Force navbar to use all available width */
+    #navbar-sticky .md1\:flex {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    /* Adjust the right-side items spacing */
+    #navbar-sticky .md1\:mt-0 {
+        margin-left: auto;
+    }
+}
+
+/* Additional layout fix for extremely tight range (793px-830px) */
+@media (min-width: 793px) and (max-width: 830px) {
+    /* More aggressive spacing only at the tightest breakpoints */
+    #navbar-sticky .py-2.px-3 {
+        padding-left: 0.375rem;
+        padding-right: 0.375rem;
+    }
+    
+    /* Slightly reduce menu text size only at tightest breakpoints */
+    #navbar-sticky .md1\:hover\:text-custom-lightgreen {
+        font-size: 0.8125rem;  /* 13px - still fairly readable */
+    }
+    
+    /* Smaller Buy Now button only at tightest breakpoints */
+    #dropdownHoverButton {
+        width: 7rem;
+    }
+}
+
+/* Medium screen adjustments (876px-1000px) */
+@media (min-width: 876px) and (max-width: 1000px) {
+    /* Reduce padding around navbar items */
+    #navbar-sticky .py-2.px-3 {
+        padding-left: 0.5rem;  /* 8px instead of 12px */
+        padding-right: 0.5rem;
+        font-size: 0.875rem;   /* 14px */
+    }
+    
+    /* Reduce space between navbar items */
+    .md1\:space-x-4 > * {
+        margin-left: 0.5rem !important;  /* 8px instead of 16px */
+    }
+    
+    /* Make buy now button smaller */
+    #dropdownHoverButton {
+        width: 7rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Adjust logo size slightly */
+    #navbar .h-14 {
+        height: 3rem;  /* 48px instead of 56px */
+    }
+    
+    /* Reduce navbar padding */
+    #navbar .p-4 {
+        padding: 0.75rem;
+    }
+    
+    /* Fix language dropdown button size */
+    #navbar-sticky button[type="button"] {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    /* Adjust first menu item to align better */
+    #navbar-sticky .md1\:flex-row > div:first-child {
+        margin-left: 0 !important;
+    }
+}
