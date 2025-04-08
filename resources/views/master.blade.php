@@ -45,25 +45,25 @@
                             <!-- Main Navigation Items -->
                             <div class="flex flex-col md1:flex-row md1:space-x-4 w-full">
                                 <div class="relative group w-full md1:w-auto">
-                                    <a href="/company" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                    <a id="nav-company" href="/company" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
                                         Our Company
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
-                                    <a href="/brand" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                    <a id="nav-brand" href="/brand" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
                                         Our Brand
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
-                                    <a href="/products" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                    <a id="nav-products" href="/products" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
                                         Products
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
-                                    <a href="/recipes" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                    <a id="nav-recipes" href="/recipes" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
                                         Recipes
                                     </a>
                                 </div>

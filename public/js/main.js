@@ -61,49 +61,65 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    const currentPage = document.body.getAttribute('data-page'); // Ambil nama rute dari data-page
+    // PART 1: Handle direct links by URL path
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('nav a[href]');
     
-    // Navigation configuration
-    const navigationConfig = {
-        'products': {
-            dropdownId: 'about-dropdown',
-            activeIds: ['about-products']
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            // For direct navigation links
+            link.classList.add('text-custom-lightgreen');
+        }
+    });
+    
+    // PART 2: Handle dropdown menus by route name
+    const currentPage = document.body.getAttribute('data-page');
+    
+    // Navigation configuration for dropdowns only
+    const dropdownConfig = {
+        'careerinfo': { 
+            dropdownId: 'career-dropdown', 
+            activeIds: ['career-info'], 
+            type: 'dropdown' 
         },
-        'company': {
-            dropdownId: 'about-dropdown',
-            activeIds: ['about-company']
-        },
-        'history': {
-            dropdownId: 'about-dropdown', 
-            activeIds: ['about-pazar']
-        },
-        'careerinfo': {
-            dropdownId: 'career-dropdown',
-            activeIds: ['career-info']
-        },
-        'vacancies': {
-            dropdownId: 'career-dropdown',
-            activeIds: ['career-vacancies']
+        'vacancies': { 
+            dropdownId: 'career-dropdown', 
+            activeIds: ['career-vacancies'], 
+            type: 'dropdown' 
         }
     };
-
-    const config = navigationConfig[currentPage];
-
-    if (config) {
+    
+    const config = dropdownConfig[currentPage];
+    
+    if (config && config.type === 'dropdown') {
+        // Style the dropdown button
         const dropdownButton = document.getElementById(config.dropdownId);
         if (dropdownButton) {
+            // Use !important to ensure the text color takes precedence
+            dropdownButton.style.setProperty('color', 'var(--color-custom-lightgreen)', 'important');
+            // Also add the class for consistency
             dropdownButton.classList.add('text-custom-lightgreen');
             
+            // Handle dropdown visibility if needed
             const parentGroup = dropdownButton.closest('.group');
             if (parentGroup) {
                 parentGroup.classList.add('active-dropdown');
             }
         }
         
+        // Highlight the specific active items within the dropdown
         config.activeIds.forEach(id => {
             const link = document.getElementById(id);
             if (link) {
-                link.classList.add('bg-custom-lightergreen', 'text-white');
+                // Apply background color
+                link.classList.add('bg-custom-lightergreen');
+                
+                // Apply white text color with high specificity
+                link.style.setProperty('color', 'white', 'important');
+                link.classList.add('text-white');
+                
+                // Remove any conflicting classes
+                link.classList.remove('text-gray-700', 'dark:text-gray-200');
             }
         });
     }

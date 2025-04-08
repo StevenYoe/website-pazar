@@ -2,6 +2,12 @@ body {
     font-family: "Nyte W00 Black";
 }
 
+/* Add this to your CSS */
+.text-custom-lightgreen,
+#career-dropdown.text-custom-lightgreen {
+    color: var(--color-custom-lightgreen) !important;
+}
+
 .landing {
     background: linear-gradient(#BF161De6, #BF161De6), url(../img/Web/bg-hero.jpg);
     background-position: center center;
