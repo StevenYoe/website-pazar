@@ -150,4 +150,5 @@
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
+<script src="{{ asset('js/carousel.js') }}"></script>
 @endsection

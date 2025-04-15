@@ -22,15 +22,19 @@
 <!-- Pop-up Modal -->
 <div id="popupModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 hidden">
     <div class="relative bg-transparent rounded-lg shadow-lg max-w-2xl flex flex-col items-center">
-        <a href="https://shopee.co.id/pazar_seasonings">
-            <img src="img/web/popup-banner1.jpg" alt="Pop Up Foto" 
-                class="mx-auto rounded-lg transition-opacity duration-300 hover:opacity-75 max-h-[600px] max-w-[80%] w-auto" />
-        </a>
-        
-        <!-- Tombol Close -->
-        <button id="closeModal" class="mt-4 bg-gray-200 hover:bg-gray-300 rounded-full p-3 flex items-center justify-center">
-            <img src="img/Web/close.svg" class="w-7 h-7">
-        </button>
+        <!-- Container with relative positioning -->
+        <div class="relative">
+            <!-- Image Link -->
+            <a href="https://shopee.co.id/pazar_seasonings">
+                <img src="img/web/popup-banner1.jpg" alt="Pop Up Foto" 
+                    class="mx-auto rounded-lg transition-opacity duration-300 hover:opacity-75 max-h-[600px] max-w-[80%] w-auto" />
+            </a>
+            
+            <!-- Close Button - Positioned absolutely inside the top right corner of the image -->
+            <button id="closeModal" class="absolute top-1 right-[calc(10%+3px)] bg-gray-200 hover:bg-gray-300 rounded-full p-2 flex items-center justify-center">
+                <img src="img/Web/close.svg" class="w-5 h-5">
+            </button>
+        </div>
     </div>
 </div>
 
