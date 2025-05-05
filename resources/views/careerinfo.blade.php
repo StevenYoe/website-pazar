@@ -9,7 +9,7 @@
             <h1 class="text-5xl font-bold dark:text-gray-200">Info Karir</h1>
         </div>
         <div class="w-full max-w-4xl">
-            <img src="img/Web/history.jpg" alt="History-Overview" class="rounded-lg shadow-lg w-full">
+            <img src="img/Web/career.jpg" alt="History-Overview" class="rounded-lg shadow-lg w-full">
         </div>
     </div>
 </div>

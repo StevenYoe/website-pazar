@@ -12,7 +12,7 @@
             <h1 class="text-5xl font-bold dark:text-gray-200">Produk Pazar Seasoning</h1>
         </div>
         <div class="w-full max-w-2xl">
-            <img src="img/Web/hero.jpeg" alt="History-Overview" class="rounded-lg shadow-lg w-full">
+            <img src="img/Web/recipe.jpeg" alt="History-Overview" class="rounded-lg shadow-lg w-full">
         </div>
     </div>
 </div>
