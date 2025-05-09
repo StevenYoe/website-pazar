@@ -6,8 +6,8 @@
     <div class="grid md:grid-cols-2 gap-8 items-center">
         <div class="text-white">
             @if(isset($header))
-                <h1 class="text-5xl font-bold mb-6 dark:text-gray-200">{{ $header->h_title_id }}</h1>
-                <p class="text-xl mb-8 dark:text-gray-200">{{ $header->h_description_id }}</p>
+                <h1 class="text-2xl font-bold mb-4 dark:text-gray-200">{{ $header->h_title_id }}</h1>
+                <p class="text-lg mb-6 dark:text-gray-200">{{ $header->h_description_id }}</p>
             @endif
             <a href="/company" class="inline-block bg-custom-lightgreen hover:bg-custom-green text-white dark:text-gray-200 font-bold py-3 px-8 rounded-lg transition duration-300">
                 SELENGKAPNYA
@@ -30,8 +30,8 @@
         <!-- Container with relative positioning -->
         <div class="relative">
             <!-- Image Link -->
-            <a href="{{ $popup->pu_link ?? 'https://shopee.co.id/pazar_seasonings' }}">
-                <img src="{{ $popup->pu_image ?? 'img/web/popup-banner1.jpg' }}" alt="Pop Up Foto" 
+            <a href="{{ $popup->pu_link }}">
+                <img src="{{ $popup->pu_image }}" alt="Pop Up Foto" 
                     class="mx-auto rounded-lg transition-opacity duration-300 hover:opacity-75 max-h-[600px] max-w-[80%] w-auto" />
             </a>
             
@@ -92,7 +92,7 @@
 <!-- Product Category Section -->
 <section class="product-category py-10 bg-white dark:bg-gray-900 antialiased">
     <div class="max-w-screen-xl mx-auto px-20">
-        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Our Product Categories</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Kategori Produk</h2>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
             @if(isset($productCategories) && count($productCategories) > 0)
@@ -108,55 +108,6 @@
                         </div>
                     </div>
                 @endforeach
-            @else
-                <!-- Fallback to static content if no categories are available -->
-                <!-- Bumbu Instan Card -->
-                <div class="category-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
-                    <div class="h-48 overflow-hidden">
-                        <img src="img/Category/bumbu-instan.jpg" alt="Bumbu Instan" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2">Bumbu Instan</h3>
-                        <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Bumbu instan berkualitas tinggi untuk membuat masakan rumah dengan rasa autentik</p>
-                        <a href="/products" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
-                    </div>
-                </div>
-                
-                <!-- Sambal Card -->
-                <div class="category-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
-                    <div class="h-48 overflow-hidden">
-                        <img src="img/Category/sambal.jpg" alt="Sambal" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2">Sambal</h3>
-                        <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Sambal dengan cita rasa pedas yang khas untuk pelengkap hidangan favorit</p>
-                        <a href="/products" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
-                    </div>
-                </div>
-                
-                <!-- Rempah Card -->
-                <div class="category-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
-                    <div class="h-48 overflow-hidden">
-                        <img src="img/Category/rempah.jpg" alt="Rempah" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2">Rempah</h3>
-                        <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Rempah pilihan berkualitas untuk meningkatkan aroma dan cita rasa masakan</p>
-                        <a href="/products" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
-                    </div>
-                </div>
-                
-                <!-- Produk Spesial Card -->
-                <div class="category-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
-                    <div class="h-48 overflow-hidden">
-                        <img src="img/Category/produk-spesial.jpg" alt="Produk Spesial" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-xl font-bold mb-2">Produk Spesial</h3>
-                        <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Tepung bumbu praktis untuk gorengan renyah dan gurih dalam sekejap</p>
-                        <a href="/products" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
-                    </div>
-                </div>
             @endif
         </div>
     </div>
@@ -187,6 +138,5 @@
 
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
-<script src="{{ asset('js/carousel.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 @endsection

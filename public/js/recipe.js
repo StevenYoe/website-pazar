@@ -1,8 +1,8 @@
-// Product filter functionality
+// Recipe filter functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Get all filter buttons and product items
+    // Get all filter buttons and recipe items
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const productItems = document.querySelectorAll('.product-item');
+    const recipeItems = document.querySelectorAll('.recipe-item');
 
     // Check if elements exist before proceeding
     if (filterButtons.length === 0) {
@@ -10,20 +10,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return; // Exit if no filter buttons
     }
     
-    if (productItems.length === 0) {
-        console.warn('No product items found on this page');
-        return; // Exit if no product items
+    if (recipeItems.length === 0) {
+        console.warn('No recipe items found on this page');
+        return; // Exit if no recipe items
     }
 
-    productItems.forEach(item => {
+    // Debug: Log all recipe items and their categories
+    recipeItems.forEach(item => {
         const category = item.getAttribute('data-category') || '';
+        const categories = item.getAttribute('data-categories') ? 
+            JSON.parse(item.getAttribute('data-categories')) : [];
         const id = item.getAttribute('data-id') || '';
         const titleElement = item.querySelector('h3');
         const title = titleElement ? titleElement.textContent.trim() : 'Unknown';
-    });
-
-    filterButtons.forEach(button => {
-        const filter = button.getAttribute('data-filter') || '';
+        
+        console.log(`Recipe: ${title} (ID: ${id}), Primary Category: ${category}, All Categories:`, categories);
     });
 
     // Add click event listeners to filter buttons
@@ -40,21 +41,30 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let visibleCount = 0;
             
-            // Show/hide products based on filter
-            productItems.forEach(item => {
+            // Show/hide recipes based on filter
+            recipeItems.forEach(item => {
                 const itemCategory = (item.getAttribute('data-category') || '').trim();
+                const itemCategories = item.getAttribute('data-categories') ? 
+                    JSON.parse(item.getAttribute('data-categories')) : [];
                 const titleElement = item.querySelector('h3');
                 const itemTitle = titleElement ? titleElement.textContent.trim() : 'Unknown';
                 
-                // Show all items if 'all' is selected, else filter by category
+                // Show all items if 'all' is selected, or if the category matches any of the recipe's categories
                 if (filterValue === 'all' || 
-                   (filterValue !== '' && itemCategory !== '' && itemCategory === filterValue)) {
+                    (filterValue !== '' && (
+                        itemCategory === filterValue || 
+                        itemCategories.includes(filterValue)
+                    ))) {
                     item.style.display = 'flex';  // Explicitly set to flex to ensure it displays
                     visibleCount++;
+                    console.log(`Showing: ${itemTitle} (categories: ${itemCategories.join(', ')})`);
                 } else {
                     item.style.display = 'none';
+                    console.log(`Hiding: ${itemTitle} (doesn't match ${filterValue})`);
                 }
             });
+            
+            console.log(`Filter applied: ${filterValue}, Showing ${visibleCount} recipes`);
         });
     });
 

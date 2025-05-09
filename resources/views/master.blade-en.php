@@ -48,36 +48,36 @@
                             <div class="flex flex-col md1:flex-row md1:space-x-4 w-full">
                                 <div class="relative group w-full md1:w-auto">
                                     <a id="nav-company" href="/company" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Perusahaan Kami
+                                        Our Company
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
                                     <a id="nav-brand" href="/brand" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Brand Kami
+                                        Our Brand
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
                                     <a id="nav-products" href="/products" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Produk
+                                        Products
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
                                     <a id="nav-recipes" href="/recipes" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Resep
+                                        Recipes
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
                                     <button id="career-dropdown" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Karir
+                                        Career
                                     </button>
                                     <div class="absolute left-0 z-10 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 md1:mt-0 mt-0">
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                                            <li><a id="career-info" href="/careerinfo" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Info Karir</a></li>
-                                            <li><a id="career-vacancies" href="/vacancies" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Lowongan</a></li>
+                                            <li><a id="career-info" href="/careerinfo" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Career Info</a></li>
+                                            <li><a id="career-vacancies" href="/vacancies" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Vacancies</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -88,8 +88,8 @@
                                 <!-- Language Dropdown -->
                                 <div class="relative group w-full md1:w-auto">
                                     <button type="button" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-white dark:text-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-custom-lightgreen dark:hover:bg-gray-700 dark:hover:text-white">
-                                    <img src="{{ asset('img/Web/Indonesia.svg')}}" alt="Indonesia Flag" class="h-3.5 w-3.5 rounded-full me-2">
-                                        Indonesia                    
+                                    <img src="{{ asset('img/Web/USA.svg')}}" alt="USA Flag" class="h-3.5 w-3.5 rounded-full me-2">
+                                        English (US)                    
                                     </button>
                                     <!-- Language Dropdown content -->
                                     <div class="absolute md1:absolute right-0 z-50 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 w-full md1:w-44">
@@ -117,7 +117,7 @@
                                 <!-- Buy Now Dropdown -->
                                 <div class="relative group w-full md1:w-auto">
                                     <button id="dropdownHoverButton" class="text-white dark:text-gray-200 bg-custom-lightgreen hover:bg-custom-green focus:ring-4 focus:outline-none focus:bg-custom-lightergreen font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center justify-between dark:bg-custom-lightgreen dark:hover:bg-custom-green dark:focus:bg-custom-darkgreen w-full md:w-auto" type="button">
-                                        Beli Sekarang
+                                        Buy Now
                                     </button>
                                     
                                     <!-- Buy Now Dropdown menu -->
@@ -154,8 +154,8 @@
                         @if(isset($footerData) && isset($footerData['address']) && $footerData['address'])
                             <h3 class="text-xl font-semibold mb-2">Kantor Pusat</h3>
                             <a href="{{ $footerData['address']->f_link ?? '#' }}" target="_blank" class="text-center md:text-left text-white dark:text-gray-200 hover:text-custom-lightergreen">
-                                <p class="font-medium">{{ $footerData['address']->f_label_id }}</p>
-                                <p class="mt-1 whitespace-normal break-words">{!! nl2br(e($footerData['address']->f_description_id ?? '')) !!}</p>
+                                <p class="font-medium">{{ $footerData['address']->f_label_en }}</p>
+                                <p class="mt-1 whitespace-normal break-words">{!! nl2br(e($footerData['address']->f_description_en ?? '')) !!}</p>
                             </a>
                         @endif
                     </div>
@@ -167,10 +167,10 @@
                             @foreach($footerData['contacts'] as $contact)
                                 <div class="flex items-center mb-3">
                                     @if(isset($contact->f_icon) && $contact->f_icon)
-                                        <img src="{{ $contact->f_icon }}" alt="{{ $contact->f_label_id ?? 'Contact' }} Icon" class="h-5 w-5 mr-2">
+                                        <img src="{{ $contact->f_icon }}" alt="{{ $contact->f_label_en ?? 'Contact' }} Icon" class="h-5 w-5 mr-2">
                                     @endif
                                     <a href="{{ $contact->f_link ?? '#' }}" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
-                                        <span>{{ $contact->f_description_id ?? $contact->f_label_id ?? 'Contact Us' }}</span>
+                                        <span>{{ $contact->f_description_en ?? $contact->f_label_en ?? 'Contact Us' }}</span>
                                     </a>
                                 </div>
                             @endforeach
@@ -185,7 +185,7 @@
                                 @foreach($footerData['socials'] as $social)
                                     <a href="{{ $social->f_link ?? '#' }}" target="_blank" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
                                         @if(isset($social->f_icon) && $social->f_icon)
-                                            <img src="{{ $social->f_icon }}" alt="{{ $social->f_label_id ?? 'Social' }} Icon" class="h-6 w-6">
+                                            <img src="{{ $social->f_icon }}" alt="{{ $social->f_label_en ?? 'Social' }} Icon" class="h-6 w-6">
                                         @endif
                                     </a>
                                 @endforeach

@@ -1,0 +1,132 @@
+@extends('master')
+
+@section('style')
+<link href="{{ asset('css/product-detail.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/product.css') }}" rel="stylesheet" type="text/css">
+@endsection
+
+@section('header')
+<!-- Override with empty header to remove default landing content -->
+<div class="product-detail-header"></div>
+@endsection
+
+@section('content')
+<!-- Product Detail Section -->
+<section class="pt-10 pb-12 bg-white dark:bg-gray-900">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:flex lg:items-start lg:space-x-8">
+            <!-- Product Image -->
+            <div class="lg:w-1/2">
+                <div class="rounded-lg overflow-hidden shadow-lg">
+                    <img src="{{ $product->p_image }}" alt="{{ $product->p_title_id }}" class="w-full h-auto">
+                </div>
+            </div>
+            
+            <!-- Product Info -->
+            <div class="mt-10 lg:mt-0 lg:w-1/2">
+                <div class="pb-6">
+                    <h1 class="text-3xl text-gray-900 dark:text-white">{{ $product->p_title_id }}</h1>
+                    <h2 class="mt-2 prose prose-sm text-custom-red">{{ $product->category_name_id }}</h2>
+                </div>
+                @if(isset($product->detail))
+                <div class="py-6">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Deskripsi</h3>
+                    <div class="mt-4 prose prose-sm text-gray-500 dark:text-gray-400">
+                        <p class="mb-2"> {{ $product->p_description_id }}</p>
+                        {!! nl2br(e($product->detail->pd_longdesc_id)) !!}
+                    </div>
+                </div>
+                <div class="py-6">
+                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Sejarah</h3>
+                    <div class="mt-4 prose prose-sm text-gray-500 dark:text-gray-400">
+                        {!! nl2br(e($product->detail->pd_history_id)) !!}
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+        
+        <!-- E-commerce Links with store logos -->
+        @if(isset($product->detail))
+        <div class="mt-10 pt-6">
+            <h3 class="text-xl font-medium text-gray-900 dark:text-white text-center mb-6">Beli Sekarang</h3>
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 max-w-2xl mx-auto">
+                @if(!empty($product->detail->pd_link_shopee))
+                <a href="{{ $product->detail->pd_link_shopee }}" target="_blank">
+                    <img src="{{ config('app.storage_url') }}/webs/Shopee.png" alt="Shopee" class="w-full transition-opacity">
+                </a>
+                @endif
+                
+                @if(!empty($product->detail->pd_link_tokopedia))
+                <a href="{{ $product->detail->pd_link_tokopedia }}" target="_blank">
+                    <img src="{{ config('app.storage_url') }}/webs/Tokopedia.png" alt="Tokopedia" class="w-full transition-opacity">
+                </a>
+                @endif
+                
+                @if(!empty($product->detail->pd_link_blibli))
+                <a href="{{ $product->detail->pd_link_blibli }}" target="_blank">
+                    <img src="{{ config('app.storage_url') }}/webs/Blibli.png" alt="Blibli" class="w-full transition-opacity">
+                </a>
+                @endif
+                
+                @if(!empty($product->detail->pd_link_lazada))
+                <a href="{{ $product->detail->pd_link_lazada }}" target="_blank">
+                    <img src="{{ config('app.storage_url') }}/webs/Lazada.png" alt="Lazada" class="w-full transition-opacity">
+                </a>
+                @endif
+            </div>
+        </div>
+        @endif
+        
+        <!-- Produk Lainnya -->
+        @if(count($randomProducts) > 0)
+        <div class="mt-16">
+            <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-8">Produk Lainnya</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($randomProducts as $randomProduct)
+                <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full overflow-hidden max-w-xs mx-auto w-full" 
+                    data-id="{{ $randomProduct->p_id }}" 
+                    data-category="{{ $randomProduct->category_name_id }}">
+                    <div class="h-48 overflow-hidden">
+                        <img src="{{ $randomProduct->p_image }}" alt="{{ $randomProduct->p_title_id }}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <a href="{{ url('product/' . $randomProduct->slug) }}" class="hover:text-custom-red">
+                            <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red">{{ $randomProduct->p_title_id }}</h3>
+                        </a>
+                        <h4 class="text-sm text-custom-red font-bold mb-2">{{ $randomProduct->category_name_id }}</h4>
+                        <p class="text-gray-600 dark:text-gray-800 flex-grow">{{ $randomProduct->p_description_id }}</p>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+    </div>
+</section>
+@endsection
+
+@section('script')
+<script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/back-to-top.js') }}"></script>
+<script>
+    // Make sure navbar is solid red on product detail page
+    document.addEventListener('DOMContentLoaded', function() {
+        // Force navbar to have background color on product detail page
+        var navbar = document.getElementById('navbar');
+        if (navbar) {
+            navbar.classList.add('bg-custom-red');
+            navbar.classList.add('scrolled');
+        }
+        
+        // Force header to have minimal height
+        var header = document.querySelector('header.landing');
+        if (header) {
+            header.style.minHeight = '21vh';
+            header.style.height = 'auto';
+            header.style.background = '#BF161C';
+            header.style.display = 'block';
+        }
+    });
+</script>
+@endsection

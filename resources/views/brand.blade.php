@@ -16,55 +16,38 @@
 @endsection
 
 @section('content')
-<!-- Why Choose Us Section -->
-<section class="why-choose-us py-20 bg-gray-50 dark:bg-gray-950 antialiased dark:text-gray-200">
-    <div class="max-w-screen-xl mx-auto px-20">
-        <h2 class="text-4xl font-bold text-center mb-12">Why Choose Pazar Seasonings?</h2>
+<!-- Why Pazar Section -->
+<section class="why-pazar py-16 bg-white dark:bg-gray-900 antialiased">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Mengapa Pazar?</h2>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
-            <!-- Master Chefs Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="text-red-600 mb-4 group-hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">Master Chefs</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
-            
-            <!-- Quality Food Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="text-red-600 mb-4 group-hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">Quality Food</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
-            
-            <!-- Online Order Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="text-red-600 mb-4 group-hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-1.45-5c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.37-.66-.11-1.48-.87-1.48H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">Online Order</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
-            
-            <!-- 24/7 Service Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="text-red-600 mb-4 group-hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">24/7 Service</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
+                @foreach($whyPazarItems as $item)
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6 flex flex-col h-full">
+                        <div class="flex items-start mb-2">
+                            <div class="flex-shrink-0 mr-2">
+                                <img src="{{ $item->w_image }}" alt="{{ $item->w_title_id }}" class="w-10 h-10">
+                            </div>
+                            <h3 class="text-lg font-bold dark:text-gray-200 line-clamp-3">{{ $item->w_title_id }}</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">{{ $item->w_description_id }}</p>
+                    </div>
+                @endforeach
+            @else
+                <!-- Fallback items if no data is available -->
+                @for($i = 0; $i < 5; $i++)
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6 flex flex-col h-full">
+                        <div class="flex items-start mb-4">
+                            <div class="flex-shrink-0 mr-4">
+                                <img src="img/Web/default-icon.svg" alt="Feature Icon" class="w-12 h-12">
+                            </div>
+                            <h3 class="text-lg font-bold dark:text-gray-200 line-clamp-2">Fitur Unggulan</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">Deskripsi mengenai keunggulan produk Pazar Seasoning.</p>
+                    </div>
+                @endfor
+            @endif
         </div>
     </div>
 </section>
@@ -78,53 +61,74 @@
             <!-- Carousel container -->
             <div class="carousel-container overflow-hidden">
                 <div class="carousel-track flex transition-transform duration-500" id="certificationTrack">
-                    <!-- Certification Item 1 -->
-                    <div class="certification-item min-w-full md:min-w-[50%] px-4">
-                        <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-row items-center h-full">
-                            <div class="w-full md:w-1/3 mb-6 md:mb-0">
-                                <img src="img/Certification/halal-certification.jpg" alt="Sertifikasi Halal" class="rounded-lg mx-auto max-h-48">
-                            </div>
-                            <div class="w-full md:w-2/3 md:pl-6">
-                                <div class="mb-4">
-                                    <span class="bg-custom-lightergreen text-white px-3 py-1 rounded-full text-sm font-medium dark:text-gray-200">Halal</span>
+                    @if(isset($certifications) && count($certifications) > 0)
+                        @foreach($certifications as $certification)
+                            <!-- Certification Item -->
+                            <div class="certification-item min-w-full md:min-w-[50%] px-4">
+                                <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-row items-center h-full">
+                                    <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                                        <img src="{{ $certification->c_image ?? 'img/Certification/default-certification.jpg' }}" alt="{{ $certification->c_title_id }}" class="rounded-lg mx-auto max-h-48">
+                                    </div>
+                                    <div class="w-full md:w-2/3 md:pl-6">
+                                        <div class="mb-4">
+                                            <span class="bg-custom-lightergreen text-white px-3 py-1 rounded-full text-sm font-medium dark:text-gray-200">{{ $certification->c_label_id }}</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold mb-2">{{ $certification->c_title_id }}</h3>
+                                        <p class="text-gray-600 dark:text-gray-800 mb-4">{{ $certification->c_description_id }}</p>
+                                    </div>
                                 </div>
-                                <h3 class="text-xl font-bold mb-2">Sertifikat Halal MUI</h3>
-                                <p class="text-gray-600 dark:text-gray-800 mb-4">Produk kami telah tersertifikasi halal oleh Majelis Ulama Indonesia yang menjamin kehalalan produk sesuai dengan syariat Islam.</p>
+                            </div>
+                        @endforeach
+                    @else
+                        <!-- Fallback certification items if no data is available -->
+                        <!-- Certification Item 1 -->
+                        <div class="certification-item min-w-full md:min-w-[50%] px-4">
+                            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-row items-center h-full">
+                                <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                                    <img src="img/Certification/halal-certification.jpg" alt="Sertifikasi Halal" class="rounded-lg mx-auto max-h-48">
+                                </div>
+                                <div class="w-full md:w-2/3 md:pl-6">
+                                    <div class="mb-4">
+                                        <span class="bg-custom-lightergreen text-white px-3 py-1 rounded-full text-sm font-medium dark:text-gray-200">Halal</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold mb-2">Sertifikat Halal MUI</h3>
+                                    <p class="text-gray-600 dark:text-gray-800 mb-4">Produk kami telah tersertifikasi halal oleh Majelis Ulama Indonesia yang menjamin kehalalan produk sesuai dengan syariat Islam.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Certification Item 2 -->
-                    <div class="certification-item min-w-full md:min-w-[50%] px-4">
-                        <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-row items-center h-full">
-                            <div class="w-full md:w-1/3 mb-6 md:mb-0">
-                                <img src="img/Certification/haccp-certification.jpg" alt="Sertifikasi HACCP" class="rounded-lg mx-auto max-h-48">
-                            </div>
-                            <div class="w-full md:w-2/3 md:pl-6">
-                                <div class="mb-4">
-                                    <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium dark:text-gray-200">Keamanan Pangan</span>
+                        
+                        <!-- Certification Item 2 -->
+                        <div class="certification-item min-w-full md:min-w-[50%] px-4">
+                            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-row items-center h-full">
+                                <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                                    <img src="img/Certification/haccp-certification.jpg" alt="Sertifikasi HACCP" class="rounded-lg mx-auto max-h-48">
                                 </div>
-                                <h3 class="text-xl font-bold mb-2">Sertifikat HACCP</h3>
-                                <p class="text-gray-600 dark:text-gray-800 mb-4">Sistem manajemen keamanan pangan kami telah memenuhi standar Hazard Analysis and Critical Control Points (HACCP).</p>
+                                <div class="w-full md:w-2/3 md:pl-6">
+                                    <div class="mb-4">
+                                        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium dark:text-gray-200">Keamanan Pangan</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold mb-2">Sertifikat HACCP</h3>
+                                    <p class="text-gray-600 dark:text-gray-800 mb-4">Sistem manajemen keamanan pangan kami telah memenuhi standar Hazard Analysis and Critical Control Points (HACCP).</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Certification Item 3 -->
-                    <div class="certification-item min-w-full md:min-w-[50%] px-4">
-                        <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-row items-center h-full">
-                            <div class="w-full md:w-1/3 mb-6 md:mb-0">
-                                <img src="img/Certification/iso-certification.jpg" alt="Sertifikasi ISO" class="rounded-lg mx-auto max-h-48">
-                            </div>
-                            <div class="w-full md:w-2/3 md:pl-6">
-                                <div class="mb-4">
-                                    <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium dark:text-gray-200">Standar Internasional</span>
+                        
+                        <!-- Certification Item 3 -->
+                        <div class="certification-item min-w-full md:min-w-[50%] px-4">
+                            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-row items-center h-full">
+                                <div class="w-full md:w-1/3 mb-6 md:mb-0">
+                                    <img src="img/Certification/iso-certification.jpg" alt="Sertifikasi ISO" class="rounded-lg mx-auto max-h-48">
                                 </div>
-                                <h3 class="text-xl font-bold mb-2">Sertifikat ISO 22000</h3>
-                                <p class="text-gray-600 dark:text-gray-800 mb-4">Produk kami telah memenuhi standar internasional ISO 22000 untuk sistem manajemen keamanan pangan.</p>
+                                <div class="w-full md:w-2/3 md:pl-6">
+                                    <div class="mb-4">
+                                        <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium dark:text-gray-200">Standar Internasional</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold mb-2">Sertifikat ISO 22000</h3>
+                                    <p class="text-gray-600 dark:text-gray-800 mb-4">Produk kami telah memenuhi standar internasional ISO 22000 untuk sistem manajemen keamanan pangan.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
             </div>
             
@@ -138,13 +142,81 @@
             
             <!-- Carousel indicators -->
             <div class="carousel-indicators flex justify-center mt-8 space-x-2">
-                <button class="w-3 h-3 rounded-full bg-custom-green" data-index="0" aria-label="Go to slide 1"></button>
-                <button class="w-3 h-3 rounded-full bg-gray-300" data-index="1" aria-label="Go to slide 2"></button>
-                <button class="w-3 h-3 rounded-full bg-gray-300" data-index="2" aria-label="Go to slide 3"></button>
+                @if(isset($certifications) && count($certifications) > 0)
+                    @foreach($certifications as $index => $certification)
+                        <button class="w-3 h-3 rounded-full {{ $index === 0 ? 'bg-custom-green' : 'bg-gray-300' }}" data-index="{{ $index }}" aria-label="Go to slide {{ $index + 1 }}"></button>
+                    @endforeach
+                @else
+                    <button class="w-3 h-3 rounded-full bg-custom-green" data-index="0" aria-label="Go to slide 1"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300" data-index="1" aria-label="Go to slide 2"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300" data-index="2" aria-label="Go to slide 3"></button>
+                @endif
             </div>
         </div>
     </div>
 </section>
+
+<section class="testimonials py-16 bg-white dark:bg-gray-900 antialiased">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-8 dark:text-gray-200">Testimoni</h2>
+        
+        <div class="flex justify-center mb-8">
+            <div class="inline-flex rounded-md shadow-sm" role="group">
+                <button type="button" id="customerTabBtn" class="testimonial-tab-active px-5 py-2.5 text-sm font-medium rounded-l-lg">
+                    Customer
+                </button>
+                <button type="button" id="chefTabBtn" class="testimonial-tab-inactive px-5 py-2.5 text-sm font-medium rounded-r-lg">
+                    Chef
+                </button>
+            </div>
+        </div>
+        
+        <!-- Customer Testimonials -->
+        <div id="customerTestimonials" class="testimonial-content">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @if(isset($customerTestimonials) && count($customerTestimonials) > 0)
+                    @foreach($customerTestimonials as $testimonial)
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="h-10 w-10 mr-4">
+                                    <img src="{{ $testimonial->t_image ?? 'img/Testimonial/default-avatar.jpg' }}" alt="{{ $testimonial->t_name }}" class="h-full w-full rounded-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold dark:text-gray-200">{{ $testimonial->t_name }}</h4>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Customer</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 italic">{{ $testimonial->t_description_id }}</p>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+        
+        <!-- Chef Testimonials -->
+        <div id="chefTestimonials" class="testimonial-content hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @if(isset($chefTestimonials) && count($chefTestimonials) > 0)
+                    @foreach($chefTestimonials as $testimonial)
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                        <div class="flex items-center mb-4">
+                                <div class="h-10 w-10 mr-4">
+                                    <img src="{{ $testimonial->t_image ?? 'img/Testimonial/default-avatar.jpg' }}" alt="{{ $testimonial->t_name }}" class="h-full w-full rounded-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold dark:text-gray-200">{{ $testimonial->t_name }}</h4>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Chef</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 italic">{{ $testimonial->t_description_id }}</p>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
+</section>
+
 @endsection
 
 @section('script')

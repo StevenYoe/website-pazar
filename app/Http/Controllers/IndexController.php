@@ -15,7 +15,8 @@ class IndexController extends BaseController
     public function index()
     {
         // Use CRUD API to get index page data
-        $response = $this->crudApiGet('/index/data');
+        // Specify that we want the index page header specifically
+        $response = $this->crudApiGet('/index/data', ['page_name' => 'index']);
         
         // Check if response was successful
         if (!isset($response['success']) || !$response['success']) {

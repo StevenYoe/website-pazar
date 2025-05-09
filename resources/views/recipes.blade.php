@@ -1,91 +1,71 @@
 @extends('master')
 
 @section('style')
-<link href="{{ asset('css/product.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ asset('css/recipe.css') }}" rel="stylesheet" type="text/css" >
+@endsection
 
-<!-- Product Header Section -->
+<!-- Recipe Header Section -->
 @section('header')
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
-            <p class="text-xl mb-2 text-yellow-400 dark:text-yellow-400">Tentang Pazar Seasoning</p>
-            <h1 class="text-5xl font-bold dark:text-gray-200">Produk Pazar Seasoning</h1>
+            <p class="text-xl mb-2 text-yellow-400 dark:text-yellow-400">
+                {{ $header->h_description_id }}
+            </p>
+            <h1 class="text-5xl font-bold dark:text-gray-200">
+                {{ $header->h_title_id }}
+            </h1>
         </div>
         <div class="w-full max-w-2xl">
-            <img src="img/Web/recipe.jpeg" alt="History-Overview" class="rounded-lg shadow-lg w-full">
+            <img src="{{ $header->h_image }}" alt="Recipe-Header" class="rounded-lg shadow-lg w-full">
         </div>
     </div>
 </div>
 @endsection
 
 @section('content')
-<!-- Product Section -->
-<section class="py-12 bg-gray-50 dark:bg-gray-950 antialiased dark:text-gray-200 product-section">
-    <div class="max-w-screen-xl mx-auto px-20">
-        <div class="filter-buttons">
-            <button class="filter-btn bg-custom-lightergreen dark:bg-transparent active" data-filter="all">All</button>
-            <button class="filter-btn bg-custom-lightergreen dark:bg-transparent" data-filter="Instant Seasoning">Bumbu Instan</button>
-            <button class="filter-btn bg-custom-lightergreen dark:bg-transparent" data-filter="Sambal">Sambal</button>
-            <button class="filter-btn bg-custom-lightergreen dark:bg-transparent" data-filter="Spices">Rempah</button>
-            <button class="filter-btn bg-custom-lightergreen dark:bg-transparent" data-filter="Special Produk">Produk Spesial</button>
+<!-- Recipe Section -->
+<section class="py-12 bg-gray-50 dark:bg-gray-950 antialiased dark:text-gray-200 recipe-section">
+    <div class="max-w-screen-xl mx-auto px-4 md:px-20">
+        <div class="filter-buttons mb-8">
+            <button class="filter-btn bg-custom-lightergreen dark:bg-transparent active" data-filter="all">Semua</button>
+            @if(count($categories) > 0)
+                @foreach($categories as $category)
+                    <button class="filter-btn bg-custom-lightergreen dark:bg-transparent" data-filter="{{ $category->rc_title_id }}">{{ $category->rc_title_id }}</button>
+                @endforeach
+            @else
+                <p class="text-gray-500">No categories found</p>
+            @endif
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
-            <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="1" data-category="Instant Seasoning">
-                <div class="h-48 overflow-hidden">
-                    <img src="img/Product/bumbu-instan-ayam-goreng.jpg" alt="Bumbu Instan Ayam Goyeng" class="w-full h-full object-cover">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            @if(count($recipes) > 0)
+                @foreach($recipes as $recipe)
+                    <div class="recipe-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" 
+                        data-id="{{ $recipe->r_id }}" 
+                        data-category="{{ $recipe->category_name_id }}"
+                        data-categories="{{ json_encode($recipe->category_names ?? [$recipe->category_name_id]) }}">
+                        <div class="h-48 overflow-hidden">
+                            <img src="{{ $recipe->r_image }}" alt="{{ $recipe->r_title_id }}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl text-black font-bold mb-1">{{ $recipe->r_title_id }}</h3>
+                            <h4 class="text-sm text-custom-red font-bold mb-4 flex-grow">
+                                @if(isset($recipe->category_names) && count($recipe->category_names) > 0)
+                                    {{ implode(', ', $recipe->category_names) }}
+                                @else
+                                    {{ $recipe->category_name_id }}
+                                @endif
+                            </h4>
+                            <a href="{{ url('recipe/' . $recipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="col-span-full text-center py-10">
+                    <p class="text-lg text-gray-500">No recipes found</p>
                 </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Ayam Goyeng</h3>
-                    <h4 class="text-sm text-custom-red font-bold mb-2">Bumbu Instan</h4>
-                    <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Bumbu instan berkualitas tinggi untuk membuat masakan rumah dengan rasa autentik</p>
-                    <a href="product/fried-chicken-instant-seasoning" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
-                </div>
-            </div>
-            <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Bumbu-Instan-Ayam-Bakar" data-category="Instant Seasoning">
-                <div class="h-48 overflow-hidden">
-                    <img src="img/Product/bumbu-instan-ayam-bakar.jpg" alt="Bumbu Instan Ayam Bakar" class="w-full h-full object-cover">
-                </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Ayam Bakar</h3>
-                    <h4 class="text-sm text-custom-red font-bold mb-2">Bumbu Instan</h4>
-                    <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Bumbu instan berkualitas tinggi untuk membuat masakan rumah dengan rasa autentik</p>
-                    <a href="product/roast-chicken-instant-seasoning" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
-                </div>
-            </div>
-            <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Sambal-Terasi" data-category="Sambal">
-                <div class="h-48 overflow-hidden">
-                    <img src="img/Product/sambal-terasi.jpg" alt="Sambal Terasi" class="w-full h-full object-cover">
-                </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="text-xl text-black font-bold mb-1">Sambal Terasi</h3>
-                    <h4 class="text-sm text-custom-red font-bold mb-2">Sambal</h4>
-                    <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Sambal dengan cita rasa pedas yang khas untuk pelengkap hidangan favorit</p>
-                    <a href="product/sambal-terasi" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
-                </div>
-            </div>
-            <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Lada-Hitam" data-category="Spices">
-                <div class="h-48 overflow-hidden">
-                    <img src="img/Product/lada-hitam.jpg" alt="Lada Hitam" class="w-full h-full object-cover">
-                </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="text-xl text-black font-bold mb-1">Lada Hitam</h3>
-                    <h4 class="text-sm text-custom-red font-bold mb-2">Rempah</h4>
-                    <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Rempah pilihan berkualitas untuk meningkatkan aroma dan cita rasa masakan</p>
-                    <a href="product/black-pepper" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
-                </div>
-            </div>
-            <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="Bumbu-Instan-Edisi-Spesial" data-category="Special Produk">
-                <div class="h-48 overflow-hidden">
-                    <img src="img/Product/bumbu-instan-edisi-spesial.jpg" alt="Bumbu Instan Edisi Spesial" class="w-full h-full object-cover">
-                </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <h3 class="text-xl text-black font-bold mb-1">Bumbu Instan Edisi Spesial</h3>
-                    <h4 class="text-sm text-custom-red font-bold mb-2">Produk Spesial</h4>
-                    <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">Tepung bumbu praktis untuk gorengan renyah dan gurih dalam sekejap</p>
-                    <a href="product/instant-seasoning-special-edition" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
-                </div>
-            </div>
+            @endif
         </div>
     </div>
 </section>
@@ -93,6 +73,6 @@
 
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
-<script src="{{ asset('js/product.js') }}"></script>
+<script src="{{ asset('js/recipe.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 @endsection

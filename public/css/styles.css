@@ -450,3 +450,176 @@ body {
         margin-left: 0 !important;
     }
 }
+
+/* History Carousel Styles */
+.history-carousel-container {
+    overflow: hidden;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.history-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}
+
+.history-item {
+    min-width: 100%;
+    padding: 0 1rem;
+}
+
+.history-item .bg-white {
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    min-height: 400px;
+}
+
+/* New flex layout for image and content */
+.history-flex-container {
+    display: flex;
+    gap: 2rem;
+    height: 100%;
+}
+
+/* Image container */
+.history-image {
+    flex: 0 0 50%;
+    max-width: 50%;
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+.history-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+/* Content container */
+.history-content-wrapper {
+    flex: 0 0 50%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.history-year {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #BF161C;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.history-year:after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background-color: #BF161C;
+}
+
+.history-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.history-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.history-carousel-indicators button {
+    transition: all 0.3s ease;
+}
+
+.history-carousel-indicators button.scale-125 {
+    transform: scale(1.25);
+}
+
+.history-carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    padding: 0.75rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.history-carousel-nav:hover {
+    background-color: #f3f4f6;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.history-carousel-prev {
+    left: 1rem;
+}
+
+.history-carousel-next {
+    right: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 792px) {
+    .history-item .bg-white {
+        padding: 1.5rem;
+        min-height: 350px;
+    }
+    
+    .history-flex-container {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .history-image, .history-content-wrapper {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .history-image {
+        height: 200px;
+    }
+    
+    .history-year {
+        font-size: 2rem;
+    }
+    
+    .history-content {
+        font-size: 1rem;
+    }
+    
+    .history-carousel-nav {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .history-item .bg-white {
+        padding: 1.25rem;
+        min-height: 300px;
+    }
+    
+    .history-year {
+        font-size: 1.75rem;
+    }
+    
+    .history-year:after {
+        width: 60px;
+        height: 3px;
+    }
+    
+    .history-carousel-indicators button {
+        height: 1.25rem;
+        width: 1.25rem;
+        margin: 0 0.5rem;
+    }
+}

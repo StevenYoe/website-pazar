@@ -1,0 +1,61 @@
+/* Styling for recipe category tag */
+.text-custom-red {
+    color: #BF161C;
+}
+
+/* Produk Lainnya section */
+.mt-16 {
+    padding-top: 2rem;
+}
+
+/* recipe item hover effect for related recipes */
+.recipe-item a:hover {
+    color: #BF161C;
+    transition: color 0.3s ease;
+}
+
+/* recipe title hover effect in recipe grid */
+.recipe-item h3 {
+    transition: color 0.3s ease;
+}
+
+.recipe-item a:hover h3 {
+    color: #BF161C;
+}
+
+/* Base aspect ratio container */
+[class*='aspect-'] {
+  position: relative;
+}
+
+[class*='aspect-'] > * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* 16:9 Aspect Ratio */
+.aspect-w-16.aspect-h-9 {
+  padding-bottom: 56.25%;
+}
+
+/* 4:3 Aspect Ratio */
+.aspect-w-4.aspect-h-3 {
+  padding-bottom: 75%;
+}
+
+/* 1:1 Aspect Ratio */
+.aspect-w-1.aspect-h-1 {
+  padding-bottom: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 792px) {
+    .mt-16 {
+        margin-top: 3rem;
+    }
+}

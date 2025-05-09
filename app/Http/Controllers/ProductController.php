@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
 
 class ProductController extends BaseController
 {
@@ -15,17 +14,13 @@ class ProductController extends BaseController
      */
     public function index()
     {
-        // Get header for products page
-        $headerResponse = $this->crudApiGet('/headers', ['page_name' => 'products']);
+        // Get header for products page using the same approach as IndexController
+        $headerResponse = $this->crudApiGet('/index/data', ['page_name' => 'products']);
         $header = null;
-        if (isset($headerResponse['success']) && $headerResponse['success'] && !empty($headerResponse['data'])) {
-            // Look for header with h_page_name = 'products'
-            foreach ($headerResponse['data'] as $headerItem) {
-                if (isset($headerItem['h_page_name']) && $headerItem['h_page_name'] === 'products') {
-                    $header = $this->processHeader($headerItem);
-                    break;
-                }
-            }
+        
+        // Check if response was successful and contains header data
+        if (isset($headerResponse['success']) && $headerResponse['success'] && isset($headerResponse['data']['header'])) {
+            $header = $this->processHeader($headerResponse['data']['header']);
         }
 
         // Get product categories for filter buttons
@@ -37,23 +32,30 @@ class ProductController extends BaseController
             }
         }
 
-        // Get all products - Updated the endpoint
-        $productsResponse = $this->crudApiGet('/products/getAllProducts');
-        $products = [];
-        if (isset($productsResponse['success']) && $productsResponse['success'] && isset($productsResponse['data'])) {
-            foreach ($productsResponse['data'] as $product) {
-                $products[] = $this->processProduct($product);
-            }
+        // Create category lookup for efficient access
+        $categoryLookup = [];
+        foreach ($categories as $category) {
+            $categoryLookup[$category->pc_id] = $category;
         }
 
-        // Log for debugging
-        Log::info('Products fetch response', [
-            'header_response' => $headerResponse,
-            'categories_response' => $categoriesResponse,
-            'products_response' => $productsResponse,
-            'categories_count' => count($categories),
-            'products_count' => count($products)
+        // Get all products - Using the updated endpoint with additional parameters
+        $productsResponse = $this->crudApiGet('/products/getAllProducts', [
+            'is_active' => true,  // Only get active products
+            'sort_by' => 'p_id',  // Sort by product ID
+            'sort_order' => 'asc' // Sort in ascending order
         ]);
+        $products = [];
+        
+        if (isset($productsResponse['success']) && $productsResponse['success'] && isset($productsResponse['data'])) {
+            // Debug the raw response to see what we're getting
+            
+            foreach ($productsResponse['data'] as $product) {
+                // Process product and ensure category information is properly set
+                $processedProduct = $this->processProduct($product, $categoryLookup);
+                
+                $products[] = $processedProduct;
+            }
+        }
 
         return view('products', [
             'header' => $header,
@@ -102,11 +104,13 @@ class ProductController extends BaseController
      * Process the product data to add storage URL to image and create slug
      *
      * @param array $product The product data from API
+     * @param array $categoryLookup Optional lookup array of categories by ID
      * @return object The processed product object
      */
-    private function processProduct($product)
+    private function processProduct($product, $categoryLookup = [])
     {
-        $productObj = (object) $product;
+        // Convert array to object if not already
+        $productObj = is_array($product) ? (object) $product : $product;
         
         // Add storage URL to image if exists
         if (!empty($productObj->p_image)) {
@@ -117,15 +121,29 @@ class ProductController extends BaseController
         $titleToUse = !empty($productObj->p_title_id) ? $productObj->p_title_id : $productObj->p_title_en;
         $productObj->slug = Str::slug($titleToUse);
         
-        // Get category name if available
-        if (isset($productObj->category) && !empty($productObj->category)) {
-            $productObj->category_name_id = $productObj->category->pc_title_id ?? '';
-            $productObj->category_name_en = $productObj->category->pc_title_en ?? '';
-        } else {
-            $productObj->category_name_id = '';
-            $productObj->category_name_en = '';
-        }
+        // Default empty category names
+        $productObj->category_name_id = '';
+        $productObj->category_name_en = '';
         
+        // Try getting category from relationship first - API might return category as 'category' property
+        if (isset($productObj->category) && !empty($productObj->category)) {
+            // Category could be an object or array
+            $category = is_array($productObj->category) ? (object) $productObj->category : $productObj->category;
+            
+            // Extract category names from relationship
+            $productObj->category_name_id = isset($category->pc_title_id) ? trim($category->pc_title_id) : '';
+            $productObj->category_name_en = isset($category->pc_title_en) ? trim($category->pc_title_en) : '';
+        } 
+        // If relationship is missing but we have the category ID and lookup table
+        else if (isset($productObj->p_id_product_category) && !empty($categoryLookup)) {
+            $categoryId = $productObj->p_id_product_category;
+            
+            if (isset($categoryLookup[$categoryId])) {
+                $category = $categoryLookup[$categoryId];
+                $productObj->category_name_id = $category->pc_title_id;
+                $productObj->category_name_en = $category->pc_title_en;
+            } 
+        } 
         return $productObj;
     }
     
@@ -137,12 +155,31 @@ class ProductController extends BaseController
      */
     public function show($slug)
     {
-        // Get all products - Updated the endpoint
-        $productsResponse = $this->crudApiGet('/products/getAllProducts');
+        // Get all active products - Updated the endpoint with parameters
+        $productsResponse = $this->crudApiGet('/products/getAllProducts', [
+            'is_active' => true,  // Only get active products
+            'sort_by' => 'p_id',  // Sort by product ID
+            'sort_order' => 'asc' // Sort in ascending order
+        ]);
         $foundProduct = null;
+        $allProducts = [];
         
         if (isset($productsResponse['success']) && $productsResponse['success'] && isset($productsResponse['data'])) {
+            // Get categories for product processing
+            $categoriesResponse = $this->crudApiGet('/productcategories/all');
+            $categoryLookup = [];
+            
+            if (isset($categoriesResponse['success']) && $categoriesResponse['success'] && isset($categoriesResponse['data'])) {
+                foreach ($categoriesResponse['data'] as $category) {
+                    $categoryObj = $this->processCategory($category);
+                    $categoryLookup[$categoryObj->pc_id] = $categoryObj;
+                }
+            }
+            
             foreach ($productsResponse['data'] as $product) {
+                $processedProduct = $this->processProduct($product, $categoryLookup);
+                $allProducts[] = $processedProduct;
+                
                 $titleId = $product['p_title_id'] ?? '';
                 $titleEn = $product['p_title_en'] ?? '';
                 
@@ -157,28 +194,52 @@ class ProductController extends BaseController
                     $detailResponse = $this->crudApiGet('/products/' . $productId);
                     
                     if (isset($detailResponse['success']) && $detailResponse['success'] && isset($detailResponse['data'])) {
-                        $foundProduct = $this->processProduct($detailResponse['data']);
-                        
-                        // Log product details for debugging
-                        Log::info('Product detail loaded', [
-                            'product_id' => $productId,
-                            'slug' => $slug,
-                            'has_detail' => isset($foundProduct->detail)
-                        ]);
+                        $foundProduct = $this->processProductDetail($detailResponse['data']);
                     }
-                    
-                    break;
                 }
             }
         }
         
         if (!$foundProduct) {
-            Log::warning('Product not found', ['slug' => $slug]);
             return abort(404);
         }
         
+        // Get random products (excluding current product)
+        $randomProducts = [];
+        $otherProducts = array_filter($allProducts, function($product) use ($foundProduct) {
+            return ($product->p_id !== $foundProduct->p_id);
+        });
+        
+        if (count($otherProducts) > 0) {
+            // Reset array keys after filtering
+            $otherProducts = array_values($otherProducts);
+            // Shuffle the array of other products
+            shuffle($otherProducts);
+            // Take the first 4 (or less if there aren't 4 products)
+            $randomProducts = array_slice($otherProducts, 0, min(4, count($otherProducts)));
+        }
+        
         return view('product-detail', [
-            'product' => $foundProduct
+            'product' => $foundProduct,
+            'randomProducts' => $randomProducts
         ]);
+    }
+
+    /**
+     * Process the product detail data to convert array to object recursively
+     *
+     * @param array $product The product data from API
+     * @return object The processed product object with detail as object
+     */
+    private function processProductDetail($product)
+    {
+        $productObj = $this->processProduct($product);
+        
+        // Convert detail from array to object if it exists
+        if (isset($productObj->detail) && !empty($productObj->detail)) {
+            $productObj->detail = (object) $productObj->detail;
+        }
+        
+        return $productObj;
     }
 }

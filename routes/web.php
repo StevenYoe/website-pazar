@@ -26,6 +26,9 @@ Route::get('/product/{slug}', [App\Http\Controllers\ProductController::class, 's
 // Recipes Routes
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes');
 
+// Recipe detail page
+Route::get('/recipe/{slug}', [App\Http\Controllers\RecipeController::class, 'show'])->name('recipe.show');
+
 // Career Routes
 Route::get('/careerinfo', [CareerController::class, 'info'])->name('careerinfo');
 

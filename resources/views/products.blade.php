@@ -10,14 +10,14 @@
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
             <p class="text-xl mb-2 text-yellow-400 dark:text-yellow-400">
-                {{ $header->h_description_id ?? 'Tentang Pazar Seasoning' }}
+                {{ $header->h_description_id }}
             </p>
             <h1 class="text-5xl font-bold dark:text-gray-200">
-                {{ $header->h_title_id ?? 'Produk Pazar Seasoning' }}
+                {{ $header->h_title_id }}
             </h1>
         </div>
         <div class="w-full max-w-2xl">
-            <img src="{{ $header->h_image ?? asset('img/Web/hero.jpeg') }}" alt="Product-Header" class="rounded-lg shadow-lg w-full">
+            <img src="{{ $header->h_image }}" alt="Product-Header" class="rounded-lg shadow-lg w-full">
         </div>
     </div>
 </div>
@@ -41,7 +41,9 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             @if(count($products) > 0)
                 @foreach($products as $product)
-                    <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" data-id="{{ $product->p_id }}" data-category="{{ $product->category_name_id }}">
+                    <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" 
+                        data-id="{{ $product->p_id }}" 
+                        data-category="{{ $product->category_name_id }}">
                         <div class="h-48 overflow-hidden">
                             <img src="{{ $product->p_image }}" alt="{{ $product->p_title_id }}" class="w-full h-full object-cover">
                         </div>

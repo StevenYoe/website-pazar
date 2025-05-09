@@ -1,0 +1,53 @@
+/* Styling for product category tag */
+.text-custom-red {
+    color: #BF161C;
+}
+
+/* E-commerce links hover effect and spacing */
+.mt-10.pt-6 a {
+    transition: opacity 0.3s ease;
+    display: block;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+}
+
+.mt-10.pt-6 a:hover {
+    opacity: 0.8;
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.mt-10.pt-6 .grid {
+    gap: 1.5rem;
+}
+
+/* Produk Lainnya section */
+.mt-16 {
+    padding-top: 2rem;
+}
+
+/* Product item hover effect for related products */
+.product-item a:hover {
+    color: #BF161C;
+    transition: color 0.3s ease;
+}
+
+/* Product title hover effect in product grid */
+.product-item h3 {
+    transition: color 0.3s ease;
+}
+
+.product-item a:hover h3 {
+    color: #BF161C;
+}
+
+/* Responsive adjustments */
+@media (max-width: 792px) {
+    /* Ensure proper spacing on mobile */
+    .mt-10 {
+        margin-top: 2rem;
+    }
+    
+    .mt-16 {
+        margin-top: 3rem;
+    }
+}
