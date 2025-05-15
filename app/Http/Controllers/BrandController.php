@@ -35,7 +35,7 @@ class BrandController extends BaseController
             'certifications' => isset($response['data']['certifications']) ? 
                 array_map([$this, 'processCertification'], $response['data']['certifications']) : [],
             
-            // Testimonials - separated by type
+            // Testimonials - separated by type with complete profile information
             'customerTestimonials' => isset($response['data']['testimonials']['customer']) ? 
                 array_map([$this, 'processTestimonial'], $response['data']['testimonials']['customer']) : [],
             'chefTestimonials' => isset($response['data']['testimonials']['chef']) ? 
@@ -100,7 +100,7 @@ class BrandController extends BaseController
     }
     
     /**
-     * Process the testimonial data to add storage URL to image
+     * Process the testimonial data to add storage URL to image and handle gender fallback
      *
      * @param array $testimonial The testimonial data from API
      * @return object The processed testimonial object
@@ -112,6 +112,14 @@ class BrandController extends BaseController
         // Add storage URL to image if exists
         if (!empty($testimonialObj->t_image)) {
             $testimonialObj->t_image = config('app.storage_url') . '/' . $testimonialObj->t_image;
+        }
+        
+        // Add storage URL to profile image if exists
+        if (!empty($testimonialObj->t_profile)) {
+            $testimonialObj->t_profile = config('app.storage_url') . '/' . $testimonialObj->t_profile;
+        } else {
+            // Set default avatar based on gender for fallback
+            $testimonialObj->t_profile = null; // We'll handle default in the view
         }
         
         return $testimonialObj;

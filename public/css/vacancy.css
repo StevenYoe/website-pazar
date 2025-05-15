@@ -1,0 +1,314 @@
+/* Vacancy CSS - Main Styling */
+.vacancies-section {
+    padding: 4rem 0;
+}
+
+/* Filter Section Styling */
+.filters {
+    transition: all 0.3s ease;
+}
+
+.filters:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.filter-group label {
+    font-weight: 500;
+}
+
+.filter-group select {
+    transition: all 0.3s ease;
+}
+
+.filter-group select:focus {
+    border-color: var(--custom-green);
+    box-shadow: 0 0 0 2px rgba(72, 187, 120, 0.2);
+}
+
+/* Vacancy Card Styling */
+.vacancy-item {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    height: 100%;
+    position: relative; /* For absolute positioning of urgent tag */
+}
+
+.vacancy-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+    border-color: var(--custom-green);
+}
+
+/* Tag styling */
+.vacancy-item span.inline-block {
+    transition: all 0.3s ease;
+}
+
+.vacancy-item:hover span.bg-custom-lightergreen {
+    background-color: var(--custom-green);
+    color: white;
+}
+
+.vacancy-item:hover span.bg-blue-100 {
+    background-color: #3182ce;
+    color: white;
+}
+
+/* Title styling */
+.vacancy-item h3 {
+    transition: color 0.3s ease;
+}
+
+.vacancy-item:hover h3 {
+    color: var(--custom-green);
+}
+
+/* View details link styling */
+.vacancy-item a {
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.vacancy-item a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--custom-green);
+    transition: width 0.3s ease;
+}
+
+.vacancy-item:hover a:after {
+    width: 100%;
+}
+
+/* No results styling */
+#no-results {
+    padding: 3rem 0;
+    transition: all 0.3s ease;
+}
+
+/* CSS Variables */
+:root {
+    --custom-green: #48bb78;
+    --custom-lightergreen: #c6f6d5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .vacancies-section {
+        padding: 2rem 0;
+    }
+    
+    .filters {
+        padding: 1rem;
+    }
+    
+    .landing-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Urgent Tag styling - UPDATED */
+.urgent-tag {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    z-index: 10;
+    border-top-left-radius: 7px;
+    overflow: hidden;
+}
+
+.urgent-tag span {
+    border-top-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    transform-origin: top left;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.vacancy-item:hover .urgent-tag span {
+    background-color: #f56565;
+    color: white;
+}
+
+/* Make sure content is properly positioned inside vacancy-item */
+.vacancy-item .p-6 {
+    position: relative;
+    z-index: 1;
+}
+
+/* Icon styling */
+.vacancy-item svg {
+    transition: all 0.3s ease;
+}
+
+.vacancy-item:hover svg {
+    transform: scale(1.2);
+}
+
+/* Enhance existing vacancy-item styles */
+.vacancy-item {
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    height: 100%;
+}
+
+.vacancy-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+    border-color: var(--custom-green);
+}
+
+/* Improve spacing and typography */
+.vacancy-item h3 {
+    line-height: 1.3;
+    transition: color 0.3s ease;
+}
+
+.vacancy-item:hover h3 {
+    color: var(--custom-green);
+}
+
+.vacancy-item .flex-col.space-y-2 {
+    margin-top: 0.5rem;
+}
+
+/* Enhance view details link */
+.vacancy-item a.text-custom-green {
+    padding-top: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.vacancy-item a.text-custom-green:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--custom-green);
+    transition: width 0.3s ease;
+}
+
+.vacancy-item:hover a.text-custom-green:after {
+    width: 100%;
+}
+
+/* Urgent Tag for Detail page */
+.vacancy-detail-header {
+    height: 30px;
+    background-color: transparent;
+}
+
+.vacancy-detail-urgent {
+    position: relative;
+    display: inline-block;
+}
+
+/* Share buttons styling - UPDATED */
+.share-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.share-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: white;
+    position: relative;
+    cursor: pointer;
+}
+
+.share-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.share-btn.facebook {
+    background-color: #1877f2;
+}
+
+.share-btn.linkedin {
+    background-color: #0a66c2;
+}
+
+.share-btn.whatsapp {
+    background-color: #25d366;
+}
+
+.share-btn.x-twitter {
+    background-color: #000000;
+}
+
+.share-btn.copy-link {
+    background-color: #6b7280;
+}
+
+.share-btn.facebook:hover {
+    background-color: #0d6efd;
+}
+
+.share-btn.linkedin:hover {
+    background-color: #004182;
+}
+
+.share-btn.whatsapp:hover {
+    background-color: #128c7e;
+}
+
+.share-btn.x-twitter:hover {
+    background-color: #333333;
+}
+
+.share-btn.copy-link:hover {
+    background-color: #4b5563;
+}
+
+/* Link copied tooltip */
+.link-copied-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.link-copied-tooltip:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.link-copied-tooltip.visible {
+    opacity: 1;
+    visibility: visible;
+}

@@ -105,27 +105,29 @@
 <!-- Vision & Mission Section -->
 <section class="vision-mission py-16 bg-gray-50 dark:bg-gray-800 antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-16">
+        <div class="flex flex-col md:flex-row">
             <!-- Vision -->
             @if(isset($companyVision))
-            <div>
+            <div class="flex-1 mb-8 md:mb-0">
                 <h2 class="text-3xl font-bold mb-8 text-center dark:text-gray-200">Visi</h2>
-                <div class="bg-white dark:bg-gray-300 rounded-lg shadow-lg p-8">
-                    <div class="prose prose-lg mx-auto dark:text-gray-800">
-                        {!! nl2br(e($companyVision->cp_description_id)) !!}
-                    </div>
+                <div class="prose prose-lg mx-auto dark:text-gray-200 px-4">
+                    {!! nl2br(e($companyVision->cp_description_id)) !!}
                 </div>
             </div>
             @endif
             
+            <!-- Divider - Only visible on desktop (793px and above) -->
+            <div class="hidden md:block w-px bg-gray-300 dark:bg-gray-600 mx-8 self-stretch"></div>
+            
+            <!-- Mobile Divider - Only visible on mobile (below 767px) -->
+            <div class="md1:hidden w-full h-px bg-gray-300 dark:bg-gray-600 my-8"></div>
+            
             <!-- Mission -->
             @if(isset($companyMission))
-            <div>
+            <div class="flex-1">
                 <h2 class="text-3xl font-bold mb-8 text-center dark:text-gray-200">Misi</h2>
-                <div class="bg-white dark:bg-gray-300 rounded-lg shadow-lg p-8">
-                    <div class="prose prose-lg mx-auto dark:text-gray-800">
-                        {!! nl2br(e($companyMission->cp_description_id)) !!}
-                    </div>
+                <div class="prose prose-lg mx-auto dark:text-gray-200 px-4">
+                    {!! nl2br(e($companyMission->cp_description_id)) !!}
                 </div>
             </div>
             @endif

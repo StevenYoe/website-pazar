@@ -34,6 +34,10 @@ class IndexController extends BaseController
             // Product categories - convert each item in array to object and add storage URL to images
             'productCategories' => isset($response['data']['product_categories']) ? 
                 array_map([$this, 'processCategory'], $response['data']['product_categories']) : [],
+                
+            // Why Pazar items - convert each item in array to object and add storage URL to images
+            'whyPazarItems' => isset($response['data']['why_pazar_items']) ? 
+                array_map([$this, 'processWhyPazarItem'], $response['data']['why_pazar_items']) : [],
             
             // Latest recipe - convert array to object if it exists and add storage URL to image
             'latestRecipe' => isset($response['data']['latest_recipe']) ? $this->processRecipe($response['data']['latest_recipe']) : null,
@@ -94,6 +98,24 @@ class IndexController extends BaseController
         }
         
         return $categoryObj;
+    }
+    
+    /**
+     * Process the Why Pazar item data to add storage URL to image
+     *
+     * @param array $item The Why Pazar item data from API
+     * @return object The processed Why Pazar item object
+     */
+    private function processWhyPazarItem($item)
+    {
+        $itemObj = $this->arrayToObject($item);
+        
+        // Add storage URL to image if exists
+        if (!empty($itemObj->w_image)) {
+            $itemObj->w_image = config('app.storage_url') . '/' . $itemObj->w_image;
+        }
+        
+        return $itemObj;
     }
     
     /**

@@ -14,6 +14,38 @@
 <!-- Recipe Detail Section -->
 <section class="pt-10 pb-12 bg-white dark:bg-gray-900">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Breadcrumb Navigation -->
+        <div class="mb-8">
+            <nav class="flex" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <a href="{{ url('/') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-custom-green dark:text-gray-300 dark:hover:text-custom-green">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                            </svg>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <a href="{{ url('/recipes') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-custom-green md:ml-2 dark:text-gray-300 dark:hover:text-custom-green">Recipes</a>
+                        </div>
+                    </li>
+                    <li aria-current="page">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">{{ $recipe->r_title_id }}</span>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+
         <div class="lg:flex lg:items-start lg:space-x-8">
             <!-- Recipe Image -->
             <div class="lg:w-1/2">
@@ -123,24 +155,5 @@
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
-<script>
-    // Make sure navbar is solid red on recipe detail page
-    document.addEventListener('DOMContentLoaded', function() {
-        // Force navbar to have background color on recipe detail page
-        var navbar = document.getElementById('navbar');
-        if (navbar) {
-            navbar.classList.add('bg-custom-red');
-            navbar.classList.add('scrolled');
-        }
-        
-        // Force header to have minimal height
-        var header = document.querySelector('header.landing');
-        if (header) {
-            header.style.minHeight = '21vh';
-            header.style.height = 'auto';
-            header.style.background = '#BF161C';
-            header.style.display = 'block';
-        }
-    });
-</script>
+<script src="{{ asset('js/detail-page.js') }}"></script>
 @endsection

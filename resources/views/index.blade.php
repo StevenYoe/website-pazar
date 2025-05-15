@@ -44,47 +44,38 @@
 </div>
 @endif
 
-<!-- Why Choose Us Section -->
-<section class="why-choose-us py-20 bg-gray-50 dark:bg-gray-950 antialiased dark:text-gray-200">
-    <div class="max-w-screen-xl mx-auto px-20">
-        <h2 class="text-4xl font-bold text-center mb-12">Why Choose Pazar Seasonings?</h2>
+<!-- Why Pazar Section -->
+<section class="why-pazar py-16 bg-gray-50 dark:bg-gray-950 antialiased">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Mengapa Pazar?</h2>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
-            <!-- Master Chefs Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="mb-4">
-                    <img src="img/Web/man.svg" alt="call icon" class="h-12 w-12 group-hover:invert group-hover:brightness-0 group-hover:contrast-100">
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">Master Chefs</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
-            
-            <!-- Quality Food Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="mb-4">
-                    <img src="img/Web/utensil.svg" alt="utensil icon" class="h-12 w-12 group-hover:invert group-hover:brightness-0 group-hover:contrast-100">
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">Quality Food</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
-            
-            <!-- Online Order Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="mb-4">
-                    <img src="img/Web/cart.svg" alt="cart icon" class="h-12 w-12 group-hover:invert group-hover:brightness-0 group-hover:contrast-100">
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">Online Order</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
-            
-            <!-- 24/7 Service Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="mb-4">
-                    <img src="img/Web/call.svg" alt="call icon" class="h-12 w-12 group-hover:invert group-hover:brightness-0 group-hover:contrast-100">
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">24/7 Service</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
+                @foreach($whyPazarItems as $item)
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6 flex flex-col h-full">
+                        <div class="flex items-start mb-2">
+                            <div class="flex-shrink-0 mr-2">
+                                <img src="{{ $item->w_image }}" alt="{{ $item->w_title_id }}" class="w-10 h-10">
+                            </div>
+                            <h3 class="text-lg font-bold dark:text-gray-200 line-clamp-3">{{ $item->w_title_id }}</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">{{ $item->w_description_id }}</p>
+                    </div>
+                @endforeach
+            @else
+                <!-- Fallback items if no data is available -->
+                @for($i = 0; $i < 5; $i++)
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6 flex flex-col h-full">
+                        <div class="flex items-start mb-4">
+                            <div class="flex-shrink-0 mr-4">
+                                <img src="img/Web/default-icon.svg" alt="Feature Icon" class="w-12 h-12">
+                            </div>
+                            <h3 class="text-lg font-bold dark:text-gray-200 line-clamp-2">Fitur Unggulan</h3>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">Deskripsi mengenai keunggulan produk Pazar Seasoning.</p>
+                    </div>
+                @endfor
+            @endif
         </div>
     </div>
 </section>
@@ -117,7 +108,7 @@
 @if(isset($latestRecipe))
 <section class="latest-recipe py-10 bg-gray-50 dark:bg-gray-950 antialiased">
     <div class="max-w-screen-xl mx-auto px-20">
-        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Latest Recipe</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Resep Pazar</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 items-center">
             <div>

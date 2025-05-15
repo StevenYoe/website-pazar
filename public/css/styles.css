@@ -568,58 +568,227 @@ body {
     right: 1rem;
 }
 
-/* Responsive adjustments */
+/* HISTORY SECTION FIXES FOR MOBILE & TABLET */
+/* Ensure text content is visible on mobile/tablet */
 @media (max-width: 792px) {
-    .history-item .bg-white {
-        padding: 1.5rem;
-        min-height: 350px;
-    }
-    
+    /* Fix history carousel layout on mobile */
     .history-flex-container {
         flex-direction: column;
         gap: 1.5rem;
+        overflow: visible; /* Prevent content hiding */
     }
     
     .history-image, .history-content-wrapper {
         flex: 0 0 100%;
         max-width: 100%;
+        overflow: visible; /* Ensure content isn't cut off */
     }
     
-    .history-image {
-        height: 200px;
+    /* Set a minimum height for content to ensure visibility */
+    .history-content-wrapper {
+        min-height: 200px;
+        display: block; /* Override flex to ensure content visibility */
     }
     
-    .history-year {
-        font-size: 2rem;
-    }
-    
+    /* Increase font size for better readability */
     .history-content {
         font-size: 1rem;
+        line-height: 1.6;
+        display: block;
+        overflow: visible;
     }
     
+    /* Force the history container to adjust height based on content */
+    .history-item {
+        height: auto;
+        overflow: visible;
+    }
+    
+    .history-item .bg-white {
+        height: auto;
+        min-height: auto;
+        overflow: visible;
+        padding-bottom: 2rem;
+    }
+
     .history-carousel-nav {
-        padding: 0.5rem;
+        display: none !important;
     }
 }
 
-@media (max-width: 640px) {
-    .history-item .bg-white {
-        padding: 1.25rem;
-        min-height: 300px;
+/* CENTER CONTENT ON DESKTOP VIEW */
+/* Make history section follow certification section style on desktop */
+@media (min-width: 793px) {
+    .history-carousel-container {
+        max-width: 90%;
+        margin: 0 auto;
     }
     
-    .history-year {
-        font-size: 1.75rem;
-    }
-    
-    .history-year:after {
-        width: 60px;
-        height: 3px;
-    }
-    
-    .history-carousel-indicators button {
-        height: 1.25rem;
-        width: 1.25rem;
-        margin: 0 0.5rem;
+    .history-item {
+        display: flex;
+        justify-content: center;
     }
 }
+
+/* IMPROVE TESTIMONIAL TAB BUTTONS VISIBILITY */
+/* Enhanced styling for Customer/Chef tab buttons */
+.testimonial-tab-active {
+    background-color: var(--color-custom-green);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.testimonial-tab-inactive {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+.testimonial-tab-inactive:hover {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+/* Make tabs more noticeable */
+.inline-flex[role="group"] {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    min-width: 240px;
+}
+
+/* FOOTER ALIGNMENT ON MOBILE & TABLET */
+/* Left-align footer content on mobile and tablet */
+@media (max-width: 792px) {
+    footer .flex-col.items-center {
+        align-items: flex-start !important;
+        text-align: left;
+    }
+    
+    footer .text-center.md\:text-left {
+        text-align: left !important;
+    }
+    
+    /* Add left margin to maintain consistent spacing */
+    footer .max-w-screen-xl {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+/* Fixed Header Alignment for Mobile & Tablet */
+@media (max-width: 792px) {
+    /* Adjust the layout to show more content area */
+    .landing {
+        min-height: auto;
+        height: auto;
+        align-items: center; /* Center align content vertically */
+    }
+    
+    /* Fix content alignment with the header */
+    .not-index .flex.flex-col.items-center {
+        margin-top: -2rem; /* Pull content up slightly */
+    }
+    
+    /* Fix for header text visibility */
+    .not-index .text-white.mb-8 {
+        margin-bottom: 1rem; /* Reduce space below header text */
+    }
+}
+
+/* Additional fixes for smaller mobile screens */
+@media (max-width: 640px) {
+    .not-index.landing-content {
+        margin-top: 4.5rem; /* Slightly reduce top margin on small screens */
+    }
+    
+    .not-index h1 {
+        font-size: 2.25rem; /* Reduce font size for better fit */
+    }
+}
+
+/* Testimonial Tab Button Styling - Using Product Filter Style */
+.flex.justify-center.mb-8 .inline-flex[role="group"] {
+    box-shadow: none; /* Remove existing shadow */
+    border-radius: 50px; /* Match filter-btn rounded style */
+    overflow: hidden;
+    min-width: 240px;
+    margin: 0 auto; /* Center the button group */
+    gap: 1rem; /* Add gap between buttons */
+    display: inline-flex;
+}
+
+/* Style active tab similar to filter-btn.active */
+.testimonial-tab-active {
+    padding: 0.75rem 2rem;
+    background-color: #BF161C !important; /* Match product filter style */
+    color: white !important;
+    font-weight: 500;
+    border: 2px solid #e1bc3a !important;
+    border-radius: 50px !important; /* Ensure rounded corners even when grouped */
+    transform: none !important; /* Remove the transform that causes height difference */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* Style inactive tab similar to filter-btn */
+.testimonial-tab-inactive {
+    padding: 0.75rem 2rem;
+    background-color: transparent !important;
+    color: white !important;
+    font-weight: 500;
+    border: 2px solid rgba(242, 244, 247, 0.1) !important;
+    border-radius: 50px !important; /* Ensure rounded corners even when grouped */
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for inactive tabs */
+.testimonial-tab-inactive:hover {
+    border-color: #BF161C !important;
+    background-color: transparent !important;
+}
+
+/* Fix button container layout */
+.flex.justify-center.mb-8 {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Adjust button group layout to match filter buttons */
+#customerTabBtn, #chefTabBtn {
+    margin: 0 0.5rem; /* Add spacing between buttons */
+    min-width: 110px; /* Ensure consistent width */
+    text-align: center;
+}
+
+/* Remove default button group styling */
+.inline-flex.rounded-md.shadow-sm[role="group"] {
+    box-shadow: none;
+    background: transparent;
+    display: flex;
+    gap: 1rem;
+}
+
+/* Fix spacing and alignment on mobile */
+@media (max-width: 640px) {
+    .testimonial-tab-active, 
+    .testimonial-tab-inactive {
+        padding: 0.5rem 1.5rem; /* Smaller padding on mobile */
+        min-width: 90px; /* Smaller min-width */
+    }
+    
+    .inline-flex.rounded-md.shadow-sm[role="group"] {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+}
+

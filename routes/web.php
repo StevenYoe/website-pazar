@@ -6,6 +6,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\VacancyController;
 // use Illuminate\Support\Facades\Route;
 
 // Homepage Route
@@ -33,4 +34,7 @@ Route::get('/recipe/{slug}', [App\Http\Controllers\RecipeController::class, 'sho
 Route::get('/careerinfo', [CareerController::class, 'info'])->name('careerinfo');
 
 // Vacancies Routes
-Route::get('/vacancies', [VacanciesController::class, 'vacancies'])->name('vacancies');
+Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies');
+
+// Vacancy detail page
+Route::get('/vacancy/{slug}', [App\Http\Controllers\VacancyController::class, 'show'])->name('vacancy.show');
