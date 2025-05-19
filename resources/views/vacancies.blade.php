@@ -9,9 +9,7 @@
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
-            <p class="text-xl mb-2 text-yellow-400 dark:text-yellow-400">
-                {{ $header->h_description_id ?? '' }}
-            </p>
+            <p class="text-xl mb-2 text-yellow-400 dark:text-yellow-400">Karir</p>
             <h1 class="text-5xl font-bold dark:text-gray-200">
                 {{ $header->h_title_id ?? 'Vacancy Positions' }}
             </h1>
