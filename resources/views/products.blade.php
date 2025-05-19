@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'Produk - Pazar Seasonings')
+
 @section('style')
 <link href="{{ asset('css/product.css') }}" rel="stylesheet" type="text/css" >
 @endsection

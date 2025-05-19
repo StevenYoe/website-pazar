@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', $vacancy->v_title_id . ' - Pazar Seasonings')
+
 @section('style')
 <link href="{{ asset('css/vacancy.css') }}" rel="stylesheet" type="text/css" >
 @endsection

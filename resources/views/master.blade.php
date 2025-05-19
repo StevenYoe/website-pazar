@@ -1,16 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pazar Seasonings</title>
+        
+        <!-- Basic SEO Meta Tags -->
+        <title>@yield('title', 'Pazar Seasonings')</title>
+        <meta name="description" content="@yield('description', 'Pazar Seasonings merupakan brand dari PT Pristine Prima Lestari dimana PT Pristine Prima Lestari adalah produsen bumbu, kondimen, tepung berbumbu, rempah, dan sambal berkualitas tinggi yang berfokus pada kepraktisan tanpa mengurangi cita rasa autentik.')">
+        <meta name="keywords" content="@yield('keywords', 'Pazar Seasoning, Pazar Seasonings, Pazar, Seasoning, Bumbu, Instan, Bumbu Instan, Sambal, Rempah, Kondimen, Horeka, Seasonings, Pristine Prima Lestari, PT Pristine Prima Lestari, Instant, Instant Seasoning, Instant Seasonings, Spices, Spice, Condiment, Condiments, Horeca, Manufaktur, Manufacture, Curug, Indonesia, Tangerang, Kabupaten Tangerang, Tangerang Regency')">
+        <meta name="author" content="Steven-MNP">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="Indonesian">
+        
+        <!-- Canonical URL -->
+        <link rel="canonical" href="{{ url()->current() }}">
+        
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="@yield('og_title', 'Pazar Seasonings - PT Pristine Prima Lestari')">
+        <meta property="og:description" content="@yield('og_description', 'Produsen bumbu, kondimen, tepung berbumbu, rempah, dan sambal berkualitas tinggi yang berfokus pada kepraktisan tanpa mengurangi cita rasa autentik.')">
+        <meta property="og:image" content="@yield('og_image', asset('img/web/Logo.png'))">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="@yield('og_type', 'website')">
+        <meta property="og:locale" content="id_ID">
+        <meta property="og:site_name" content="Pazar Seasonings">
+        
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="@yield('twitter_title', 'Pazar Seasonings - PT Pristine Prima Lestari')">
+        <meta name="twitter:description" content="@yield('twitter_description', 'Produsen bumbu, kondimen, tepung berbumbu, rempah, dan sambal berkualitas tinggi.')">
+        <meta name="twitter:image" content="@yield('twitter_image', asset('img/web/Logo.png'))">
+        
+        <!-- Favicon -->
         <link rel="icon" href="{{ asset('img/web/Logo.ico') }}" type="image/x-icon">
-        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css" >
+        <link rel="apple-touch-icon" href="{{ asset('img/web/Logo.png') }}">
+        
+        <!-- Stylesheets -->
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet" type="text/css">
         @yield('style')
         <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
         <link href="https://db.onlinewebfonts.com/c/f5a6cacc1ecc1ccdc9e8563085f972ec?family=Nyte+W00+Black" rel="stylesheet">
+        
+        <!-- Preconnect for performance -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://cdn.jsdelivr.net">
+        
+        <!-- JSON-LD Structured Data -->
+        <script type="application/ld+json">
+        @yield('structured_data', json_encode([
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            'name' => 'PT Pristine Prima Lestari',
+            'alternateName' => 'Pazar Seasonings',
+            'url' => url('/'),
+            'logo' => asset('img/web/Logo.png'),
+            'description' => 'PT Pristine Prima Lestari adalah produsen bumbu, kondimen, tepung berbumbu, rempah, dan sambal berkualitas tinggi yang berfokus pada kepraktisan tanpa mengurangi cita rasa autentik.',
+            'address' => [
+                '@type' => 'PostalAddress',
+                'addressCountry' => 'ID',
+                'addressRegion' => 'Banten',
+                'addressLocality' => 'Kabupaten Tangerang',
+                'streetAddress' => 'Curug'
+            ],
+            'contactPoint' => [
+                '@type' => 'ContactPoint',
+                'contactType' => 'customer service',
+                'availableLanguage' => ['Indonesian', 'English']
+            ],
+            'sameAs' => [
+                'https://shopee.co.id/pazar_seasonings',
+                'https://www.tokopedia.com/pazarseasonings',
+                'https://www.blibli.com/merchant/pazar-seasonings/PAS-70580',
+                'https://www.lazada.co.id/shop/pazar-seasonings/',
+                'https://www.tiktok.com/@pazar.seasonings',
+                'https://www.bukalapak.com/u/pazarseasonings_113090'
+            ],
+            'numberOfEmployees' => [
+                '@type' => 'QuantitativeValue',
+                'value' => '100-200'
+            ],
+            'foundingDate' => '2016',
+            'industry' => 'Spice Manufacturing',
+            'knowsAbout' => [
+                'Bumbu Instan',
+                'Seasonings',
+                'Rempah',
+                'Sambal',
+                'Kondimen'
+            ]
+        ], JSON_UNESCAPED_SLASHES))
+        </script>
 
         <style type="text/tailwindcss">
             @theme {
@@ -214,6 +293,6 @@
         </button>
 
         @yield('script')
-
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     </body>
 </html>

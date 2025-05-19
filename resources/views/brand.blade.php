@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'Brand Kami - Pazar Seasonings')
+
 <!-- Company Header Section -->
 @section('header')
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
@@ -126,8 +128,8 @@
         <div id="customerTestimonials" class="testimonial-content">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @if(isset($customerTestimonials) && count($customerTestimonials) > 0)
-                    @foreach($customerTestimonials as $testimonial)
-                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6">
+                    @foreach($customerTestimonials as $index => $testimonial)
+                        <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6 relative">
                             <div class="flex items-center mb-4">
                                 <div class="h-10 w-10 mr-4">
                                     @if($testimonial->t_profile)
@@ -136,8 +138,6 @@
                                         <img src="{{ asset('img/Testimonial/male-avatar.svg') }}" alt="{{ $testimonial->t_name }}" class="h-full w-full rounded-full object-cover">
                                     @elseif($testimonial->t_gender == 'Female')
                                         <img src="{{ asset('img/Testimonial/female-avatar.svg') }}" alt="{{ $testimonial->t_name }}" class="h-full w-full rounded-full object-cover">
-                                    @else
-                                        <img src="{{ asset('img/Testimonial/default-avatar.jpg') }}" alt="{{ $testimonial->t_name }}" class="h-full w-full rounded-full object-cover">
                                     @endif
                                 </div>
                                 <div>
@@ -145,7 +145,25 @@
                                     <p class="text-sm text-gray-500 dark:text-gray-400">Customer</p>
                                 </div>
                             </div>
-                            <p class="text-gray-600 dark:text-gray-300">{{ $testimonial->t_description_id }}</p>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">{{ $testimonial->t_description_id }}</p>
+                            
+                            <!-- Small photo box if t_image exists -->
+                            @if(!empty($testimonial->t_image))
+                                <div class="flex justify-center">
+                                    <button onclick="openImagePopup('{{ $testimonial->t_image }}', '{{ $testimonial->t_name }}')" 
+                                            class="relative group cursor-pointer hover:opacity-90 transition-opacity duration-200">
+                                        <img src="{{ $testimonial->t_image }}" 
+                                             alt="{{ $testimonial->t_name }} testimonial image" 
+                                             class="w-16 h-16 rounded-lg object-cover border-2 border-gray-200 dark:border-gray-600 shadow-sm">
+                                        <!-- Hover overlay with zoom icon -->
+                                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 rounded-lg flex items-center justify-center">
+                                            <svg class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </div>
+                            @endif
                         </div>
                     @endforeach
                 @endif
@@ -191,10 +209,32 @@
     </div>
 </section>
 
+<!-- Image Popup Modal -->
+<div id="imagePopupModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
+    <div class="relative max-w-4xl max-h-full">
+        <!-- Close button -->
+        <button onclick="closeImagePopup()" 
+                class="absolute -top-4 -right-4 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 z-10">
+            <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        
+        <!-- Image container -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-2xl overflow-hidden">
+            <img id="popupImage" src="" alt="" class="max-w-full max-h-[80vh] object-contain">
+            <div class="p-4 bg-white dark:bg-gray-800">
+                <p id="popupImageCaption" class="text-center text-gray-700 dark:text-gray-300 font-medium"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/brand.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 <script src="{{ asset('js/carousel.js') }}"></script>
 @endsection

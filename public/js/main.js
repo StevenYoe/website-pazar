@@ -47,19 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const popupModal = document.getElementById('popupModal');
-    const closeModal = document.getElementById('closeModal');
-
-    // Tampilkan modal saat halaman dimuat
-    popupModal.classList.remove('hidden');
-
-    // Sembunyikan modal saat tombol close diklik
-    closeModal.addEventListener("click", function () {
-        popupModal.classList.add('hidden');
-    });
-});
-
 document.addEventListener('DOMContentLoaded', function() {
     // PART 1: Handle direct links by URL path
     const currentPath = window.location.pathname;
@@ -123,36 +110,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
-
-// Testimonial tab functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const customerBtn = document.getElementById('customerTabBtn');
-    const chefBtn = document.getElementById('chefTabBtn');
-    const customerContent = document.getElementById('customerTestimonials');
-    const chefContent = document.getElementById('chefTestimonials');
-    
-    customerBtn.addEventListener('click', function() {
-        // Update button styles
-        customerBtn.classList.add('testimonial-tab-active');
-        customerBtn.classList.remove('testimonial-tab-inactive');
-        chefBtn.classList.add('testimonial-tab-inactive');
-        chefBtn.classList.remove('testimonial-tab-active');
-        
-        // Show/hide content
-        customerContent.classList.remove('hidden');
-        chefContent.classList.add('hidden');
-    });
-    
-    chefBtn.addEventListener('click', function() {
-        // Update button styles
-        chefBtn.classList.add('testimonial-tab-active');
-        chefBtn.classList.remove('testimonial-tab-inactive');
-        customerBtn.classList.add('testimonial-tab-inactive');
-        customerBtn.classList.remove('testimonial-tab-active');
-        
-        // Show/hide content
-        chefContent.classList.remove('hidden');
-        customerContent.classList.add('hidden');
-    });
 });

@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', $recipe->r_title_id . ' - Pazar Seasonings')
+
 @section('style')
 <link href="{{ asset('css/recipe-detail.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/recipe.css') }}" rel="stylesheet" type="text/css" >

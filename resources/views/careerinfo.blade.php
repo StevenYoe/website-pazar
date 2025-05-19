@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'Info Karir - Pazar Seasonings')
+
 <!-- Career Info Header Section -->
 @section('header')
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
@@ -9,63 +11,102 @@
             <h1 class="text-5xl font-bold dark:text-gray-200">Info Karir</h1>
         </div>
         <div class="w-full max-w-4xl">
-            <img src="img/Web/career.jpg" alt="History-Overview" class="rounded-lg shadow-lg w-full">
+            <img src="img/Web/career.jpg" alt="Career-Overview" class="rounded-lg shadow-lg w-full">
         </div>
     </div>
 </div>
 @endsection
 
 @section('content')
-<!-- Why Choose Us Section -->
-<section class="why-choose-us py-20 bg-gray-50 dark:bg-gray-950 antialiased dark:text-gray-200">
-    <div class="max-w-screen-xl mx-auto px-20">
-        <h2 class="text-4xl font-bold text-center mb-12">Why Choose Pazar Seasonings?</h2>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
-            <!-- Master Chefs Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="text-red-600 mb-4 group-hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">Master Chefs</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
-            
-            <!-- Quality Food Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="text-red-600 mb-4 group-hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">Quality Food</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
-            
-            <!-- Online Order Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="text-red-600 mb-4 group-hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-1.45-5c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.37-.66-.11-1.48-.87-1.48H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">Online Order</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
-            </div>
-            
-            <!-- 24/7 Service Card -->
-            <div class="bg-white dark:bg-gray-300 rounded-lg shadow-sm p-6 flex flex-col h-full hover:bg-yellow-400 transition-all duration-300 group max-w-xs mx-auto w-full">
-                <div class="text-red-600 mb-4 group-hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1zM19 12h2c0-4.97-4.03-9-9-9v2c3.87 0 7 3.13 7 7zm-4 0h2c0-2.76-2.24-5-5-5v2c1.66 0 3 1.34 3 3z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-white dark:text-black">24/7 Service</h3>
-                <p class="text-gray-600 dark:text-gray-800 group-hover:text-white">Diam elitr kasd sed at elitr sed ipsum justo dolor sed clita amet diam</p>
+<!-- Bekerja di Pazar Section -->
+<section class="py-16 bg-white dark:bg-gray-900 antialiased">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-6 dark:text-gray-200">Bekerja di Pazar</h2>
+            <div class="max-w-4xl mx-auto text-lg leading-relaxed text-gray-600 dark:text-gray-300 space-y-6">
+                <p>
+                    Pazar adalah perusahaan manufaktur bumbu masakan terkemuka yang telah dipercaya oleh ribuan keluarga Indonesia selama bertahun-tahun. Sebagai bagian dari keluarga besar Pazar, Anda akan berkontribusi dalam menyajikan cita rasa autentik yang memperkaya kuliner nusantara.
+                </p>
+                <p>
+                    Dengan fasilitas produksi modern dan teknologi terdepan, kami berkomitmen untuk menghasilkan produk bumbu berkualitas tinggi yang memenuhi standar internasional. Di Pazar, setiap karyawan memiliki peran penting dalam menjaga kualitas dan kelezatan setiap produk yang sampai ke tangan konsumen.
+                </p>
+                <p>
+                    Kami mencari individu yang passionate, inovatif, dan siap berkembang bersama perusahaan. Bergabunglah dengan tim profesional kami dan rasakan pengalaman bekerja di lingkungan yang mendukung kreativitas, pembelajaran berkelanjutan, dan pencapaian career goals yang optimal.
+                </p>
             </div>
         </div>
+    </div>
+</section>
+
+<!-- Kelebihan Pazar Section -->
+<section class="py-16 bg-gray-50 dark:bg-gray-950 antialiased">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold text-center mb-16 dark:text-gray-200">Mengapa Memilih Berkarir di Pazar?</h2>
+        
+        <!-- First Feature -->
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+                <h3 class="text-3xl font-bold mb-6 text-custom-green dark:text-custom-lightgreen">Memberikan Dampak Positif</h3>
+                <p class="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+                    Kami percaya pada kekuatan kebaikan untuk meningkatkan kualitas hidup. Keyakinan ini mendorong komitmen kami untuk menggunakan skala global, sumber daya dan keahlian untuk berkontribusi pada masa depan yang lebih sehat bagi masyarakat dan planet. Anda akan bergabung dengan perusahaan yang berkomitmen membuat dampak positif melalui cita rasa autentik Indonesia.
+                </p>
+            </div>
+            <div>
+                <img src="img/Web/make-impact.jpg" alt="Memberikan Dampak Positif di Pazar" class="rounded-lg shadow-lg w-full h-auto">
+            </div>
+        </div>
+
+        <!-- Second Feature -->
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+            <div class="order-2 md:order-1">
+                <img src="img/Web/make-impact.jpg" alt="Budaya Inovasi" class="rounded-lg shadow-lg w-full h-auto">
+            </div>
+            <div class="order-1 md:order-2">
+                <h3 class="text-3xl font-bold mb-6 text-custom-green dark:text-custom-lightgreen">Budaya Inovasi</h3>
+                <p class="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+                    Di Pazar, inovasi adalah inti dari semua yang kami lakukan. Dari teknik tradisional pencampuran bumbu hingga proses manufaktur modern, kami mendorong tim untuk berpikir kreatif dan melampaui batas. Bergabunglah dengan tempat kerja di mana ide-ide Anda dihargai dan inovasi mendorong kesuksesan kami dalam menghadirkan produk luar biasa untuk keluarga Indonesia.
+                </p>
+            </div>
+        </div>
+
+        <!-- Third Feature -->
+        <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+            <div>
+                <h3 class="text-3xl font-bold mb-6 text-custom-green dark:text-custom-lightgreen">Pertumbuhan Profesional</h3>
+                <p class="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+                    Perjalanan karir Anda sangat berarti bagi kami. Kami menyediakan program pelatihan komprehensif, kesempatan mentoring, dan jalur perkembangan karir yang jelas. Baik Anda yang baru memulai karir atau ingin naik ke level berikutnya, Pazar menawarkan dukungan dan sumber daya yang dibutuhkan untuk mencapai aspirasi profesional Anda di industri manufaktur makanan.
+                </p>
+            </div>
+            <div>
+                <img src="img/Web/make-impact.jpg" alt="Pertumbuhan Profesional" class="rounded-lg shadow-lg w-full h-auto">
+            </div>
+        </div>
+
+        <!-- Fourth Feature -->
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <img src="img/Web/make-impact.jpg" alt="Kolaborasi Tim" class="rounded-lg shadow-lg w-full h-auto">
+            </div>
+            <div class="order-1 md:order-2">
+                <h3 class="text-3xl font-bold mb-6 text-custom-green dark:text-custom-lightgreen">Lingkungan Kolaboratif</h3>
+                <p class="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+                    Rasakan kekuatan kerja tim dalam lingkungan kerja yang inklusif dan kolaboratif. Di Pazar, perspektif yang beragam dihargai, dan setiap anggota tim berkontribusi pada kesuksesan bersama. Bangun hubungan bermakna dengan rekan kerja yang berbagi passion Anda untuk kualitas dan keunggulan dalam manufaktur bumbu.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-16 bg-custom-green dark:bg-custom-green">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">Siap Bergabung dengan Tim Pazar?</h2>
+        <p class="text-xl text-white mb-8 max-w-3xl mx-auto">
+            Jelajahi berbagai posisi karir yang tersedia dan temukan peluang yang sesuai dengan passion dan keahlian Anda. Mari bersama-sama menciptakan cita rasa yang menginspirasi.
+        </p>
+        <a href="/vacancies" class="inline-block bg-white hover:bg-gray-100 text-custom-green font-bold py-4 px-8 rounded-lg transition duration-300 text-lg">
+            LIHAT LOWONGAN KERJA
+        </a>
     </div>
 </section>
 @endsection

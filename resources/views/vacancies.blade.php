@@ -1,5 +1,7 @@
 @extends('master')
 
+@section('title', 'Lowongan - Pazar Seasonings')
+
 @section('style')
 <link href="{{ asset('css/vacancy.css') }}" rel="stylesheet" type="text/css" >
 @endsection
@@ -11,7 +13,7 @@
         <div class="text-white mb-8">
             <p class="text-xl mb-2 text-yellow-400 dark:text-yellow-400">Karir</p>
             <h1 class="text-5xl font-bold dark:text-gray-200">
-                {{ $header->h_title_id ?? 'Vacancy Positions' }}
+                {{ $header->h_title_id }}
             </h1>
         </div>
         @if(isset($header->h_image))
