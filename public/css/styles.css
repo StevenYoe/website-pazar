@@ -25,6 +25,14 @@ body {
     background-color: transparent;
 }
 
+#navbar-sticky button[type="button"] {
+    cursor: pointer; /* Add pointer cursor */
+    user-select: none; /* Prevent text selection */
+    -webkit-user-select: none; /* Safari support */
+    -moz-user-select: none; /* Firefox support */
+    -ms-user-select: none; /* IE/Edge support */
+}
+
 .active-dropdown > button {
     color: #3fd144; /* Warna hijau custom-lightgreen */
 }
@@ -59,6 +67,24 @@ body {
     position: relative;
 }
 
+/* Same styling for all dropdown buttons */
+.group button {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Fix for dropdown items */
+.group-hover\:block a {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
 .group-hover\:block {
     position: absolute;
     left: 50%;
@@ -89,6 +115,11 @@ body {
 .category-item {
     transform: translateY(0);
     transition: transform 0.3s ease;;
+}
+
+/* Back to Top Button Cursor Fix */
+#btn-back-to-top {
+    cursor: pointer;
 }
 
 /* Mobile responsive adjustments */
@@ -632,27 +663,24 @@ body {
 
 /* IMPROVE TESTIMONIAL TAB BUTTONS VISIBILITY */
 /* Enhanced styling for Customer/Chef tab buttons */
-.testimonial-tab-active {
-    background-color: var(--color-custom-green);
+.testimonial-tab.active {
+    background: #BF161C;
+    border-color: #e1bc3a;
+}
+
+.testimonial-tab {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 50px;
     color: white;
-    font-weight: 600;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 2;
-    transform: translateY(-2px);
+    font-weight: 500;
+    cursor: pointer;
     transition: all 0.3s ease;
+    border: 2px solid rgba(242, 244, 247, 0.1);
 }
 
-.testimonial-tab-inactive {
-    background-color: #f3f4f6;
-    color: #4b5563;
-    border: 1px solid #e5e7eb;
-    transition: all 0.3s ease;
-}
-
-.testimonial-tab-inactive:hover {
-    background-color: #e5e7eb;
-    color: #374151;
+.testimonial-tab:hover {
+    border-color: #BF161C;
 }
 
 /* Make tabs more noticeable */
@@ -712,83 +740,3 @@ body {
         font-size: 2.25rem; /* Reduce font size for better fit */
     }
 }
-
-/* Testimonial Tab Button Styling - Using Product Filter Style */
-.flex.justify-center.mb-8 .inline-flex[role="group"] {
-    box-shadow: none; /* Remove existing shadow */
-    border-radius: 50px; /* Match filter-btn rounded style */
-    overflow: hidden;
-    min-width: 240px;
-    margin: 0 auto; /* Center the button group */
-    gap: 1rem; /* Add gap between buttons */
-    display: inline-flex;
-}
-
-/* Style active tab similar to filter-btn.active */
-.testimonial-tab-active {
-    padding: 0.75rem 2rem;
-    background-color: #BF161C !important; /* Match product filter style */
-    color: white !important;
-    font-weight: 500;
-    border: 2px solid #e1bc3a !important;
-    border-radius: 50px !important; /* Ensure rounded corners even when grouped */
-    transform: none !important; /* Remove the transform that causes height difference */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-    transition: all 0.3s ease;
-}
-
-/* Style inactive tab similar to filter-btn */
-.testimonial-tab-inactive {
-    padding: 0.75rem 2rem;
-    background-color: transparent !important;
-    color: white !important;
-    font-weight: 500;
-    border: 2px solid rgba(242, 244, 247, 0.1) !important;
-    border-radius: 50px !important; /* Ensure rounded corners even when grouped */
-    transition: all 0.3s ease;
-}
-
-/* Hover effect for inactive tabs */
-.testimonial-tab-inactive:hover {
-    border-color: #BF161C !important;
-    background-color: transparent !important;
-}
-
-/* Fix button container layout */
-.flex.justify-center.mb-8 {
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-/* Adjust button group layout to match filter buttons */
-#customerTabBtn, #chefTabBtn {
-    margin: 0 0.5rem; /* Add spacing between buttons */
-    min-width: 110px; /* Ensure consistent width */
-    text-align: center;
-}
-
-/* Remove default button group styling */
-.inline-flex.rounded-md.shadow-sm[role="group"] {
-    box-shadow: none;
-    background: transparent;
-    display: flex;
-    gap: 1rem;
-}
-
-/* Fix spacing and alignment on mobile */
-@media (max-width: 640px) {
-    .testimonial-tab-active, 
-    .testimonial-tab-inactive {
-        padding: 0.5rem 1.5rem; /* Smaller padding on mobile */
-        min-width: 90px; /* Smaller min-width */
-    }
-    
-    .inline-flex.rounded-md.shadow-sm[role="group"] {
-        width: 100%;
-        justify-content: center;
-        gap: 0.5rem;
-    }
-}
-

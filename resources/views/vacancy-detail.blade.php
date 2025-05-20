@@ -4,6 +4,7 @@
 
 @section('style')
 <link href="{{ asset('css/vacancy.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
 @section('header')
@@ -13,7 +14,7 @@
 
 @section('content')
 <!-- Vacancy Detail Section -->
-<section class="py-12 bg-gray-50 dark:bg-gray-950 antialiased dark:text-gray-200">
+<section class="py-12 bg-gray-100 dark:bg-gray-950 antialiased dark:text-gray-200">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
         <!-- Breadcrumb Navigation -->
         <div class="mb-8">
@@ -212,56 +213,62 @@
                 @if(count($relatedVacancies) > 0)
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Lowongan Serupa</h3>
-                    <div class="space-y-6">
-                        @foreach($relatedVacancies as $related)
-                        <div class="vacancy-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden relative">
-                            @if(isset($related->v_urgent) && $related->v_urgent)
-                            <div class="urgent-tag">
-                                <span class="inline-flex items-center px-3 py-1 text-xs font-semibold bg-red-100 text-red-800">
-                                    <svg class="w-4 h-4 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path d="M12 23a7.5 7.5 0 01-5.138-12.963C8.204 8.774 11.5 6.5 11 1.5c6 4 9 8 3 14 1 0 2.5 0 5-2.47.27.773.5 1.604.5 2.47A7.5 7.5 0 0112 23z"></path>
-                                    </svg>
-                                    Urgently needed
-                                </span>
-                            </div>
-                            @endif
-                            
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h3 class="text-xl text-black font-bold mb-3">{{ $related->v_title_id }}</h3>
-                                <div class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">
-                                    <p class="mb-3"><span class="font-medium">Pendaftaran Ditutup:</span> {{ $related->closed_date_formatted }}</p>
-                                    
-                                    <div class="flex flex-col space-y-2">
-                                        <div class="flex items-center">
-                                            <svg class="w-4 h-4 mr-2 text-custom-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                                            </svg>
-                                            <span>{{ $related->department_name_id }}</span>
-                                        </div>
+                    <div class="vacancies-item">
+                        <div class="grid grid-cols-1 gap-6">
+                            @foreach($relatedVacancies as $related)
+                            <div class="vacancy-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden"
+                                data-department="{{ $related->v_department_id }}"
+                                data-employment="{{ $related->v_employment_id }}"
+                                data-experience="{{ $related->v_experience_id }}">
+                                
+                                @if(isset($related->v_urgent) && $related->v_urgent)
+                                <div class="urgent-tag">
+                                    <span class="inline-flex items-center px-3 py-1 text-xs font-semibold bg-red-100 text-red-800">
+                                        <svg class="w-4 h-4 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path d="M12 23a7.5 7.5 0 01-5.138-12.963C8.204 8.774 11.5 6.5 11 1.5c6 4 9 8 3 14 1 0 2.5 0 5-2.47.27.773.5 1.604.5 2.47A7.5 7.5 0 0112 23z"></path>
+                                        </svg>
+                                        Urgently needed
+                                    </span>
+                                </div>
+                                @endif
+                                
+                                <div class="p-6 flex flex-col card-container">
+                                    <h3 class="text-xl text-black font-bold mb-3 line-clamp-2">{{ $related->v_title_id }}</h3>
+                                    <div class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">
+                                        <p class="mb-3"><span class="font-medium">Pendaftaran Ditutup:</span> {{ $related->closed_date_formatted }}</p>
                                         
-                                        <div class="flex items-center">
-                                            <svg class="w-4 h-4 mr-2 text-custom-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                                <circle cx="12" cy="10" r="3"></circle>
-                                            </svg>
-                                            <span>{{ $related->employment_name_id }}</span>
-                                        </div>
-                                    
-                                        <div class="flex items-center">
-                                            <svg class="w-4 h-4 mr-2 text-custom-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <circle cx="12" cy="12" r="10"></circle>
-                                                <path d="M12 16v-4"></path>
-                                                <path d="M12 8h.01"></path>
-                                            </svg>
-                                            <span>Min. {{ $related->experience_name_id }}</span>
+                                        <div class="flex flex-col space-y-2">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-2 text-custom-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                                </svg>
+                                                <span>{{ $related->department_name_id }}</span>
+                                            </div>
+                                            
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-2 text-custom-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                                    <circle cx="12" cy="10" r="3"></circle>
+                                                </svg>
+                                                <span>{{ $related->employment_name_id }}</span>
+                                            </div>
+                                        
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-2 text-custom-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10"></circle>
+                                                    <path d="M12 16v-4"></path>
+                                                    <path d="M12 8h.01"></path>
+                                                </svg>
+                                                <span>Min. {{ $related->experience_name_id }}</span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <a href="{{ url('vacancy/' . $related->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                                 </div>
-                                <a href="{{ url('vacancy/' . $related->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">VIEW DETAILS →</a>
                             </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
                 </div>
                 @endif
@@ -275,6 +282,7 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/vacancy.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
+<script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/detail-page.js') }}"></script>
 <script src="{{ asset('js/vacancy-detail.js') }}"></script>
 @endsection

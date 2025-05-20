@@ -1,0 +1,36 @@
+/* Core card container styles */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Remove truncation constraints */
+.why-pazar h3.text-lg,
+.product-category h3.text-xl,
+.recipe-section h3.text-xl,
+.recipe-section h4.text-sm,
+.vacancies-section .vacancy-item h3.text-xl {
+  /* Remove min-height constraints */
+  min-height: auto;
+  /* Remove truncation */
+  -webkit-line-clamp: unset;
+  /* Keep vertical alignment */
+  align-items: flex-start;
+  /* Ensure full text is visible */
+  overflow: visible;
+}
+
+/* Remove truncation for descriptions */
+.why-pazar p.text-sm,
+.product-category p.text-gray-600,
+.product-section p.text-gray-600 {
+  /* Remove min-height constraints */
+  min-height: auto;
+  /* Remove truncation */
+  -webkit-line-clamp: unset;
+  /* Keep vertical alignment */
+  align-items: flex-start;
+  /* Ensure full text is visible */
+  overflow: visible;
+}

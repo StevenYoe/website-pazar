@@ -4,6 +4,7 @@
 
 @section('style')
 <link href="{{ asset('css/vacancy.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
 <!-- Vacancies Header Section -->
@@ -27,7 +28,7 @@
 
 @section('content')
 <!-- Vacancies Section -->
-<section class="py-12 bg-gray-50 dark:bg-gray-950 antialiased dark:text-gray-200 vacancies-section">
+<section class="py-12 bg-gray-100 dark:bg-gray-950 antialiased dark:text-gray-200 vacancies-section">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
         <!-- Filter Section -->
         <div class="filters mb-12 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
@@ -72,7 +73,7 @@
         <div id="vacancies-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @if(count($vacancies) > 0)
                 @foreach($vacancies as $vacancy)
-                    <div class="vacancy-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden"
+                    <div class="vacancy-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden"
                         data-department="{{ $vacancy->v_department_id }}"
                         data-employment="{{ $vacancy->v_employment_id }}"
                         data-experience="{{ $vacancy->v_experience_id }}">
@@ -88,8 +89,8 @@
                         </div>
                         @endif
                         
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl text-black font-bold mb-3">{{ $vacancy->v_title_id }}</h3>
+                        <div class="p-6 flex flex-col">
+                            <h3 class="text-xl text-black font-bold mb-3 line-clamp-2">{{ $vacancy->v_title_id }}</h3>
                             <div class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">
                                 <p class="mb-3"><span class="font-medium">Pendaftaran Ditutup:</span> {{ $vacancy->closed_date_formatted }}</p>
                                 
@@ -141,6 +142,7 @@
 
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/vacancy.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 @endsection

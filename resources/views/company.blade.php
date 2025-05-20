@@ -40,7 +40,7 @@
 @endif
 
 <!-- History Section -->
-<section class="history-section py-16 bg-gray-50 dark:bg-gray-800 antialiased">
+<section class="history-section py-16 bg-gray-100 dark:bg-gray-800 antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Sejarah Pazar Seasoning</h2>
         
@@ -105,7 +105,7 @@
 @endif
 
 <!-- Vision & Mission Section -->
-<section class="vision-mission py-16 bg-gray-50 dark:bg-gray-800 antialiased">
+<section class="vision-mission py-16 bg-gray-100 dark:bg-gray-800 antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row">
             <!-- Vision -->

@@ -1,0 +1,82 @@
+/* Testimonial Tab Button Styling - Properly Matching Product Filter Style */
+.flex.justify-center.mb-8 .inline-flex[role="group"] {
+    box-shadow: none; /* Remove existing shadow */
+    border-radius: 50px; /* Match filter-btn rounded style */
+    overflow: hidden;
+    min-width: 240px;
+    margin: 0 auto; /* Center the button group */
+    gap: 1rem; /* Add gap between buttons */
+    display: inline-flex;
+}
+
+/* Style active tab similar to filter-btn.active */
+.testimonial-tab-active {
+    padding: 0.75rem 2rem;
+    background-color: #BF161C !important; /* Red background for active state */
+    color: white !important;
+    font-weight: 500;
+    border: 2px solid #e1bc3a !important; /* Yellow border for active state */
+    border-radius: 50px !important; /* Ensure rounded corners even when grouped */
+    transform: none !important; /* Remove the transform that causes height difference */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* 
+   Style inactive tab similar to filter-btn
+   Note: The actual green color comes from the bg-custom-lightergreen class in the HTML
+   This CSS just handles the border and other styling
+*/
+.testimonial-tab {
+    padding: 0.75rem 2rem;
+    /* No background-color override here since it comes from Tailwind class */
+    color: white !important;
+    font-weight: 500;
+    border: 2px solid rgba(242, 244, 247, 0.1) !important; /* Light border for inactive state */
+    border-radius: 50px !important; /* Ensure rounded corners even when grouped */
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for inactive tabs - matches filter-btn:hover */
+.testimonial-tab:hover {
+    border-color: #BF161C !important; /* Red border on hover */
+    /* background stays green from the Tailwind class */
+}
+
+/* Fix button container layout */
+.flex.justify-center.mb-8 {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Adjust button group layout to match filter buttons */
+#customerTabBtn, #chefTabBtn {
+    margin: 0 0.5rem; /* Add spacing between buttons */
+    min-width: 110px; /* Ensure consistent width */
+    text-align: center;
+}
+
+/* Remove default button group styling */
+.inline-flex.rounded-md.shadow-sm[role="group"] {
+    box-shadow: none;
+    background: transparent;
+    display: flex;
+    gap: 1rem;
+}
+
+/* Fix spacing and alignment on mobile */
+@media (max-width: 640px) {
+    .testimonial-tab-active, 
+    .testimonial-tab {
+        padding: 0.5rem 1.5rem; /* Smaller padding on mobile */
+        min-width: 90px; /* Smaller min-width */
+    }
+    
+    .inline-flex.rounded-md.shadow-sm[role="group"] {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+}

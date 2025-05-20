@@ -31,7 +31,7 @@ Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes');
 Route::get('/recipe/{slug}', [App\Http\Controllers\RecipeController::class, 'show'])->name('recipe.show');
 
 // Career Routes
-Route::get('/careerinfo', [CareerController::class, 'info'])->name('careerinfo');
+Route::get('/careerinfo', [CareerController::class, 'index'])->name('careerinfo');
 
 // Vacancies Routes
 Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies');

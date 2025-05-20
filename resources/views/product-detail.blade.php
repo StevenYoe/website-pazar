@@ -5,6 +5,7 @@
 @section('style')
 <link href="{{ asset('css/product-detail.css') }}" rel="stylesheet" type="text/css">
 <link href="{{ asset('css/product.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
 @section('header')
@@ -114,11 +115,11 @@
         
         <!-- Produk Lainnya -->
         @if(count($randomProducts) > 0)
-        <div class="mt-16">
+        <div class="mt-16 product-section">
             <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-8">Produk Lainnya</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 @foreach($randomProducts as $randomProduct)
-                <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full overflow-hidden max-w-xs mx-auto w-full" 
+                <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full"
                     data-id="{{ $randomProduct->p_id }}" 
                     data-category="{{ $randomProduct->category_name_id }}">
                     <div class="h-48 overflow-hidden">
@@ -126,10 +127,10 @@
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <a href="{{ url('product/' . $randomProduct->slug) }}" class="hover:text-custom-red">
-                            <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red">{{ $randomProduct->p_title_id }}</h3>
+                            <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red line-clamp-2">{{ $randomProduct->p_title_id }}</h3>
                         </a>
-                        <h4 class="text-sm text-custom-red font-bold mb-2">{{ $randomProduct->category_name_id }}</h4>
-                        <p class="text-gray-600 dark:text-gray-800 flex-grow">{{ $randomProduct->p_description_id }}</p>
+                        <h5 class="text-sm text-custom-red font-bold mb-2">{{ $randomProduct->category_name_id }}</h5>
+                        <p class="text-gray-600 dark:text-gray-800 flex-grow line-clamp-3">{{ $randomProduct->p_description_id }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -142,6 +143,7 @@
 
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 <script src="{{ asset('js/detail-page.js') }}"></script>
 @endsection

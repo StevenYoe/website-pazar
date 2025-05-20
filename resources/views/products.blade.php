@@ -4,6 +4,7 @@
 
 @section('style')
 <link href="{{ asset('css/product.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
 <!-- Product Header Section -->
@@ -27,7 +28,7 @@
 
 @section('content')
 <!-- Product Section -->
-<section class="py-12 bg-gray-50 dark:bg-gray-950 antialiased dark:text-gray-200 product-section">
+<section class="py-12 bg-gray-100 dark:bg-gray-950 antialiased dark:text-gray-200 product-section">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
         <div class="filter-buttons mb-8">
             <button class="filter-btn bg-custom-lightergreen dark:bg-transparent active" data-filter="all">Semua</button>
@@ -43,16 +44,16 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             @if(count($products) > 0)
                 @foreach($products as $product)
-                    <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" 
+                    <div class="product-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" 
                         data-id="{{ $product->p_id }}" 
                         data-category="{{ $product->category_name_id }}">
                         <div class="h-48 overflow-hidden">
                             <img src="{{ $product->p_image }}" alt="{{ $product->p_title_id }}" class="w-full h-full object-cover">
                         </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl text-black font-bold mb-1">{{ $product->p_title_id }}</h3>
-                            <h4 class="text-sm text-custom-red font-bold mb-2">{{ $product->category_name_id }}</h4>
-                            <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">{{ $product->p_description_id }}</p>
+                        <div class="p-6 flex flex-col">
+                            <h3 class="text-xl text-black font-bold mb-1 line-clamp-2">{{ $product->p_title_id }}</h3>
+                            <h5 class="text-sm text-custom-red font-bold mb-2">{{ $product->category_name_id }}</h5>
+                            <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow line-clamp-3">{{ $product->p_description_id }}</p>
                             <a href="{{ url('product/' . $product->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                         </div>
                     </div>
@@ -69,6 +70,7 @@
 
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/product.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 @endsection

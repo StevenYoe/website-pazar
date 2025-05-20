@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function() {
     customerBtn.addEventListener('click', function() {
         // Update button styles
         customerBtn.classList.add('testimonial-tab-active');
-        customerBtn.classList.remove('testimonial-tab-inactive');
-        chefBtn.classList.add('testimonial-tab-inactive');
+        customerBtn.classList.remove('testimonial-tab');
+        chefBtn.classList.add('testimonial-tab');
         chefBtn.classList.remove('testimonial-tab-active');
         
         // Show/hide content
@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
     chefBtn.addEventListener('click', function() {
         // Update button styles
         chefBtn.classList.add('testimonial-tab-active');
-        chefBtn.classList.remove('testimonial-tab-inactive');
-        customerBtn.classList.add('testimonial-tab-inactive');
+        chefBtn.classList.remove('testimonial-tab');
+        customerBtn.classList.add('testimonial-tab');
         customerBtn.classList.remove('testimonial-tab-active');
         
         // Show/hide content

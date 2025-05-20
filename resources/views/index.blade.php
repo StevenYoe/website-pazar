@@ -1,5 +1,9 @@
 @extends('master')
 
+@section('style')
+<link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
+@endsection
+
 <!-- Hero/Header Section -->
 @section('header')
 <div class="landing-content max-w-screen-xl mx-auto px-4 py-20">
@@ -45,57 +49,44 @@
 @endif
 
 <!-- Why Pazar Section -->
-<section class="why-pazar py-16 bg-gray-50 dark:bg-gray-950 antialiased">
+<section class="why-pazar py-16 bg-white dark:bg-gray-900 antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Mengapa Pazar?</h2>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
                 @foreach($whyPazarItems as $item)
-                    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6 flex flex-col h-full">
+                    <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm p-6 flex flex-col">
                         <div class="flex items-start mb-2">
                             <div class="flex-shrink-0 mr-2">
                                 <img src="{{ $item->w_image }}" alt="{{ $item->w_title_id }}" class="w-10 h-10">
                             </div>
-                            <h3 class="text-lg font-bold dark:text-gray-200 line-clamp-3">{{ $item->w_title_id }}</h3>
+                            <h3 class="text-lg font-bold dark:text-gray-200 line-clamp-2">{{ $item->w_title_id }}</h3>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">{{ $item->w_description_id }}</p>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mt-2 flex-grow line-clamp-4">{{ $item->w_description_id }}</p>
                     </div>
                 @endforeach
-            @else
-                <!-- Fallback items if no data is available -->
-                @for($i = 0; $i < 5; $i++)
-                    <div class="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-sm p-6 flex flex-col h-full">
-                        <div class="flex items-start mb-4">
-                            <div class="flex-shrink-0 mr-4">
-                                <img src="img/Web/default-icon.svg" alt="Feature Icon" class="w-12 h-12">
-                            </div>
-                            <h3 class="text-lg font-bold dark:text-gray-200 line-clamp-2">Fitur Unggulan</h3>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">Deskripsi mengenai keunggulan produk Pazar Seasoning.</p>
-                    </div>
-                @endfor
             @endif
         </div>
     </div>
 </section>
 
 <!-- Product Category Section -->
-<section class="product-category py-10 bg-white dark:bg-gray-900 antialiased">
+<section class="product-category py-10 bg-gray-100 dark:bg-gray-950 antialiased">
     <div class="max-w-screen-xl mx-auto px-20">
         <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Kategori Produk</h2>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
             @if(isset($productCategories) && count($productCategories) > 0)
                 @foreach($productCategories as $category)
-                    <div class="category-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col h-full border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
+                    <div class="category-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
                         <div class="h-48 overflow-hidden">
                             <img src="{{ $category->pc_image ?? 'img/Category/default-category.jpg' }}" alt="{{ $category->pc_title_id }}" class="w-full h-full object-cover">
                         </div>
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="text-xl font-bold mb-2">{{ $category->pc_title_id }}</h3>
-                            <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">{{ $category->pc_description_id }}</p>
-                            <a href="/products?category={{ $category->pc_id }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                        <div class="p-6 flex flex-col">
+                            <h3 class="text-xl font-bold mb-2 line-clamp-2">{{ $category->pc_title_id }}</h3>
+                            <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow line-clamp-3">{{ $category->pc_description_id }}</p>
+                            <a href="/products" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                         </div>
                     </div>
                 @endforeach
@@ -106,7 +97,7 @@
 
 <!-- Latest Recipe Section -->
 @if(isset($latestRecipe))
-<section class="latest-recipe py-10 bg-gray-50 dark:bg-gray-950 antialiased">
+<section class="latest-recipe py-10 bg-white dark:bg-gray-900 antialiased">
     <div class="max-w-screen-xl mx-auto px-20">
         <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Resep Pazar</h2>
         
@@ -129,6 +120,7 @@
 
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/index.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 @endsection

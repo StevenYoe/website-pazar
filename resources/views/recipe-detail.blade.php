@@ -5,6 +5,7 @@
 @section('style')
 <link href="{{ asset('css/recipe-detail.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/recipe.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
 @section('header')
@@ -122,7 +123,7 @@
 
         <!-- Other Recipes -->
         @if(count($randomRecipes) > 0)
-        <div class="mt-16">
+        <div class="mt-16 recipe-section">
             <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-8">Resep Lainnya</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($randomRecipes as $randomRecipe)
@@ -135,15 +136,16 @@
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <a href="{{ url('recipe/' . $randomRecipe->slug) }}" class="hover:text-custom-red">
-                            <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red">{{ $randomRecipe->r_title_id }}</h3>
+                            <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red line-clamp-2">{{ $randomRecipe->r_title_id }}</h3>
                         </a>
-                        <h4 class="text-sm text-custom-red font-bold mb-2">
+                        <h4 class="text-sm text-custom-red font-bold mb-2 line-clamp-2">
                             @if(isset($randomRecipe->category_names) && count($randomRecipe->category_names) > 0)
                                 {{ implode(', ', $randomRecipe->category_names) }}
                             @else
                                 {{ $randomRecipe->category_name_id }}
                             @endif
                         </h4>
+                        <a href="{{ url('recipe/' . $randomRecipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end mt-auto">SELENGKAPNYA →</a>
                     </div>
                 </div>
                 @endforeach
@@ -156,6 +158,7 @@
 
 @section('script')
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 <script src="{{ asset('js/detail-page.js') }}"></script>
 @endsection
