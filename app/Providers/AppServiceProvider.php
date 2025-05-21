@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Register helpers
+        require_once app_path('Helpers/LanguageHelper.php');
     }
 }

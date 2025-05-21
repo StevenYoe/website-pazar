@@ -1,33 +1,36 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ app()->getLocale() }}" class="{{ $theme === 'dark' ? 'dark' : '' }}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <!-- Basic SEO Meta Tags -->
-        <title>@yield('title', 'Pazar Seasonings')</title>
-        <meta name="description" content="@yield('description', 'Pazar Seasonings merupakan brand dari PT Pristine Prima Lestari dimana PT Pristine Prima Lestari adalah produsen bumbu, kondimen, tepung berbumbu, rempah, dan sambal berkualitas tinggi yang berfokus pada kepraktisan tanpa mengurangi cita rasa autentik.')">
-        <meta name="keywords" content="@yield('keywords', 'Pazar Seasoning, Pazar Seasonings, Pazar, Seasoning, Bumbu, Instan, Bumbu Instan, Sambal, Rempah, Kondimen, Horeka, Seasonings, Pristine Prima Lestari, PT Pristine Prima Lestari, Instant, Instant Seasoning, Instant Seasonings, Spices, Spice, Condiment, Condiments, Horeca, Manufaktur, Manufacture, Curug, Indonesia, Tangerang, Kabupaten Tangerang, Tangerang Regency')">
+        <title>@yield('title',  __('general.app_name'))</title>
+        <meta name="description" content="@yield('description', __('general.meta_description'))">
+        <meta name="keywords" content="@yield('keywords', __('general.meta_keywords'))">
         <meta name="author" content="Steven-MNP">
         <meta name="robots" content="index, follow">
-        <meta name="language" content="Indonesian">
+        <meta name="language" content="{{ app()->getLocale() == 'id' ? 'Indonesian' : 'English' }}">
         
         <!-- Canonical URL -->
         <link rel="canonical" href="{{ url()->current() }}">
+        <link rel="alternate" hreflang="id" href="{{ url()->current() }}?lang=id">
+        <link rel="alternate" hreflang="en" href="{{ url()->current() }}?lang=en">
+        <link rel="alternate" hreflang="x-default" href="{{ url()->current() }}">
         
         <!-- Open Graph Meta Tags -->
-        <meta property="og:title" content="@yield('og_title', 'Pazar Seasonings - PT Pristine Prima Lestari')">
-        <meta property="og:description" content="@yield('og_description', 'Produsen bumbu, kondimen, tepung berbumbu, rempah, dan sambal berkualitas tinggi yang berfokus pada kepraktisan tanpa mengurangi cita rasa autentik.')">
+        <meta property="og:title" content="@yield('og_title', __('general.og_title'))">
+        <meta property="og:description" content="@yield('og_description', __('general.og_description'))">
         <meta property="og:image" content="@yield('og_image', asset('img/web/Logo.png'))">
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:type" content="@yield('og_type', 'website')">
-        <meta property="og:locale" content="id_ID">
+        <meta property="og:locale" content="{{ app()->getLocale() == 'id' ? 'id_ID' : 'en_US' }}">
         <meta property="og:site_name" content="Pazar Seasonings">
         
         <!-- Twitter Card Meta Tags -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="@yield('twitter_title', 'Pazar Seasonings - PT Pristine Prima Lestari')">
-        <meta name="twitter:description" content="@yield('twitter_description', 'Produsen bumbu, kondimen, tepung berbumbu, rempah, dan sambal berkualitas tinggi.')">
+        <meta name="twitter:title" content="@yield('twitter_title', __('general.twitter_title'))">
+        <meta name="twitter:description" content="@yield('twitter_description', __('general.twitter_description'))">
         <meta name="twitter:image" content="@yield('twitter_image', asset('img/web/Logo.png'))">
         
         <!-- Favicon -->
@@ -45,50 +48,70 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://cdn.jsdelivr.net">
         
+        <!-- Multilingual SEO -->
+        {!! \App\Helpers\LanguageHelper::getHreflangTags() !!}
+        
         <!-- JSON-LD Structured Data -->
         <script type="application/ld+json">
-        @yield('structured_data', json_encode([
-            '@context' => 'https://schema.org',
-            '@type' => 'Organization',
-            'name' => 'PT Pristine Prima Lestari',
-            'alternateName' => 'Pazar Seasonings',
-            'url' => url('/'),
-            'logo' => asset('img/web/Logo.png'),
-            'description' => 'PT Pristine Prima Lestari adalah produsen bumbu, kondimen, tepung berbumbu, rempah, dan sambal berkualitas tinggi yang berfokus pada kepraktisan tanpa mengurangi cita rasa autentik.',
-            'address' => [
-                '@type' => 'PostalAddress',
-                'addressCountry' => 'ID',
-                'addressRegion' => 'Banten',
-                'addressLocality' => 'Kabupaten Tangerang',
-                'streetAddress' => 'Curug'
-            ],
-            'contactPoint' => [
-                '@type' => 'ContactPoint',
-                'contactType' => 'customer service',
-                'availableLanguage' => ['Indonesian', 'English']
-            ],
-            'sameAs' => [
-                'https://shopee.co.id/pazar_seasonings',
-                'https://www.tokopedia.com/pazarseasonings',
-                'https://www.blibli.com/merchant/pazar-seasonings/PAS-70580',
-                'https://www.lazada.co.id/shop/pazar-seasonings/',
-                'https://www.tiktok.com/@pazar.seasonings',
-                'https://www.bukalapak.com/u/pazarseasonings_113090'
-            ],
-            'numberOfEmployees' => [
-                '@type' => 'QuantitativeValue',
-                'value' => '100-200'
-            ],
-            'foundingDate' => '2016',
-            'industry' => 'Spice Manufacturing',
-            'knowsAbout' => [
-                'Bumbu Instan',
-                'Seasonings',
-                'Rempah',
-                'Sambal',
-                'Kondimen'
-            ]
-        ], JSON_UNESCAPED_SLASHES))
+            {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "PT Pristine Prima Lestari",
+                "alternateName": "Pazar Seasonings",
+                "url": "{{ url('/') }}",
+                "logo": "{{ asset('img/web/Logo.png') }}",
+                "description": "{{ __('general.meta_description') }}",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "ID",
+                    "addressRegion": "Banten",
+                    "addressLocality": "Kabupaten Tangerang",
+                    "streetAddress": "Curug"
+                },
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "contactType": "customer service",
+                    "availableLanguage": ["Indonesian", "English"]
+                },
+                "sameAs": [
+                    "https://shopee.co.id/pazar_seasonings",
+                    "https://www.tokopedia.com/pazarseasonings",
+                    "https://www.blibli.com/merchant/pazar-seasonings/PAS-70580",
+                    "https://www.lazada.co.id/shop/pazar-seasonings/",
+                    "https://www.tiktok.com/@pazar.seasonings",
+                    "https://www.bukalapak.com/u/pazarseasonings_113090"
+                ],
+                "numberOfEmployees": {
+                    "@type": "QuantitativeValue",
+                    "value": "100-200"
+                },
+                "foundingDate": "2016",
+                "industry": "Spice Manufacturing",
+                "knowsAbout": [
+                    "{{ app()->getLocale() == 'id' ? 'Bumbu Instan' : 'Instant Seasonings' }}",
+                    "Seasonings",
+                    "{{ app()->getLocale() == 'id' ? 'Rempah' : 'Spices' }}",
+                    "{{ app()->getLocale() == 'id' ? 'Sambal' : 'Chili Paste' }}",
+                    "{{ app()->getLocale() == 'id' ? 'Kondimen' : 'Condiments' }}"
+                ]
+            }
+        </script>
+
+        <script>
+            // Check if dark mode is saved in cookie
+            function getThemeCookie() {
+                let cookies = document.cookie.split('; ');
+                for (let cookie of cookies) {
+                    let [name, value] = cookie.split('=');
+                    if (name === 'theme') {
+                        return value;
+                    }
+                }
+                return 'light'; // Default theme if not set
+            }
+            // Apply theme class to html tag
+            const theme = getThemeCookie();
+            document.documentElement.className = theme === 'dark' ? 'dark' : '';
         </script>
 
         <style type="text/tailwindcss">
@@ -106,7 +129,7 @@
     <body data-page="{{ Route::currentRouteName() }}">
         <header class="landing relative">
             <!-- Navbar Section - This will be visible on all pages including product-detail -->
-            <nav id="navbar" class="fixed w-full z-20 top-0 start-0 border-gray-200 dark:border-gray-600 @if(Route::currentRouteName() == 'products.show') bg-custom-red @endif">
+            <nav id="navbar" class="fixed w-full z-20 top-0 start-0 {{ $theme === 'dark' ? 'dark border-gray-600 text-white' : 'border-gray-200' }} @if(Route::currentRouteName() == 'products.show') bg-custom-red @endif" data-breakpoint="793">
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src="{{ asset('img/web/Logo.png') }}" class="h-14" alt="Pazar Logo">
@@ -121,82 +144,95 @@
 
                     <!-- Desktop Navigation -->
                     <div class="items-center justify-between hidden w-full md1:flex md1:w-auto md1:order-1" id="navbar-sticky">
-                        <!-- Navigation content remains the same -->
-                        <div class="flex flex-col md1:flex-row md1:items-center md1:space-x-4 w-full">
-                            <!-- Main Navigation Items -->
-                            <div class="flex flex-col md1:flex-row md1:space-x-4 w-full">
+                        <!-- Navigation content with improved spacing -->
+                        <div class="flex flex-col md1:flex-row md1:items-center w-full justify-between">
+                            <!-- Main Navigation Items - pushed more to the right with ml-auto and compact spacing -->
+                            <div class="flex flex-col md1:flex-row md1:space-x-1 md1:ml-16">
                                 <div class="relative group w-full md1:w-auto">
                                     <a id="nav-company" href="/company" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Perusahaan Kami
+                                        {{ __('general.company') }}
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
                                     <a id="nav-brand" href="/brand" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Brand Kami
+                                        {{ __('general.brand') }}
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
                                     <a id="nav-products" href="/products" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Produk
+                                        {{ __('general.products') }}
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
                                     <a id="nav-recipes" href="/recipes" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Resep
+                                        {{ __('general.recipes') }}
                                     </a>
                                 </div>
 
                                 <div class="relative group w-full md1:w-auto">
                                     <button id="career-dropdown" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
-                                        Karir
+                                        {{ __('general.career') }}
                                     </button>
                                     <div class="absolute left-0 z-10 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 md1:mt-0 mt-0">
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                                            <li><a id="career-info" href="/careerinfo" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Info Karir</a></li>
-                                            <li><a id="career-vacancies" href="/vacancies" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Lowongan</a></li>
+                                            <li><a id="career-info" href="/careerinfo" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">{{ __('general.career') }}</a></li>
+                                            <li><a id="career-vacancies" href="/vacancies" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">{{ __('general.vacancies') }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Right side items -->
-                            <div class="flex flex-col md1:flex-row md1:items-center md1:space-x-4 mt-4 md1:mt-0 w-full md1:w-auto">
+                            <!-- Right side items - compact spacing -->
+                            <div class="flex flex-col md1:flex-row md1:items-center space-x-0 md1:space-x-1 mt-4 md1:mt-0">
                                 <!-- Language Dropdown -->
                                 <div class="relative group w-full md1:w-auto">
-                                    <button type="button" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-white dark:text-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-custom-lightgreen dark:hover:bg-gray-700 dark:hover:text-white">
-                                    <img src="{{ asset('img/Web/Indonesia.svg')}}" alt="Indonesia Flag" class="h-3.5 w-3.5 rounded-full me-2">
-                                        Indonesia                    
+                                    <button type="button" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-white dark:text-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-custom-lightgreen dark:hover:bggray-700 dark:hover:text-white w-full">
+                                        @if(app()->getLocale() == 'id')
+                                            <img src="{{ asset('img/Web/Indonesia.svg') }}" alt="Indonesia Flag" class="h-3.5 w-3.5 rounded-full me-2"> Indonesia
+                                        @else
+                                            <img src="{{ asset('img/Web/USA.svg') }}" alt="USA Flag" class="h-3.5 w-3.5 rounded-full me-2"> English (US)
+                                        @endif
                                     </button>
                                     <!-- Language Dropdown content -->
-                                    <div class="absolute md1:absolute right-0 z-50 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 w-full md1:w-44">
+                                    <div class="absolute md1:absolute right-0 z-50 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 wfull md1:w-44">
                                         <ul class="py-2 font-medium" role="none">
-                                            <li>
-                                                <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-400 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white" role="menuitem">
-                                                    <div class="inline-flex items-center">
-                                                    <img src="{{ asset('img/Web/Indonesia.svg')}}" alt="Indonesia Flag" class="h-3.5 w-3.5 rounded-full me-2">
-                                                        Indonesia                                
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-400 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white" role="menuitem">
-                                                    <div class="inline-flex items-center">
-                                                    <img src="{{ asset('img/Web/USA.svg')}}" alt="USA Flag" class="h-3.5 w-3.5 rounded-full me-2">
-                                                        English (US)
-                                                    </div>
-                                                </a>
-                                            </li>
+                                            @foreach(config('app.available_locales') as $locale => $language)
+                                                <li>
+                                                    <a href="{{ route('language.switch', $locale) }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-400 hover:bg-custom-lightergreen dark:hover:bg-customlightergreen dark:hover:text-white {{ app()->getLocale() == $locale ? 'bggray-100 dark:bg-gray-600' : '' }}" role="menuitem">
+                                                        <div class="inline-flex items-center">
+                                                            <img src="{{ asset($language['flag']) }}" alt=" {{ $language['name'] }} Flag" class="h-3.5 w-3.5 rounded-full me-2"> {{ $language['native'] }}
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
+                                </div>
+
+                                <!-- Theme Toggle Button -->
+                                <div class="relative group w-full md1:w-auto">
+                                    <a href="{{ route('theme.toggle') }}" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-white dark:text-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-customlightgreen dark:hover:bg-gray-700 dark:hover:text-white w-full">
+                                        @if($theme === 'dark')
+                                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                                            </svg>
+                                            {{ __('general.light_mode') }}
+                                        @else
+                                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                                            </svg>
+                                            {{ __('general.dark_mode') }}
+                                        @endif
+                                    </a>
                                 </div>
 
                                 <!-- Buy Now Dropdown -->
                                 <div class="relative group w-full md1:w-auto">
                                     <button id="dropdownHoverButton" class="text-white dark:text-gray-200 bg-custom-lightgreen hover:bg-custom-green focus:ring-4 focus:outline-none focus:bg-custom-lightergreen font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center justify-between dark:bg-custom-lightgreen dark:hover:bg-custom-green dark:focus:bg-custom-darkgreen w-full md:w-auto" type="button">
-                                        Beli Sekarang
+                                        {{ __('general.buy_now') }}
                                     </button>
                                     
                                     <!-- Buy Now Dropdown menu -->
@@ -231,7 +267,7 @@
                     <div class="flex flex-col items-center md:items-start">
                         <img src="{{ asset('img/web/Logo.png')}}" class="h-16 mb-4" alt="Pazar Logo">
                         @if(isset($footerData) && isset($footerData['address']) && $footerData['address'])
-                            <h3 class="text-xl font-semibold mb-2">Kantor Pusat</h3>
+                            <h3 class="text-xl font-semibold mb-2">{{ __('general.headquarters') }}</h3>
                             <a href="{{ $footerData['address']->f_link ?? '#' }}" target="_blank" class="text-center md:text-left text-white dark:text-gray-200 hover:text-custom-lightergreen">
                                 <p class="font-medium">{{ $footerData['address']->f_label_id }}</p>
                                 <p class="mt-1 whitespace-normal break-words">{!! nl2br(e($footerData['address']->f_description_id ?? '')) !!}</p>
@@ -241,7 +277,7 @@
                     
                     <!-- Contact Section -->
                     <div class="flex flex-col items-center md:items-start">
-                        <h3 class="text-xl font-semibold mb-4">Hubungi Kami</h3>
+                        <h3 class="text-xl font-semibold mb-4">{{ __('general.contact_us') }}</h3>
                         @if(isset($footerData) && isset($footerData['contacts']) && count($footerData['contacts']) > 0)
                             @foreach($footerData['contacts'] as $contact)
                                 <div class="flex items-center mb-3">
@@ -258,7 +294,7 @@
                     
                     <!-- Social Media Section -->
                     <div class="flex flex-col items-center md:items-start">
-                        <h3 class="text-xl font-semibold mb-4">Ikuti Kami</h3>
+                        <h3 class="text-xl font-semibold mb-4">{{ __('general.follow_us') }}</h3>
                         <div class="flex space-x-4">
                             @if(isset($footerData) && isset($footerData['socials']) && count($footerData['socials']) > 0)
                                 @foreach($footerData['socials'] as $social)

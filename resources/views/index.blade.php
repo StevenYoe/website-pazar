@@ -13,7 +13,7 @@
                 <h1 class="text-2xl font-bold mb-4 dark:text-gray-200">{{ $header->h_title_id }}</h1>
                 <p class="text-lg mb-6 dark:text-gray-200">{{ $header->h_description_id }}</p>
             @endif
-            <a href="/company" class="inline-block bg-custom-lightgreen hover:bg-custom-green text-white dark:text-gray-200 font-bold py-3 px-8 rounded-lg transition duration-300">
+            <a href="/company" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
                 SELENGKAPNYA
             </a>
         </div>
@@ -49,21 +49,21 @@
 @endif
 
 <!-- Why Pazar Section -->
-<section class="why-pazar py-16 bg-white dark:bg-gray-900 antialiased">
+<section class="why-pazar py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Mengapa Pazar?</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Mengapa Pazar?</h2>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
                 @foreach($whyPazarItems as $item)
-                    <div class="bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm p-6 flex flex-col">
+                    <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 flex flex-col">
                         <div class="flex items-start mb-2">
                             <div class="flex-shrink-0 mr-2">
                                 <img src="{{ $item->w_image }}" alt="{{ $item->w_title_id }}" class="w-10 h-10">
                             </div>
-                            <h3 class="text-lg font-bold dark:text-gray-200 line-clamp-2">{{ $item->w_title_id }}</h3>
+                            <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} line-clamp-2">{{ $item->w_title_id }}</h3>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mt-2 flex-grow line-clamp-4">{{ $item->w_description_id }}</p>
+                        <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-800' }} text-sm mt-2 flex-grow line-clamp-4">{{ $item->w_description_id }}</p>
                     </div>
                 @endforeach
             @endif
@@ -72,20 +72,20 @@
 </section>
 
 <!-- Product Category Section -->
-<section class="product-category py-10 bg-gray-100 dark:bg-gray-950 antialiased">
+<section class="product-category py-10 {{ $theme === 'dark' ? 'bg-gray-950' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-20">
-        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Kategori Produk</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Kategori Produk</h2>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
             @if(isset($productCategories) && count($productCategories) > 0)
                 @foreach($productCategories as $category)
-                    <div class="category-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
+                    <div class="category-item {{ $theme === 'dark' ? 'bg-white' : 'bg-gray-300' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
                         <div class="h-48 overflow-hidden">
                             <img src="{{ $category->pc_image ?? 'img/Category/default-category.jpg' }}" alt="{{ $category->pc_title_id }}" class="w-full h-full object-cover">
                         </div>
                         <div class="p-6 flex flex-col">
                             <h3 class="text-xl font-bold mb-2 line-clamp-2">{{ $category->pc_title_id }}</h3>
-                            <p class="text-gray-600 dark:text-gray-800 mb-4 flex-grow line-clamp-3">{{ $category->pc_description_id }}</p>
+                            <p class="{{ $theme === 'dark' ? 'text-gray-800' : 'text-gray-600' }} mb-4 flex-grow line-clamp-3">{{ $category->pc_description_id }}</p>
                             <a href="/products" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
                         </div>
                     </div>
@@ -97,18 +97,18 @@
 
 <!-- Latest Recipe Section -->
 @if(isset($latestRecipe))
-<section class="latest-recipe py-10 bg-white dark:bg-gray-900 antialiased">
+<section class="latest-recipe py-10 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-20">
-        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Resep Pazar</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Resep Pazar</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 items-center">
             <div>
                 <img src="{{ $latestRecipe->r_image }}" alt="{{ $latestRecipe->r_title_id }}" class="rounded-lg shadow-lg w-full h-auto">
             </div>
-            <div class="dark:text-gray-200">
-                <h3 class="text-3xl font-bold mb-4">{{ $latestRecipe->r_title_id }}</h3>
+            <div>
+                <h3 class="text-3xl {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} font-bold mb-4">{{ $latestRecipe->r_title_id }}</h3>
                 <p class="text-sm text-custom-green mb-4">{{ $latestRecipe->category_name }}</p>
-                <a href="/recipes/{{ $latestRecipe->r_id }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green text-white dark:text-gray-200 font-bold py-3 px-8 rounded-lg transition duration-300">
+                <a href="/recipes/{{ $latestRecipe->r_id }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
                     LIHAT RESEP
                 </a>
             </div>

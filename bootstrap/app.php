@@ -13,7 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Register the FooterDataMiddleware in the web middleware group
         $middleware->web(append: [
-            \App\Http\Middleware\FooterDataMiddleware::class
+            \App\Http\Middleware\FooterDataMiddleware::class,
+            \App\Http\Middleware\SetLocale::class,
+            \App\Http\Middleware\HandleTheme::class,
         ]);
         
         // Your other middleware registrations...

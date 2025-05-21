@@ -79,9 +79,23 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'available_locales' => [
+        'id' => [
+            'name' => 'Indonesia',
+            'native' => 'Indonesia',
+            'flag' => 'img/Web/Indonesia.svg',
+        ],
+        'en' => [
+            'name' => 'English (US)',
+            'native' => 'English (US)',
+            'flag' => 'img/Web/USA.svg',
+        ],
+    ],
+    
 
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'id'),
+
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'id'),
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
