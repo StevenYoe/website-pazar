@@ -12,10 +12,10 @@
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
-            <p class="text-xl mb-2 text-yellow-400 dark:text-yellow-400">
+            <p class="text-xl mb-2 text-yellow-400">
                 {{ $header->h_description_id }}
             </p>
-            <h1 class="text-5xl font-bold dark:text-gray-200">
+            <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">
                 {{ $header->h_title_id }}
             </h1>
         </div>
@@ -28,23 +28,23 @@
 
 @section('content')
 <!-- Recipe Section -->
-<section class="py-12 bg-gray-100 dark:bg-gray-950 antialiased dark:text-gray-200 recipe-section">
+<section class="py-12 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased recipe-section">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
         <div class="filter-buttons mb-8">
-            <button class="filter-btn bg-custom-lightergreen dark:bg-transparent active" data-filter="all">Semua</button>
+            <button class="filter-btn {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }} active" data-filter="all">Semua</button>
             @if(count($categories) > 0)
                 @foreach($categories as $category)
-                    <button class="filter-btn bg-custom-lightergreen dark:bg-transparent" data-filter="{{ $category->rc_title_id }}">{{ $category->rc_title_id }}</button>
+                    <button class="filter-btn {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }}" data-filter="{{ $category->rc_title_id }}">{{ $category->rc_title_id }}</button>
                 @endforeach
             @else
-                <p class="text-gray-500">No categories found</p>
+                <p class="{{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }}">No categories found</p>
             @endif
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             @if(count($recipes) > 0)
                 @foreach($recipes as $recipe)
-                    <div class="recipe-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full" 
+                    <div class="recipe-item {{ $theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200' }} rounded-lg shadow-sm flex flex-col border border-gray-100 overflow-hidden max-w-xs mx-auto w-full" 
                         data-id="{{ $recipe->r_id }}" 
                         data-category="{{ $recipe->category_name_id }}"
                         data-categories="{{ json_encode($recipe->category_names ?? [$recipe->category_name_id]) }}">
@@ -66,7 +66,7 @@
                 @endforeach
             @else
                 <div class="col-span-full text-center py-10">
-                    <p class="text-lg text-gray-500">No recipes found</p>
+                    <p class="text-lg {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }}">No recipes found</p>
                 </div>
             @endif
         </div>

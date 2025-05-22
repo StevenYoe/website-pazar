@@ -8,10 +8,8 @@
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
             @if(isset($header))
-                <p class="text-xl mb-2 text-yellow-400 dark:text-yellow-400">{{ $header->h_description_id }}</p>
-                <h1 class="text-5xl font-bold dark:text-gray-200">{{ $header->h_title_id }}</h1>
-            @else
-                <h1 class="text-5xl font-bold dark:text-gray-200">Sekilas Perusahaan</h1>
+                <p class="text-xl mb-2 text-yellow-400">{{ $header->h_description_id }}</p>
+                <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">{{ $header->h_title_id }}</h1>
             @endif
         </div>
         <div class="w-full max-w-4xl">
@@ -28,11 +26,11 @@
 @section('content')
 <!-- Company What Section -->
 @if(isset($companyWhat))
-<section class="company-what py-16 bg-white dark:bg-gray-900 antialiased">
+<section class="company-what py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Sekilas Perusahaan</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Sekilas Perusahaan</h2>
         
-        <div class="prose prose-lg mx-auto dark:text-gray-200">
+        <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
             {!! nl2br(e($companyWhat->cp_description_id)) !!}
         </div>
     </div>
@@ -40,9 +38,9 @@
 @endif
 
 <!-- History Section -->
-<section class="history-section py-16 bg-gray-100 dark:bg-gray-800 antialiased">
+<section class="history-section py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Sejarah Pazar Seasoning</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Sejarah Pazar Seasoning</h2>
         
         <div class="relative">
             <!-- History Carousel container -->
@@ -52,7 +50,7 @@
                         @foreach($histories as $history)
                             <!-- History Item -->
                             <div class="history-item min-w-full px-4">
-                                <div class="bg-white dark:bg-gray-300 rounded-lg shadow-lg p-6 flex flex-col h-full">
+                                <div class="{{ $theme === 'dark' ? 'bg-gray-300' : 'bg-white' }} rounded-lg shadow-lg p-6 flex flex-col h-full">
                                     <div class="history-flex-container">
                                         <div class="history-image">
                                             @if(isset($history->hs_image))
@@ -63,7 +61,7 @@
                                         </div>
                                         <div class="history-content-wrapper">
                                             <div class="history-year">{{ $history->hs_year }}</div>
-                                            <div class="history-content dark:text-gray-800">
+                                            <div class="history-content {{ $theme === 'dark' ? 'text-gray-800' : 'text-black' }}">
                                                 {!! $history->hs_description_id !!}
                                             </div>
                                         </div>
@@ -93,11 +91,11 @@
 
 <!-- Quality Policy Section -->
 @if(isset($companyPolicy))
-<section class="quality-policy py-16 bg-white dark:bg-gray-900 antialiased">
+<section class="quality-policy py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 dark:text-gray-200">Kebijakan Mutu</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Kebijakan Mutu</h2>
         
-        <div class="prose prose-lg mx-auto dark:text-gray-200">
+        <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
             {!! nl2br(e($companyPolicy->cp_description_id)) !!}
         </div>
     </div>
@@ -105,30 +103,30 @@
 @endif
 
 <!-- Vision & Mission Section -->
-<section class="vision-mission py-16 bg-gray-100 dark:bg-gray-800 antialiased">
+<section class="vision-mission py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row">
             <!-- Vision -->
             @if(isset($companyVision))
             <div class="flex-1 mb-8 md:mb-0">
-                <h2 class="text-3xl font-bold mb-8 text-center dark:text-gray-200">Visi</h2>
-                <div class="prose prose-lg mx-auto dark:text-gray-200 px-4">
+                <h2 class="text-3xl font-bold mb-8 text-center {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Visi</h2>
+                <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} px-4">
                     {!! nl2br(e($companyVision->cp_description_id)) !!}
                 </div>
             </div>
             @endif
             
             <!-- Divider - Only visible on desktop (793px and above) -->
-            <div class="hidden md:block w-px bg-gray-300 dark:bg-gray-600 mx-8 self-stretch"></div>
+            <div class="hidden md:block w-px {{ $theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300' }} mx-8 self-stretch"></div>
             
             <!-- Mobile Divider - Only visible on mobile (below 767px) -->
-            <div class="md1:hidden w-full h-px bg-gray-300 dark:bg-gray-600 my-8"></div>
+            <div class="md1:hidden w-full h-px {{ $theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300' }} my-8"></div>
             
             <!-- Mission -->
             @if(isset($companyMission))
             <div class="flex-1">
-                <h2 class="text-3xl font-bold mb-8 text-center dark:text-gray-200">Misi</h2>
-                <div class="prose prose-lg mx-auto dark:text-gray-200 px-4">
+                <h2 class="text-3xl font-bold mb-8 text-center {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Misi</h2>
+                <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} px-4">
                     {!! nl2br(e($companyMission->cp_description_id)) !!}
                 </div>
             </div>

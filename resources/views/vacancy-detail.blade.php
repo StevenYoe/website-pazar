@@ -14,14 +14,14 @@
 
 @section('content')
 <!-- Vacancy Detail Section -->
-<section class="py-12 bg-gray-100 dark:bg-gray-950 antialiased dark:text-gray-200">
+<section class="py-12 {{ $theme === 'dark' ? 'bg-gray-900 text-gray-400' : 'bg-white text-gray-black' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
         <!-- Breadcrumb Navigation -->
         <div class="mb-8">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
-                        <a href="{{ url('/') }}" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-custom-green dark:text-gray-300 dark:hover:text-custom-green">
+                        <a href="{{ url('/') }}" class="inline-flex items-center text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }} hover:text-custom-green">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
                             </svg>
@@ -33,15 +33,15 @@
                             <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <a href="{{ url('/vacancies') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-custom-green md:ml-2 dark:text-gray-300 dark:hover:text-custom-green">Vacancies</a>
+                            <a href="{{ url('/vacancies') }}" class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }} hover:text-custom-green">Vacancies</a>
                         </div>
                     </li>
                     <li aria-current="page">
                         <div class="flex items-center">
-                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400">{{ $vacancy->v_title_id }}</span>
+                            <span class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }} md:ml-2">{{ $vacancy->v_title_id }}</span>
                         </div>
                     </li>
                 </ol>
@@ -50,7 +50,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Main Content -->
-            <div class="lg:col-span-2 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 relative">
+            <div class="lg:col-span-2 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-md p-6 relative">
                 <!-- Urgent Tag at top left corner -->
                 @if(isset($vacancy->v_urgent) && $vacancy->v_urgent)
                 <div class="urgent-tag">
@@ -65,7 +65,7 @@
                 
                 <!-- Vacancy Header -->
                 <div class="mb-4">
-                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">{{ $vacancy->v_title_id }}</h1>
+                    <h1 class="text-3xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ $vacancy->v_title_id }}</h1>
                 </div>
 
                 <!-- Vacancy Details -->
@@ -78,14 +78,14 @@
                                 <line x1="8" y1="2" x2="8" y2="6"></line>
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
                             </svg>
-                            <span class="text-gray-700 dark:text-gray-300">Pendaftaran Ditutup: <span class="font-medium">{{ $vacancy->closed_date_formatted }}</span></span>
+                            <span class="{{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }}">Pendaftaran Ditutup: <span class="font-medium">{{ $vacancy->closed_date_formatted }}</span></span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Job Description -->
                 <div class="mb-6">
-                    <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Deskripsi Pekerjaan</h2>
+                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">Deskripsi Pekerjaan</h2>
                     <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
                         {!! $vacancy->v_description_id !!}
                     </div>
@@ -93,7 +93,7 @@
 
                 <!-- Job Responsibilities -->
                 <div class="mb-6">
-                    <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Tanggung Jawab Utama</h2>
+                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">Tanggung Jawab Utama</h2>
                     <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
                         {!! $vacancy->v_responsibilities_id !!}
                     </div>
@@ -101,7 +101,7 @@
 
                 <!-- Job Requirements -->
                 <div class="mb-6">
-                    <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Kualifikasi</h2>
+                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">Kualifikasi</h2>
                     <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
                         {!! $vacancy->v_requirement_id !!}
                     </div>
@@ -118,8 +118,8 @@
             <!-- Sidebar -->
             <div class="lg:col-span-1">
                 <!-- Job Summary -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Detail Pekerjaan</h3>
+                <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-4">Detail Pekerjaan</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start">
                             <svg class="w-5 h-5 mr-2 text-custom-green mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -127,8 +127,8 @@
                                 <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                             </svg>
                             <div>
-                                <span class="block text-sm text-gray-500 dark:text-gray-400">Departemen</span>
-                                <span class="text-gray-800 dark:text-gray-200">{{ $vacancy->department_name_id }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Departemen</span>
+                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">{{ $vacancy->department_name_id }}</span>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -137,8 +137,8 @@
                                 <circle cx="12" cy="10" r="3"></circle>
                             </svg>
                             <div>
-                                <span class="block text-sm text-gray-500 dark:text-gray-400">Model Kerja</span>
-                                <span class="text-gray-800 dark:text-gray-200">{{ $vacancy->v_type }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Model Kerja</span>
+                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">{{ $vacancy->v_type }}</span>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -149,8 +149,8 @@
                                 <line x1="6" y1="18" x2="6.01" y2="18"></line>
                             </svg>
                             <div>
-                                <span class="block text-sm text-gray-500 dark:text-gray-400">Jenis Pekerjaan</span>
-                                <span class="text-gray-800 dark:text-gray-200">{{ $vacancy->employment_name_id }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Jenis Pekerjaan</span>
+                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">{{ $vacancy->employment_name_id }}</span>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -160,16 +160,16 @@
                                 <path d="M12 8h.01"></path>
                             </svg>
                             <div>
-                                <span class="block text-sm text-gray-500 dark:text-gray-400">Pengalaman</span>
-                                <span class="text-gray-800 dark:text-gray-200">Min. {{ $vacancy->experience_name_id }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Pengalaman</span>
+                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">Min. {{ $vacancy->experience_name_id }}</span>
                             </div>
                         </li>
                     </ul>
                 </div>
 
                 <!-- Share Job -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Sebarkan Lowongan</h3>
+                <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-4">Sebarkan Lowongan</h3>
                     <div class="share-buttons">
                         <!-- Facebook -->
                         <button type="button" class="share-btn facebook" onclick="shareVacancy('facebook')">

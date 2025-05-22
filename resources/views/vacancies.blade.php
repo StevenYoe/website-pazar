@@ -12,8 +12,8 @@
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
-            <p class="text-xl mb-2 text-yellow-400 dark:text-yellow-400">Karir</p>
-            <h1 class="text-5xl font-bold dark:text-gray-200">
+            <p class="text-xl mb-2 text-yellow-400">Karir</p>
+            <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">
                 {{ $header->h_title_id }}
             </h1>
         </div>
@@ -28,15 +28,15 @@
 
 @section('content')
 <!-- Vacancies Section -->
-<section class="py-12 bg-gray-100 dark:bg-gray-950 antialiased dark:text-gray-200 vacancies-section">
+<section class="py-12 {{ $theme === 'dark' ? 'text-gray-900' : 'text-white' }} vacancies-section">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
         <!-- Filter Section -->
-        <div class="filters mb-12 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <h2 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Filter Vacancies</h2>
+        <div class="filters mb-12 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200' }} rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Filter Vacancies</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Department Filter -->
                 <div class="filter-group">
-                    <label for="department-filter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Departemen</label>
+                    <label for="department-filter" class="block text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-800' }} mb-2">Departemen</label>
                     <select id="department-filter" class="block w-full py-2 px-3 border dark:text-black border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green">
                         <option value="all">Semua Departemen</option>
                         @foreach($departments as $department)
@@ -47,7 +47,7 @@
                 
                 <!-- Employment Type Filter -->
                 <div class="filter-group">
-                    <label for="employment-filter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Model Kerja</label>
+                    <label for="employment-filter" class="block text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-800' }} mb-2">Model Kerja</label>
                     <select id="employment-filter" class="block w-full py-2 px-3 border dark:text-black border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green">
                         <option value="all">Semua Model Kerja</option>
                         @foreach($employments as $employment)
@@ -58,7 +58,7 @@
                 
                 <!-- Experience Level Filter -->
                 <div class="filter-group">
-                    <label for="experience-filter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pengalaman</label>
+                    <label for="experience-filter" class="block text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-800' }} mb-2">Pengalaman</label>
                     <select id="experience-filter" class="block w-full py-2 px-3 border dark:text-black border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green">
                         <option value="all">Semua Pengalaman</option>
                         @foreach($experiences as $experience)
@@ -73,7 +73,7 @@
         <div id="vacancies-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @if(count($vacancies) > 0)
                 @foreach($vacancies as $vacancy)
-                    <div class="vacancy-item bg-white dark:bg-gray-300 rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden"
+                    <div class="vacancy-item {{ $theme === 'dark' ? 'bg-gray-300' : 'bg-gray-100' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden"
                         data-department="{{ $vacancy->v_department_id }}"
                         data-employment="{{ $vacancy->v_employment_id }}"
                         data-experience="{{ $vacancy->v_experience_id }}">
@@ -91,7 +91,7 @@
                         
                         <div class="p-6 flex flex-col">
                             <h3 class="text-xl text-black font-bold mb-3 line-clamp-2">{{ $vacancy->v_title_id }}</h3>
-                            <div class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">
+                            <div class="{{ $theme === 'dark' ? 'text-gray-800' : 'text-gray-600' }} mb-4 flex-grow">
                                 <p class="mb-3"><span class="font-medium">Pendaftaran Ditutup:</span> {{ $vacancy->closed_date_formatted }}</p>
                                 
                                 <div class="flex flex-col space-y-2">
