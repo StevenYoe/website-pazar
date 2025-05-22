@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Lowongan - Pazar Seasonings')
+@section('title', __('general.vacancies') . ' - Pazar Seasonings')
 
 @section('style')
 <link href="{{ asset('css/vacancy.css') }}" rel="stylesheet" type="text/css" >

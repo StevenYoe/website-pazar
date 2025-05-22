@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Info Karir - Pazar Seasonings')
+@section('title', __('general.career_info') . ' - Pazar Seasonings')
 
 <!-- Career Info Header Section -->
 @section('header')

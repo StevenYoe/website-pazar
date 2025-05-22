@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Resep - Pazar Seasonings')
+@section('title', __('general.recipes') . ' - Pazar Seasonings')
 
 @section('style')
 <link href="{{ asset('css/recipe.css') }}" rel="stylesheet" type="text/css" >

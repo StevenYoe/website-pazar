@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Perusahaan Kami - Pazar Seasonings')
+@section('title', __('general.company') . ' - Pazar Seasonings')
 
 <!-- Company Header Section -->
 @section('header')

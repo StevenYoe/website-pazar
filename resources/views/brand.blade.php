@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', 'Brand Kami - Pazar Seasonings')
+@section('title', __('general.brand') . ' - Pazar Seasonings')
 
 @section('style')
 <link href="{{ asset('css/brand.css') }}" rel="stylesheet" type="text/css" >
@@ -204,17 +204,17 @@
     <div class="relative max-w-4xl max-h-full">
         <!-- Close button -->
         <button onclick="closeImagePopup()" 
-                class="absolute -top-4 -right-4 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 z-10">
-            <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="absolute -top-4 -right-4 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 z-10">
+            <svg class="w-6 h-6 {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
         
         <!-- Image container -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-2xl overflow-hidden">
+        <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-2xl overflow-hidden">
             <img id="popupImage" src="" alt="" class="max-w-full max-h-[80vh] object-contain">
-            <div class="p-4 bg-white dark:bg-gray-800">
-                <p id="popupImageCaption" class="text-center text-gray-700 dark:text-gray-300 font-medium"></p>
+            <div class="p-4 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }}">
+                <p id="popupImageCaption" class="text-center {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }} font-medium"></p>
             </div>
         </div>
     </div>
