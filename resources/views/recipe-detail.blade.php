@@ -85,31 +85,33 @@
                     </h2>
                 </div>
                     @if(isset($recipe->detail))
-                    <div class="py-2">
-                        <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Deskripsi</h3>
-                        <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
-                            {!! nl2br(e($recipe->detail->rd_desc_id)) !!}
-                        </div>
-                    </div>
-                    @if(isset($recipe->detail->rd_ingredients_id) && !empty($recipe->detail->rd_ingredients_id))
-                    <div class="py-2">
-                        <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Bahan-bahan</h3>
-                        <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
-                            {!! nl2br(e($recipe->detail->rd_ingredients_id)) !!}
-                        </div>
-                    </div>
-                    @endif
+                        @if(isset($recipe->detail->rd_desc_id) && !empty($recipe->detail->rd_desc_id))
+                            <div class="py-2">
+                                <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
+                                    {!! nl2br(e($recipe->detail->rd_desc_id)) !!}
+                                </div>
+                            </div>
+                        @endif
                         
-                    @if(isset($recipe->detail->rd_cook_id) && !empty($recipe->detail->rd_cook_id))
-                    <div class="py-2">
-                        <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Cara Pembuatan</h3>
-                        <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
-                            {!! nl2br(e($recipe->detail->rd_cook_id)) !!}
-                        </div>
-                    </div>
-                    @endif
+                        @if(isset($recipe->detail->rd_ingredients_id) && !empty($recipe->detail->rd_ingredients_id))
+                            <div class="py-2">
+                                <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Bahan-bahan</h3>
+                                <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
+                                    {!! nl2br(e($recipe->detail->rd_ingredients_id)) !!}
+                                </div>
+                            </div>
+                        @endif
+                            
+                        @if(isset($recipe->detail->rd_cook_id) && !empty($recipe->detail->rd_cook_id))
+                            <div class="py-2">
+                                <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Cara Pembuatan</h3>
+                                <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
+                                    {!! nl2br(e($recipe->detail->rd_cook_id)) !!}
+                                </div>
+                            </div>
+                        @endif
                     @else
-                    <p class="text-gray-500">Detail resep tidak tersedia</p>
+                        <p class="text-gray-500">Detail resep tidak tersedia</p>
                     @endif
                 </div>
             </div>

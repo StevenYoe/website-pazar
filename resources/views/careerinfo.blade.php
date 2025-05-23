@@ -7,7 +7,7 @@
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
-            <p class="text-xl mb-2 text-yellow-400">Karir</p>
+            <p class="text-xl mb-2 text-yellow-400">{{ __('general.career') }}</p>
             @if(isset($header))
                 <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">{{ $header->h_title_id }}</h1>
             @endif

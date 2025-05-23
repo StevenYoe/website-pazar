@@ -8,7 +8,7 @@
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
             @if(isset($header))
-                <p class="text-xl mb-2 text-yellow-400">{{ $header->h_description_id }}</p>
+                <p class="text-xl mb-2 text-yellow-400">{{ __('general.about') }}</p>
                 <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">{{ $header->h_title_id }}</h1>
             @endif
         </div>

@@ -12,7 +12,7 @@
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
-            <p class="text-xl mb-2 text-yellow-400">Karir</p>
+            <p class="text-xl mb-2 text-yellow-400">{{ __('general.career') }}</p>
             <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">
                 {{ $header->h_title_id }}
             </h1>
@@ -28,7 +28,7 @@
 
 @section('content')
 <!-- Vacancies Section -->
-<section class="py-12 {{ $theme === 'dark' ? 'text-gray-900' : 'text-white' }} vacancies-section">
+<section class="py-12 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} vacancies-section">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
         <!-- Filter Section -->
         <div class="filters mb-12 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200' }} rounded-lg shadow-md p-6">

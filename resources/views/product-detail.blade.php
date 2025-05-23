@@ -59,24 +59,22 @@
             
             <!-- Product Info -->
             <div class="mt-10 lg:mt-0 lg:w-1/2">
-                <div class="pb-6">
+                <div class="pb-3">
                     <h1 class="text-3xl {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ $product->p_title_id }}</h1>
                     <h2 class="mt-2 prose prose-sm text-custom-red">{{ $product->category_name_id }}</h2>
                 </div>
                 @if(isset($product->detail))
-                <div class="py-6">
-                    <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Deskripsi</h3>
-                    <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
-                        <p class="mb-2"> {{ $product->p_description_id }}</p>
-                        {!! nl2br(e($product->detail->pd_longdesc_id)) !!}
+                    <div class="py-1">
+                        <div class="mt-2 prose prose-sm {{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-500' }}">
+                            @if(!empty($product->detail->pd_net_weight))    
+                                <p class="mb-2 {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-700' }}"> {{ __('general.net_weight') . ': ' . $product->detail->pd_net_weight }}</p>
+                            @endif
+                            <p class="mb-4"> {{ $product->p_description_id }}</p>
+                            @if(!empty($product->detail->pd_longdesc_id))
+                                {!! nl2br(e($product->detail->pd_longdesc_id)) !!}
+                            @endif
+                        </div>
                     </div>
-                </div>
-                <div class="py-6">
-                    <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Sejarah</h3>
-                    <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
-                        {!! nl2br(e($product->detail->pd_history_id)) !!}
-                    </div>
-                </div>
                 @endif
             </div>
         </div>
