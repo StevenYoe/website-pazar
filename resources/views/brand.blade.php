@@ -12,8 +12,10 @@
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
-            <p class="text-xl mb-2 text-yellow-400">Tentang Pazar Seasoning</p>
-            <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">{{ $header->h_title_id }}</h1>
+            <p class="text-xl mb-2 text-yellow-400">{{ __('general.about') }}</p>
+            <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">
+                {{ app()->getLocale() == 'en' ? $header->h_title_en : $header->h_title_id }}
+            </h1>
         </div>
         @if(isset($header->h_image))
         <div class="w-full max-w-2xl">
@@ -28,7 +30,7 @@
 <!-- Why Pazar Section -->
 <section class="why-pazar py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Mengapa Pazar?</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.why_pazar') }}</h2>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
@@ -38,9 +40,13 @@
                             <div class="flex-shrink-0 mr-2">
                                 <img src="{{ $item->w_image }}" alt="{{ $item->w_title_id }}" class="w-10 h-10">
                             </div>
-                            <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} line-clamp-2">{{ $item->w_title_id }}</h3>
+                            <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} line-clamp-2">
+                                {{ app()->getLocale() == 'en' ? $item->w_title_en : $item->w_title_id }}
+                            </h3>
                         </div>
-                        <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-900' }} text-sm mt-2 flex-grow line-clamp-4">{{ $item->w_description_id }}</p>
+                        <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-900' }} text-sm mt-2 flex-grow line-clamp-4">
+                            {{ app()->getLocale() == 'en' ? $item->w_description_en : $item->w_description_id }}
+                        </p>
                     </div>
                 @endforeach
             @endif
@@ -51,7 +57,7 @@
 <!-- Certification Section -->
 <section class="certification py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Sertifikasi Kami</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.certifications') }}</h2>
         
         <div class="relative">
             <!-- Carousel container -->
@@ -69,8 +75,12 @@
                                         <div class="mb-4">
                                             <span class="bg-custom-lightergreen px-3 py-1 rounded-full text-sm font-medium {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $certification->c_label_id }}</span>
                                         </div>
-                                        <h3 class="text-xl font-bold mb-2">{{ $certification->c_title_id }}</h3>
-                                        <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }} mb-4">{{ $certification->c_description_id }}</p>
+                                        <h3 class="text-xl font-bold mb-2">
+                                            {{ app()->getLocale() == 'en' ? $certification->c_title_en : $certification->c_title_id }}
+                                        </h3>
+                                        <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }} mb-4">
+                                            {{ app()->getLocale() == 'en' ? $certification->c_description_en : $certification->c_description_id }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -101,7 +111,7 @@
 
 <section class="testimonials py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-8 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Testimoni</h2>
+        <h2 class="text-4xl font-bold text-center mb-8 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.testimonials') }}</h2>
         
         <div class="flex justify-center mb-8">
             <div class="inline-flex rounded-md shadow-sm" role="group">
@@ -135,7 +145,9 @@
                                     <p class="text-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-black' }}">Customer</p>
                                 </div>
                             </div>
-                            <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }} mb-4">{{ $testimonial->t_description_id }}</p>
+                            <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }} mb-4">
+                                {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
+                            </p>
                             
                             <!-- Small photo box if t_image exists -->
                             @if(!empty($testimonial->t_image))
@@ -174,7 +186,9 @@
                                 </div>
                                 <div class="md:w-2/3 md:pl-8">
                                     <h4 class="text-xl font-bold mb-4 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
-                                    <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }}">{{ $testimonial->t_description_id }}</p>
+                                    <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }}">
+                                        {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -187,7 +201,9 @@
                                 </div>
                                 <div class="md:w-2/3 md:pr-8">
                                     <h4 class="text-xl font-bold mb-4 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
-                                    <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }}">{{ $testimonial->t_description_id }}</p>
+                                    <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }}">
+                                        {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
+                                    </p>
                                 </div>
                             </div>
                         </div>

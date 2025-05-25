@@ -14,6 +14,11 @@ class IndexController extends BaseController
      */
     public function index()
     {
+        // Get the current locale
+        $locale = app()->getLocale();
+        $titleField = 'h_title_' . $locale;
+        $descField = 'h_description_' . $locale;
+        
         // Use CRUD API to get index page data
         // Specify that we want the index page header specifically
         $response = $this->crudApiGet('/index/data', ['page_name' => 'index']);

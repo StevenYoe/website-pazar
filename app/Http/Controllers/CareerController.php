@@ -13,6 +13,11 @@ class CareerController extends BaseController
      */
     public function index()
     {
+        // Get the current locale
+        $locale = app()->getLocale();
+        $titleField = 'h_title_' . $locale;
+        $descField = 'h_description_' . $locale;
+        
         // Use CRUD API to get career page data
         $response = $this->crudApiGet('/career/data');
         

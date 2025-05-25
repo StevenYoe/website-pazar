@@ -26,7 +26,7 @@
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
                             </svg>
-                            Home
+                            {{ __('general.home') }}
                         </a>
                     </li>
                     <li>
@@ -34,7 +34,7 @@
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <a href="{{ url('/products') }}" class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }} hover:text-custom-green">Products</a>
+                            <a href="{{ url('/products') }}" class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }} hover:text-custom-green">{{ __('general.products') }}</a>
                         </div>
                     </li>
                     <li aria-current="page">
@@ -42,7 +42,7 @@
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }} md:ml-2">{{ $product->p_title_id }}</span>
+                            <span class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }} md:ml-2">{{ app()->getLocale() == 'en' ? $product->p_title_en : $product->p_title_id }}</span>
                         </div>
                     </li>
                 </ol>
@@ -60,8 +60,8 @@
             <!-- Product Info -->
             <div class="mt-10 lg:mt-0 lg:w-1/2">
                 <div class="pb-3">
-                    <h1 class="text-3xl {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ $product->p_title_id }}</h1>
-                    <h2 class="mt-2 prose prose-sm text-custom-red">{{ $product->category_name_id }}</h2>
+                    <h1 class="text-3xl {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ app()->getLocale() == 'en' ? $product->p_title_en : $product->p_title_id }}</h1>
+                    <h2 class="mt-2 prose prose-sm text-custom-red">{{ app()->getLocale() == 'en' ? $product->category_name_en : $product->category_name_id }}</h2>
                 </div>
                 @if(isset($product->detail))
                     <div class="py-1">
@@ -69,9 +69,9 @@
                             @if(!empty($product->detail->pd_net_weight))    
                                 <p class="mb-2 {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-700' }}"> {{ __('general.net_weight') . ': ' . $product->detail->pd_net_weight }}</p>
                             @endif
-                            <p class="mb-4"> {{ $product->p_description_id }}</p>
+                            <p class="mb-4"> {{ app()->getLocale() == 'en' ? $product->p_description_en : $product->p_description_id }}</p>
                             @if(!empty($product->detail->pd_longdesc_id))
-                                {!! nl2br(e($product->detail->pd_longdesc_id)) !!}
+                                {{ app()->getLocale() == 'en' ? nl2br(e($product->detail->pd_longdesc_en)) : nl2br(e($product->detail->pd_longdesc_id)) }}
                             @endif
                         </div>
                     </div>
@@ -82,7 +82,7 @@
         <!-- E-commerce Links with store logos -->
         @if(isset($product->detail))
         <div class="mt-10 pt-6">
-            <h3 class="text-xl font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }} text-center mb-6">Beli Sekarang</h3>
+            <h3 class="text-xl font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }} text-center mb-6">{{ __('general.buy_now') }}</h3>
             <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 max-w-2xl mx-auto">
                 @if(!empty($product->detail->pd_link_shopee))
                 <a href="{{ $product->detail->pd_link_shopee }}" target="_blank">
@@ -114,7 +114,7 @@
         <!-- Produk Lainnya -->
         @if(count($randomProducts) > 0)
         <div class="mt-16 product-section">
-            <h2 class="text-2xl font-bold text-center {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }} mb-8">Produk Lainnya</h2>
+            <h2 class="text-2xl font-bold text-center {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }} mb-8">{{ __('general.related_products') }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 @foreach($randomProducts as $randomProduct)
                 <div class="product-item {{ $theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full"
@@ -125,10 +125,16 @@
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
                         <a href="{{ url('product/' . $randomProduct->slug) }}" class="hover:text-custom-red">
-                            <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red line-clamp-2">{{ $randomProduct->p_title_id }}</h3>
+                            <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red line-clamp-2">
+                                {{ app()->getLocale() == 'en' ? $randomProduct->p_title_en : $randomProduct->p_title_id }}
+                            </h3>
                         </a>
-                        <h5 class="text-sm text-custom-red font-bold mb-2">{{ $randomProduct->category_name_id }}</h5>
-                        <p class="text-gray-800 flex-grow line-clamp-3">{{ $randomProduct->p_description_id }}</p>
+                        <h5 class="text-sm text-custom-red font-bold mb-2">
+                            {{ app()->getLocale() == 'en' ? $randomProduct->category_name_en : $randomProduct->category_name_id }}
+                        </h5>
+                        <p class="text-gray-800 flex-grow line-clamp-3">
+                            {{ app()->getLocale() == 'en' ? $randomProduct->p_description_en : $randomProduct->p_description_id }}
+                        </p>
                     </div>
                 </div>
                 @endforeach

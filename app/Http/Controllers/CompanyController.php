@@ -13,6 +13,11 @@ class CompanyController extends BaseController
      */
     public function index()
     {
+        // Get the current locale
+        $locale = app()->getLocale();
+        $titleField = 'h_title_' . $locale;
+        $descField = 'h_description_' . $locale;
+        
         // Use CRUD API to get company page data
         $response = $this->crudApiGet('/company/data');
         
@@ -38,9 +43,6 @@ class CompanyController extends BaseController
             'companyVision' => isset($response['data']['company_vision']) ? $this->arrayToObject($response['data']['company_vision']) : null,
             'companyMission' => isset($response['data']['company_mission']) ? $this->arrayToObject($response['data']['company_mission']) : null,
         ];
-        
-        // For debugging
-        // dd($response, $data);
         
         return view('company', $data);
     }

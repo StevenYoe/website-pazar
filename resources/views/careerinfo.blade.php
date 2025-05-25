@@ -9,7 +9,9 @@
         <div class="text-white mb-8">
             <p class="text-xl mb-2 text-yellow-400">{{ __('general.career') }}</p>
             @if(isset($header))
-                <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">{{ $header->h_title_id }}</h1>
+                <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">
+                    {{ app()->getLocale() == 'en' ? $header->h_title_en : $header->h_title_id }}
+                </h1>
             @endif
         </div>
         <div class="w-full max-w-4xl">
@@ -27,9 +29,11 @@
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             @if(isset($workAtPazarWork))
-                <h2 class="text-4xl font-bold mb-6 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $workAtPazarWork->wap_title_id }}</h2>
+                <h2 class="text-4xl font-bold mb-6 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
+                    {{ app()->getLocale() == 'en' ? $workAtPazarWork->wap_title_en : $workAtPazarWork->wap_title_id }}
+                </h2>
                 <div class="max-w-4xl mx-auto text-lg leading-relaxed {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-600' }} space-y-6">
-                    {!! nl2br(e($workAtPazarWork->wap_description_id)) !!}
+                    {{ app()->getLocale() == 'en' ? nl2br(e($workAtPazarWork->wap_description_en)) : nl2br(e($workAtPazarWork->wap_description_id)) }}
                 </div>
             @endif
         </div>
@@ -40,7 +44,9 @@
 <section class="py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         @if(isset($workAtPazarWhy))
-            <h2 class="text-4xl font-bold text-center mb-16 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $workAtPazarWhy->wap_title_id }}</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
+                {{ app()->getLocale() == 'en' ? $workAtPazarWhy->wap_title_en : $workAtPazarWhy->wap_title_id }}
+            </h2>
         @endif
         
         @if(isset($careerInfos) && count($careerInfos) > 0)
@@ -49,9 +55,11 @@
                 <div class="grid md:grid-cols-2 gap-12 items-center {{ $index < count($careerInfos) - 1 ? 'mb-20' : '' }}">
                     @if($index % 2 == 0)
                         <div>
-                            <h3 class="text-3xl font-bold mb-6 {{ $theme === 'dark' ? 'text-custom-lightgreen' : 'text-custom-green' }}">{{ $info->ci_title_id }}</h3>
+                            <h3 class="text-3xl font-bold mb-6 {{ $theme === 'dark' ? 'text-custom-lightgreen' : 'text-custom-green' }}">
+                                {{ app()->getLocale() == 'en' ? $info->ci_title_en : $info->ci_title_id }}
+                            </h3>
                             <p class="text-lg leading-relaxed {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-600' }}">
-                                {{ $info->ci_description_id }}
+                                {{ app()->getLocale() == 'en' ? $info->ci_description_en : $info->ci_description_id }}
                             </p>
                         </div>
                         <div>
@@ -62,9 +70,11 @@
                             <img src="{{ $info->ci_image }}" alt="{{ $info->ci_title_id }}" class="rounded-lg shadow-lg w-full h-auto">
                         </div>
                         <div class="order-1 md:order-2">
-                            <h3 class="text-3xl font-bold mb-6 {{ $theme === 'dark' ? 'text-custom-lightgreen' : 'text-custom-green' }}">{{ $info->ci_title_id }}</h3>
+                            <h3 class="text-3xl font-bold mb-6 {{ $theme === 'dark' ? 'text-custom-lightgreen' : 'text-custom-green' }}">
+                                {{ app()->getLocale() == 'en' ? $info->ci_title_en : $info->ci_title_id }}
+                            </h3>
                             <p class="text-lg leading-relaxed {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-600' }}">
-                                {{ $info->ci_description_id }}
+                                {{ app()->getLocale() == 'en' ? $info->ci_description_en : $info->ci_description_id }}
                             </p>
                         </div>
                     @endif
@@ -78,13 +88,15 @@
 <section class="py-16 bg-custom-green">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         @if(isset($workAtPazarJoin))
-            <h2 class="text-4xl font-bold text-white mb-6">{{ $workAtPazarJoin->wap_title_id }}</h2>
+            <h2 class="text-4xl font-bold text-white mb-6">
+                {{ app()->getLocale() == 'en' ? $workAtPazarJoin->wap_title_en : $workAtPazarJoin->wap_title_id }}
+            </h2>
             <p class="text-xl text-white mb-8 max-w-3xl mx-auto">
-                {{ $workAtPazarJoin->wap_description_id }}
+                {{ app()->getLocale() == 'en' ? $workAtPazarJoin->wap_description_en : $workAtPazarJoin->wap_description_id }}
             </p>
         @endif
         <a href="/vacancies" class="inline-block bg-white hover:bg-gray-100 text-custom-green font-bold py-4 px-8 rounded-lg transition duration-300 text-lg">
-            LIHAT LOWONGAN KERJA
+            {{ __('general.view_job') }}
         </a>
     </div>
 </section>

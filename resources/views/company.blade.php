@@ -9,7 +9,9 @@
         <div class="text-white mb-8">
             @if(isset($header))
                 <p class="text-xl mb-2 text-yellow-400">{{ __('general.about') }}</p>
-                <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">{{ $header->h_title_id }}</h1>
+                <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">
+                    {{ app()->getLocale() == 'en' ? $header->h_title_en : $header->h_title_id }}
+                </h1>
             @endif
         </div>
         <div class="w-full max-w-4xl">
@@ -28,10 +30,10 @@
 @if(isset($companyWhat))
 <section class="company-what py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Sekilas Perusahaan</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.company_overview') }}</h2>
         
         <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
-            {!! nl2br(e($companyWhat->cp_description_id)) !!}
+            {{ app()->getLocale() == 'en' ? nl2br(e($companyWhat->cp_description_en)) : nl2br(e($companyWhat->cp_description_id)) }}
         </div>
     </div>
 </section>
@@ -40,7 +42,7 @@
 <!-- History Section -->
 <section class="history-section py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Sejarah Pazar Seasoning</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.history') }}</h2>
         
         <div class="relative">
             <!-- History Carousel container -->
@@ -62,7 +64,7 @@
                                         <div class="history-content-wrapper">
                                             <div class="history-year">{{ $history->hs_year }}</div>
                                             <div class="history-content {{ $theme === 'dark' ? 'text-gray-800' : 'text-black' }}">
-                                                {!! $history->hs_description_id !!}
+                                                {{ app()->getLocale() == 'en' ? $history->hs_description_en : $history->hs_description_id }}
                                             </div>
                                         </div>
                                     </div>
@@ -93,10 +95,10 @@
 @if(isset($companyPolicy))
 <section class="quality-policy py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Kebijakan Mutu</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.policy') }}</h2>
         
         <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
-            {!! nl2br(e($companyPolicy->cp_description_id)) !!}
+            {{ app()->getLocale() == 'en' ? nl2br(e($companyPolicy->cp_description_en)) : nl2br(e($companyPolicy->cp_description_id)) }}
         </div>
     </div>
 </section>
@@ -109,9 +111,9 @@
             <!-- Vision -->
             @if(isset($companyVision))
             <div class="flex-1 mb-8 md:mb-0">
-                <h2 class="text-3xl font-bold mb-8 text-center {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Visi</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.vision') }}</h2>
                 <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} px-4">
-                    {!! nl2br(e($companyVision->cp_description_id)) !!}
+                    {{ app()->getLocale() == 'en' ? nl2br(e($companyVision->cp_description_en)) : nl2br(e($companyVision->cp_description_id)) }}
                 </div>
             </div>
             @endif
@@ -125,9 +127,9 @@
             <!-- Mission -->
             @if(isset($companyMission))
             <div class="flex-1">
-                <h2 class="text-3xl font-bold mb-8 text-center {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">Misi</h2>
+                <h2 class="text-3xl font-bold mb-8 text-center {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.mission') }}</h2>
                 <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} px-4">
-                    {!! nl2br(e($companyMission->cp_description_id)) !!}
+                    {{ app()->getLocale() == 'en' ? nl2br(e($companyMission->cp_description_en)) : nl2br(e($companyMission->cp_description_id)) }}
                 </div>
             </div>
             @endif

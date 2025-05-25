@@ -14,6 +14,11 @@ class ProductController extends BaseController
      */
     public function index()
     {
+        // Get the current locale
+        $locale = app()->getLocale();
+        $titleField = 'h_title_' . $locale;
+        $descField = 'h_description_' . $locale;
+        
         // Get header for products page using the same approach as IndexController
         $headerResponse = $this->crudApiGet('/index/data', ['page_name' => 'products']);
         $header = null;

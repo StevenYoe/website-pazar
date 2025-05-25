@@ -25,7 +25,7 @@
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
                             </svg>
-                            Home
+                            {{ __('general.home') }}
                         </a>
                     </li>
                     <li>
@@ -33,7 +33,7 @@
                             <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <a href="{{ url('/vacancies') }}" class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }} hover:text-custom-green">Vacancies</a>
+                            <a href="{{ url('/vacancies') }}" class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }} hover:text-custom-green">{{ __('general.vacancies') }}</a>
                         </div>
                     </li>
                     <li aria-current="page">
@@ -41,7 +41,9 @@
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }} md:ml-2">{{ $vacancy->v_title_id }}</span>
+                            <span class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }} md:ml-2">
+                                {{ app()->getLocale() == 'en' ? $vacancy->v_title_en : $vacancy->v_title_id }}
+                            </span>
                         </div>
                     </li>
                 </ol>
@@ -58,14 +60,16 @@
                         <svg class="w-4 h-4 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M12 23a7.5 7.5 0 01-5.138-12.963C8.204 8.774 11.5 6.5 11 1.5c6 4 9 8 3 14 1 0 2.5 0 5-2.47.27.773.5 1.604.5 2.47A7.5 7.5 0 0112 23z"></path>
                         </svg>
-                        Urgently needed
+                        {{ __('general.urgently_needed') }}
                     </span>
                 </div>
                 @endif
                 
                 <!-- Vacancy Header -->
                 <div class="mb-4">
-                    <h1 class="text-3xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ $vacancy->v_title_id }}</h1>
+                    <h1 class="text-3xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">
+                        {{ app()->getLocale() == 'en' ? $vacancy->v_title_en : $vacancy->v_title_id }}
+                    </h1>
                 </div>
 
                 <!-- Vacancy Details -->
@@ -78,39 +82,39 @@
                                 <line x1="8" y1="2" x2="8" y2="6"></line>
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
                             </svg>
-                            <span class="{{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }}">Pendaftaran Ditutup: <span class="font-medium">{{ $vacancy->closed_date_formatted }}</span></span>
+                            <span class="{{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }}">{{ __('general.closing_date') }}<span class="font-medium"> {{ $vacancy->closed_date_formatted }}</span></span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Job Description -->
                 <div class="mb-6">
-                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">Deskripsi Pekerjaan</h2>
+                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">{{ __('general.job_description') }}</h2>
                     <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
-                        {!! $vacancy->v_description_id !!}
+                        {{ app()->getLocale() == 'en' ? $vacancy->v_description_en : $vacancy->v_description_id }}
                     </div>
                 </div>
 
                 <!-- Job Responsibilities -->
                 <div class="mb-6">
-                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">Tanggung Jawab Utama</h2>
+                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">{{ __('general.main_responsibilities') }}</h2>
                     <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
-                        {!! $vacancy->v_responsibilities_id !!}
+                        {{ app()->getLocale() == 'en' ? $vacancy->v_responsibilities_en : $vacancy->v_responsibilities_id }}
                     </div>
                 </div>
 
                 <!-- Job Requirements -->
                 <div class="mb-6">
-                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">Kualifikasi</h2>
+                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">{{ __('general.qualifications') }}</h2>
                     <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
-                        {!! $vacancy->v_requirement_id !!}
+                        {{ app()->getLocale() == 'en' ? $vacancy->v_requirement_en : $vacancy->v_requirement_id }}
                     </div>
                 </div>
 
                 <!-- Apply Button -->
                 <div class="mt-6">
                     <a href="mailto:careers@company.com?subject=Application for {{ $vacancy->v_title_id }}" class="inline-block bg-custom-green hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
-                        Lamar Sekarang
+                        {{ __('general.apply_now') }}
                     </a>
                 </div>
             </div>
@@ -119,7 +123,7 @@
             <div class="lg:col-span-1">
                 <!-- Job Summary -->
                 <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-4">Detail Pekerjaan</h3>
+                    <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-4">{{ __('general.job_details') }}</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start">
                             <svg class="w-5 h-5 mr-2 text-custom-green mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -127,8 +131,10 @@
                                 <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                             </svg>
                             <div>
-                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Departemen</span>
-                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">{{ $vacancy->department_name_id }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.all_departments') }}</span>
+                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
+                                    {{ app()->getLocale() == 'en' ? $vacancy->department_name_en : $vacancy->department_name_id }}
+                                </span>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -137,8 +143,10 @@
                                 <circle cx="12" cy="10" r="3"></circle>
                             </svg>
                             <div>
-                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Model Kerja</span>
-                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">{{ $vacancy->v_type }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.job_type') }}</span>
+                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
+                                    {{ app()->getLocale() == 'en' ? $vacancy->v_type : $vacancy->v_type }}
+                                </span>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -149,8 +157,10 @@
                                 <line x1="6" y1="18" x2="6.01" y2="18"></line>
                             </svg>
                             <div>
-                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Jenis Pekerjaan</span>
-                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">{{ $vacancy->employment_name_id }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.all_work_models') }}</span>
+                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
+                                    {{ app()->getLocale() == 'en' ? $vacancy->employment_name_en : $vacancy->employment_name_id }}
+                                </span>
                             </div>
                         </li>
                         <li class="flex items-start">
@@ -160,8 +170,10 @@
                                 <path d="M12 8h.01"></path>
                             </svg>
                             <div>
-                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">Pengalaman</span>
-                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">Min. {{ $vacancy->experience_name_id }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.all_experiences') }}</span>
+                                <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
+                                    {{ app()->getLocale() == 'en' ? $vacancy->department_name_en : $vacancy->department_name_id }}
+                                </span>
                             </div>
                         </li>
                     </ul>
@@ -169,7 +181,7 @@
 
                 <!-- Share Job -->
                 <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-md p-6 mb-6">
-                    <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-4">Sebarkan Lowongan</h3>
+                    <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-4">{{ __('general.share_vacancy') }}</h3>
                     <div class="share-buttons">
                         <!-- Facebook -->
                         <button type="button" class="share-btn facebook" onclick="shareVacancy('facebook')">
@@ -204,7 +216,7 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
                             </svg>
-                            <span class="link-copied-tooltip">Link copied!</span>
+                            <span class="link-copied-tooltip">{{ __('general.link_copied') }}</span>
                         </button>
                     </div>
                 </div>
@@ -212,7 +224,9 @@
                 <!-- Related Vacancies -->
                 @if(count($relatedVacancies) > 0)
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Lowongan Serupa</h3>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
+                        {{ __('general.related_vacancies') }}
+                    </h3>
                     <div class="vacancies-item">
                         <div class="grid grid-cols-1 gap-6">
                             @foreach($relatedVacancies as $related)
@@ -227,15 +241,17 @@
                                         <svg class="w-4 h-4 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                             <path d="M12 23a7.5 7.5 0 01-5.138-12.963C8.204 8.774 11.5 6.5 11 1.5c6 4 9 8 3 14 1 0 2.5 0 5-2.47.27.773.5 1.604.5 2.47A7.5 7.5 0 0112 23z"></path>
                                         </svg>
-                                        Urgently needed
+                                        {{ __('general.urgently_needed') }}
                                     </span>
                                 </div>
                                 @endif
                                 
                                 <div class="p-6 flex flex-col card-container">
-                                    <h3 class="text-xl text-black font-bold mb-3 line-clamp-2">{{ $related->v_title_id }}</h3>
+                                    <h3 class="text-xl text-black font-bold mb-3 line-clamp-2">
+                                        {{ app()->getLocale() == 'en' ? $related->v_title_en : $related->v_title_id }}
+                                    </h3>
                                     <div class="text-gray-600 dark:text-gray-800 mb-4 flex-grow">
-                                        <p class="mb-3"><span class="font-medium">Pendaftaran Ditutup:</span> {{ $related->closed_date_formatted }}</p>
+                                        <p class="mb-3"><span class="font-medium">{{ __('general.closing_date') }}</span> {{ $related->closed_date_formatted }}</p>
                                         
                                         <div class="flex flex-col space-y-2">
                                             <div class="flex items-center">
@@ -243,7 +259,7 @@
                                                     <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
                                                     <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                                                 </svg>
-                                                <span>{{ $related->department_name_id }}</span>
+                                                <span>{{ app()->getLocale() == 'en' ? $related->department_name_en : $related->department_name_id }}</span>
                                             </div>
                                             
                                             <div class="flex items-center">
@@ -251,7 +267,7 @@
                                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                                     <circle cx="12" cy="10" r="3"></circle>
                                                 </svg>
-                                                <span>{{ $related->employment_name_id }}</span>
+                                                <span>{{ app()->getLocale() == 'en' ? $related->employment_name_en : $related->employment_name_id }}</span>
                                             </div>
                                         
                                             <div class="flex items-center">
@@ -260,11 +276,11 @@
                                                     <path d="M12 16v-4"></path>
                                                     <path d="M12 8h.01"></path>
                                                 </svg>
-                                                <span>Min. {{ $related->experience_name_id }}</span>
+                                                <span>Min. {{ app()->getLocale() == 'en' ? $related->experience_name_en : $related->experience_name_id }}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{ url('vacancy/' . $related->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">SELENGKAPNYA →</a>
+                                    <a href="{{ url('vacancy/' . $related->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
                                 </div>
                             </div>
                             @endforeach

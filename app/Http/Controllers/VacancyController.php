@@ -14,6 +14,11 @@ class VacancyController extends BaseController
      */
     public function index()
     {
+        // Get the current locale
+        $locale = app()->getLocale();
+        $titleField = 'h_title_' . $locale;
+        $descField = 'h_description_' . $locale;
+        
         // Get header for vacancies page using the same approach as IndexController
         $headerResponse = $this->crudApiGet('/index/data', ['page_name' => 'vacancies']);
         $header = null;
