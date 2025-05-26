@@ -145,22 +145,24 @@ class IndexController extends BaseController
         
         // Create slug from title based on current locale
         $locale = app()->getLocale();
-        $titleToUse = ($locale == 'en' && !empty($recipeObj->r_title_en)) ? 
-                    $recipeObj->r_title_en : $recipeObj->r_title_id;
+        $titleToUse = ($locale === 'en' && !empty($recipeObj->r_title_en)) ? 
+            $recipeObj->r_title_en : $recipeObj->r_title_id;
         $recipeObj->slug = Str::slug($titleToUse);
+        
+        // Initialize category name with proper locale
+        $recipeObj->category_name = '';
         
         // Check if categories relationship exists
         if (isset($recipeObj->categories) && !empty($recipeObj->categories)) {
             $categoryNames = [];
             foreach ($recipeObj->categories as $category) {
                 $cat = is_array($category) ? (object) $category : $category;
-                if ($locale == 'en' && isset($cat->rc_title_en)) {
+                if ($locale === 'en' && isset($cat->rc_title_en) && !empty($cat->rc_title_en)) {
                     $categoryNames[] = trim($cat->rc_title_en);
-                } elseif ($locale == 'id' && isset($cat->rc_title_id)) {
+                } elseif (isset($cat->rc_title_id) && !empty($cat->rc_title_id)) {
                     $categoryNames[] = trim($cat->rc_title_id);
                 }
             }
-            
             if (!empty($categoryNames)) {
                 $recipeObj->category_name = implode(', ', $categoryNames);
             }
@@ -168,9 +170,9 @@ class IndexController extends BaseController
         // Fallback: check if single category exists
         elseif (isset($recipeObj->category)) {
             $category = is_array($recipeObj->category) ? (object) $recipeObj->category : $recipeObj->category;
-            if ($locale == 'en' && isset($category->rc_title_en)) {
+            if ($locale === 'en' && isset($category->rc_title_en) && !empty($category->rc_title_en)) {
                 $recipeObj->category_name = trim($category->rc_title_en);
-            } elseif ($locale == 'id' && isset($category->rc_title_id)) {
+            } elseif (isset($category->rc_title_id) && !empty($category->rc_title_id)) {
                 $recipeObj->category_name = trim($category->rc_title_id);
             }
         }
