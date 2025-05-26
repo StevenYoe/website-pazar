@@ -42,7 +42,7 @@
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }} md:ml-2">{{ app()->getLocale() == 'en' ? $product->p_title_en : $product->p_title_id }}</span>
+                            <span class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }} md:ml-2">{!! app()->getLocale() == 'en' ? $product->p_title_en : $product->p_title_id !!}</span>
                         </div>
                     </li>
                 </ol>
@@ -60,8 +60,8 @@
             <!-- Product Info -->
             <div class="mt-10 lg:mt-0 lg:w-1/2">
                 <div class="pb-3">
-                    <h1 class="text-3xl {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ app()->getLocale() == 'en' ? $product->p_title_en : $product->p_title_id }}</h1>
-                    <h2 class="mt-2 prose prose-sm text-custom-red">{{ app()->getLocale() == 'en' ? $product->category_name_en : $product->category_name_id }}</h2>
+                    <h1 class="text-3xl {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{!! app()->getLocale() == 'en' ? $product->p_title_en : $product->p_title_id !!}</h1>
+                    <h2 class="mt-2 prose prose-sm text-custom-red">{!! app()->getLocale() == 'en' ? $product->category_name_en : $product->category_name_id !!}</h2>
                 </div>
                 @if(isset($product->detail))
                     <div class="py-1">
@@ -69,9 +69,9 @@
                             @if(!empty($product->detail->pd_net_weight))    
                                 <p class="mb-2 {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-700' }}"> {{ __('general.net_weight') . ': ' . $product->detail->pd_net_weight }}</p>
                             @endif
-                            <p class="mb-4"> {{ app()->getLocale() == 'en' ? $product->p_description_en : $product->p_description_id }}</p>
+                            <p class="mb-4"> {!! app()->getLocale() == 'en' ? $product->p_description_en : $product->p_description_id !!}</p>
                             @if(!empty($product->detail->pd_longdesc_id))
-                                {{ app()->getLocale() == 'en' ? nl2br(e($product->detail->pd_longdesc_en)) : nl2br(e($product->detail->pd_longdesc_id)) }}
+                                {!! app()->getLocale() == 'en' ? nl2br(e($product->detail->pd_longdesc_en)) : nl2br(e($product->detail->pd_longdesc_id)) !!}
                             @endif
                         </div>
                     </div>
@@ -126,14 +126,14 @@
                     <div class="p-6 flex flex-col flex-grow">
                         <a href="{{ url('product/' . $randomProduct->slug) }}" class="hover:text-custom-red">
                             <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red line-clamp-2">
-                                {{ app()->getLocale() == 'en' ? $randomProduct->p_title_en : $randomProduct->p_title_id }}
+                                {!! app()->getLocale() == 'en' ? $randomProduct->p_title_en : $randomProduct->p_title_id !!}
                             </h3>
                         </a>
                         <h5 class="text-sm text-custom-red font-bold mb-2">
-                            {{ app()->getLocale() == 'en' ? $randomProduct->category_name_en : $randomProduct->category_name_id }}
+                            {!! app()->getLocale() == 'en' ? $randomProduct->category_name_en : $randomProduct->category_name_id !!}
                         </h5>
                         <p class="text-gray-800 flex-grow line-clamp-3">
-                            {{ app()->getLocale() == 'en' ? $randomProduct->p_description_en : $randomProduct->p_description_id }}
+                            {!! app()->getLocale() == 'en' ? $randomProduct->p_description_en : $randomProduct->p_description_id !!}
                         </p>
                     </div>
                 </div>

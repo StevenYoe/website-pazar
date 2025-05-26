@@ -30,10 +30,10 @@
         <div class="text-center mb-12">
             @if(isset($workAtPazarWork))
                 <h2 class="text-4xl font-bold mb-6 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
-                    {{ app()->getLocale() == 'en' ? $workAtPazarWork->wap_title_en : $workAtPazarWork->wap_title_id }}
+                    {!! app()->getLocale() == 'en' ? $workAtPazarWork->wap_title_en : $workAtPazarWork->wap_title_id !!}
                 </h2>
                 <div class="max-w-4xl mx-auto text-lg leading-relaxed {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-600' }} space-y-6">
-                    {{ app()->getLocale() == 'en' ? nl2br(e($workAtPazarWork->wap_description_en)) : nl2br(e($workAtPazarWork->wap_description_id)) }}
+                    {!! app()->getLocale() == 'en' ? nl2br(e($workAtPazarWork->wap_description_en)) : nl2br(e($workAtPazarWork->wap_description_id)) !!}
                 </div>
             @endif
         </div>
@@ -45,7 +45,7 @@
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         @if(isset($workAtPazarWhy))
             <h2 class="text-4xl font-bold text-center mb-16 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
-                {{ app()->getLocale() == 'en' ? $workAtPazarWhy->wap_title_en : $workAtPazarWhy->wap_title_id }}
+                {!! app()->getLocale() == 'en' ? $workAtPazarWhy->wap_title_en : $workAtPazarWhy->wap_title_id !!}
             </h2>
         @endif
         
@@ -56,10 +56,10 @@
                     @if($index % 2 == 0)
                         <div>
                             <h3 class="text-3xl font-bold mb-6 {{ $theme === 'dark' ? 'text-custom-lightgreen' : 'text-custom-green' }}">
-                                {{ app()->getLocale() == 'en' ? $info->ci_title_en : $info->ci_title_id }}
+                                {!! app()->getLocale() == 'en' ? $info->ci_title_en : $info->ci_title_id !!}
                             </h3>
                             <p class="text-lg leading-relaxed {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-600' }}">
-                                {{ app()->getLocale() == 'en' ? $info->ci_description_en : $info->ci_description_id }}
+                                {!! app()->getLocale() == 'en' ? $info->ci_description_en : $info->ci_description_id !!}
                             </p>
                         </div>
                         <div>
@@ -71,10 +71,10 @@
                         </div>
                         <div class="order-1 md:order-2">
                             <h3 class="text-3xl font-bold mb-6 {{ $theme === 'dark' ? 'text-custom-lightgreen' : 'text-custom-green' }}">
-                                {{ app()->getLocale() == 'en' ? $info->ci_title_en : $info->ci_title_id }}
+                                {!! app()->getLocale() == 'en' ? $info->ci_title_en : $info->ci_title_id !!}
                             </h3>
                             <p class="text-lg leading-relaxed {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-600' }}">
-                                {{ app()->getLocale() == 'en' ? $info->ci_description_en : $info->ci_description_id }}
+                                {!! app()->getLocale() == 'en' ? $info->ci_description_en : $info->ci_description_id !!}
                             </p>
                         </div>
                     @endif
@@ -89,10 +89,10 @@
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         @if(isset($workAtPazarJoin))
             <h2 class="text-4xl font-bold text-white mb-6">
-                {{ app()->getLocale() == 'en' ? $workAtPazarJoin->wap_title_en : $workAtPazarJoin->wap_title_id }}
+                {!! app()->getLocale() == 'en' ? $workAtPazarJoin->wap_title_en : $workAtPazarJoin->wap_title_id !!}
             </h2>
             <p class="text-xl text-white mb-8 max-w-3xl mx-auto">
-                {{ app()->getLocale() == 'en' ? $workAtPazarJoin->wap_description_en : $workAtPazarJoin->wap_description_id }}
+                {!! app()->getLocale() == 'en' ? $workAtPazarJoin->wap_description_en : $workAtPazarJoin->wap_description_id !!}
             </p>
         @endif
         <a href="/vacancies" class="inline-block bg-white hover:bg-gray-100 text-custom-green font-bold py-4 px-8 rounded-lg transition duration-300 text-lg">

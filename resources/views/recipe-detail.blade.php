@@ -42,7 +42,7 @@
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <span class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }} md:ml-2">{{ app()->getLocale() == 'en' ? $recipe->r_title_en : $recipe->r_title_id }}</span>
+                            <span class="ml-1 text-sm font-medium {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }} md:ml-2">{!! app()->getLocale() == 'en' ? $recipe->r_title_en : $recipe->r_title_id !!}</span>
                         </div>
                     </li>
                 </ol>
@@ -75,12 +75,12 @@
             <!-- Recipe Info -->
             <div class="mt-10 lg:mt-0 lg:w-1/2">
                 <div class="pb-2">
-                    <h1 class="text-3xl {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ app()->getLocale() == 'en' ? $recipe->r_title_en : $recipe->r_title_id }}</h1>
+                    <h1 class="text-3xl {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{!! app()->getLocale() == 'en' ? $recipe->r_title_en : $recipe->r_title_id !!}</h1>
                     <h2 class="mt-2 prose prose-sm text-custom-red">
                         @if(isset($recipe->category_names) && count($recipe->category_names) > 0)
                             {{ implode(', ', $recipe->category_names) }}
                         @else
-                            {{ app()->getLocale() == 'en' ? $recipe->category_name_en : $recipe->category_name_id }}
+                            {!! app()->getLocale() == 'en' ? $recipe->category_name_en : $recipe->category_name_id !!}
                         @endif
                     </h2>
                 </div>
@@ -88,7 +88,7 @@
                         @if(isset($recipe->detail->rd_desc_id) && !empty($recipe->detail->rd_desc_id))
                             <div class="py-2">
                                 <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
-                                    {{ app()->getLocale() == 'en' ? nl2br(e($recipe->detail->rd_desc_en)) : nl2br(e($recipe->detail->rd_desc_id)) }}
+                                    {!! app()->getLocale() == 'en' ? nl2br(e($recipe->detail->rd_desc_en)) : nl2br(e($recipe->detail->rd_desc_id)) !!}
                                 </div>
                             </div>
                         @endif
@@ -97,7 +97,7 @@
                             <div class="py-2">
                                 <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Bahan-bahan</h3>
                                 <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
-                                    {{ app()->getLocale() == 'en' ? nl2br(e($recipe->detail->rd_ingredients_en)) : nl2br(e($recipe->detail->rd_ingredients_id)) }}
+                                    {!! app()->getLocale() == 'en' ? nl2br(e($recipe->detail->rd_ingredients_en)) : nl2br(e($recipe->detail->rd_ingredients_id)) !!}
                                 </div>
                             </div>
                         @endif
@@ -106,7 +106,7 @@
                             <div class="py-2">
                                 <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Cara Pembuatan</h3>
                                 <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
-                                    {{ app()->getLocale() == 'en' ? nl2br(e($recipe->detail->rd_cook_en)) : nl2br(e($recipe->detail->rd_cook_id)) }}
+                                    {!! app()->getLocale() == 'en' ? nl2br(e($recipe->detail->rd_cook_en)) : nl2br(e($recipe->detail->rd_cook_id)) !!}
                                 </div>
                             </div>
                         @endif
@@ -131,14 +131,14 @@
                     <div class="p-6 flex flex-col flex-grow">
                         <a href="{{ url('recipe/' . $randomRecipe->slug) }}" class="hover:text-custom-red">
                             <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red line-clamp-2">
-                                {{ app()->getLocale() == 'en' ? $randomRecipe->r_title_en : $randomRecipe->r_title_id }}
+                                {!! app()->getLocale() == 'en' ? $randomRecipe->r_title_en : $randomRecipe->r_title_id !!}
                             </h3>
                         </a>
                         <h4 class="text-sm text-custom-red font-bold mb-2 line-clamp-2">
                             @if(isset($randomRecipe->category_names) && count($randomRecipe->category_names) > 0)
                                 {{ implode(', ', $randomRecipe->category_names) }}
                             @else
-                                {{ app()->getLocale() == 'en' ? $randomRecipe->category_name_en : $randomRecipe->category_name_id }}
+                                {!! app()->getLocale() == 'en' ? $randomRecipe->category_name_en : $randomRecipe->category_name_id !!}
                             @endif
                         </h4>
                         <a href="{{ url('recipe/' . $randomRecipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end mt-auto">SELENGKAPNYA →</a>

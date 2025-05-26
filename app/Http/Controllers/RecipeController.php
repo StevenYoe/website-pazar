@@ -118,36 +118,46 @@ class RecipeController extends BaseController
             $recipeObj->r_image = config('app.storage_url') . '/' . $recipeObj->r_image;
         }
         
-        // Create slug from title_id or title_en
+        // Get current locale for creating proper slug
+        $locale = app()->getLocale();
+        
         $titleToUse = !empty($recipeObj->r_title_id) ? $recipeObj->r_title_id : $recipeObj->r_title_en;
         $recipeObj->slug = Str::slug($titleToUse);
         
-        // Default empty category values
-        $recipeObj->category_name_id = 'Uncategorized';
-        $recipeObj->category_name_en = 'Uncategorized';
         $recipeObj->category_names = []; // Array to store all category names
         $recipeObj->all_categories = []; // Array to store all category data
-        
+
         // Process categories from relationship
         if (isset($recipeObj->categories) && !empty($recipeObj->categories)) {
+            $categoryNamesId = [];
+            $categoryNamesEn = [];
+            
             foreach ($recipeObj->categories as $index => $cat) {
                 $category = is_array($cat) ? (object) $cat : $cat;
                 
                 // Store category data in array
                 $recipeObj->all_categories[] = $category;
                 
-                // Add category names to array
+                // Add category names to arrays based on locale
                 if (isset($category->rc_title_id) && !empty($category->rc_title_id)) {
-                    $recipeObj->category_names[] = trim($category->rc_title_id);
+                    $categoryNamesId[] = trim($category->rc_title_id);
+                }
+                if (isset($category->rc_title_en) && !empty($category->rc_title_en)) {
+                    $categoryNamesEn[] = trim($category->rc_title_en);
                 }
                 
                 // Set first category as primary (for backward compatibility)
                 if ($index === 0) {
-                    $recipeObj->category_name_id = isset($category->rc_title_id) ? trim($category->rc_title_id) : 'Uncategorized';
-                    $recipeObj->category_name_en = isset($category->rc_title_en) ? trim($category->rc_title_en) : 'Uncategorized';
+                    $recipeObj->category_name_id = isset($category->rc_title_id) ? 
+                        trim($category->rc_title_id) : 'Uncategorized';
+                    $recipeObj->category_name_en = isset($category->rc_title_en) ? 
+                        trim($category->rc_title_en) : 'Uncategorized';
                 }
             }
-        } 
+            
+            // Set category_names based on current locale
+            $recipeObj->category_names = $locale == 'en' ? $categoryNamesEn : $categoryNamesId;
+        }
         
         return $recipeObj;
     }

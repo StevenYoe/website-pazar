@@ -33,7 +33,7 @@
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.company_overview') }}</h2>
         
         <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
-            {{ app()->getLocale() == 'en' ? nl2br(e($companyWhat->cp_description_en)) : nl2br(e($companyWhat->cp_description_id)) }}
+            {!! app()->getLocale() == 'en' ? nl2br(e($companyWhat->cp_description_en)) : nl2br(e($companyWhat->cp_description_id)) !!}
         </div>
     </div>
 </section>
@@ -64,7 +64,7 @@
                                         <div class="history-content-wrapper">
                                             <div class="history-year">{{ $history->hs_year }}</div>
                                             <div class="history-content {{ $theme === 'dark' ? 'text-gray-800' : 'text-black' }}">
-                                                {{ app()->getLocale() == 'en' ? $history->hs_description_en : $history->hs_description_id }}
+                                                {!! app()->getLocale() == 'en' ? $history->hs_description_en : $history->hs_description_id !!}
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +98,7 @@
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.policy') }}</h2>
         
         <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
-            {{ app()->getLocale() == 'en' ? nl2br(e($companyPolicy->cp_description_en)) : nl2br(e($companyPolicy->cp_description_id)) }}
+            {!! app()->getLocale() == 'en' ? nl2br(e($companyPolicy->cp_description_en)) : nl2br(e($companyPolicy->cp_description_id)) !!}
         </div>
     </div>
 </section>
@@ -113,7 +113,7 @@
             <div class="flex-1 mb-8 md:mb-0">
                 <h2 class="text-3xl font-bold mb-8 text-center {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.vision') }}</h2>
                 <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} px-4">
-                    {{ app()->getLocale() == 'en' ? nl2br(e($companyVision->cp_description_en)) : nl2br(e($companyVision->cp_description_id)) }}
+                    {!! app()->getLocale() == 'en' ? nl2br(e($companyVision->cp_description_en)) : nl2br(e($companyVision->cp_description_id)) !!}
                 </div>
             </div>
             @endif
@@ -129,7 +129,7 @@
             <div class="flex-1">
                 <h2 class="text-3xl font-bold mb-8 text-center {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.mission') }}</h2>
                 <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} px-4">
-                    {{ app()->getLocale() == 'en' ? nl2br(e($companyMission->cp_description_en)) : nl2br(e($companyMission->cp_description_id)) }}
+                    {!! app()->getLocale() == 'en' ? nl2br(e($companyMission->cp_description_en)) : nl2br(e($companyMission->cp_description_id)) !!}
                 </div>
             </div>
             @endif

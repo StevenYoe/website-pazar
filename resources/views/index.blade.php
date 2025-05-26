@@ -117,8 +117,16 @@
                 <h3 class="text-3xl {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} font-bold mb-4">
                     {{ app()->getLocale() == 'en' ? $latestRecipe->r_title_en : $latestRecipe->r_title_id }}
                 </h3>
-                <p class="text-sm text-custom-green mb-4">{{ $latestRecipe->category_name }}</p>
-                <a href="/recipes/{{ $latestRecipe->r_id }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
+                <p class="text-sm text-custom-green mb-4">
+                    @if(isset($latestRecipe->category_names) && count($latestRecipe->category_names) > 0)
+                        {{ implode(', ', $latestRecipe->category_names) }}
+                    @elseif(isset($latestRecipe->category_name))
+                        {{ $latestRecipe->category_name }}
+                    @else
+                        {{ app()->getLocale() == 'en' ? $latestRecipe->category_name_en : $latestRecipe->category_name_id }}
+                    @endif
+                </p>
+                <a href="{{ url('recipe/' . $latestRecipe->slug) }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
                     {{ __('general.view_recipe') }}
                 </a>
             </div>
