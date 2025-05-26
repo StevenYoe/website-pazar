@@ -95,7 +95,7 @@
                 {{ app()->getLocale() == 'en' ? $workAtPazarJoin->wap_description_en : $workAtPazarJoin->wap_description_id }}
             </p>
         @endif
-        <a href="/vacancies" class="inline-block bg-white hover:bg-gray-100 text-custom-green font-bold py-4 px-8 rounded-lg transition duration-300 text-lg">
+        <a href="{{ app()->getLocale() == 'en' ? '/en/vacancies' : '/id/lowongan' }}" class="inline-block bg-white hover:bg-gray-100 text-custom-green font-bold py-4 px-8 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 text-lg">
             {{ __('general.view_job') }}
         </a>
     </div>

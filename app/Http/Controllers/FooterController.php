@@ -6,25 +6,22 @@ use Illuminate\Http\Request;
 use stdClass;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\App;
 
 class FooterController extends BaseController
 {
-    /**
-     * Get footer data for the master layout
-     *
-     * @return array
-     */
     public function getFooterData()
     {
-        // Try to get data from cache first
-        // Temporarily disable cache for debugging
-        $cacheKey = 'footer_data';
-        $useCache = false; // Set to false to bypass cache during debugging
+        // Get current locale
+        $locale = App::getLocale();
         
+        // Try to get data from cache first (with locale-specific cache)
+        $cacheKey = 'footer_data_' . $locale;
+        $useCache = false; // Set to true in production
         if ($useCache && Cache::has($cacheKey)) {
             return Cache::get($cacheKey);
         }
-
+        
         // Use CRUD API to get all footer data
         $response = $this->crudApiGet('/footers');
         
@@ -36,7 +33,6 @@ class FooterController extends BaseController
                 'contacts' => [],
                 'socials' => []
             ];
-            
             return $errorData;
         }
         
@@ -50,13 +46,15 @@ class FooterController extends BaseController
             foreach ($response['data']['data'] as $item) {
                 $footerItem = $this->processFooterItem($item);
                 
+                // Add locale-specific properties for easier access in views
+                $footerItem->current_label = $locale == 'en' ? 
+                    $footerItem->f_label_en : $footerItem->f_label_id;
+                
+                $footerItem->current_description = $locale == 'en' ? 
+                    $footerItem->f_description_en : $footerItem->f_description_id;
+                
                 switch ($item['f_type']) {
                     case 'alamat':
-                        // Ensure the complete address is properly formatted
-                        if (isset($footerItem->f_description_id)) {
-                            // Make sure the description has no HTML tags or special characters that could affect display
-                            $footerItem->f_description_id = trim($footerItem->f_description_id);
-                        }
                         $address = $footerItem;
                         break;
                     case 'kontak':
@@ -75,20 +73,14 @@ class FooterController extends BaseController
             'socials' => $socials
         ];
         
-        // For debugging
-        if (isset($address->f_description_id)) {
-            // Log the description to check its value
-            // \Illuminate\Support\Facades\Log::info('Address description: ' . $address->f_description_id);
-        }
-        
-        // Cache the data (only if useCache is true)
+        // Cache the data with locale-specific key
         if ($useCache) {
             Cache::put($cacheKey, $footerData, 60 * 60);
         }
         
         return $footerData;
     }
-    
+
     /**
      * Process a footer item to add backend API URL to icon and convert to object
      *
@@ -100,14 +92,14 @@ class FooterController extends BaseController
         $footerObj = $this->arrayToObject($item);
         
         if (!empty($footerObj->f_icon)) {
-            $storageUrl = config('app.storage_url'); // Pastikan ini digunakan
+            $storageUrl = config('app.storage_url');
             $storageUrl = rtrim($storageUrl, '/');
             $footerObj->f_icon = $storageUrl . '/' . ltrim($footerObj->f_icon, '/');
         }
         
         return $footerObj;
     }
-    
+
     /**
      * Convert an array to an object recursively
      *
@@ -119,7 +111,7 @@ class FooterController extends BaseController
         if (!is_array($array)) {
             return $array;
         }
-        
+
         $object = new stdClass();
         foreach ($array as $key => $value) {
             if (is_array($value)) {
@@ -128,7 +120,7 @@ class FooterController extends BaseController
                 $object->$key = $value;
             }
         }
-        
+
         return $object;
     }
 }

@@ -122,8 +122,15 @@ class ProductController extends BaseController
             $productObj->p_image = config('app.storage_url') . '/' . $productObj->p_image;
         }
         
-        // Create slug from title_id or title_en
-        $titleToUse = !empty($productObj->p_title_id) ? $productObj->p_title_id : $productObj->p_title_en;
+        // Get current locale for creating proper slug
+        $locale = app()->getLocale();
+        
+        // Create slug from title based on locale
+        $titleEn = !empty($productObj->p_title_en) ? $productObj->p_title_en : '';
+        $titleId = !empty($productObj->p_title_id) ? $productObj->p_title_id : '';
+        
+        // Use locale-specific title for slug
+        $titleToUse = ($locale == 'en' && !empty($titleEn)) ? $titleEn : $titleId;
         $productObj->slug = Str::slug($titleToUse);
         
         // Default empty category names

@@ -14,6 +14,7 @@ module.exports = {
         'custom-green': 'var(--color-custom-green)',
         'custom-darkgreen': 'var(--color-custom-darkgreen)',
         'custom-red': 'var(--color-custom-red)',
+        'custom-gold': 'var(--color-custom-gold)',
       },
     },
   },

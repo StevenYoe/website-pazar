@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use stdClass;
 
 class IndexController extends BaseController
@@ -18,16 +19,16 @@ class IndexController extends BaseController
         $locale = app()->getLocale();
         $titleField = 'h_title_' . $locale;
         $descField = 'h_description_' . $locale;
-        
+
         // Use CRUD API to get index page data
         // Specify that we want the index page header specifically
         $response = $this->crudApiGet('/index/data', ['page_name' => 'index']);
-        
+
         // Check if response was successful
         if (!isset($response['success']) || !$response['success']) {
             return view('index')->with('error', $response['message'] ?? 'Failed to load index data');
         }
-        
+
         // Extract data from response for view
         $data = [
             // Popup data - convert array to object if it exists and add storage URL to image
@@ -37,20 +38,21 @@ class IndexController extends BaseController
             'header' => isset($response['data']['header']) ? $this->processHeader($response['data']['header']) : null,
             
             // Product categories - convert each item in array to object and add storage URL to images
-            'productCategories' => isset($response['data']['product_categories']) ? 
+            'productCategories' => isset($response['data']['product_categories']) ?
                 array_map([$this, 'processCategory'], $response['data']['product_categories']) : [],
                 
             // Why Pazar items - convert each item in array to object and add storage URL to images
-            'whyPazarItems' => isset($response['data']['why_pazar_items']) ? 
+            'whyPazarItems' => isset($response['data']['why_pazar_items']) ?
                 array_map([$this, 'processWhyPazarItem'], $response['data']['why_pazar_items']) : [],
-            
+                
             // Latest recipe - convert array to object if it exists and add storage URL to image
-            'latestRecipe' => isset($response['data']['latest_recipe']) ? $this->processRecipe($response['data']['latest_recipe']) : null,
+            'latestRecipe' => isset($response['data']['latest_recipe']) ?
+                $this->processRecipe($response['data']['latest_recipe']) : null,
         ];
-        
+
         return view('index', $data);
     }
-    
+
     /**
      * Process the popup data to add storage URL to image
      *
@@ -68,7 +70,7 @@ class IndexController extends BaseController
         
         return $popupObj;
     }
-    
+
     /**
      * Process the header data to add storage URL to image
      *
@@ -86,7 +88,7 @@ class IndexController extends BaseController
         
         return $headerObj;
     }
-    
+
     /**
      * Process the category data to add storage URL to image
      *
@@ -104,7 +106,7 @@ class IndexController extends BaseController
         
         return $categoryObj;
     }
-    
+
     /**
      * Process the Why Pazar item data to add storage URL to image
      *
@@ -122,9 +124,9 @@ class IndexController extends BaseController
         
         return $itemObj;
     }
-    
+
     /**
-     * Process the recipe data to add storage URL to image
+     * Process the recipe data to add storage URL to image and category name
      *
      * @param array $recipe The recipe data from API
      * @return object The processed recipe object
@@ -141,9 +143,41 @@ class IndexController extends BaseController
             $recipeObj->r_image = asset('img/Recipes/default-recipe.jpg');
         }
         
+        // Create slug from title based on current locale
+        $locale = app()->getLocale();
+        $titleToUse = ($locale == 'en' && !empty($recipeObj->r_title_en)) ? 
+                    $recipeObj->r_title_en : $recipeObj->r_title_id;
+        $recipeObj->slug = Str::slug($titleToUse);
+        
+        // Check if categories relationship exists
+        if (isset($recipeObj->categories) && !empty($recipeObj->categories)) {
+            $categoryNames = [];
+            foreach ($recipeObj->categories as $category) {
+                $cat = is_array($category) ? (object) $category : $category;
+                if ($locale == 'en' && isset($cat->rc_title_en)) {
+                    $categoryNames[] = trim($cat->rc_title_en);
+                } elseif ($locale == 'id' && isset($cat->rc_title_id)) {
+                    $categoryNames[] = trim($cat->rc_title_id);
+                }
+            }
+            
+            if (!empty($categoryNames)) {
+                $recipeObj->category_name = implode(', ', $categoryNames);
+            }
+        }
+        // Fallback: check if single category exists
+        elseif (isset($recipeObj->category)) {
+            $category = is_array($recipeObj->category) ? (object) $recipeObj->category : $recipeObj->category;
+            if ($locale == 'en' && isset($category->rc_title_en)) {
+                $recipeObj->category_name = trim($category->rc_title_en);
+            } elseif ($locale == 'id' && isset($category->rc_title_id)) {
+                $recipeObj->category_name = trim($category->rc_title_id);
+            }
+        }
+        
         return $recipeObj;
     }
-    
+
     /**
      * Convert an array to an object recursively
      *
@@ -155,7 +189,7 @@ class IndexController extends BaseController
         if (!is_array($array)) {
             return $array;
         }
-        
+
         $object = new stdClass();
         foreach ($array as $key => $value) {
             if (is_array($value)) {
@@ -164,7 +198,7 @@ class IndexController extends BaseController
                 $object->$key = $value;
             }
         }
-        
+
         return $object;
     }
 }

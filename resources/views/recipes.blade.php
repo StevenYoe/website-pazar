@@ -58,10 +58,12 @@
                                 @if(isset($recipe->category_names) && count($recipe->category_names) > 0)
                                     {{ implode(', ', $recipe->category_names) }}
                                 @else
-                                    {{ app()->getLocale() == 'en' ? $recipe->category_name_en : $recipe->category_name_id }}
+                                    {{ app()->getLocale() == 'en' ? ($recipe->category_name_en) : ($recipe->category_name_id) }}
                                 @endif
                             </h4>
-                            <a href="{{ url('recipe/' . $recipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
+                            <a href="{{ app()->getLocale() == 'en' ? '/en/recipe/' . $recipe->slug : '/id/recipe/' . $recipe->slug }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">
+                                {{ __('general.see_more') }} →
+                            </a>
                         </div>
                     </div>
                 @endforeach

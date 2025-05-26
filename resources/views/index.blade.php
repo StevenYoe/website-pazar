@@ -13,7 +13,7 @@
                 <h1 class="text-2xl font-bold mb-4 dark:text-gray-200">{{ app()->getLocale() == 'en' ? $header->h_title_en : $header->h_title_id }}</h1>
                 <p class="text-lg mb-6 dark:text-gray-200">{{ app()->getLocale() == 'en' ? $header->h_description_en : $header->h_description_id }}</p>
             @endif
-            <a href="/company" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
+            <a href="{{ app()->getLocale() == 'en' ? '/en/our-company' : '/id/perusahaan-kami' }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-white' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
                 {{ __('general.see_more') }}
             </a>
         </div>
@@ -94,7 +94,9 @@
                             <p class="{{ $theme === 'dark' ? 'text-gray-800' : 'text-gray-600' }} mb-4 flex-grow line-clamp-3">
                                 {{ app()->getLocale() == 'en' ? $category->pc_description_en : $category->pc_description_id }}
                             </p>
-                            <a href="/products" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
+                            <a href="{{ app()->getLocale() == 'en' ? '/en/products' : '/id/produk' }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">
+                                {{ __('general.see_more') }} →
+                            </a>
                         </div>
                     </div>
                 @endforeach
@@ -108,7 +110,6 @@
 <section class="latest-recipe py-10 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-20">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.our_recipe') }}</h2>
-        
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 items-center">
             <div>
                 <img src="{{ $latestRecipe->r_image }}" alt="{{ $latestRecipe->r_title_id }}" class="rounded-lg shadow-lg w-full h-auto">
@@ -118,7 +119,7 @@
                     {{ app()->getLocale() == 'en' ? $latestRecipe->r_title_en : $latestRecipe->r_title_id }}
                 </h3>
                 <p class="text-sm text-custom-green mb-4">{{ $latestRecipe->category_name }}</p>
-                <a href="/recipes/{{ $latestRecipe->r_id }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
+                <a href="{{ app()->getLocale() == 'en' ? '/en/recipe/' . $latestRecipe->slug : '/id/recipe/' . $latestRecipe->slug }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-white' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
                     {{ __('general.view_recipe') }}
                 </a>
             </div>

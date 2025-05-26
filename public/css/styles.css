@@ -740,3 +740,19 @@ body {
         font-size: 2.25rem; /* Reduce font size for better fit */
     }
 }
+
+:root {
+  --color-custom-lightgreen: #3fd144;
+  --color-custom-green: #116a2a;
+  --color-custom-darkgreen: #0b5727;
+  --color-custom-red: #BF161C;
+  --color-custom-gold: #E1BC3A;
+}
+
+.dark {
+  --color-custom-lightgreen: #36b149;
+  --color-custom-green: #1f8c3b;
+  --color-custom-darkgreen: #166d2e;
+  --color-custom-red: #D92832;
+  --color-custom-gold: #F0CB4C;
+}

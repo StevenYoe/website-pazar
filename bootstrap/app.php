@@ -18,6 +18,10 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\HandleTheme::class,
         ]);
         
+        $middleware->alias([
+            'localization' => \App\Http\Middleware\SetLocale::class,
+        ]);
+
         // Your other middleware registrations...
     })
     ->withExceptions(function (Exceptions $exceptions) {
