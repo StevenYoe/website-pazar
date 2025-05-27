@@ -61,7 +61,7 @@
                             <div class="flex-shrink-0 mr-2">
                                 <img src="{{ $item->w_image }}" alt="{{ $item->w_title_id }}" class="w-10 h-10">
                             </div>
-                            <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} line-clamp-2">
+                            <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} line-clamp-3">
                                 {{ app()->getLocale() == 'en' ? $item->w_title_en : $item->w_title_id }}
                             </h3>
                         </div>

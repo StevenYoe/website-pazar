@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', $recipe->r_title_id . ' - Pazar Seasonings')
+@section('title', (app()->getLocale() == 'en' ? $recipe->r_title_en : $recipe->r_title_id) . ' - Pazar Seasonings')
 
 @section('style')
 <link href="{{ asset('css/recipe-detail.css') }}" rel="stylesheet" type="text/css" >
@@ -95,7 +95,7 @@
                         
                         @if(isset($recipe->detail->rd_ingredients_id) && !empty($recipe->detail->rd_ingredients_id))
                             <div class="py-2">
-                                <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Bahan-bahan</h3>
+                                <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ __('general.ingredients') }}</h3>
                                 <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
                                     {!! app()->getLocale() == 'en' ? nl2br(e($recipe->detail->rd_ingredients_en)) : nl2br(e($recipe->detail->rd_ingredients_id)) !!}
                                 </div>
@@ -104,7 +104,7 @@
                             
                         @if(isset($recipe->detail->rd_cook_id) && !empty($recipe->detail->rd_cook_id))
                             <div class="py-2">
-                                <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">Cara Pembuatan</h3>
+                                <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ __('general.preparation') }}</h3>
                                 <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
                                     {!! app()->getLocale() == 'en' ? nl2br(e($recipe->detail->rd_cook_en)) : nl2br(e($recipe->detail->rd_cook_id)) !!}
                                 </div>
@@ -141,7 +141,7 @@
                                 {!! app()->getLocale() == 'en' ? $randomRecipe->category_name_en : $randomRecipe->category_name_id !!}
                             @endif
                         </h4>
-                        <a href="{{ url('recipe/' . $randomRecipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end mt-auto">SELENGKAPNYA →</a>
+                        <a href="{{ url('recipe/' . $randomRecipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end mt-auto">{{ __('general.see_more') }} →</a>
                     </div>
                 </div>
                 @endforeach

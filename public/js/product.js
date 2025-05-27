@@ -69,4 +69,79 @@ document.addEventListener('DOMContentLoaded', function() {
             filterButtons[0].click();
         }
     }
+
+    // Download catalog functionality
+    const downloadButtons = document.querySelectorAll('.download-catalog-btn');
+    
+    downloadButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Add downloading class for visual feedback
+            this.classList.add('downloading');
+            
+            // Get the button text to show feedback
+            const originalText = this.querySelector('span') ? this.querySelector('span').textContent : this.textContent;
+            
+            // Optional: Show downloading feedback
+            setTimeout(() => {
+                this.classList.remove('downloading');
+            }, 2000);
+            
+            // Optional: Add download success notification
+            setTimeout(() => {
+                showDownloadNotification('Download started successfully!');
+            }, 500);
+        });
+    });
 });
+
+// Function to show download notification (optional)
+function showDownloadNotification(message) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = 'download-notification';
+    notification.innerHTML = `
+        <div class="notification-content">
+            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    // Add styles
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #10B981;
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        z-index: 1000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    `;
+    
+    notification.querySelector('.notification-content').style.cssText = `
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    `;
+    
+    // Add to body
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}

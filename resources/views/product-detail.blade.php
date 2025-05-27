@@ -1,6 +1,6 @@
 @extends('master')
 
-@section('title', $product->p_title_id . ' - Pazar Seasonings')
+@section('title', (app()->getLocale() == 'en' ? $product->p_title_en : $product->p_title_id) . ' - Pazar Seasonings')
 
 @section('style')
 <link href="{{ asset('css/product-detail.css') }}" rel="stylesheet" type="text/css">

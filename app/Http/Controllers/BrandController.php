@@ -119,14 +119,6 @@ class BrandController extends BaseController
             $testimonialObj->t_image = config('app.storage_url') . '/' . $testimonialObj->t_image;
         }
         
-        // Add storage URL to profile image if exists
-        if (!empty($testimonialObj->t_profile)) {
-            $testimonialObj->t_profile = config('app.storage_url') . '/' . $testimonialObj->t_profile;
-        } else {
-            // Set default avatar based on gender for fallback
-            $testimonialObj->t_profile = null; // We'll handle default in the view
-        }
-        
         return $testimonialObj;
     }
     

@@ -47,3 +47,11 @@ Route::get('/vacancies', [VacancyController::class, 'index'])->name('vacancies')
 
 // Vacancy detail page
 Route::get('/vacancy/{slug}', [VacancyController::class, 'show'])->name('vacancy.show');
+
+Route::get('/test-404', function () {
+    abort(404);
+});
+
+Route::fallback(function () {
+    return view('404');
+});

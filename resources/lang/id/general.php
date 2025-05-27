@@ -41,7 +41,7 @@ return [
     'all_categories' => 'Semua',
     'net_weight' => 'Berat Bersih',
     'testimonials' => 'Testimoni',
-    'customers' => 'Customer',
+    'customers' => 'Pelanggan',
     'chefs' => 'Chef',
     'close' => 'Tutup',
     'certifications' => 'Sertifikasi Kami',
@@ -64,6 +64,8 @@ return [
     'view_job' => 'LIHAT LOWONGAN KERJA',
     'light_mode' => 'Ganti ke Mode Terang',
     'dark_mode' => 'Ganti ke Mode Gelap',
+    'download_catalog' => 'Unduh Katalog',
+    'product_catalog' => 'Katalog Produk',
 
     'app_name' => 'Pazar Seasonings',
     'meta_description' => 'Pazar Seasonings merupakan brand dari PT Pristine Prima Lestari dimana PT Pristine Prima Lestari adalah produsen bumbu, kondimen, tepung berbumbu, rempah, dan sambal berkualitas tinggi yang berfokus pada kepraktisan tanpa mengurangi cita rasa autentik.',

@@ -116,10 +116,10 @@
         <div class="flex justify-center mb-8">
             <div class="inline-flex rounded-md shadow-sm" role="group">
                 <button type="button" id="customerTabBtn" class="testimonial-tab-active {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }} px-5 py-2 text-sm font-medium rounded-l-lg">
-                    Customer
+                    {{ __('general.customers') }}
                 </button>
                 <button type="button" id="chefTabBtn" class="testimonial-tab {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }} px-5 py-2 text-sm font-medium rounded-r-lg">
-                    Chef
+                    {{ __('general.chefs') }}
                 </button>
             </div>
         </div>
@@ -132,8 +132,8 @@
                         <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 relative">
                             <div class="flex items-center mb-4">
                                 <div class="h-10 w-10 mr-4">
-                                    @if($testimonial->t_profile)
-                                        <img src="{{ $testimonial->t_profile }}" alt="{{ $testimonial->t_name }}" class="h-full w-full rounded-full object-cover">
+                                    @if($testimonial->t_image)
+                                        <img src="{{ $testimonial->t_image }}" alt="{{ $testimonial->t_name }}" class="h-full w-full rounded-full object-cover">
                                     @elseif($testimonial->t_gender == 'Male')
                                         <img src="{{ asset('img/Testimonial/male-avatar.svg') }}" alt="{{ $testimonial->t_name }}" class="h-full w-full rounded-full object-cover">
                                     @elseif($testimonial->t_gender == 'Female')
@@ -145,27 +145,9 @@
                                     <p class="text-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-black' }}">Customer</p>
                                 </div>
                             </div>
-                            <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }} mb-4">
+                            <p class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }} mb-4">
                                 {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
                             </p>
-                            
-                            <!-- Small photo box if t_image exists -->
-                            @if(!empty($testimonial->t_image))
-                                <div class="flex justify-center">
-                                    <button onclick="openImagePopup('{{ $testimonial->t_image }}', '{{ $testimonial->t_name }}')" 
-                                            class="relative group cursor-pointer hover:opacity-90 transition-opacity duration-200">
-                                        <img src="{{ $testimonial->t_image }}" 
-                                             alt="{{ $testimonial->t_name }} testimonial image" 
-                                             class="w-16 h-16 rounded-lg object-cover border-2 {{ $theme === 'dark' ? 'bg-gray-600' : 'bg-gray-200' }} shadow-sm">
-                                        <!-- Hover overlay with zoom icon -->
-                                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 rounded-lg flex items-center justify-center">
-                                            <svg class="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                                            </svg>
-                                        </div>
-                                    </button>
-                                </div>
-                            @endif
                         </div>
                     @endforeach
                 @endif
@@ -182,11 +164,11 @@
                         <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6">
                             <div class="flex flex-col md:flex-row items-center">
                                 <div class="md:w-1/3 mb-6 md:mb-0">
-                                    <img src="{{ $testimonial->t_image ?? asset('img/Testimonial/default-chef.jpg') }}" alt="{{ $testimonial->t_name }}" class="rounded-lg mx-auto w-full max-w-xs object-cover">
+                                    <img src="{{ $testimonial->t_image }}" alt="{{ $testimonial->t_name }}" class="rounded-lg mx-auto w-full max-w-xs object-cover">
                                 </div>
                                 <div class="md:w-2/3 md:pl-8">
                                     <h4 class="text-xl font-bold mb-4 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
-                                    <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }}">
+                                    <p class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
                                         {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
                                     </p>
                                 </div>
@@ -197,7 +179,7 @@
                         <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6">
                             <div class="flex flex-col md:flex-row-reverse items-center">
                                 <div class="md:w-1/3 mb-6 md:mb-0">
-                                    <img src="{{ $testimonial->t_image ?? asset('img/Testimonial/default-chef.jpg') }}" alt="{{ $testimonial->t_name }}" class="rounded-lg mx-auto w-full max-w-xs object-cover">
+                                    <img src="{{ $testimonial->t_image }}" alt="{{ $testimonial->t_name }}" class="rounded-lg mx-auto w-full max-w-xs object-cover">
                                 </div>
                                 <div class="md:w-2/3 md:pr-8">
                                     <h4 class="text-xl font-bold mb-4 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
@@ -214,27 +196,6 @@
         </div>
     </div>
 </section>
-
-<!-- Image Popup Modal -->
-<div id="imagePopupModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
-    <div class="relative max-w-4xl max-h-full">
-        <!-- Close button -->
-        <button onclick="closeImagePopup()" 
-                class="absolute -top-4 -right-4 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 z-10">
-            <svg class="w-6 h-6 {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        
-        <!-- Image container -->
-        <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-2xl overflow-hidden">
-            <img id="popupImage" src="" alt="" class="max-w-full max-h-[80vh] object-contain">
-            <div class="p-4 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }}">
-                <p id="popupImageCaption" class="text-center {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }} font-medium"></p>
-            </div>
-        </div>
-    </div>
-</div>
 
 @endsection
 

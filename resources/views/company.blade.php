@@ -14,11 +14,9 @@
                 </h1>
             @endif
         </div>
-        <div class="w-full max-w-4xl">
+        <div class="w-full max-w-xl">
             @if(isset($header) && $header->h_image)
                 <img src="{{ $header->h_image }}" alt="Company-Overview" class="rounded-lg shadow-lg w-full">
-            @else
-                <img src="img/Web/company.jpg" alt="Company-Overview" class="rounded-lg shadow-lg w-full">
             @endif
         </div>
     </div>

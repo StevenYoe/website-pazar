@@ -63,6 +63,8 @@ return [
     'view_job' => 'VIEW JOB VACANCY',
     'light_mode' => 'Switch to Light Mode',
     'dark_mode' => 'Switch to Dark Mode',
+    'download_catalog' => 'Download Catalog',
+    'product_catalog' => 'Product Catalog',
 
     'app_name' => 'Pazar Seasonings',
     'meta_description' => 'Pazar Seasonings is a brand from PT Pristine Prima Lestari, a high-quality manufacturer of seasonings, condiments, spiced flour, spices, and sambal focused on convenience without compromising authentic flavors.',
