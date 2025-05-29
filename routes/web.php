@@ -17,7 +17,6 @@ Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class
 // Theme toggle route
 Route::get('/theme/toggle', [App\Http\Controllers\ThemeController::class, 'toggle'])->name('theme.toggle');
 
-
 // Homepage Route
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
@@ -29,6 +28,7 @@ Route::get('/brand', [BrandController::class, 'index'])->name('brand');
 
 // Products Routes
 Route::get('/products', [ProductController::class, 'index'])->name('products');
+Route::get('/products/download-catalog', [ProductController::class, 'downloadCatalog'])->name('products.download-catalog');
 
 // Product detail page
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');

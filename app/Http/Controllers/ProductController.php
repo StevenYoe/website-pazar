@@ -122,33 +122,33 @@ class ProductController extends BaseController
             $productObj->p_image = config('app.storage_url') . '/' . $productObj->p_image;
         }
         
-        // Create slug from title_id or title_en
-        $titleToUse = !empty($productObj->p_title_id) ? $productObj->p_title_id : $productObj->p_title_en;
+        // Create slug based on current language
+        $locale = app()->getLocale();
+        $titleToUse = $locale === 'en' ? 
+            ($productObj->p_title_en ?? $productObj->p_title_id) : 
+            ($productObj->p_title_id ?? $productObj->p_title_en);
+        
         $productObj->slug = Str::slug($titleToUse);
         
         // Default empty category names
         $productObj->category_name_id = '';
         $productObj->category_name_en = '';
         
-        // Try getting category from relationship first - API might return category as 'category' property
+        // Process category relationship
         if (isset($productObj->category) && !empty($productObj->category)) {
-            // Category could be an object or array
             $category = is_array($productObj->category) ? (object) $productObj->category : $productObj->category;
-            
-            // Extract category names from relationship
             $productObj->category_name_id = isset($category->pc_title_id) ? trim($category->pc_title_id) : '';
             $productObj->category_name_en = isset($category->pc_title_en) ? trim($category->pc_title_en) : '';
-        } 
-        // If relationship is missing but we have the category ID and lookup table
+        }
         else if (isset($productObj->p_id_product_category) && !empty($categoryLookup)) {
             $categoryId = $productObj->p_id_product_category;
-            
             if (isset($categoryLookup[$categoryId])) {
                 $category = $categoryLookup[$categoryId];
                 $productObj->category_name_id = $category->pc_title_id;
                 $productObj->category_name_en = $category->pc_title_en;
-            } 
-        } 
+            }
+        }
+        
         return $productObj;
     }
     
@@ -160,12 +160,15 @@ class ProductController extends BaseController
      */
     public function show($slug)
     {
-        // Get all active products - Updated the endpoint with parameters
+        $locale = app()->getLocale();
+        
+        // Get all active products
         $productsResponse = $this->crudApiGet('/products/getAllProducts', [
-            'is_active' => true,  // Only get active products
-            'sort_by' => 'p_id',  // Sort by product ID
-            'sort_order' => 'asc' // Sort in ascending order
+            'is_active' => true,
+            'sort_by' => 'p_id',
+            'sort_order' => 'asc'
         ]);
+        
         $foundProduct = null;
         $allProducts = [];
         
@@ -173,7 +176,6 @@ class ProductController extends BaseController
             // Get categories for product processing
             $categoriesResponse = $this->crudApiGet('/productcategories/all');
             $categoryLookup = [];
-            
             if (isset($categoriesResponse['success']) && $categoriesResponse['success'] && isset($categoriesResponse['data'])) {
                 foreach ($categoriesResponse['data'] as $category) {
                     $categoryObj = $this->processCategory($category);
@@ -185,19 +187,18 @@ class ProductController extends BaseController
                 $processedProduct = $this->processProduct($product, $categoryLookup);
                 $allProducts[] = $processedProduct;
                 
-                $titleId = $product['p_title_id'] ?? '';
-                $titleEn = $product['p_title_en'] ?? '';
+                // Create slug based on current language
+                $titleToUse = $locale === 'en' ? 
+                    ($product['p_title_en'] ?? $product['p_title_id']) : 
+                    ($product['p_title_id'] ?? $product['p_title_en']);
                 
-                $titleToUse = !empty($titleId) ? $titleId : $titleEn;
                 $productSlug = Str::slug($titleToUse);
                 
                 if ($productSlug === $slug) {
                     // Found the product by slug
                     $productId = $product['p_id'];
-                    
                     // Get detailed product info with all relations
                     $detailResponse = $this->crudApiGet('/products/' . $productId);
-                    
                     if (isset($detailResponse['success']) && $detailResponse['success'] && isset($detailResponse['data'])) {
                         $foundProduct = $this->processProductDetail($detailResponse['data']);
                     }
@@ -216,11 +217,8 @@ class ProductController extends BaseController
         });
         
         if (count($otherProducts) > 0) {
-            // Reset array keys after filtering
             $otherProducts = array_values($otherProducts);
-            // Shuffle the array of other products
             shuffle($otherProducts);
-            // Take the first 4 (or less if there aren't 4 products)
             $randomProducts = array_slice($otherProducts, 0, min(4, count($otherProducts)));
         }
         
@@ -246,5 +244,28 @@ class ProductController extends BaseController
         }
         
         return $productObj;
+    }
+
+    /**
+     * Download catalog based on language
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadCatalog(Request $request)
+    {
+        $locale = app()->getLocale();
+        
+        // Call API to get catalog
+        $response = $this->crudApiGet('/productcatalogs/by-language', ['lang' => $locale]);
+        
+        if (!isset($response['success']) || !$response['success']) {
+            return redirect()->back()->with('error', 'Catalog not available');
+        }
+        
+        $catalogData = $response['data'];
+        
+        // Redirect to file URL for download
+        return redirect($catalogData['file_url']);
     }
 }

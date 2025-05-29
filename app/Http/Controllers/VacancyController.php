@@ -211,8 +211,12 @@ class VacancyController extends BaseController
         // Convert array to object if not already
         $vacancyObj = is_array($vacancy) ? (object) $vacancy : $vacancy;
         
-        // Create slug from title
-        $titleToUse = !empty($vacancyObj->v_title_id) ? $vacancyObj->v_title_id : $vacancyObj->v_title_en;
+        // Create slug based on current language
+        $locale = app()->getLocale();
+        $titleToUse = $locale === 'en' ? 
+            ($vacancyObj->v_title_en ?? $vacancyObj->v_title_id) : 
+            ($vacancyObj->v_title_id ?? $vacancyObj->v_title_en);
+        
         $vacancyObj->slug = Str::slug($titleToUse);
         
         // Process department info

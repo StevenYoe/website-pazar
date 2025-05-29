@@ -64,6 +64,8 @@ return [
     'light_mode' => 'Switch to Light Mode',
     'dark_mode' => 'Switch to Dark Mode',
     'download_catalog' => 'Download Catalog',
+    'catalog_downloaded' => 'Catalog downloaded successfully!',
+    'catalog_error' => 'Error downloading catalog. Please try again.',
     'product_catalog' => 'Product Catalog',
 
     'app_name' => 'Pazar Seasonings',

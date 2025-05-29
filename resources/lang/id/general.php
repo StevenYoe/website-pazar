@@ -65,6 +65,8 @@ return [
     'light_mode' => 'Ganti ke Mode Terang',
     'dark_mode' => 'Ganti ke Mode Gelap',
     'download_catalog' => 'Unduh Katalog',
+    'catalog_downloaded' => 'Katalog berhasil diunduh!',
+    'catalog_error' => 'Error mengunduh katalog. Silakan coba lagi.',
     'product_catalog' => 'Katalog Produk',
 
     'app_name' => 'Pazar Seasonings',

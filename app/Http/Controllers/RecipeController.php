@@ -120,12 +120,15 @@ class RecipeController extends BaseController
         
         // Get current locale for creating proper slug
         $locale = app()->getLocale();
+        $titleToUse = $locale === 'en' ? 
+            ($recipeObj->r_title_en ?? $recipeObj->r_title_id) : 
+            ($recipeObj->r_title_id ?? $recipeObj->r_title_en);
         
-        $titleToUse = !empty($recipeObj->r_title_id) ? $recipeObj->r_title_id : $recipeObj->r_title_en;
         $recipeObj->slug = Str::slug($titleToUse);
         
-        $recipeObj->category_names = []; // Array to store all category names
-        $recipeObj->all_categories = []; // Array to store all category data
+        // Rest of the method remains the same...
+        $recipeObj->category_names = [];
+        $recipeObj->all_categories = [];
 
         // Process categories from relationship
         if (isset($recipeObj->categories) && !empty($recipeObj->categories)) {
