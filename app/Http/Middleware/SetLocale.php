@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -9,18 +8,19 @@ use Illuminate\Support\Facades\Session;
 
 class SetLocale
 {
-    /**
-    * Handle an incoming request.
-    *
-    * @param \Illuminate\Http\Request $request
-    * @param \Closure $next
-    * @return mixed
-    */
     public function handle(Request $request, Closure $next)
     {
-        // If the user has selected a language and it's in the session, use it
-        if (Session::has('locale') && array_key_exists(Session::get('locale'), config('app.available_locales'))) {
-            App::setLocale(Session::get('locale'));
+        // Get locale from URL prefix
+        $segment = $request->segment(1);
+        
+        if (in_array($segment, ['id', 'en'])) {
+            App::setLocale($segment);
+            Session::put('locale', $segment);
+        } else {
+            // Default to Indonesian if no prefix
+            $defaultLocale = 'id';
+            App::setLocale($defaultLocale);
+            Session::put('locale', $defaultLocale);
         }
         
         return $next($request);

@@ -61,7 +61,7 @@
                                     {{ app()->getLocale() == 'en' ? $recipe->category_name_en : $recipe->category_name_id }}
                                 @endif
                             </h4>
-                            <a href="{{ url('recipe/' . $recipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
+                            <a href="{{ route(app()->getLocale() . '.recipe.show', $recipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
                         </div>
                     </div>
                 @endforeach

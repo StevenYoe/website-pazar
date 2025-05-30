@@ -28,7 +28,7 @@ class BaseController extends Controller
      * @param array $params Optional query parameters
      * @return array Response data or error message
      */
-    protected function crudApiGet($endpoint, $params = [])
+    public function crudApiGet($endpoint, $params = [])
     {
         try {
             $url = $this->apiBaseUrl . $endpoint;

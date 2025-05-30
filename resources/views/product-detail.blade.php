@@ -124,9 +124,9 @@
                         <img src="{{ $randomProduct->p_image }}" alt="{{ $randomProduct->p_title_id }}" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
-                        <a href="{{ url('product/' . $randomProduct->slug) }}" class="hover:text-custom-red">
+                        <a href="{{ route(app()->getLocale() . '.product.show', $randomProduct->slug) }}" class="hover:text-custom-red">
                             <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red line-clamp-2">
-                                {!! app()->getLocale() == 'en' ? $randomProduct->p_title_en : $randomProduct->p_title_id !!}
+                                {{ app()->getLocale() == 'en' ? $randomProduct->p_title_en : $randomProduct->p_title_id }}
                             </h3>
                         </a>
                         <h5 class="text-sm text-custom-red font-bold mb-2">

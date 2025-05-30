@@ -191,16 +191,18 @@ class ProductController extends BaseController
                 $titleToUse = $locale === 'en' ? 
                     ($product['p_title_en'] ?? $product['p_title_id']) : 
                     ($product['p_title_id'] ?? $product['p_title_en']);
-                
                 $productSlug = Str::slug($titleToUse);
                 
                 if ($productSlug === $slug) {
                     // Found the product by slug
                     $productId = $product['p_id'];
+                    
                     // Get detailed product info with all relations
                     $detailResponse = $this->crudApiGet('/products/' . $productId);
                     if (isset($detailResponse['success']) && $detailResponse['success'] && isset($detailResponse['data'])) {
                         $foundProduct = $this->processProductDetail($detailResponse['data']);
+                        // Add proper slug for current locale
+                        $foundProduct->slug = $productSlug;
                     }
                 }
             }
@@ -265,7 +267,7 @@ class ProductController extends BaseController
         
         $catalogData = $response['data'];
         
-        // Redirect to file URL for download
+        // Simple redirect to file URL - let browser handle download
         return redirect($catalogData['file_url']);
     }
 }

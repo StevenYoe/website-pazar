@@ -13,7 +13,7 @@
                 <h1 class="text-2xl font-bold mb-4 dark:text-gray-200">{{ app()->getLocale() == 'en' ? $header->h_title_en : $header->h_title_id }}</h1>
                 <p class="text-lg mb-6 dark:text-gray-200">{{ app()->getLocale() == 'en' ? $header->h_description_en : $header->h_description_id }}</p>
             @endif
-            <a href="/company" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
+            <a href="{{ route(app()->getLocale() . '.company') }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-white' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
                 {{ __('general.see_more') }}
             </a>
         </div>
@@ -94,7 +94,9 @@
                             <p class="{{ $theme === 'dark' ? 'text-gray-800' : 'text-gray-600' }} mb-4 flex-grow line-clamp-3">
                                 {{ app()->getLocale() == 'en' ? $category->pc_description_en : $category->pc_description_id }}
                             </p>
-                            <a href="/products" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
+                            <a href="{{ route(app()->getLocale() . '.products') }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">
+                                {{ __('general.see_more') }} →
+                            </a>
                         </div>
                     </div>
                 @endforeach
@@ -126,7 +128,7 @@
                         {{ app()->getLocale() == 'en' ? $latestRecipe->category_name_en : $latestRecipe->category_name_id }}
                     @endif
                 </p>
-                <a href="{{ url('recipe/' . $latestRecipe->slug) }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
+                <a href="{{ route(app()->getLocale() . '.recipe.show', $latestRecipe->slug) }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-white' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
                     {{ __('general.view_recipe') }}
                 </a>
             </div>

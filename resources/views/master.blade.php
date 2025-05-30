@@ -144,66 +144,72 @@
 
                     <!-- Desktop Navigation -->
                     <div class="items-center justify-between hidden w-full md1:flex md1:w-auto md1:order-1" id="navbar-sticky">
-                        <!-- Navigation content with improved spacing -->
                         <div class="flex flex-col md1:flex-row md1:items-center w-full justify-between">
-                            <!-- Main Navigation Items - pushed more to the right with ml-auto and compact spacing -->
-                            <div class="flex flex-col md1:flex-row md1:space-x-1 md1:ml-16">
+                            <!-- Main Navigation Items -->
+                            <div class="flex flex-col md1:flex-row md1:space-x-4 md1:ml-16">
                                 <div class="relative group w-full md1:w-auto">
-                                    <a id="nav-company" href="/company" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                    <a id="nav-company" href="{{ app()->getLocale() == 'en' ? '/en/our-company' : '/id/perusahaan-kami' }}"
+                                    class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.company') }}
                                     </a>
                                 </div>
-
                                 <div class="relative group w-full md1:w-auto">
-                                    <a id="nav-brand" href="/brand" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                    <a id="nav-brand" href="{{ app()->getLocale() == 'en' ? '/en/our-brand' : '/id/brand-kami' }}"
+                                    class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.brand') }}
                                     </a>
                                 </div>
-
                                 <div class="relative group w-full md1:w-auto">
-                                    <a id="nav-products" href="/products" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                    <a id="nav-products" href="{{ app()->getLocale() == 'en' ? '/en/products' : '/id/produk' }}"
+                                    class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.products') }}
                                     </a>
                                 </div>
-
                                 <div class="relative group w-full md1:w-auto">
-                                    <a id="nav-recipes" href="/recipes" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                    <a id="nav-recipes" href="{{ app()->getLocale() == 'en' ? '/en/recipes' : '/id/resep' }}"
+                                    class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.recipes') }}
                                     </a>
                                 </div>
-
                                 <div class="relative group w-full md1:w-auto">
-                                    <button id="career-dropdown" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen dark:text-gray-200 dark:hover:text-custom-lightgreen">
+                                    <button id="career-dropdown" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.career') }}
                                     </button>
-                                    <div class="absolute left-0 z-10 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 md1:mt-0 mt-0">
-                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                                            <li><a id="career-info" href="/careerinfo" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">{{ __('general.career_info') }}</a></li>
-                                            <li><a id="career-vacancies" href="/vacancies" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">{{ __('general.vacancies') }}</a></li>
+                                    <div class="absolute left-0 z-10 hidden group-hover:block {{ $theme === 'dark' ? 'bg-gray-700' : 'bg-white' }} divide-y divide-gray-100 rounded-lg shadow-sm w-44 md1:mt-0 mt-0">
+                                        <ul class="py-2 text-sm {{ $theme === 'dark' ? 'text-white' : 'text-gray-700' }}">
+                                            <li><a id="career-info" href="{{ app()->getLocale() == 'en' ? '/en/career-info' : '/id/info-karir' }}"
+                                                class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">
+                                                {{ __('general.career_info') }}
+                                            </a></li>
+                                            <li><a id="career-vacancies" href="{{ app()->getLocale() == 'en' ? '/en/vacancies' : '/id/lowongan' }}"
+                                                class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">
+                                                {{ __('general.vacancies') }}
+                                            </a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Right side items - compact spacing -->
+                            <!-- Right side items -->
                             <div class="flex flex-col md1:flex-row md1:items-center space-x-0 md1:space-x-1 mt-4 md1:mt-0">
                                 <!-- Language Dropdown -->
                                 <div class="relative group w-full md1:w-auto">
-                                    <button type="button" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-white dark:text-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-custom-lightgreen dark:hover:bggray-700 dark:hover:text-white w-full">
+                                    <button type="button" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} rounded-lg cursor-pointer hover:bg-gray-100 hover:text-custom-lightgreen {{ $theme === 'dark' ? 'hover:bg-gray-700 hover:text-white' : 'hover:bg-gray-100 hover:text-custom-lightgreen' }} w-full">
                                         @if(app()->getLocale() == 'id')
                                             <img src="{{ asset('img/Web/Indonesia.svg') }}" alt="Indonesia Flag" class="h-3.5 w-3.5 rounded-full me-2"> Indonesia
                                         @else
                                             <img src="{{ asset('img/Web/USA.svg') }}" alt="USA Flag" class="h-3.5 w-3.5 rounded-full me-2"> English (US)
                                         @endif
                                     </button>
-                                    <!-- Language Dropdown content -->
-                                    <div class="absolute md1:absolute right-0 z-50 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 wfull md1:w-44">
+                                    <div class="absolute md1:absolute right-0 z-50 hidden group-hover:block {{ $theme === 'dark' ? 'bg-gray-700' : 'bg-white' }} divide-y divide-gray-100 rounded-lg shadow-sm w-full md1:w-44">
                                         <ul class="py-2 font-medium" role="none">
                                             @foreach(config('app.available_locales') as $locale => $language)
                                                 <li>
-                                                    <a href="{{ route('language.switch', $locale) }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-400 hover:bg-custom-lightergreen dark:hover:bg-customlightergreen dark:hover:text-white {{ app()->getLocale() == $locale ? 'bggray-100 dark:bg-gray-600' : '' }}" role="menuitem">
+                                                    <a href="{{ route('language.switch', $locale) }}"
+                                                    class="block px-4 py-2 text-sm {{ $theme === 'dark' ? 'text-white' : 'text-gray-700' }} hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }} {{ app()->getLocale() == $locale ? ($theme === 'dark' ? 'bg-gray-600' : 'bg-gray-100') : '' }}"
+                                                    role="menuitem">
                                                         <div class="inline-flex items-center">
-                                                            <img src="{{ asset($language['flag']) }}" alt=" {{ $language['name'] }} Flag" class="h-3.5 w-3.5 rounded-full me-2"> {{ $language['native'] }}
+                                                            <img src="{{ asset($language['flag']) }}" alt="{{ $language['name'] }} Flag" class="h-3.5 w-3.5 rounded-full me-2"> {{ $language['native'] }}
                                                         </div>
                                                     </a>
                                                 </li>
@@ -211,39 +217,38 @@
                                         </ul>
                                     </div>
                                 </div>
-
+                                
                                 <!-- Theme Toggle Button -->
                                 <div class="relative group w-full md1:w-auto">
-                                    <a href="{{ route('theme.toggle') }}" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm text-white dark:text-gray-200 rounded-lg cursor-pointer hover:bg-gray-100 hover:text-customlightgreen dark:hover:bg-gray-700 dark:hover:text-white w-full">
-                                        @if($theme === 'dark')
+                                    <button id="theme-toggle-btn" class="inline-flex items-center font-medium justify-center px-4 py-2 text-sm {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} rounded-lg cursor-pointer hover:bg-gray-100 hover:text-custom-lightgreen {{ $theme === 'dark' ? 'hover:bg-gray-700 hover:text-white' : 'hover:bg-gray-100 hover:text-custom-lightgreen' }} border-2 border-custom-gold">
+                                        <span class="light-mode-content" style="display: {{ $theme === 'dark' ? 'flex' : 'none' }};">
                                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                                             </svg>
                                             {{ __('general.light_mode') }}
-                                        @else
+                                        </span>
+                                        <span class="dark-mode-content" style="display: {{ $theme === 'dark' ? 'none' : 'flex' }};">
                                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
                                             </svg>
                                             {{ __('general.dark_mode') }}
-                                        @endif
-                                    </a>
+                                        </span>
+                                    </button>
                                 </div>
-
+                                
                                 <!-- Buy Now Dropdown -->
                                 <div class="relative group w-full md1:w-auto">
-                                    <button id="dropdownHoverButton" class="text-white dark:text-gray-200 bg-custom-lightgreen hover:bg-custom-green focus:ring-4 focus:outline-none focus:bg-custom-lightergreen font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center justify-between dark:bg-custom-lightgreen dark:hover:bg-custom-green dark:focus:bg-custom-darkgreen w-full md:w-auto" type="button">
+                                    <button id="dropdownHoverButton" class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }} bg-custom-lightgreen hover:bg-custom-green focus:ring-4 focus:outline-none focus:bg-custom-lightergreen font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center justify-between {{ $theme === 'dark' ? 'bg-custom-lightgreen hover:bg-custom-green focus:bg-custom-darkgreen' : 'bg-custom-lightgreen hover:bg-custom-green focus:bg-custom-lightergreen' }} w-full md:w-auto" type="button">
                                         {{ __('general.buy_now') }}
                                     </button>
-                                    
-                                    <!-- Buy Now Dropdown menu -->
-                                    <div class="absolute left-0 md1:left-auto md1:right-0 z-10 hidden group-hover:block bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-full md1:w-44 dark:bg-gray-700">
-                                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
-                                            <li><a href="https://shopee.co.id/pazar_seasonings" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Shopee</a></li>
-                                            <li><a href="https://www.tokopedia.com/pazarseasonings" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Tokopedia</a></li>
-                                            <li><a href="https://www.blibli.com/merchant/pazar-seasonings/PAS-70580" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Blibli</a></li>
-                                            <li><a href="https://www.lazada.co.id/shop/pazar-seasonings/" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Lazada</a></li>
-                                            <li><a href="https://www.tiktok.com/@pazar.seasonings" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Tiktok Shop</a></li>
-                                            <li><a href="https://www.bukalapak.com/u/pazarseasonings_113090" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen dark:hover:bg-custom-lightergreen dark:hover:text-white">Bukalapak</a></li>
+                                    <div class="absolute left-0 md1:left-auto md1:right-0 z-10 hidden group-hover:block {{ $theme === 'dark' ? 'bg-gray-700' : 'bg-white' }} divide-y divide-gray-100 rounded-lg shadow-sm w-full md1:w-44">
+                                        <ul class="py-2 text-sm {{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-700' }}">
+                                            <li><a href="https://shopee.co.id/pazar_seasonings" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Shopee</a></li>
+                                            <li><a href="https://www.tokopedia.com/pazarseasonings" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Tokopedia</a></li>
+                                            <li><a href="https://www.blibli.com/merchant/pazar-seasonings/PAS-70580" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Blibli</a></li>
+                                            <li><a href="https://www.lazada.co.id/shop/pazar-seasonings/" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Lazada</a></li>
+                                            <li><a href="https://www.tiktok.com/@pazar.seasonings" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Tiktok Shop</a></li>
+                                            <li><a href="https://www.bukalapak.com/u/pazarseasonings_113090" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Bukalapak</a></li>
                                         </ul>
                                     </div>
                                 </div>

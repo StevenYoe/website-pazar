@@ -45,8 +45,7 @@
 
             <!-- Download Catalog Button (positioned absolute di kanan) -->
             <div class="absolute top-6 -right-12 download-catalog-section">
-                <a href="{{ route('products.download-catalog') }}"
-                    class="download-catalog-btn inline-flex items-center px-6 py-3 bg-custom-lightergreen hover:bg-custom-green text-white font-medium rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg">
+                <a href="{{ route(app()->getLocale() . '.products.download-catalog') }}" class="download-catalog-btn inline-flex items-center px-6 py-3 bg-custom-lightergreen hover:bg-custom-green text-white font-medium rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
@@ -74,7 +73,7 @@
                             <p class="text-gray-800 mb-4 flex-grow line-clamp-3">
                                 {{ app()->getLocale() == 'en' ? $product->p_description_en : $product->p_description_id }}
                             </p>
-                            <a href="{{ url('product/' . $product->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
+                            <a href="{{ route(app()->getLocale() . '.product.show', $product->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
                         </div>
                     </div>
                 @endforeach
