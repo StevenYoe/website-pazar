@@ -91,10 +91,10 @@
             
             <!-- Navigation buttons -->
             <button class="carousel-nav carousel-prev absolute top-1/2 left-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10 hidden md:block" aria-label="Previous slide">
-                <img src="img/Web/left.svg" alt="left icon" class="h-6 w-6">
+                <img src="{{ asset('img/web/left.svg') }}" alt="left icon" class="h-6 w-6">
             </button>
             <button class="carousel-nav carousel-next absolute top-1/2 right-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10 hidden md:block" aria-label="Next slide">
-                <img src="img/Web/right.svg" alt="right icon" class="h-6 w-6">
+                <img src="{{ asset('img/web/right.svg') }}" alt="right icon" class="h-6 w-6">
             </button>
             
             <!-- Carousel indicators -->

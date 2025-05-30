@@ -9,7 +9,7 @@ body {
 }
 
 .landing {
-    background: linear-gradient(#BF161De6, #BF161De6), url(../img/Web/bg-hero.jpg);
+    background: linear-gradient(#BF161De6, #BF161De6), url(../img/Web/bg-hero.webp);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;

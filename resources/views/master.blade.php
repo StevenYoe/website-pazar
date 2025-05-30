@@ -132,7 +132,7 @@
             <nav id="navbar" class="fixed w-full z-20 top-0 start-0 {{ $theme === 'dark' ? 'dark border-gray-600 text-white' : 'border-gray-200' }} @if(Route::currentRouteName() == 'products.show') bg-custom-red @endif" data-breakpoint="793">
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img src="{{ asset('img/web/Logo.png') }}" class="h-14" alt="Pazar Logo">
+                        <img src="{{ asset('img/web/Logo.webp') }}" class="h-14" alt="Pazar Logo">
                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
                     </a>
                     
@@ -270,7 +270,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Logo Section -->
                     <div class="flex flex-col items-center md:items-start">
-                        <img src="{{ asset('img/web/Logo.png')}}" class="h-16 mb-4" alt="Pazar Logo">
+                        <img src="{{ asset('img/web/Logo.webp')}}" class="h-16 mb-4" alt="Pazar Logo">
                         @if(isset($footerData) && isset($footerData['address']) && $footerData['address'])
                             <h3 class="text-xl font-semibold mb-2">{{ __('general.headquarters') }}</h3>
                             <a href="{{ $footerData['address']->f_link ?? '#' }}" target="_blank" class="text-center md:text-left text-white dark:text-gray-200 hover:text-custom-lightergreen">

@@ -131,7 +131,7 @@
                                 <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                             </svg>
                             <div>
-                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.departments') }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.department') }}</span>
                                 <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
                                     {{ app()->getLocale() == 'en' ? $vacancy->department_name_en : $vacancy->department_name_id }}
                                 </span>
@@ -157,7 +157,7 @@
                                 <line x1="6" y1="18" x2="6.01" y2="18"></line>
                             </svg>
                             <div>
-                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.work_models') }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.work_model') }}</span>
                                 <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
                                     {{ app()->getLocale() == 'en' ? $vacancy->employment_name_en : $vacancy->employment_name_id }}
                                 </span>
@@ -170,7 +170,7 @@
                                 <path d="M12 8h.01"></path>
                             </svg>
                             <div>
-                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.experiences') }}</span>
+                                <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.experience') }}</span>
                                 <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
                                     {{ app()->getLocale() == 'en' ? $vacancy->department_name_en : $vacancy->department_name_id }}
                                 </span>
