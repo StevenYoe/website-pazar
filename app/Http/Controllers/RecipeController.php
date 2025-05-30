@@ -112,23 +112,24 @@ class RecipeController extends BaseController
     {
         // Convert array to object if not already
         $recipeObj = is_array($recipe) ? (object) $recipe : $recipe;
-        
+
         // Add storage URL to image if exists
         if (!empty($recipeObj->r_image)) {
             $recipeObj->r_image = config('app.storage_url') . '/' . $recipeObj->r_image;
         }
-        
-        // Get current locale for creating proper slug
+
+        // Get current locale for creating proper slug - CONSISTENT WITH PRODUCT
         $locale = app()->getLocale();
-        $titleToUse = $locale === 'en' ? 
-            ($recipeObj->r_title_en ?? $recipeObj->r_title_id) : 
+        $titleToUse = $locale === 'en' ?
+            ($recipeObj->r_title_en ?? $recipeObj->r_title_id) :
             ($recipeObj->r_title_id ?? $recipeObj->r_title_en);
-        
         $recipeObj->slug = Str::slug($titleToUse);
-        
-        // Rest of the method remains the same...
+
+        // Initialize category properties
         $recipeObj->category_names = [];
         $recipeObj->all_categories = [];
+        $recipeObj->category_name_id = '';
+        $recipeObj->category_name_en = '';
 
         // Process categories from relationship
         if (isset($recipeObj->categories) && !empty($recipeObj->categories)) {
@@ -140,7 +141,7 @@ class RecipeController extends BaseController
                 
                 // Store category data in array
                 $recipeObj->all_categories[] = $category;
-                
+
                 // Add category names to arrays based on locale
                 if (isset($category->rc_title_id) && !empty($category->rc_title_id)) {
                     $categoryNamesId[] = trim($category->rc_title_id);
@@ -148,20 +149,20 @@ class RecipeController extends BaseController
                 if (isset($category->rc_title_en) && !empty($category->rc_title_en)) {
                     $categoryNamesEn[] = trim($category->rc_title_en);
                 }
-                
+
                 // Set first category as primary (for backward compatibility)
                 if ($index === 0) {
-                    $recipeObj->category_name_id = isset($category->rc_title_id) ? 
-                        trim($category->rc_title_id) : 'Uncategorized';
-                    $recipeObj->category_name_en = isset($category->rc_title_en) ? 
+                    $recipeObj->category_name_id = isset($category->rc_title_id) ?
+                        trim($category->rc_title_id) : 'Tidak Berkategori';
+                    $recipeObj->category_name_en = isset($category->rc_title_en) ?
                         trim($category->rc_title_en) : 'Uncategorized';
                 }
             }
-            
+
             // Set category_names based on current locale
             $recipeObj->category_names = $locale == 'en' ? $categoryNamesEn : $categoryNamesId;
         }
-        
+
         return $recipeObj;
     }
     
@@ -173,12 +174,15 @@ class RecipeController extends BaseController
      */
     public function show($slug)
     {
-        // Get all active recipes - Using the new getAllRecipes endpoint with parameters
+        $locale = app()->getLocale();
+        
+        // Get all active recipes
         $recipesResponse = $this->crudApiGet('/recipes/getAllRecipes', [
-            'is_active' => true,  // Only get active recipes
-            'sort_by' => 'r_id',  // Sort by recipe ID
-            'sort_order' => 'asc' // Sort in ascending order
+            'is_active' => true,
+            'sort_by' => 'r_id',
+            'sort_order' => 'asc'
         ]);
+        
         $foundRecipe = null;
         $allRecipes = [];
         
@@ -186,7 +190,6 @@ class RecipeController extends BaseController
             // Get categories for recipe processing
             $categoriesResponse = $this->crudApiGet('/recipecategories/all');
             $categoryLookup = [];
-            
             if (isset($categoriesResponse['success']) && $categoriesResponse['success'] && isset($categoriesResponse['data'])) {
                 foreach ($categoriesResponse['data'] as $category) {
                     $categoryObj = $this->processCategory($category);
@@ -198,10 +201,10 @@ class RecipeController extends BaseController
                 $processedRecipe = $this->processRecipe($recipe, $categoryLookup);
                 $allRecipes[] = $processedRecipe;
                 
-                $titleId = $recipe['r_title_id'] ?? '';
-                $titleEn = $recipe['r_title_en'] ?? '';
-                
-                $titleToUse = !empty($titleId) ? $titleId : $titleEn;
+                // Create slug based on current language - SAME AS PRODUCT
+                $titleToUse = $locale === 'en' ? 
+                    ($recipe['r_title_en'] ?? $recipe['r_title_id']) : 
+                    ($recipe['r_title_id'] ?? $recipe['r_title_en']);
                 $recipeSlug = Str::slug($titleToUse);
                 
                 if ($recipeSlug === $slug) {
@@ -210,9 +213,10 @@ class RecipeController extends BaseController
                     
                     // Get detailed recipe info with all relations
                     $detailResponse = $this->crudApiGet('/recipes/' . $recipeId);
-                    
                     if (isset($detailResponse['success']) && $detailResponse['success'] && isset($detailResponse['data'])) {
                         $foundRecipe = $this->processRecipeDetail($detailResponse['data']);
+                        // Add proper slug for current locale
+                        $foundRecipe->slug = $recipeSlug;
                     }
                 }
             }
@@ -229,11 +233,8 @@ class RecipeController extends BaseController
         });
         
         if (count($otherRecipes) > 0) {
-            // Reset array keys after filtering
             $otherRecipes = array_values($otherRecipes);
-            // Shuffle the array of other recipes
             shuffle($otherRecipes);
-            // Take the first 3 (or less if there aren't 3 recipes)
             $randomRecipes = array_slice($otherRecipes, 0, min(3, count($otherRecipes)));
         }
         

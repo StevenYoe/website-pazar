@@ -115,33 +115,30 @@
             </div>
         </div>
 
-        <!-- Other Recipes -->
+        <!-- Other Recipes section -->
         @if(count($randomRecipes) > 0)
         <div class="mt-16 recipe-section">
             <h2 class="text-2xl font-bold text-center {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }} mb-8">{{ __('general.related_recipes') }}</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($randomRecipes as $randomRecipe)
-                <div class="recipe-item {{ $theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200' }} rounded-lg shadow-sm flex flex-col h-full overflow-hidden max-w-xs mx-auto w-full" 
-                    data-id="{{ $randomRecipe->r_id }}" 
-                    data-category="{{ $randomRecipe->category_name_id }}"
-                    data-categories="{{ json_encode($randomRecipe->category_names ?? [$randomRecipe->category_name_id]) }}">
+                <div class="recipe-item {{ $theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200' }} rounded-lg shadow-sm flex flex-col h-full overflow-hidden max-w-xs mx-auto w-full">
                     <div class="h-48 overflow-hidden">
                         <img src="{{ $randomRecipe->r_image }}" alt="{{ $randomRecipe->r_title_id }}" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6 flex flex-col flex-grow">
-                        <a href="{{ url('recipe/' . $randomRecipe->slug) }}" class="hover:text-custom-red">
+                        <a href="{{ route(app()->getLocale() . '.recipe.show', $randomRecipe->slug) }}" class="hover:text-custom-red">
                             <h3 class="text-xl text-black font-bold mb-1 hover:text-custom-red line-clamp-2">
-                                {!! app()->getLocale() == 'en' ? $randomRecipe->r_title_en : $randomRecipe->r_title_id !!}
+                                {{ app()->getLocale() == 'en' ? $randomRecipe->r_title_en : $randomRecipe->r_title_id }}
                             </h3>
                         </a>
                         <h4 class="text-sm text-custom-red font-bold mb-2 line-clamp-2">
                             @if(isset($randomRecipe->category_names) && count($randomRecipe->category_names) > 0)
                                 {{ implode(', ', $randomRecipe->category_names) }}
                             @else
-                                {!! app()->getLocale() == 'en' ? $randomRecipe->category_name_en : $randomRecipe->category_name_id !!}
+                                {{ app()->getLocale() == 'en' ? ($randomRecipe->category_name_en ?? 'Uncategorized') : ($randomRecipe->category_name_id ?? 'Tidak Berkategori') }}
                             @endif
                         </h4>
-                        <a href="{{ url('recipe/' . $randomRecipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end mt-auto">{{ __('general.see_more') }} →</a>
+                        <a href="{{ route(app()->getLocale() . '.recipe.show', $randomRecipe->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end mt-auto">{{ __('general.see_more') }} →</a>
                     </div>
                 </div>
                 @endforeach

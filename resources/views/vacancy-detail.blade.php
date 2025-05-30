@@ -280,7 +280,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{ url('vacancy/' . $related->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
+                                    <a href="{{ route(app()->getLocale() . '.vacancy.show', $related->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">
+                                        {{ __('general.see_more') }} →
+                                    </a>
                                 </div>
                             </div>
                             @endforeach
