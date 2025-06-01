@@ -16,9 +16,39 @@ Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('l
 // Theme toggle route
 Route::post('/theme/toggle', [ThemeController::class, 'toggle'])->name('theme.toggle');
 
-// Default redirect to Indonesian
+// Default redirect berdasarkan browser language
 Route::get('/', function () {
-    return redirect('/id');
+    // Get browser language preference
+    $acceptLanguage = request()->header('Accept-Language');
+    $preferredLanguage = 'id'; // default to Indonesian
+    
+    if ($acceptLanguage) {
+        // Parse Accept-Language header
+        $languages = [];
+        foreach (explode(',', $acceptLanguage) as $lang) {
+            $parts = explode(';q=', trim($lang));
+            $locale = trim($parts[0]);
+            $quality = isset($parts[1]) ? (float) $parts[1] : 1.0;
+            $languages[$locale] = $quality;
+        }
+        
+        // Sort by quality
+        arsort($languages);
+        
+        // Check for supported languages
+        foreach ($languages as $locale => $quality) {
+            // Check for exact match or language prefix
+            if ($locale === 'id' || $locale === 'id-ID') {
+                $preferredLanguage = 'id';
+                break;
+            } elseif ($locale === 'en' || strpos($locale, 'en-') === 0) {
+                $preferredLanguage = 'en';
+                break;
+            }
+        }
+    }
+    
+    return redirect('/' . $preferredLanguage);
 });
 
 // Indonesian Routes
@@ -48,19 +78,19 @@ Route::prefix('en')->group(function () {
     Route::get('/our-company', [CompanyController::class, 'index'])->name('en.company');
     Route::get('/our-brand', [BrandController::class, 'index'])->name('en.brand');
     
-    // Products
+    // Products - CHANGED: products/{slug} -> product/{slug}
     Route::get('/products', [ProductController::class, 'index'])->name('en.products');
     Route::get('/products/download-catalog', [ProductController::class, 'downloadCatalog'])->name('en.products.download-catalog');
-    Route::get('/products/{slug}', [ProductController::class, 'show'])->name('en.product.show');
+    Route::get('/product/{slug}', [ProductController::class, 'show'])->name('en.product.show');
     
-    // Recipes
+    // Recipes - CHANGED: recipes/{slug} -> recipe/{slug}
     Route::get('/recipes', [RecipeController::class, 'index'])->name('en.recipes');
-    Route::get('/recipes/{slug}', [RecipeController::class, 'show'])->name('en.recipe.show');
+    Route::get('/recipe/{slug}', [RecipeController::class, 'show'])->name('en.recipe.show');
     
-    // Career
+    // Career - CHANGED: vacancies/{slug} -> vacancy/{slug}
     Route::get('/career-info', [CareerController::class, 'index'])->name('en.careerinfo');
     Route::get('/vacancies', [VacancyController::class, 'index'])->name('en.vacancies');
-    Route::get('/vacancies/{slug}', [VacancyController::class, 'show'])->name('en.vacancy.show');
+    Route::get('/vacancy/{slug}', [VacancyController::class, 'show'])->name('en.vacancy.show');
 });
 
 // Fallback routes for old URLs (redirect to new structure)

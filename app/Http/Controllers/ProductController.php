@@ -268,16 +268,14 @@ class ProductController extends BaseController
         $catalogData = $response['data'];
         $fileUrl = $catalogData['file_url'];
         
-        // Fix URL if it's pointing to localhost instead of backend server
-        if (strpos($fileUrl, 'localhost') !== false) {
-            // Replace localhost with backend server URL
-            $backendUrl = config('app.storage_url', 'http://127.0.0.1:8002/storage');
-            $fileUrl = str_replace('http://localhost/storage', $backendUrl, $fileUrl);
-        }
+        // Clean up the URL to remove any duplication
+        $fileUrl = str_replace('http://127.0.0.1:8002/storage/http://127.0.0.1:8002/storage/', 'http://127.0.0.1:8002/storage/', $fileUrl);
         
-        // Also handle if the URL is just relative path
+        // Ensure the URL is properly formed
         if (!filter_var($fileUrl, FILTER_VALIDATE_URL)) {
-            $fileUrl = config('app.storage_url') . '/' . ltrim($fileUrl, '/');
+            // If still not a valid URL, reconstruct it
+            $filename = basename($fileUrl);
+            $fileUrl = config('app.storage_url', 'http://127.0.0.1:8002/storage') . '/catalogs/' . $filename;
         }
         
         // Simple redirect to corrected file URL

@@ -131,7 +131,8 @@
             <!-- Navbar Section - This will be visible on all pages including product-detail -->
             <nav id="navbar" class="fixed w-full z-20 top-0 start-0 {{ $theme === 'dark' ? 'dark border-gray-600 text-white' : 'border-gray-200' }} @if(Route::currentRouteName() == 'products.show') bg-custom-red @endif" data-breakpoint="793">
                 <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <!-- Logo Link - Preserve Language -->
+                    <a href="{{ route(app()->getLocale() . '.index') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
                         <img src="{{ asset('img/web/Logo.webp') }}" class="h-14" alt="Pazar Logo">
                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
                     </a>
@@ -148,40 +149,45 @@
                             <!-- Main Navigation Items -->
                             <div class="flex flex-col md1:flex-row md1:space-x-4 md1:ml-16">
                                 <div class="relative group w-full md1:w-auto">
-                                    <a id="nav-company" href="{{ app()->getLocale() == 'en' ? '/en/our-company' : '/id/perusahaan-kami' }}"
+                                    <a id="nav-company" href="{{ route(app()->getLocale() . '.company') }}" 
                                     class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.company') }}
                                     </a>
                                 </div>
+
                                 <div class="relative group w-full md1:w-auto">
-                                    <a id="nav-brand" href="{{ app()->getLocale() == 'en' ? '/en/our-brand' : '/id/brand-kami' }}"
+                                    <a id="nav-brand" href="{{ route(app()->getLocale() . '.brand') }}" 
                                     class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.brand') }}
                                     </a>
                                 </div>
+
                                 <div class="relative group w-full md1:w-auto">
-                                    <a id="nav-products" href="{{ app()->getLocale() == 'en' ? '/en/products' : '/id/produk' }}"
+                                    <a id="nav-products" href="{{ route(app()->getLocale() . '.products') }}" 
                                     class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.products') }}
                                     </a>
                                 </div>
+
                                 <div class="relative group w-full md1:w-auto">
-                                    <a id="nav-recipes" href="{{ app()->getLocale() == 'en' ? '/en/recipes' : '/id/resep' }}"
+                                    <a id="nav-recipes" href="{{ route(app()->getLocale() . '.recipes') }}" 
                                     class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.recipes') }}
                                     </a>
                                 </div>
+
+                                <!-- Career Dropdown -->
                                 <div class="relative group w-full md1:w-auto">
                                     <button id="career-dropdown" class="flex items-center justify-between w-full py-2 px-3 text-white rounded-sm md1:hover:text-custom-lightgreen {{ $theme === 'dark' ? 'text-white' : 'text-white' }}">
                                         {{ __('general.career') }}
                                     </button>
                                     <div class="absolute left-0 z-10 hidden group-hover:block {{ $theme === 'dark' ? 'bg-gray-700' : 'bg-white' }} divide-y divide-gray-100 rounded-lg shadow-sm w-44 md1:mt-0 mt-0">
                                         <ul class="py-2 text-sm {{ $theme === 'dark' ? 'text-white' : 'text-gray-700' }}">
-                                            <li><a id="career-info" href="{{ app()->getLocale() == 'en' ? '/en/career-info' : '/id/info-karir' }}"
+                                            <li><a id="career-info" href="{{ route(app()->getLocale() . '.careerinfo') }}" 
                                                 class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">
                                                 {{ __('general.career_info') }}
                                             </a></li>
-                                            <li><a id="career-vacancies" href="{{ app()->getLocale() == 'en' ? '/en/vacancies' : '/id/lowongan' }}"
+                                            <li><a id="career-vacancies" href="{{ route(app()->getLocale() . '.vacancies') }}" 
                                                 class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">
                                                 {{ __('general.vacancies') }}
                                             </a></li>
@@ -264,7 +270,7 @@
         
         @yield('content')
 
-        <!-- Footer Section -->
+        <!-- Update footer section di master.blade.php -->
         <footer class="bg-custom-red text-white dark:text-gray-200 antialiased">
             <div class="max-w-screen-xl mx-auto px-4 py-10">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -274,8 +280,12 @@
                         @if(isset($footerData) && isset($footerData['address']) && $footerData['address'])
                             <h3 class="text-xl font-semibold mb-2">{{ __('general.headquarters') }}</h3>
                             <a href="{{ $footerData['address']->f_link ?? '#' }}" target="_blank" class="text-center md:text-left text-white dark:text-gray-200 hover:text-custom-lightergreen">
-                                <p class="font-medium">{{ $footerData['address']->f_label_id }}</p>
-                                <p class="mt-1 whitespace-normal break-words">{!! nl2br(e($footerData['address']->f_description_id ?? '')) !!}</p>
+                                <p class="font-medium">
+                                    {{ app()->getLocale() == 'en' ? ($footerData['address']->f_label_en ?? $footerData['address']->f_label_id) : $footerData['address']->f_label_id }}
+                                </p>
+                                <p class="mt-1 whitespace-normal break-words">
+                                    {!! nl2br(e(app()->getLocale() == 'en' ? ($footerData['address']->f_description_en ?? $footerData['address']->f_description_id) : $footerData['address']->f_description_id)) !!}
+                                </p>
                             </a>
                         @endif
                     </div>
@@ -290,7 +300,9 @@
                                         <img src="{{ $contact->f_icon }}" alt="{{ $contact->f_label_id ?? 'Contact' }} Icon" class="h-5 w-5 mr-2">
                                     @endif
                                     <a href="{{ $contact->f_link ?? '#' }}" class="text-white dark:text-gray-200 hover:text-custom-lightergreen">
-                                        <span>{{ $contact->f_description_id ?? $contact->f_label_id ?? 'Contact Us' }}</span>
+                                        <span>
+                                            {{ app()->getLocale() == 'en' ? ($contact->f_description_en ?? $contact->f_description_id) : $contact->f_description_id }}
+                                        </span>
                                     </a>
                                 </div>
                             @endforeach

@@ -36,7 +36,6 @@ class LanguageController extends Controller
         // Remove current locale prefix and split path
         $pathSegments = explode('/', trim($path, '/'));
         $currentLocale = null;
-        
         if (in_array($pathSegments[0] ?? '', ['id', 'en'])) {
             $currentLocale = array_shift($pathSegments);
         }
@@ -46,7 +45,7 @@ class LanguageController extends Controller
             return "/{$targetLocale}";
         }
         
-        // URL mappings
+        // URL mappings - Updated untuk singular detail
         $urlMappings = [
             'id' => [
                 'perusahaan-kami' => 'our-company',
@@ -60,9 +59,12 @@ class LanguageController extends Controller
                 'our-company' => 'perusahaan-kami',
                 'our-brand' => 'brand-kami',
                 'products' => 'produk',
+                'product' => 'produk', // Handle singular detail
                 'recipes' => 'resep',
+                'recipe' => 'resep', // Handle singular detail
                 'career-info' => 'info-karir',
-                'vacancies' => 'lowongan'
+                'vacancies' => 'lowongan',
+                'vacancy' => 'lowongan' // Handle singular detail
             ]
         ];
         
@@ -77,6 +79,23 @@ class LanguageController extends Controller
             
             // Handle detail pages (product, recipe, vacancy)
             if (count($pathSegments) >= 2) {
+                // For English to Indonesian detail pages, change singular to plural
+                if ($targetLocale === 'id' && in_array($firstSegment, ['product', 'recipe', 'vacancy'])) {
+                    // Keep the plural form for Indonesian
+                    // produk, resep, lowongan are already plural
+                }
+                // For Indonesian to English detail pages, change to singular
+                elseif ($targetLocale === 'en' && in_array($pathSegments[0], ['products', 'recipes', 'vacancies'])) {
+                    $singularMap = [
+                        'products' => 'product',
+                        'recipes' => 'recipe', 
+                        'vacancies' => 'vacancy'
+                    ];
+                    if (isset($singularMap[$pathSegments[0]])) {
+                        $pathSegments[0] = $singularMap[$pathSegments[0]];
+                    }
+                }
+                
                 $this->translateDetailSlug($pathSegments, $currentLocale, $targetLocale);
             }
         }
@@ -92,18 +111,18 @@ class LanguageController extends Controller
         $section = $pathSegments[0];
         $slug = $pathSegments[1];
         
-        // Check if this is a detail page
-        $detailSections = ['produk', 'products', 'resep', 'recipes', 'lowongan', 'vacancies'];
+        // Check if this is a detail page - Updated untuk singular URLs
+        $detailSections = ['produk', 'products', 'product', 'resep', 'recipes', 'recipe', 'lowongan', 'vacancies', 'vacancy'];
         if (!in_array($section, $detailSections)) return;
         
         try {
             // Determine API endpoint based on section
             $apiEndpoint = '';
-            if (in_array($section, ['produk', 'products'])) {
+            if (in_array($section, ['produk', 'products', 'product'])) {
                 $apiEndpoint = '/products/getAllProducts';
-            } elseif (in_array($section, ['resep', 'recipes'])) {
+            } elseif (in_array($section, ['resep', 'recipes', 'recipe'])) {
                 $apiEndpoint = '/recipes/getAllRecipes';
-            } elseif (in_array($section, ['lowongan', 'vacancies'])) {
+            } elseif (in_array($section, ['lowongan', 'vacancies', 'vacancy'])) {
                 $apiEndpoint = '/vacancies/active';
             }
             
@@ -120,14 +139,13 @@ class LanguageController extends Controller
                 // Create slugs for both languages
                 $titleId = '';
                 $titleEn = '';
-                
-                if (in_array($section, ['produk', 'products'])) {
+                if (in_array($section, ['produk', 'products', 'product'])) {
                     $titleId = $item['p_title_id'] ?? '';
                     $titleEn = $item['p_title_en'] ?? '';
-                } elseif (in_array($section, ['resep', 'recipes'])) {
+                } elseif (in_array($section, ['resep', 'recipes', 'recipe'])) {
                     $titleId = $item['r_title_id'] ?? '';
                     $titleEn = $item['r_title_en'] ?? '';
-                } elseif (in_array($section, ['lowongan', 'vacancies'])) {
+                } elseif (in_array($section, ['lowongan', 'vacancies', 'vacancy'])) {
                     $titleId = $item['v_title_id'] ?? '';
                     $titleEn = $item['v_title_en'] ?? '';
                 }
