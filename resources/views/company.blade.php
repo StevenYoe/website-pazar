@@ -55,8 +55,6 @@
                                         <div class="history-image">
                                             @if(isset($history->hs_image))
                                                 <img src="{{ $history->hs_image }}" alt="Pazar Seasoning {{ $history->hs_year }}" class="w-full h-full object-cover">
-                                            @else
-                                                <img src="img/Web/history-placeholder.jpg" alt="Pazar Seasoning {{ $history->hs_year }}" class="w-full h-full object-cover">
                                             @endif
                                         </div>
                                         <div class="history-content-wrapper">

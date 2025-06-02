@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (i === currentIndex) {
                 // Use the logo for active indicator
                 const img = document.createElement('img');
-                img.src = '/img/Web/Logo.png';
+                img.src = '/img/Web/Logo.webp';
                 img.alt = 'Active page';
                 img.classList.add('w-full', 'h-full', 'object-contain');
                 button.appendChild(img);
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (index === currentIndex) {
                 // Use the logo for active indicator
                 const img = document.createElement('img');
-                img.src = '/img/Web/Logo.png';
+                img.src = '/img/Web/Logo.webp';
                 img.alt = 'Active page';
                 img.classList.add('w-full', 'h-full', 'object-contain');
                 indicator.appendChild(img);

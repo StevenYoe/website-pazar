@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
 // Theme toggle route
-Route::post('/theme/toggle', [ThemeController::class, 'toggle'])->name('theme.toggle');
+Route::get('/theme/toggle', [App\Http\Controllers\ThemeController::class, 'toggle'])->name('theme.toggle');
 
 // Default redirect berdasarkan browser language
 Route::get('/', function () {
