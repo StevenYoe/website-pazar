@@ -2,72 +2,69 @@ body {
     font-family: "Nyte W00 Black";
 }
 
-/* Add this to your CSS */
+/* CSS Variables */
+:root {
+    --navbar-height: 56px;
+    --navbar-height-scrolled: 48px;
+}
+
+/* Active Navigation State */
+.active-nav-item,
 .text-custom-lightgreen,
 #career-dropdown.text-custom-lightgreen {
     color: var(--color-custom-lightgreen) !important;
 }
 
+/* Landing Section */
 .landing {
     background: linear-gradient(#BF161De6, #BF161De6), url(../img/Web/bg-hero.webp);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100vh; 
+    min-height: 100vh;
     display: flex;
     align-items: center;
     transition: all 0.3s ease;
 }
 
+/* Navbar Base Styles */
 #navbar {
     transition: background-color 0.1s ease, padding 0.1s ease;
     padding: 1rem 0;
     background-color: transparent;
+    width: 100%;
 }
 
-#navbar-sticky button[type="button"] {
-    cursor: pointer; /* Add pointer cursor */
-    user-select: none; /* Prevent text selection */
-    -webkit-user-select: none; /* Safari support */
-    -moz-user-select: none; /* Firefox support */
-    -ms-user-select: none; /* IE/Edge support */
-}
-
-.active-dropdown > button {
-    color: #3fd144; /* Warna hijau custom-lightgreen */
-}
-
+/* Navbar Scrolled State */
 .scrolled {
-    background-color: #BF161C !important; /* Darker red when scrolled */
+    background-color: #BF161C !important;
     padding: 0 0 !important;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.scrolled .h-14{
-    height: calc(var(--spacing) * 12);
+.scrolled .h-14 {
+    height: var(--navbar-height-scrolled);
     transition: 0.3s ease;
 }
 
-.landing-content {
+/* Navbar Container - Full Width Fix */
+#navbar .max-w-screen-xl {
     width: 100%;
-    padding: 0 6rem;
-    margin-top: 2rem;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-.landing-content .grid {
-    gap: 3rem; /* Increase gap between content and image */
+@media (min-width: 793px) {
+    #navbar .max-w-screen-xl {
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
-#dropdownHoverButton {
-    width: 9rem;
-}
-
-/* Dropdown positioning for desktop */
-.group {
-    position: relative;
-}
-
-/* Same styling for all dropdown buttons */
+/* Button Styles */
+#navbar-sticky button[type="button"],
 .group button {
     cursor: pointer;
     user-select: none;
@@ -76,37 +73,49 @@ body {
     -ms-user-select: none;
 }
 
-/* Fix for dropdown items */
-.group-hover\:block a {
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+/* Dropdown Hover States */
+.active-dropdown > button {
+    color: var(--color-custom-lightgreen);
 }
 
-.group-hover\:block {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 100%;
-    min-width: 10rem;
-    z-index: 50;
+/* Landing Content */
+.landing-content {
+    width: 100%;
+    padding: 0 6rem;
+    margin-top: 2rem;
 }
 
+.landing-content .grid {
+    gap: 3rem;
+}
+
+/* Dropdown Button Width */
+#dropdownHoverButton {
+    width: 9rem;
+}
+
+/* Desktop Dropdown Positioning */
+@media (min-width: 793px) {
+    .group {
+        position: relative;
+    }
+    
+    .group-hover\:block {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100%;
+        min-width: 10rem;
+        z-index: 50;
+    }
+}
+
+/* Popup Modal */
 #popupModal {
-    background: rgba(0, 0, 0, 0.8); /* Warna hitam transparan */
+    background: rgba(0, 0, 0, 0.8);
 }
 
-.nama-perusahaan {
-    display: block; /* Membuat nama perusahaan menjadi blok */
-    font-weight: bold; /* Contoh: menebalkan nama perusahaan */
-}
-  
-.alamat {
-    display: block; /* Membuat alamat menjadi blok */
-}
-
+/* Category Item Hover */
 .category-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px #BF161C;
@@ -114,50 +123,52 @@ body {
 
 .category-item {
     transform: translateY(0);
-    transition: transform 0.3s ease;;
+    transition: transform 0.3s ease;
 }
 
-/* Back to Top Button Cursor Fix */
+/* Back to Top Button */
 #btn-back-to-top {
     cursor: pointer;
 }
 
-/* Mobile responsive adjustments */
-@media (max-width: 792px) {
-    .landing {
-        align-items: flex-start;
-        padding-top: 80px;
-        text-align: center;
-        padding-bottom: 3rem;
-    }
+/* Not Index Pages */
+.not-index {
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+}
 
-    .landing-content {
-        padding: 0 2rem;
-        transition: padding-top 0.3s ease;
-    }
-    
-    .landing-content .grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .landing h1 {
-        font-size: 2.5rem;
-        margin-top: 4rem;
-    }
-    
-    .landing .text-white {
-        max-width: 90%;
-        margin: 0 auto;
-    }
-    
-    .landing .inline-block {
-        margin-top: 1rem;
-    }
-    
+.not-index h1 {
+    font-size: 3rem;
+    margin-top: 0.5rem;
+}
+
+.not-index .text-xl {
+    font-size: 1.1rem;
+}
+
+.not-index .max-w-4xl, .not-index .max-w-2xl {
+    max-width: 90%;
+    margin-top: 2rem;
+}
+
+/* Mobile Navigation (< 793px) */
+@media (max-width: 792px) {
+    /* Ensure full width navbar */
     #navbar {
         background-color: rgba(191, 22, 29, 0.9);
+        width: 100%;
+        left: 0;
+        right: 0;
     }
-
+    
+    /* Mobile navbar container full width */
+    #navbar .flex.flex-wrap {
+        width: 100%;
+        margin: 0;
+        padding: 0 1rem;
+    }
+    
+    /* Mobile menu full width */
     #navbar-sticky {
         background-color: #BF161C;
         position: absolute;
@@ -167,8 +178,9 @@ body {
         width: 100%;
         z-index: 19;
         padding: 1rem;
+        margin: 0;
     }
-
+    
     #navbar-sticky .flex-col {
         display: flex;
         flex-direction: column;
@@ -187,11 +199,7 @@ body {
         justify-content: left;
     }
     
-    /* Language and Buy Now buttons styling */
-    #navbar-sticky .md1\:flex-row.md1\:items-center {
-        align-items: flex-start;
-    }
-    
+    /* Language and Buy Now buttons */
     #navbar-sticky .group.w-full.md1\:w-auto button[type="button"],
     #navbar-sticky #dropdownHoverButton {
         width: 9rem;
@@ -199,6 +207,7 @@ body {
         justify-content: center;
     }
     
+    /* Mobile dropdown menus */
     #navbar-sticky .group-hover\:block {
         position: static;
         left: 0;
@@ -216,123 +225,95 @@ body {
     #navbar-sticky .group:hover .group-hover\:block {
         display: block;
     }
-
-    /* about */
-    .not-index {
+    
+    /* Landing adjustments */
+    .landing {
+        align-items: flex-start;
+        padding-top: 80px;
+        text-align: center;
+        padding-bottom: 3rem;
+    }
+    
+    .landing-content {
+        padding: 0 2rem;
+        transition: padding-top 0.3s ease;
+    }
+    
+    .landing-content .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .landing h1 {
+        font-size: 2.5rem;
         margin-top: 4rem;
-        padding: 3rem 2rem;
     }
     
-    .not-index h1 {
-        font-size: 3rem;
-        margin-top: 0.5rem;
+    .landing .text-white {
+        max-width: 100%;
+        margin: 0 auto;
     }
     
-    .not-index .text-xl {
-        font-size: 1.1rem;
-    }
-    
-    .not-index .max-w-4xl, .max-w-2xl {
-        max-width: 90%;
-        margin-top: 2rem;
+    .landing .inline-block {
+        margin-top: 1rem;
     }
 }
 
-/* Mobile styles (320px-640px) */
+/* Small Mobile (320px - 640px) */
 @media (min-width: 320px) and (max-width: 640px) {
-    /* General layout adjustments */
+    /* Ensure navbar takes full width */
+    #navbar {
+        padding: 0.75rem 0;
+    }
+    
+    #navbar .max-w-screen-xl {
+        padding: 0 0.75rem;
+    }
+    
+    /* Landing content adjustments */
     .landing-content {
         padding-top: 150px;
         padding-bottom: 30px;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
-
-    /* Landing content */
+    
     .landing-content h1 {
         font-size: 2rem;
     }
-
+    
     .landing-content p {
         font-size: 1rem;
     }
-
+    
     /* Section padding */
     .why-choose-us, .product-category {
         padding: 40px 0;
     }
-
+    
     .max-w-screen-xl {
         padding-left: 1rem;
         padding-right: 1rem;
     }
-
+    
     /* Typography */
     h2 {
         font-size: 1.75rem;
         margin-bottom: 1.5rem;
     }
-
+    
     /* Card layout */
     .grid {
         gap: 1rem;
     }
-
-    /* Product cards */
-    .product-category .grid > div {
-        max-width: 100%;
+    
+    /* Navigation logo */
+    #navbar .h-14 {
+        height: 3rem;
     }
-
-    /* Navigation adjustments */
-    #navbar .max-w-screen-xl {
-        padding: 0.75rem;
-    }
-
-    /* Hero section */
-    .landing .grid {
-        text-align: center;
-    }
-
+    
     /* Button sizing */
     .landing-content a {
         padding: 0.5rem 1.5rem;
-    }
-
-    /* Mengubah layout dari flex-row menjadi flex-col pada mobile */
-    .certification-item .bg-white {
-        flex-direction: column;
-    }
-    
-    /* Mengatur width gambar sertifikasi pada mobile */
-    .certification-item [class*="md\:w-1"] {
-        width: 100%;
-        margin-bottom: 1rem;
-    }
-    
-    /* Mengatur width konten sertifikasi pada mobile */
-    .certification-item [class*="md\:w-2"] {
-        width: 100%;
-        padding-left: 0;
-    }
-    
-    /* Mengatasi badge yang terpotong dengan mengatur text-wrap */
-    .certification-item .rounded-full {
-        white-space: normal;
-        display: inline-block;
-        margin-bottom: 0.5rem;
-    }
-    
-    /* Memberikan padding tambahan untuk badge */
-    .certification-item .bg-blue-500,
-    .certification-item .bg-yellow-500,
-    .certification-item .bg-custom-lightergreen {
-        padding: 0.25rem 0.75rem;
-        line-height: 1.5;
-    }
-    
-    /* Mengatur tombol unduh */
-    .certification-item a.inline-block {
-        margin-top: 1rem;
-        display: block;
-        text-align: center;
     }
     
     /* Carousel indicators */
@@ -341,8 +322,8 @@ body {
         height: 12px;
         margin: 0 4px;
     }
-
-    /* about */
+    
+    /* Not index pages */
     .not-index {
         margin-top: 8rem;
         padding: 2rem 1rem;
@@ -357,101 +338,86 @@ body {
         font-size: 1rem;
     }
     
-    .not-index .max-w-4xl, .max-w-2xl {
+    .not-index .max-w-4xl, .not-index .max-w-2xl {
         max-width: 100%;
         margin-top: 1.5rem;
     }
 }
 
-/* Balanced adjustments for 793px-875px */
+/* Medium Tablet (793px - 875px) */
 @media (min-width: 793px) and (max-width: 875px) {
-    /* Adjust the navigation container */
     #navbar .max-w-screen-xl {
         padding-left: 0.75rem;
         padding-right: 0.75rem;
     }
     
-    /* Logo size adjustment - slightly smaller but still visible */
     #navbar .h-14 {
-        height: 3.25rem;  /* 52px - reasonably visible */
+        height: 3.25rem;
     }
     
-    /* Remove unnecessary spacing between menu items */
     .md1\:space-x-4 > * {
         margin-left: 0.5rem !important;
         margin-right: 0 !important;
     }
     
-    /* Adjust padding around text items without making them too cramped */
     #navbar-sticky .py-2.px-3 {
         padding-left: 0.5rem;
         padding-right: 0.5rem;
-        font-size: 0.875rem;  /* 14px - still readable */
+        font-size: 0.875rem;
     }
     
-    /* Make first item flush left */
     #navbar-sticky .md1\:flex-row > div:first-child {
         margin-left: 0 !important;
     }
     
-    /* Optimize the Buy Now button */
     #dropdownHoverButton {
-        width: 7.5rem;  /* Still reasonably sized */
+        width: 7.5rem;
         padding-left: 0.5rem;
         padding-right: 0.5rem;
     }
     
-    /* More compact language selector while keeping it readable */
     #navbar-sticky button[type="button"] {
         font-size: 0.875rem;
     }
     
-    /* Force navbar to use all available width */
     #navbar-sticky .md1\:flex {
         width: 100%;
         justify-content: space-between;
     }
     
-    /* Adjust the right-side items spacing */
     #navbar-sticky .md1\:mt-0 {
         margin-left: auto;
     }
 }
 
-/* Additional layout fix for extremely tight range (793px-830px) */
+/* Tight Tablet (793px - 830px) */
 @media (min-width: 793px) and (max-width: 830px) {
-    /* More aggressive spacing only at the tightest breakpoints */
     #navbar-sticky .py-2.px-3 {
         padding-left: 0.375rem;
         padding-right: 0.375rem;
     }
     
-    /* Slightly reduce menu text size only at tightest breakpoints */
     #navbar-sticky .md1\:hover\:text-custom-lightgreen {
-        font-size: 0.8125rem;  /* 13px - still fairly readable */
+        font-size: 0.8125rem;
     }
     
-    /* Smaller Buy Now button only at tightest breakpoints */
     #dropdownHoverButton {
         width: 7rem;
     }
 }
 
-/* Medium screen adjustments (876px-1000px) */
+/* Large Tablet (876px - 1000px) */
 @media (min-width: 876px) and (max-width: 1000px) {
-    /* Reduce padding around navbar items */
     #navbar-sticky .py-2.px-3 {
-        padding-left: 0.5rem;  /* 8px instead of 12px */
+        padding-left: 0.5rem;
         padding-right: 0.5rem;
-        font-size: 0.875rem;   /* 14px */
+        font-size: 0.875rem;
     }
     
-    /* Reduce space between navbar items */
     .md1\:space-x-4 > * {
-        margin-left: 0.5rem !important;  /* 8px instead of 16px */
+        margin-left: 0.5rem !important;
     }
     
-    /* Make buy now button smaller */
     #dropdownHoverButton {
         width: 7rem;
         padding-left: 0.5rem;
@@ -459,30 +425,26 @@ body {
         font-size: 0.875rem;
     }
     
-    /* Adjust logo size slightly */
     #navbar .h-14 {
-        height: 3rem;  /* 48px instead of 56px */
+        height: 3rem;
     }
     
-    /* Reduce navbar padding */
     #navbar .p-4 {
         padding: 0.75rem;
     }
     
-    /* Fix language dropdown button size */
     #navbar-sticky button[type="button"] {
         padding-left: 0.5rem;
         padding-right: 0.5rem;
         font-size: 0.875rem;
     }
     
-    /* Adjust first menu item to align better */
     #navbar-sticky .md1\:flex-row > div:first-child {
         margin-left: 0 !important;
     }
 }
 
-/* History Carousel Styles */
+/* History Carousel */
 .history-carousel-container {
     overflow: hidden;
     margin: 2rem 0;
@@ -506,14 +468,12 @@ body {
     min-height: 400px;
 }
 
-/* New flex layout for image and content */
 .history-flex-container {
     display: flex;
     gap: 2rem;
     height: 100%;
 }
 
-/* Image container */
 .history-image {
     flex: 0 0 50%;
     max-width: 50%;
@@ -528,7 +488,6 @@ body {
     border-radius: 0.5rem;
 }
 
-/* Content container */
 .history-content-wrapper {
     flex: 0 0 50%;
     max-width: 50%;
@@ -599,29 +558,25 @@ body {
     right: 1rem;
 }
 
-/* HISTORY SECTION FIXES FOR MOBILE & TABLET */
-/* Ensure text content is visible on mobile/tablet */
+/* History Mobile Fixes */
 @media (max-width: 792px) {
-    /* Fix history carousel layout on mobile */
     .history-flex-container {
         flex-direction: column;
         gap: 1.5rem;
-        overflow: visible; /* Prevent content hiding */
+        overflow: visible;
     }
     
     .history-image, .history-content-wrapper {
         flex: 0 0 100%;
         max-width: 100%;
-        overflow: visible; /* Ensure content isn't cut off */
+        overflow: visible;
     }
     
-    /* Set a minimum height for content to ensure visibility */
     .history-content-wrapper {
         min-height: 200px;
-        display: block; /* Override flex to ensure content visibility */
+        display: block;
     }
     
-    /* Increase font size for better readability */
     .history-content {
         font-size: 1rem;
         line-height: 1.6;
@@ -629,7 +584,6 @@ body {
         overflow: visible;
     }
     
-    /* Force the history container to adjust height based on content */
     .history-item {
         height: auto;
         overflow: visible;
@@ -641,14 +595,13 @@ body {
         overflow: visible;
         padding-bottom: 2rem;
     }
-
+    
     .history-carousel-nav {
         display: none !important;
     }
 }
 
-/* CENTER CONTENT ON DESKTOP VIEW */
-/* Make history section follow certification section style on desktop */
+/* Center History on Desktop */
 @media (min-width: 793px) {
     .history-carousel-container {
         max-width: 90%;
@@ -661,38 +614,7 @@ body {
     }
 }
 
-/* IMPROVE TESTIMONIAL TAB BUTTONS VISIBILITY */
-/* Enhanced styling for Customer/Chef tab buttons */
-.testimonial-tab.active {
-    background: #BF161C;
-    border-color: #e1bc3a;
-}
-
-.testimonial-tab {
-    padding: 0.75rem 2rem;
-    border: none;
-    border-radius: 50px;
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(242, 244, 247, 0.1);
-}
-
-.testimonial-tab:hover {
-    border-color: #BF161C;
-}
-
-/* Make tabs more noticeable */
-.inline-flex[role="group"] {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    overflow: hidden;
-    min-width: 240px;
-}
-
-/* FOOTER ALIGNMENT ON MOBILE & TABLET */
-/* Left-align footer content on mobile and tablet */
+/* Footer Alignment Mobile */
 @media (max-width: 792px) {
     footer .flex-col.items-center {
         align-items: flex-start !important;
@@ -703,40 +625,35 @@ body {
         text-align: left !important;
     }
     
-    /* Add left margin to maintain consistent spacing */
     footer .max-w-screen-xl {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
     }
 }
 
-/* Fixed Header Alignment for Mobile & Tablet */
+/* Fixed Header Alignment Mobile */
 @media (max-width: 792px) {
-    /* Adjust the layout to show more content area */
     .landing {
         min-height: auto;
         height: auto;
-        align-items: center; /* Center align content vertically */
+        align-items: center;
     }
     
-    /* Fix content alignment with the header */
     .not-index .flex.flex-col.items-center {
-        margin-top: -2rem; /* Pull content up slightly */
+        margin-top: -2rem;
     }
     
-    /* Fix for header text visibility */
     .not-index .text-white.mb-8 {
-        margin-bottom: 1rem; /* Reduce space below header text */
+        margin-bottom: 1rem;
     }
 }
 
-/* Additional fixes for smaller mobile screens */
 @media (max-width: 640px) {
     .not-index.landing-content {
-        margin-top: 4.5rem; /* Slightly reduce top margin on small screens */
+        margin-top: 4.5rem;
     }
     
     .not-index h1 {
-        font-size: 2.25rem; /* Reduce font size for better fit */
+        font-size: 2.25rem;
     }
 }

@@ -44,7 +44,7 @@
                                 {{ app()->getLocale() == 'en' ? $item->w_title_en : $item->w_title_id }}
                             </h3>
                         </div>
-                        <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-900' }} text-sm mt-2 flex-grow line-clamp-4">
+                        <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-900' }} {{ app()->getLocale() == 'en' ? 'mb-6' : '' }} text-sm mt-2 flex-grow line-clamp-4">
                             {{ app()->getLocale() == 'en' ? $item->w_description_en : $item->w_description_id }}
                         </p>
                     </div>

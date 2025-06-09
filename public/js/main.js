@@ -15,9 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Reset initial state
     function resetMobileNavState() {
-        if (window.innerWidth <= 640) {
+        if (window.innerWidth <= 792) {
             navbarMenu.classList.add('hidden');
-            landingContent.style.paddingTop = '0';
+            if (landingContent) {
+                landingContent.style.paddingTop = '0';
+            }
         }
     }
     
@@ -33,81 +35,117 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle resize events
     window.addEventListener('resize', resetMobileNavState);
     
-    toggleButton.addEventListener('click', function() {
-        const expanded = toggleButton.getAttribute('aria-expanded') === 'true' || false;
-        toggleButton.setAttribute('aria-expanded', !expanded);
-        navbarMenu.classList.toggle('hidden');
-        
-        if (!expanded) {
-            const menuHeight = navbarMenu.offsetHeight;
-            landingContent.style.paddingTop = menuHeight + 'px';
-        } else {
-            landingContent.style.paddingTop = '0';
-        }
-    });
+    if (toggleButton) {
+        toggleButton.addEventListener('click', function() {
+            const expanded = toggleButton.getAttribute('aria-expanded') === 'true' || false;
+            toggleButton.setAttribute('aria-expanded', !expanded);
+            navbarMenu.classList.toggle('hidden');
+            
+            if (!expanded && landingContent) {
+                const menuHeight = navbarMenu.offsetHeight;
+                landingContent.style.paddingTop = menuHeight + 'px';
+            } else if (landingContent) {
+                landingContent.style.paddingTop = '0';
+            }
+        });
+    }
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // PART 1: Handle direct links by URL path
+    // IMPROVED ACTIVE STATE LOGIC
     const currentPath = window.location.pathname;
-    const navLinks = document.querySelectorAll('nav a[href]');
+    const currentLocale = currentPath.startsWith('/en') ? 'en' : 'id';
     
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
-            // For direct navigation links
-            link.classList.add('text-custom-lightgreen');
-        }
-    });
+    // Remove locale prefix to get the actual route
+    const pathWithoutLocale = currentPath.replace(/^\/(id|en)/, '') || '/';
     
-    // PART 2: Handle dropdown menus by route name
-    const currentPage = document.body.getAttribute('data-page');
-    
-    // Navigation configuration for dropdowns only
-    const dropdownConfig = {
-        'careerinfo': { 
-            dropdownId: 'career-dropdown', 
-            activeIds: ['career-info'], 
-            type: 'dropdown' 
-        },
-        'vacancies': { 
-            dropdownId: 'career-dropdown', 
-            activeIds: ['career-vacancies'], 
-            type: 'dropdown' 
-        }
+    // Define route mappings for active state
+    const routeMappings = {
+        '/': 'index',
+        '/perusahaan-kami': 'company',
+        '/our-company': 'company',
+        '/brand-kami': 'brand',
+        '/our-brand': 'brand',
+        '/produk': 'products',
+        '/products': 'products',
+        '/resep': 'recipes',
+        '/recipes': 'recipes',
+        '/info-karir': 'careerinfo',
+        '/career-info': 'careerinfo',
+        '/lowongan': 'vacancies',
+        '/vacancies': 'vacancies'
     };
     
-    const config = dropdownConfig[currentPage];
+    // Get current route name
+    let currentRoute = routeMappings[pathWithoutLocale];
     
-    if (config && config.type === 'dropdown') {
-        // Style the dropdown button
-        const dropdownButton = document.getElementById(config.dropdownId);
-        if (dropdownButton) {
-            // Use !important to ensure the text color takes precedence
-            dropdownButton.style.setProperty('color', 'var(--color-custom-lightgreen)', 'important');
-            // Also add the class for consistency
-            dropdownButton.classList.add('text-custom-lightgreen');
-            
-            // Handle dropdown visibility if needed
-            const parentGroup = dropdownButton.closest('.group');
-            if (parentGroup) {
-                parentGroup.classList.add('active-dropdown');
-            }
+    // Check if we're on a detail page
+    if (!currentRoute) {
+        if (pathWithoutLocale.match(/^\/(produk|product|products)\/[\w-]+$/)) {
+            currentRoute = 'products';
+        } else if (pathWithoutLocale.match(/^\/(resep|recipe|recipes)\/[\w-]+$/)) {
+            currentRoute = 'recipes';
+        } else if (pathWithoutLocale.match(/^\/(lowongan|vacancy|vacancies)\/[\w-]+$/)) {
+            currentRoute = 'vacancies';
+        }
+    }
+    
+    // Apply active state to navigation items
+    if (currentRoute) {
+        // Handle main navigation items
+        const navLinks = {
+            'company': document.getElementById('nav-company'),
+            'brand': document.getElementById('nav-brand'),
+            'products': document.getElementById('nav-products'),
+            'recipes': document.getElementById('nav-recipes')
+        };
+        
+        // Apply active class to the correct nav item
+        if (navLinks[currentRoute]) {
+            navLinks[currentRoute].classList.add('text-custom-lightgreen', 'active-nav-item');
+            navLinks[currentRoute].classList.remove('text-white');
         }
         
-        // Highlight the specific active items within the dropdown
-        config.activeIds.forEach(id => {
-            const link = document.getElementById(id);
-            if (link) {
-                // Apply background color
-                link.classList.add('bg-custom-lightergreen');
+        // Handle career dropdown
+        if (currentRoute === 'careerinfo' || currentRoute === 'vacancies') {
+            const careerDropdown = document.getElementById('career-dropdown');
+            if (careerDropdown) {
+                careerDropdown.classList.add('text-custom-lightgreen', 'active-nav-item');
+                careerDropdown.classList.remove('text-white');
                 
-                // Apply white text color with high specificity
-                link.style.setProperty('color', 'white', 'important');
-                link.classList.add('text-white');
+                // Add active state to parent group
+                const parentGroup = careerDropdown.closest('.group');
+                if (parentGroup) {
+                    parentGroup.classList.add('active-dropdown');
+                }
                 
-                // Remove any conflicting classes
-                link.classList.remove('text-gray-700', 'dark:text-gray-200');
+                // Highlight specific dropdown item
+                if (currentRoute === 'careerinfo') {
+                    const careerInfoLink = document.getElementById('career-info');
+                    if (careerInfoLink) {
+                        careerInfoLink.classList.add('bg-custom-lightergreen', 'text-white');
+                    }
+                } else if (currentRoute === 'vacancies') {
+                    const vacanciesLink = document.getElementById('career-vacancies');
+                    if (vacanciesLink) {
+                        vacanciesLink.classList.add('bg-custom-lightergreen', 'text-white');
+                    }
+                }
             }
+        }
+    }
+    
+    // Mobile menu dropdown functionality
+    if (window.innerWidth <= 792) {
+        const dropdownButtons = document.querySelectorAll('.group button');
+        dropdownButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const dropdownMenu = this.nextElementSibling;
+                if (dropdownMenu && dropdownMenu.classList.contains('group-hover:block')) {
+                    dropdownMenu.classList.toggle('hidden');
+                }
+            });
         });
     }
 });
