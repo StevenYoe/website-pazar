@@ -49,18 +49,27 @@
                     @if(isset($histories) && count($histories) > 0)
                         @foreach($histories as $history)
                             <!-- History Item -->
-                            <div class="history-item min-w-full px-4">
-                                <div class="{{ $theme === 'dark' ? 'bg-gray-300' : 'bg-white' }} rounded-lg shadow-lg p-6 flex flex-col h-full">
-                                    <div class="history-flex-container">
-                                        <div class="history-image">
+                            <div class="history-item min-w-full md:min-w-[50%] px-4">
+                                <div class="{{ $theme === 'dark' ? 'bg-gray-300' : 'bg-white' }} rounded-lg shadow-lg p-6 h-full">
+                                    <div class="flex flex-col md:flex-row items-start md:items-center h-full">
+                                        <!-- History Image -->
+                                        <div class="w-full md:w-1/2 mb-6 md:mb-0 flex-shrink-0">
                                             @if(isset($history->hs_image))
-                                                <img src="{{ $history->hs_image }}" alt="Pazar Seasoning {{ $history->hs_year }}" class="w-full h-full object-cover">
+                                                <img src="{{ $history->hs_image }}" alt="Pazar Seasoning {{ $history->hs_year }}" class="w-full h-48 md:h-64 lg:h-72 object-cover rounded-lg">
                                             @endif
                                         </div>
-                                        <div class="history-content-wrapper">
-                                            <div class="history-year">{{ $history->hs_year }}</div>
-                                            <div class="history-content {{ $theme === 'dark' ? 'text-gray-800' : 'text-black' }}">
-                                                {!! app()->getLocale() == 'en' ? $history->hs_description_en : $history->hs_description_id !!}
+                                        
+                                        <!-- History Content -->
+                                        <div class="w-full md:w-1/2 md:pl-6 flex flex-col">
+                                            <div class="mb-4">
+                                                <span class="history-year text-2xl font-bold {{ $theme === 'dark' ? 'text-gray-800' : 'text-gray-800' }}">
+                                                    {{ $history->hs_year }}
+                                                </span>
+                                            </div>
+                                            <div class="flex-grow">
+                                                <div class="history-content {{ $theme === 'dark' ? 'text-gray-800' : 'text-gray-800' }} text-sm leading-relaxed">
+                                                    {!! app()->getLocale() == 'en' ? $history->hs_description_en : $history->hs_description_id !!}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -72,10 +81,10 @@
             </div>
             
             <!-- Navigation buttons -->
-            <button class="history-carousel-nav history-carousel-prev absolute top-1/2 left-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10" aria-label="Previous slide">
+            <button class="history-carousel-nav history-carousel-prev absolute top-1/2 left-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10 hidden md:block" aria-label="Previous slide">
                 <img src="{{ asset('img/web/left.svg') }}" alt="left icon" class="h-6 w-6">
             </button>
-            <button class="history-carousel-nav history-carousel-next absolute top-1/2 right-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10" aria-label="Next slide">
+            <button class="history-carousel-nav history-carousel-next absolute top-1/2 right-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10 hidden md:block" aria-label="Next slide">
                 <img src="{{ asset('img/web/right.svg') }}" alt="right icon" class="h-6 w-6">
             </button>
             

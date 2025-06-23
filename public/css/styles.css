@@ -61,6 +61,33 @@ body {
         margin-left: auto;
         margin-right: auto;
     }
+
+    .not-index {
+        margin-top: 4rem;
+        padding: 3rem 2rem;
+    }
+    
+    .not-index .landing-content {
+        padding: 0 2rem;
+        margin-top: 0; /* Konsisten */
+    }
+    
+    .not-index .flex.flex-col.items-center {
+        margin-top: 0; /* Reset untuk desktop */
+    }
+    
+    .not-index .text-white.mb-8 {
+        margin-bottom: 2rem; /* Konsisten dengan mobile */
+    }
+    
+    .not-index h1 {
+        font-size: 3rem;
+        margin-top: 0.5rem;
+    }
+    
+    .not-index .text-xl {
+        font-size: 1.1rem;
+    }
 }
 
 /* Button Styles */
@@ -131,10 +158,14 @@ body {
     cursor: pointer;
 }
 
-/* Not Index Pages */
 .not-index {
     margin-top: 4rem;
     padding: 3rem 2rem;
+}
+
+.not-index .landing-content {
+    padding: 0 2rem;
+    margin-top: 0; /* Reset margin-top yang bisa konflik */
 }
 
 .not-index h1 {
@@ -325,8 +356,13 @@ body {
     
     /* Not index pages */
     .not-index {
-        margin-top: 8rem;
+        margin-top: 5rem; /* Konsisten */
         padding: 2rem 1rem;
+    }
+    
+    .not-index .landing-content {
+        padding: 0 1rem;
+        margin-top: 0; /* Hapus margin-top konflik */
     }
     
     .not-index h1 {
@@ -341,6 +377,11 @@ body {
     .not-index .max-w-4xl, .not-index .max-w-2xl {
         max-width: 100%;
         margin-top: 1.5rem;
+    }
+    
+    /* Hapus override yang konflik */
+    .not-index.landing-content {
+        margin-top: 0 !important; /* Override margin-top yang ada */
     }
 }
 
@@ -633,27 +674,35 @@ body {
 
 /* Fixed Header Alignment Mobile */
 @media (max-width: 792px) {
-    .landing {
-        min-height: auto;
-        height: auto;
-        align-items: center;
+    .not-index {
+        margin-top: 5rem; /* Konsisten untuk mobile */
+        padding: 2rem 1rem;
+    }
+    
+    .not-index .landing-content {
+        padding: 0 1rem;
+        margin-top: 0; /* Hapus margin-top yang bisa konflik */
     }
     
     .not-index .flex.flex-col.items-center {
-        margin-top: -2rem;
+        margin-top: 0; /* Reset margin-top yang ada */
     }
     
     .not-index .text-white.mb-8 {
-        margin-bottom: 1rem;
-    }
-}
-
-@media (max-width: 640px) {
-    .not-index.landing-content {
-        margin-top: 4.5rem;
+        margin-bottom: 2rem; /* Konsisten spacing */
     }
     
     .not-index h1 {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
+        margin-top: 0.5rem;
+    }
+    
+    .not-index .text-xl {
+        font-size: 1rem;
+    }
+    
+    .not-index .max-w-4xl, .not-index .max-w-2xl {
+        max-width: 100%;
+        margin-top: 1.5rem;
     }
 }
