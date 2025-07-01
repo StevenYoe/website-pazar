@@ -1,8 +1,16 @@
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
 .filter-buttons {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
     gap: 1rem;
-    margin-bottom: 3rem;
 }
 
 .filter-btn {
@@ -155,13 +163,16 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .section-title {
-        font-size: 2rem;
+    .filter-container {
+        padding: 0 1rem;
+    }
+    
+    .filter-buttons {
+        order: 2; /* Move filter buttons below the download button on mobile */
     }
 
-    .filter-buttons {
-        flex-wrap: wrap;
-        padding: 0 1rem;
+    .section-title {
+        font-size: 2rem;
     }
 
     .filter-btn {
@@ -190,9 +201,10 @@
         align-items: center;
         gap: 0.75rem;
     }
-
+    
     .download-catalog-btn {
-        min-width: 250px;
-        padding: 0.75rem 1.5rem;
+        order: 1; /* Move download button above the filters on mobile */
+        width: 100%;
+        text-align: center;
     }
 }

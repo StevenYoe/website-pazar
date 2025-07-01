@@ -7,7 +7,6 @@
 <link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
-<!-- Company Header Section -->
 @section('header')
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
@@ -27,7 +26,6 @@
 @endsection
 
 @section('content')
-<!-- Why Pazar Section -->
 <section class="why-pazar py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.why_pazar') }}</h2>
@@ -44,7 +42,7 @@
                                 {{ app()->getLocale() == 'en' ? $item->w_title_en : $item->w_title_id }}
                             </h3>
                         </div>
-                        <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-900' }} {{ app()->getLocale() == 'en' ? 'mb-6' : '' }} text-sm mt-2 flex-grow line-clamp-4">
+                        <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-900' }} text-sm mt-2 flex-grow line-clamp-4">
                             {{ app()->getLocale() == 'en' ? $item->w_description_en : $item->w_description_id }}
                         </p>
                     </div>
@@ -54,18 +52,15 @@
     </div>
 </section>
 
-<!-- Certification Section -->
 <section class="certification py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.certifications') }}</h2>
         
         <div class="relative">
-            <!-- Carousel container -->
             <div class="carousel-container overflow-hidden">
                 <div class="carousel-track flex transition-transform duration-500" id="certificationTrack">
                     @if(isset($certifications) && count($certifications) > 0)
                         @foreach($certifications as $certification)
-                            <!-- Certification Item -->
                             <div class="certification-item min-w-full md:min-w-[50%] px-4">
                                 <div class="{{ $theme === 'dark' ? 'bg-gray-300' : 'bg-white' }} rounded-lg shadow-sm p-6 flex flex-row items-center h-full">
                                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
@@ -89,15 +84,13 @@
                 </div>
             </div>
             
-            <!-- Navigation buttons -->
             <button class="carousel-nav carousel-prev absolute top-1/2 left-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10 hidden md:block" aria-label="Previous slide">
-                <img src="{{ asset('img/web/left.svg') }}" alt="left icon" class="h-6 w-6">
+                <img src="img/Web/left.svg" alt="left icon" class="h-6 w-6">
             </button>
             <button class="carousel-nav carousel-next absolute top-1/2 right-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10 hidden md:block" aria-label="Next slide">
-                <img src="{{ asset('img/web/right.svg') }}" alt="right icon" class="h-6 w-6">
+                <img src="img/Web/right.svg" alt="right icon" class="h-6 w-6">
             </button>
             
-            <!-- Carousel indicators -->
             <div class="carousel-indicators flex justify-center mt-8 space-x-2">
                 @if(isset($certifications) && count($certifications) > 0)
                     @foreach($certifications as $index => $certification)
@@ -116,15 +109,14 @@
         <div class="flex justify-center mb-8">
             <div class="inline-flex rounded-md shadow-sm" role="group">
                 <button type="button" id="customerTabBtn" class="testimonial-tab-active {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }} px-5 py-2 text-sm font-medium rounded-l-lg">
-                    {{ __('general.customers') }}
+                    Customer
                 </button>
                 <button type="button" id="chefTabBtn" class="testimonial-tab {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }} px-5 py-2 text-sm font-medium rounded-r-lg">
-                    {{ __('general.chefs') }}
+                    Chef
                 </button>
             </div>
         </div>
         
-        <!-- Customer Testimonials -->
         <div id="customerTestimonials" class="testimonial-content">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @if(isset($customerTestimonials) && count($customerTestimonials) > 0)
@@ -145,7 +137,7 @@
                                     <p class="text-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-black' }}">Customer</p>
                                 </div>
                             </div>
-                            <p class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }} mb-4">
+                            <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }} mb-4">
                                 {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
                             </p>
                         </div>
@@ -154,34 +146,31 @@
             </div>
         </div>
         
-        <!-- Chef Testimonials - with alternating layout -->
         <div id="chefTestimonials" class="testimonial-content hidden">
             <div class="space-y-8">
                 @if(isset($chefTestimonials) && count($chefTestimonials) > 0)
                     @foreach($chefTestimonials as $index => $testimonial)
                         @if($index % 2 == 0)
-                        <!-- Odd chef testimonial - Image on left -->
                         <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6">
                             <div class="flex flex-col md:flex-row items-center">
                                 <div class="md:w-1/3 mb-6 md:mb-0">
-                                    <img src="{{ $testimonial->t_image }}" alt="{{ $testimonial->t_name }}" class="rounded-lg mx-auto w-full max-w-xs object-cover">
+                                    <img src="{{ $testimonial->t_image ?? asset('img/Testimonial/default-chef.jpg') }}" alt="{{ $testimonial->t_name }}" class="rounded-lg mx-auto w-full max-w-xs object-cover">
                                 </div>
                                 <div class="md:w-2/3 md:pl-8">
                                     <h4 class="text-xl font-bold mb-4 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
-                                    <p class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
+                                    <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }}">
                                         {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
                                     </p>
                                 </div>
                             </div>
                         </div>
                         @else
-                        <!-- Even chef testimonial - Image on right -->
                         <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6">
                             <div class="flex flex-col md:flex-row-reverse items-center">
                                 <div class="md:w-1/3 mb-6 md:mb-0">
-                                    <img src="{{ $testimonial->t_image }}" alt="{{ $testimonial->t_name }}" class="rounded-lg mx-auto w-full max-w-xs object-cover">
+                                    <img src="{{ $testimonial->t_image ?? asset('img/Testimonial/default-chef.jpg') }}" alt="{{ $testimonial->t_name }}" class="rounded-lg mx-auto w-full max-w-xs object-cover">
                                 </div>
-                                <div class="md:w-2/3 md:pr-8">
+                                <div class="md:w-2/3 md:pl-8 md:pr-0">
                                     <h4 class="text-xl font-bold mb-4 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
                                     <p class="{{ $theme === 'dark' ? 'text-gray-900' : 'text-gray-800' }}">
                                         {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
@@ -196,6 +185,24 @@
         </div>
     </div>
 </section>
+
+<div id="imagePopupModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
+    <div class="relative max-w-4xl max-h-full">
+        <button onclick="closeImagePopup()" 
+                class="absolute -top-4 -right-4 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 z-10">
+            <svg class="w-6 h-6 {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        
+        <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-2xl overflow-hidden">
+            <img id="popupImage" src="" alt="" class="max-w-full max-h-[80vh] object-contain">
+            <div class="p-4 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }}">
+                <p id="popupImageCaption" class="text-center {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-700' }} font-medium"></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 
