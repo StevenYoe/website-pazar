@@ -26,7 +26,7 @@
 <section class="py-12 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased product-section">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
         <div class="filter-container">
-            <a href="#" class="download-catalog-btn inline-block bg-custom-lightergreen hover:bg-custom-green text-white font-bold py-3 px-8 rounded-lg transition duration-300">
+            <a href="{{ route(app()->getLocale() . '.products.download-catalog') }}" class="download-catalog-btn inline-block bg-custom-lightergreen hover:bg-custom-green text-white font-bold py-3 px-8 rounded-lg transition duration-300">
                 {{ app()->getLocale() == 'en' ? 'Download Catalog' : 'Unduh Katalog' }}
             </a>
             <div class="filter-buttons">
