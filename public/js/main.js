@@ -12,28 +12,38 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
     const navbarMenu = document.getElementById('navbar-sticky');
     const landingContent = document.querySelector('.landing-content');
-    
-    // Reset initial state
-    function resetMobileNavState() {
-        if (window.innerWidth <= 792) {
-            navbarMenu.classList.add('hidden');
-            if (landingContent) {
-                landingContent.style.paddingTop = '0';
+
+    // Pastikan elemen ada
+    if (toggleButton && navbarMenu && landingContent) {
+        // Fungsi untuk mereset state navigasi saat layar diperbesar
+        const resetNavOnDesktop = () => {
+            if (window.innerWidth > 792.1) { // Breakpoint untuk desktop
+                if (!navbarMenu.classList.contains('hidden')) {
+                    navbarMenu.classList.add('hidden');
+                    toggleButton.setAttribute('aria-expanded', 'false');
+                    landingContent.style.paddingTop = ''; // Hapus inline style
+                }
             }
-        }
+        };
+
+        toggleButton.addEventListener('click', function() {
+            const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+            toggleButton.setAttribute('aria-expanded', !isExpanded);
+            navbarMenu.classList.toggle('hidden');
+
+            if (!isExpanded && window.innerWidth <= 792.1) {
+                // Hanya tambahkan padding di mobile saat menu dibuka
+                const menuHeight = navbarMenu.offsetHeight;
+                landingContent.style.paddingTop = menuHeight + 'px';
+            } else {
+                // Hapus padding saat menu ditutup
+                landingContent.style.paddingTop = '';
+            }
+        });
+
+        // Tambahkan event listener untuk resize
+        window.addEventListener('resize', resetNavOnDesktop);
     }
-    
-    // Initial setup
-    resetMobileNavState();
-    
-    // Handle dropdown attributes
-    if (window.innerWidth <= 792) {
-        document.querySelectorAll('[data-dropdown-toggle], [data-dropdown-trigger]')
-            .forEach(el => el.removeAttribute('data-dropdown-toggle'));
-    }
-    
-    // Handle resize events
-    window.addEventListener('resize', resetMobileNavState);
     
     if (toggleButton) {
         toggleButton.addEventListener('click', function() {

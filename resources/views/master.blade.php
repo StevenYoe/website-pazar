@@ -42,7 +42,7 @@
         @yield('style')
         <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
         <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-        <link href="https://db.onlinewebfonts.com/c/f5a6cacc1ecc1ccdc9e8563085f972ec?family=Nyte+W00+Black" rel="stylesheet">
+        <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
         
         <!-- Preconnect for performance -->
         <link rel="preconnect" href="https://fonts.googleapis.com">

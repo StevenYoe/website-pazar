@@ -62,9 +62,7 @@
                             <p class="text-gray-800 mb-4 flex-grow line-clamp-3">
                                 {{ app()->getLocale() == 'en' ? $product->p_description_en : $product->p_description_id }}
                             </p>
-                            <a href="{{ app()->getLocale() == 'en' ? '/en/product/' . $product->slug : '/id/product/' . $product->slug }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">
-                                {{ __('general.see_more') }} →
-                            </a>
+                            <a href="{{ route(app()->getLocale() . '.product.show', $product->slug) }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">{{ __('general.see_more') }} →</a>
                         </div>
                     </div>
                 @endforeach
