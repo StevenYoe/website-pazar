@@ -260,7 +260,7 @@ body {
     /* Landing adjustments */
     .landing {
         align-items: flex-start;
-        padding-top: 80px;
+        padding-top: 20px;
         text-align: center;
         padding-bottom: 3rem;
     }
@@ -302,7 +302,7 @@ body {
     
     /* Landing content adjustments */
     .landing-content {
-        padding-top: 150px;
+        padding-top: 0px;
         padding-bottom: 30px;
         padding-left: 1rem;
         padding-right: 1rem;
