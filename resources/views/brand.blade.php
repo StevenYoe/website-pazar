@@ -1,3 +1,16 @@
+<!--
+    brand.blade.php
+    
+    This Blade template renders the Brand page, including:
+    - The header section with a dynamic title and image
+    - The "Why Pazar" section with key selling points
+    - The Certification carousel with navigation and indicators
+    - The Testimonials section with tab switching for Customer and Chef testimonials
+    - All sections are responsive and theme-aware (dark/light)
+    - JavaScript is included for interactivity (carousel, tabs, card height, etc.)
+    
+    Comments are provided throughout to help programmers understand the structure and logic.
+-->
 @extends('master')
 
 @section('title', __('general.brand') . ' - Pazar Seasonings')
@@ -8,6 +21,7 @@
 @endsection
 
 @section('header')
+<!-- Header section: displays the main title and header image for the brand page -->
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
@@ -26,6 +40,7 @@
 @endsection
 
 @section('content')
+<!-- Why Pazar section: highlights key reasons to choose Pazar -->
 <section class="why-pazar py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.why_pazar') }}</h2>
@@ -33,6 +48,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
                 @foreach($whyPazarItems as $item)
+                    {{-- Card for each selling point --}}
                     <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 flex flex-col">
                         <div class="flex items-start mb-2">
                             <div class="flex-shrink-0 mr-2">
@@ -52,6 +68,7 @@
     </div>
 </section>
 
+<!-- Certification carousel: displays certifications with carousel navigation and indicators -->
 <section class="certification py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.certifications') }}</h2>
@@ -61,6 +78,7 @@
                 <div class="carousel-track flex transition-transform duration-500" id="certificationTrack">
                     @if(isset($certifications) && count($certifications) > 0)
                         @foreach($certifications as $certification)
+                            <!-- Each certification card -->
                             <div class="certification-item min-w-full md:min-w-[50%] px-4">
                                 <div class="{{ $theme === 'dark' ? 'bg-gray-300' : 'bg-white' }} rounded-lg shadow-sm p-6 flex flex-row items-center h-full">
                                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
@@ -84,6 +102,7 @@
                 </div>
             </div>
             
+            <!-- Carousel navigation buttons -->
             <button class="carousel-nav carousel-prev absolute top-1/2 left-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10 hidden md:block" aria-label="Previous slide">
                 <img src="{{ asset('img/web/left.svg') }}" alt="left icon" class="h-6 w-6">
             </button>
@@ -91,6 +110,7 @@
                 <img src="{{ asset('img/web/right.svg') }}" alt="right icon" class="h-6 w-6">
             </button>
             
+            <!-- Carousel indicators (dots) -->
             <div class="carousel-indicators flex justify-center mt-8 space-x-2">
                 @if(isset($certifications) && count($certifications) > 0)
                     @foreach($certifications as $index => $certification)
@@ -102,10 +122,12 @@
     </div>
 </section>
 
+<!-- Testimonials section: tabbed interface for Customer and Chef testimonials -->
 <section class="testimonials py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-8 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.testimonials') }}</h2>
         
+        <!-- Tab buttons for switching between Customer and Chef testimonials -->
         <div class="flex justify-center mb-8">
             <div class="inline-flex rounded-md shadow-sm" role="group">
                 <button type="button" id="customerTabBtn" class="testimonial-tab-active {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }} px-5 py-2 text-sm font-medium rounded-l-lg">
@@ -117,10 +139,12 @@
             </div>
         </div>
         
+        <!-- Customer testimonials tab content -->
         <div id="customerTestimonials" class="testimonial-content">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @if(isset($customerTestimonials) && count($customerTestimonials) > 0)
                     @foreach($customerTestimonials as $index => $testimonial)
+                        <!-- Each customer testimonial card -->
                         <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 relative">
                             <div class="flex items-center mb-4">
                                 <div class="h-10 w-10 mr-4">
@@ -146,11 +170,13 @@
             </div>
         </div>
         
+        <!-- Chef testimonials tab content -->
         <div id="chefTestimonials" class="testimonial-content hidden">
             <div class="space-y-8">
                 @if(isset($chefTestimonials) && count($chefTestimonials) > 0)
                     @foreach($chefTestimonials as $index => $testimonial)
                         @if($index % 2 == 0)
+                        <!-- Chef testimonial card (left image) -->
                         <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6">
                             <div class="flex flex-col md:flex-row items-center">
                                 <div class="md:w-3/5 mb-6 md:mb-0">
@@ -165,6 +191,7 @@
                             </div>
                         </div>
                         @else
+                        <!-- Chef testimonial card (right image) -->
                         <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6">
                             <div class="flex flex-col md:flex-row-reverse items-center">
                                 <div class="md:w-3/5 mb-6 md:mb-0">
@@ -189,6 +216,7 @@
 @endsection
 
 @section('script')
+<!-- JavaScript includes for interactivity: navigation, carousel, tabs, etc. -->
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/brand.js') }}"></script>

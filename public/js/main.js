@@ -1,4 +1,9 @@
-// JavaScript for scroll behavior
+// main.js
+//
+// This script manages the navigation bar's scroll behavior, responsive menu toggling, active state logic, and mobile dropdowns.
+// Each section and function is commented to clarify its purpose and logic for future maintainers.
+
+// Scroll event: toggles 'scrolled' class on navbar for sticky effect
 window.addEventListener('scroll', function() {
     const navbar = document.getElementById('navbar');
     if (window.scrollY > 50) {
@@ -9,48 +14,49 @@ window.addEventListener('scroll', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Responsive navigation menu toggle and padding adjustment
     const toggleButton = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
     const navbarMenu = document.getElementById('navbar-sticky');
     const landingContent = document.querySelector('.landing-content');
 
-    // Pastikan elemen ada
+    // Ensure all elements exist before adding listeners
     if (toggleButton && navbarMenu && landingContent) {
-        // Fungsi untuk mereset state navigasi saat layar diperbesar
+        // Reset navigation state when resizing to desktop
         const resetNavOnDesktop = () => {
-            if (window.innerWidth > 792.1) { // Breakpoint untuk desktop
+            if (window.innerWidth > 792.1) { // Desktop breakpoint
                 if (!navbarMenu.classList.contains('hidden')) {
                     navbarMenu.classList.add('hidden');
                     toggleButton.setAttribute('aria-expanded', 'false');
-                    landingContent.style.paddingTop = ''; // Hapus inline style
+                    landingContent.style.paddingTop = '';
                 }
             }
         };
 
+        // Toggle mobile menu and adjust landing content padding
         toggleButton.addEventListener('click', function() {
             const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
             toggleButton.setAttribute('aria-expanded', !isExpanded);
             navbarMenu.classList.toggle('hidden');
-
             if (!isExpanded && window.innerWidth <= 792.1) {
-                // Hanya tambahkan padding di mobile saat menu dibuka
+                // Add padding to landing content when menu is open on mobile
                 const menuHeight = navbarMenu.offsetHeight;
                 landingContent.style.paddingTop = menuHeight + 'px';
             } else {
-                // Hapus padding saat menu ditutup
+                // Remove padding when menu is closed
                 landingContent.style.paddingTop = '';
             }
         });
 
-        // Tambahkan event listener untuk resize
+        // Listen for window resize to reset nav state
         window.addEventListener('resize', resetNavOnDesktop);
     }
     
+    // Fallback: toggle menu and landing content padding if only toggleButton exists
     if (toggleButton) {
         toggleButton.addEventListener('click', function() {
             const expanded = toggleButton.getAttribute('aria-expanded') === 'true' || false;
             toggleButton.setAttribute('aria-expanded', !expanded);
             navbarMenu.classList.toggle('hidden');
-            
             if (!expanded && landingContent) {
                 const menuHeight = navbarMenu.offsetHeight;
                 landingContent.style.paddingTop = menuHeight + 'px';
@@ -62,13 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // IMPROVED ACTIVE STATE LOGIC
+    // Improved active state logic for navigation
     const currentPath = window.location.pathname;
     const currentLocale = currentPath.startsWith('/en') ? 'en' : 'id';
-    
     // Remove locale prefix to get the actual route
     const pathWithoutLocale = currentPath.replace(/^\/(id|en)/, '') || '/';
-    
     // Define route mappings for active state
     const routeMappings = {
         '/': 'index',
@@ -85,11 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
         '/lowongan': 'vacancies',
         '/vacancies': 'vacancies'
     };
-    
     // Get current route name
     let currentRoute = routeMappings[pathWithoutLocale];
-    
-    // Check if we're on a detail page
+    // Check for detail pages
     if (!currentRoute) {
         if (pathWithoutLocale.match(/^\/(produk|product|products)\/[\w-]+$/)) {
             currentRoute = 'products';
@@ -99,36 +101,31 @@ document.addEventListener('DOMContentLoaded', function() {
             currentRoute = 'vacancies';
         }
     }
-    
     // Apply active state to navigation items
     if (currentRoute) {
-        // Handle main navigation items
+        // Main navigation items
         const navLinks = {
             'company': document.getElementById('nav-company'),
             'brand': document.getElementById('nav-brand'),
             'products': document.getElementById('nav-products'),
             'recipes': document.getElementById('nav-recipes')
         };
-        
-        // Apply active class to the correct nav item
+        // Highlight the correct nav item
         if (navLinks[currentRoute]) {
             navLinks[currentRoute].classList.add('text-custom-lightgreen', 'active-nav-item');
             navLinks[currentRoute].classList.remove('text-white');
         }
-        
-        // Handle career dropdown
+        // Handle career dropdown highlighting
         if (currentRoute === 'careerinfo' || currentRoute === 'vacancies') {
             const careerDropdown = document.getElementById('career-dropdown');
             if (careerDropdown) {
                 careerDropdown.classList.add('text-custom-lightgreen', 'active-nav-item');
                 careerDropdown.classList.remove('text-white');
-                
                 // Add active state to parent group
                 const parentGroup = careerDropdown.closest('.group');
                 if (parentGroup) {
                     parentGroup.classList.add('active-dropdown');
                 }
-                
                 // Highlight specific dropdown item
                 if (currentRoute === 'careerinfo') {
                     const careerInfoLink = document.getElementById('career-info');
@@ -144,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-    
     // Mobile menu dropdown functionality
     if (window.innerWidth <= 792) {
         const dropdownButtons = document.querySelectorAll('.group button');

@@ -3,22 +3,26 @@
 @section('title', __('general.vacancies') . ' - Pazar Seasonings')
 
 @section('style')
+<!-- Include vacancy and card height styles for consistent layout -->
 <link href="{{ asset('css/vacancy.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
-<!-- Vacancies Header Section -->
+<!-- Vacancies Header Section: Displays the vacancies page banner with title and image -->
 @section('header')
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
+            <!-- Career label above the main title -->
             <p class="text-xl mb-2 text-yellow-400">{{ __('general.career') }}</p>
+            <!-- Dynamic page title based on locale -->
             <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">
                 {{ app()->getLocale() == 'en' ? $header->h_title_en : $header->h_title_id }}
             </h1>
         </div>
         @if(isset($header->h_image))
         <div class="w-full max-w-2xl">
+            <!-- Header image for the vacancies page -->
             <img src="{{ $header->h_image }}" alt="Vacancies-Header" class="rounded-lg shadow-lg w-full">
         </div>
         @endif
@@ -27,14 +31,14 @@
 @endsection
 
 @section('content')
-<!-- Vacancies Section -->
+<!-- Vacancies Section: Shows filter options and job vacancy cards -->
 <section class="py-12 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} vacancies-section">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
-        <!-- Filter Section -->
+        <!-- Filter Section: Allows users to filter vacancies by department, employment type, and experience -->
         <div class="filters mb-12 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200' }} rounded-lg shadow-md p-6">
             <h2 class="text-2xl font-bold mb-4 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.filter_vacancies') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Department Filter -->
+                <!-- Department Filter Dropdown -->
                 <div class="filter-group">
                     <label for="department-filter" class="block text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-800' }} mb-2">{{ __('general.department') }}</label>
                     <select id="department-filter" class="block w-full py-2 px-3 border dark:text-black border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green">
@@ -47,7 +51,7 @@
                     </select>
                 </div>
                 
-                <!-- Employment Type Filter -->
+                <!-- Employment Type Filter Dropdown -->
                 <div class="filter-group">
                     <label for="employment-filter" class="block text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-800' }} mb-2">{{ __('general.work_model') }}</label>
                     <select id="employment-filter" class="block w-full py-2 px-3 border dark:text-black border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green">
@@ -60,7 +64,7 @@
                     </select>
                 </div>
                 
-                <!-- Experience Level Filter -->
+                <!-- Experience Level Filter Dropdown -->
                 <div class="filter-group">
                     <label for="experience-filter" class="block text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-800' }} mb-2">{{ __('general.experience') }}</label>
                     <select id="experience-filter" class="block w-full py-2 px-3 border dark:text-black border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green">
@@ -75,16 +79,18 @@
             </div>
         </div>
 
-        <!-- Vacancies Listing -->
+        <!-- Vacancies Listing: Displays all available job vacancies -->
         <div id="vacancies-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @if(count($vacancies) > 0)
                 @foreach($vacancies as $vacancy)
+                    <!-- Vacancy card for each job opening -->
                     <div class="vacancy-item {{ $theme === 'dark' ? 'bg-gray-300' : 'bg-gray-100' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden"
                         data-department="{{ $vacancy->v_department_id }}"
                         data-employment="{{ $vacancy->v_employment_id }}"
                         data-experience="{{ $vacancy->v_experience_id }}">
                         
                         @if(isset($vacancy->v_urgent) && $vacancy->v_urgent)
+                        <!-- Urgent tag for high-priority vacancies -->
                         <div class="urgent-tag">
                             <span class="inline-flex items-center px-3 py-1 text-xs font-semibold bg-red-100 text-red-800">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -145,7 +151,7 @@
             @endif
         </div>
         
-        <!-- No Results Message - Removed "hidden" class to make it appear when needed -->
+        <!-- No Results Message: Appears if no vacancies match the filters -->
         <div id="no-results" class="hidden text-center py-10 col-span-full">
             <p class="text-lg text-gray-500">{{ __('general.no_vacancies') }}</p>
         </div>
@@ -154,6 +160,7 @@
 @endsection
 
 @section('script')
+<!-- Include scripts for vacancies page interactivity and filtering -->
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/vacancy.js') }}"></script>

@@ -7,9 +7,13 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 
+// BaseController provides reusable methods for making CRUD API requests
+// It handles GET, POST, PUT, and DELETE requests to an external API with authentication and error logging
 class BaseController extends Controller
 {
+    // The base URL for the external API
     protected $apiBaseUrl;
+    // The API token for authentication
     protected $apiToken;
     
     public function __construct()
@@ -27,6 +31,9 @@ class BaseController extends Controller
      * @param string $endpoint Endpoint path (e.g., '/dashboard/statistics')
      * @param array $params Optional query parameters
      * @return array Response data or error message
+     *
+     * This method sends a GET request to the API and returns the response as an array.
+     * If the request fails, it logs the error and returns a standardized error array.
      */
     public function crudApiGet($endpoint, $params = [])
     {
@@ -63,6 +70,9 @@ class BaseController extends Controller
      * @param string $endpoint Endpoint path
      * @param array $data Data to send
      * @return array Response data or error message
+     *
+     * This method sends a POST request to the API and returns the response as an array.
+     * If the request fails, it logs the error and returns a standardized error array.
      */
     protected function crudApiPost($endpoint, $data = [])
     {
@@ -99,6 +109,9 @@ class BaseController extends Controller
      * @param string $endpoint Endpoint path
      * @param array $data Data to send
      * @return array Response data or error message
+     *
+     * This method sends a PUT request to the API and returns the response as an array.
+     * If the request fails, it logs the error and returns a standardized error array.
      */
     protected function crudApiPut($endpoint, $data = [])
     {
@@ -134,6 +147,9 @@ class BaseController extends Controller
      *
      * @param string $endpoint Endpoint path
      * @return array Response data or error message
+     *
+     * This method sends a DELETE request to the API and returns the response as an array.
+     * If the request fails, it logs the error and returns a standardized error array.
      */
     protected function crudApiDelete($endpoint)
     {

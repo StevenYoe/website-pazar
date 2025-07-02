@@ -1,3 +1,11 @@
+/*
+    recipe.css
+    This stylesheet provides custom styles for the recipe listing page, including filter buttons,
+    recipe grid, recipe items, and responsive adjustments for mobile devices.
+    It ensures a clean, modern, and interactive UI for recipe-related views.
+*/
+
+/* Filter button container and button styles */
 .filter-buttons {
     display: flex;
     justify-content: center;
@@ -25,6 +33,7 @@
     border-color: #BF161C;
 }
 
+/* Recipe grid and recipe item styles */
 .recipe-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

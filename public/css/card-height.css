@@ -1,3 +1,10 @@
+/*
+    card-height.css
+    This stylesheet ensures that card containers and their content (titles and descriptions)
+    display their full text without truncation or unnecessary height constraints.
+    It is used to improve readability and maintain consistent card layouts across sections.
+*/
+
 /* Core card container styles */
 .card-container {
   display: flex;
@@ -5,32 +12,26 @@
   height: 100%;
 }
 
-/* Remove truncation constraints */
+/* Remove truncation and min-height for section titles */
 .why-pazar h3.text-lg,
 .product-category h3.text-xl,
 .recipe-section h3.text-xl,
 .recipe-section h4.text-sm,
 .vacancies-section .vacancy-item h3.text-xl {
-  /* Remove min-height constraints */
-  min-height: auto;
-  /* Remove truncation */
-  -webkit-line-clamp: unset;
-  /* Keep vertical alignment */
-  align-items: flex-start;
-  /* Ensure full text is visible */
-  overflow: visible;
+  min-height: auto;           /* Remove any min-height constraints */
+  line-clamp: unset;          /* Remove text truncation (multi-line ellipsis) - standard */
+  -webkit-line-clamp: unset;  /* Remove text truncation (multi-line ellipsis) - webkit */
+  align-items: flex-start;    /* Keep vertical alignment at the top */
+  overflow: visible;          /* Ensure full text is visible */
 }
 
-/* Remove truncation for descriptions */
+/* Remove truncation and min-height for descriptions */
 .why-pazar p.text-sm,
 .product-category p.text-gray-600,
 .product-section p.text-gray-600 {
-  /* Remove min-height constraints */
-  min-height: auto;
-  /* Remove truncation */
-  -webkit-line-clamp: unset;
-  /* Keep vertical alignment */
-  align-items: flex-start;
-  /* Ensure full text is visible */
-  overflow: visible;
+  min-height: auto;           /* Remove any min-height constraints */
+  line-clamp: unset;          /* Remove text truncation (multi-line ellipsis) - standard */
+  -webkit-line-clamp: unset;  /* Remove text truncation (multi-line ellipsis) - webkit */
+  align-items: flex-start;    /* Keep vertical alignment at the top */
+  overflow: visible;          /* Ensure full text is visible */
 }

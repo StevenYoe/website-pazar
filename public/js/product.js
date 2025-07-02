@@ -1,20 +1,26 @@
-// Product filter functionality
+// product.js
+//
+// This script manages product filtering and catalog download functionality on the products page.
+// Each section and function is commented to clarify its purpose and logic for future maintainers.
+
+// Product filter functionality: show/hide products by category
+// Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Get all filter buttons and product items
     const filterButtons = document.querySelectorAll('.filter-btn');
     const productItems = document.querySelectorAll('.product-item');
 
-    // Check if elements exist before proceeding
+    // Check if filter buttons and product items exist
     if (filterButtons.length === 0) {
         console.warn('No filter buttons found on this page');
-        return; // Exit if no filter buttons
+        return;
     }
-    
     if (productItems.length === 0) {
         console.warn('No product items found on this page');
-        return; // Exit if no product items
+        return;
     }
 
+    // (Optional) Gather product info for debugging or future use
     productItems.forEach(item => {
         const category = item.getAttribute('data-category') || '';
         const id = item.getAttribute('data-id') || '';
@@ -22,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = titleElement ? titleElement.textContent.trim() : 'Unknown';
     });
 
+    // (Optional) Gather filter info for debugging or future use
     filterButtons.forEach(button => {
         const filter = button.getAttribute('data-filter') || '';
     });
@@ -31,25 +38,20 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             // Remove 'active' class from all buttons
             filterButtons.forEach(btn => btn.classList.remove('active'));
-            
             // Add 'active' class to clicked button
             this.classList.add('active');
-            
             // Get filter value
             const filterValue = this.getAttribute('data-filter') || '';
-            
             let visibleCount = 0;
-            
             // Show/hide products based on filter
             productItems.forEach(item => {
                 const itemCategory = (item.getAttribute('data-category') || '').trim();
                 const titleElement = item.querySelector('h3');
                 const itemTitle = titleElement ? titleElement.textContent.trim() : 'Unknown';
-                
                 // Show all items if 'all' is selected, else filter by category
                 if (filterValue === 'all' || 
                    (filterValue !== '' && itemCategory !== '' && itemCategory === filterValue)) {
-                    item.style.display = 'flex';  // Explicitly set to flex to ensure it displays
+                    item.style.display = 'flex';
                     visibleCount++;
                 } else {
                     item.style.display = 'none';
@@ -58,25 +60,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Initially activate the "All" filter
+    // Initially activate the "All" filter for default view
     const allFilterBtn = document.querySelector('.filter-btn[data-filter="all"]');
     if (allFilterBtn) {
         allFilterBtn.click();
     } else {
         console.warn("Couldn't find 'All' filter button");
-        // If there's no "All" button, activate the first filter instead
+        // If no "All" button, activate the first filter instead
         if (filterButtons.length > 0) {
             filterButtons[0].click();
         }
     }
 
-    // Download catalog functionality
+    // Download catalog functionality: visual feedback and notification
     const downloadButtons = document.querySelectorAll('.download-catalog-btn');
     downloadButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             // Add downloading class for visual feedback
             this.classList.add('downloading');
-            
             // Show loading state
             const originalText = this.innerHTML;
             this.innerHTML = `
@@ -84,9 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                Downloading...
-            `;
-            
+                Downloading...`;
             // Reset after 2 seconds
             setTimeout(() => {
                 this.classList.remove('downloading');
@@ -110,8 +109,7 @@ function showDownloadNotification(message) {
             <span>${message}</span>
         </div>
     `;
-    
-    // Add styles
+    // Add styles for notification
     notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -125,21 +123,17 @@ function showDownloadNotification(message) {
         transform: translateX(100%);
         transition: transform 0.3s ease;
     `;
-    
     notification.querySelector('.notification-content').style.cssText = `
         display: flex;
         align-items: center;
         gap: 0.5rem;
     `;
-    
     // Add to body
     document.body.appendChild(notification);
-    
     // Animate in
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
-    
     // Remove after 3 seconds
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';

@@ -1,12 +1,27 @@
+<!--
+    company.blade.php
+    
+    This Blade template renders the Company page, including:
+    - The header section with a dynamic title and image
+    - The Company Overview section with a description
+    - The History section with a custom carousel for company milestones
+    - The Quality Policy section
+    - The Vision & Mission section with responsive layout
+    - All sections are responsive and theme-aware (dark/light)
+    - JavaScript is included for interactivity (main.js, back-to-top.js, history-carousel.js)
+    
+    Comments are provided throughout to help programmers understand the structure and logic.
+-->
 @extends('master')
 
 @section('title', __('general.company') . ' - Pazar Seasonings')
 
-<!-- Company Header Section -->
+<!-- Company Header Section: displays the main title and header image for the company page -->
 @section('header')
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
         <div class="text-white mb-8">
+            <!-- About label for the company page header -->
             @if(isset($header))
                 <p class="text-xl mb-2 text-yellow-400">{{ __('general.about') }}</p>
                 <h1 class="text-5xl font-bold {{ $theme === 'dark' ? 'text-gray-200' : 'text-white' }}">
@@ -24,12 +39,11 @@
 @endsection
 
 @section('content')
-<!-- Company What Section -->
+<!-- Company What Section: overview of the company -->
 @if(isset($companyWhat))
 <section class="company-what py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.company_overview') }}</h2>
-        
         <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
             {!! app()->getLocale() == 'en' ? nl2br(e($companyWhat->cp_description_en)) : nl2br(e($companyWhat->cp_description_id)) !!}
         </div>
@@ -37,18 +51,17 @@
 </section>
 @endif
 
-<!-- History Section -->
+<!-- History Section: company milestones carousel -->
 <section class="history-section py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.history') }}</h2>
-        
         <div class="relative">
             <!-- History Carousel container -->
             <div class="history-carousel-container overflow-hidden">
                 <div class="history-track flex transition-transform duration-500" id="historyTrack">
                     @if(isset($histories) && count($histories) > 0)
                         @foreach($histories as $history)
-                            <!-- History Item -->
+                            <!-- History Item: each milestone in the carousel -->
                             <div class="history-item min-w-full md:min-w-[50%] px-4">
                                 <div class="{{ $theme === 'dark' ? 'bg-gray-300' : 'bg-white' }} rounded-lg shadow-lg p-6 h-full">
                                     <div class="flex flex-col md:flex-row items-start md:items-center h-full">
@@ -58,7 +71,6 @@
                                                 <img src="{{ $history->hs_image }}" alt="Pazar Seasoning {{ $history->hs_year }}" class="w-full h-48 md:h-64 lg:h-72 object-cover rounded-lg">
                                             @endif
                                         </div>
-                                        
                                         <!-- History Content -->
                                         <div class="w-full md:w-1/2 md:pl-6 flex flex-col">
                                             <div class="mb-4">
@@ -79,16 +91,14 @@
                     @endif
                 </div>
             </div>
-            
-            <!-- Navigation buttons -->
+            <!-- Navigation buttons for the carousel -->
             <button class="history-carousel-nav history-carousel-prev absolute top-1/2 left-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10 hidden md:block" aria-label="Previous slide">
                 <img src="{{ asset('img/web/left.svg') }}" alt="left icon" class="h-6 w-6">
             </button>
             <button class="history-carousel-nav history-carousel-next absolute top-1/2 right-0 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 focus:outline-none z-10 hidden md:block" aria-label="Next slide">
                 <img src="{{ asset('img/web/right.svg') }}" alt="right icon" class="h-6 w-6">
             </button>
-            
-            <!-- Carousel indicators -->
+            <!-- Carousel indicators (populated by JS) -->
             <div class="history-carousel-indicators flex justify-center mt-8 space-x-2">
                 <!-- These will be populated by JavaScript -->
             </div>
@@ -96,12 +106,11 @@
     </div>
 </section>
 
-<!-- Quality Policy Section -->
+<!-- Quality Policy Section: company's quality policy statement -->
 @if(isset($companyPolicy))
 <section class="quality-policy py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.policy') }}</h2>
-        
         <div class="prose prose-lg mx-auto {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">
             {!! app()->getLocale() == 'en' ? nl2br(e($companyPolicy->cp_description_en)) : nl2br(e($companyPolicy->cp_description_id)) !!}
         </div>
@@ -109,7 +118,7 @@
 </section>
 @endif
 
-<!-- Vision & Mission Section -->
+<!-- Vision & Mission Section: displays the company's vision and mission side by side -->
 <section class="vision-mission py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row">
@@ -122,13 +131,10 @@
                 </div>
             </div>
             @endif
-            
             <!-- Divider - Only visible on desktop (793px and above) -->
             <div class="hidden md:block w-px {{ $theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300' }} mx-8 self-stretch"></div>
-            
             <!-- Mobile Divider - Only visible on mobile (below 767px) -->
             <div class="md1:hidden w-full h-px {{ $theme === 'dark' ? 'bg-gray-600' : 'bg-gray-300' }} my-8"></div>
-            
             <!-- Mission -->
             @if(isset($companyMission))
             <div class="flex-1">
@@ -144,6 +150,7 @@
 @endsection
 
 @section('script')
+<!-- JavaScript includes for interactivity: navigation, back-to-top, history carousel, etc. -->
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 <script src="{{ asset('js/history-carousel.js') }}"></script>

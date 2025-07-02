@@ -9,15 +9,15 @@
 @endsection
 
 @section('header')
-<!-- Override with empty header to remove default landing content -->
+<!-- Override with empty header to remove default landing content on product detail page -->
 <div class="product-detail-header"></div>
 @endsection
 
 @section('content')
-<!-- Product Detail Section -->
+<!-- Product Detail Section: Displays product image, info, and description -->
 <section class="pt-10 pb-12 {{ $theme === 'dark' ? 'bg-gray-900 text-gray-400' : 'bg-white text-gray-900' }}">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Breadcrumb Navigation -->
+        <!-- Breadcrumb Navigation: Shows navigation path for user orientation -->
         <div class="mb-8">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -50,14 +50,14 @@
         </div>
 
         <div class="lg:flex lg:items-start lg:space-x-8">
-            <!-- Product Image -->
+            <!-- Product Image Section -->
             <div class="lg:w-1/2">
                 <div class="rounded-lg overflow-hidden shadow-lg">
                     <img src="{{ $product->p_image }}" alt="{{ $product->p_title_id }}" class="w-full h-auto">
                 </div>
             </div>
             
-            <!-- Product Info -->
+            <!-- Product Info Section: Title, category, and description -->
             <div class="mt-10 lg:mt-0 lg:w-1/2">
                 <div class="pb-3">
                     <h1 class="text-3xl {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{!! app()->getLocale() == 'en' ? $product->p_title_en : $product->p_title_id !!}</h1>
@@ -67,10 +67,13 @@
                     <div class="py-1">
                         <div class="mt-2 prose prose-sm {{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-500' }}">
                             @if(!empty($product->detail->pd_net_weight))    
+                                <!-- Net weight info -->
                                 <p class="mb-2 {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-700' }}"> {{ __('general.net_weight') . ': ' . $product->detail->pd_net_weight }}</p>
                             @endif
+                            <!-- Short product description -->
                             <p class="mb-4"> {!! app()->getLocale() == 'en' ? $product->p_description_en : $product->p_description_id !!}</p>
                             @if(!empty($product->detail->pd_longdesc_id))
+                                <!-- Long product description -->
                                 {!! app()->getLocale() == 'en' ? nl2br(e($product->detail->pd_longdesc_en)) : nl2br(e($product->detail->pd_longdesc_id)) !!}
                             @endif
                         </div>
@@ -79,7 +82,7 @@
             </div>
         </div>
         
-        <!-- E-commerce Links with store logos -->
+        <!-- E-commerce Links with store logos: Direct links to buy the product on various platforms -->
         @if(isset($product->detail))
         <div class="mt-10 pt-6">
             <h3 class="text-xl font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }} text-center mb-6">{{ __('general.buy_now') }}</h3>
@@ -111,7 +114,7 @@
         </div>
         @endif
         
-        <!-- Produk Lainnya -->
+        <!-- Related Products Section: Shows other products for cross-selling -->
         @if(count($randomProducts) > 0)
         <div class="mt-16 product-section">
             <h2 class="text-2xl font-bold text-center {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }} mb-8">{{ __('general.related_products') }}</h2>
@@ -146,6 +149,7 @@
 @endsection
 
 @section('script')
+<!-- Include scripts for product detail interactivity and UI behavior -->
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>

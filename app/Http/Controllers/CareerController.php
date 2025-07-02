@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// CareerController handles the logic for displaying the career info page and processing career-related data from the API
 class CareerController extends BaseController
 {
     /**
-     * Display the career info page
+     * Display the career info page with all required data from the API
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        // Get the current locale
+        // Get the current locale (language)
         $locale = app()->getLocale();
         $titleField = 'h_title_' . $locale;
         $descField = 'h_description_' . $locale;
@@ -21,12 +22,12 @@ class CareerController extends BaseController
         // Use CRUD API to get career page data
         $response = $this->crudApiGet('/career/data');
         
-        // Check if response was successful
+        // Check if response was successful, otherwise show error
         if (!isset($response['success']) || !$response['success']) {
             return view('careerinfo')->with('error', $response['message'] ?? 'Failed to load career data');
         }
         
-        // Extract data from response for view
+        // Prepare data for the view, processing images and converting arrays to objects
         $data = [
             // Header data - convert array to object if it exists and add storage URL to image
             'header' => isset($response['data']['header']) ? $this->processHeader($response['data']['header']) : null,
@@ -45,9 +46,10 @@ class CareerController extends BaseController
                 array_map([$this, 'processCareerInfo'], $response['data']['career_infos']) : [],
         ];
         
-        // For debugging
+        // For debugging: Uncomment the line below to inspect the API response and processed data
         // dd($response, $data);
         
+        // Return the careerinfo view with the processed data
         return view('careerinfo', $data);
     }
     
@@ -61,7 +63,7 @@ class CareerController extends BaseController
     {
         $headerObj = $this->arrayToObject($header);
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($headerObj->h_image)) {
             $headerObj->h_image = config('app.storage_url') . '/' . $headerObj->h_image;
         }
@@ -79,7 +81,7 @@ class CareerController extends BaseController
     {
         $careerInfoObj = $this->arrayToObject($careerInfo);
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($careerInfoObj->ci_image)) {
             $careerInfoObj->ci_image = config('app.storage_url') . '/' . $careerInfoObj->ci_image;
         }
@@ -92,6 +94,8 @@ class CareerController extends BaseController
      *
      * @param array $array The array to convert
      * @return object The converted object
+     *
+     * This helper function recursively converts an array to a stdClass object.
      */
     private function arrayToObject($array)
     {

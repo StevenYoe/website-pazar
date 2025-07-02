@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// CompanyController handles the logic for displaying the company page and processing company-related data from the API
 class CompanyController extends BaseController
 {
     /**
-     * Display the company page
+     * Display the company page with all required data from the API
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        // Get the current locale
+        // Get the current locale (language)
         $locale = app()->getLocale();
         $titleField = 'h_title_' . $locale;
         $descField = 'h_description_' . $locale;
@@ -21,12 +22,12 @@ class CompanyController extends BaseController
         // Use CRUD API to get company page data
         $response = $this->crudApiGet('/company/data');
         
-        // Check if response was successful
+        // Check if response was successful, otherwise show error
         if (!isset($response['success']) || !$response['success']) {
             return view('company')->with('error', $response['message'] ?? 'Failed to load company data');
         }
         
-        // Extract data from response for view
+        // Prepare data for the view, processing images and converting arrays to objects
         $data = [
             // Header data - convert array to object if it exists and add storage URL to image
             'header' => isset($response['data']['header']) ? $this->processHeader($response['data']['header']) : null,
@@ -44,6 +45,7 @@ class CompanyController extends BaseController
             'companyMission' => isset($response['data']['company_mission']) ? $this->arrayToObject($response['data']['company_mission']) : null,
         ];
         
+        // Return the company view with the processed data
         return view('company', $data);
     }
     
@@ -57,7 +59,7 @@ class CompanyController extends BaseController
     {
         $headerObj = $this->arrayToObject($header);
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($headerObj->h_image)) {
             $headerObj->h_image = config('app.storage_url') . '/' . $headerObj->h_image;
         }
@@ -75,7 +77,7 @@ class CompanyController extends BaseController
     {
         $historyObj = $this->arrayToObject($history);
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($historyObj->hs_image)) {
             $historyObj->hs_image = config('app.storage_url') . '/' . $historyObj->hs_image;
         }
@@ -88,6 +90,8 @@ class CompanyController extends BaseController
      *
      * @param array $array The array to convert
      * @return object The converted object
+     *
+     * This helper function recursively converts an array to a stdClass object.
      */
     private function arrayToObject($array)
     {

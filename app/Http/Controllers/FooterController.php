@@ -7,19 +7,22 @@ use stdClass;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 
+// FooterController handles the logic for retrieving and processing footer data for the master layout
 class FooterController extends BaseController
 {
     /**
      * Get footer data for the master layout
      *
-     * @return array
+     * @return array Footer data including address, contacts, and socials
+     *
+     * This method retrieves footer data from the API, processes it, and returns it in a structured format.
+     * It also supports caching for performance, which can be toggled for debugging.
      */
     public function getFooterData()
     {
-        // Try to get data from cache first
-        // Temporarily disable cache for debugging
+        // Try to get data from cache first (disabled for debugging)
         $cacheKey = 'footer_data';
-        $useCache = false; // Set to false to bypass cache during debugging
+        $useCache = false; // Set to true to enable cache
         
         if ($useCache && Cache::has($cacheKey)) {
             return Cache::get($cacheKey);
@@ -28,7 +31,7 @@ class FooterController extends BaseController
         // Use CRUD API to get all footer data
         $response = $this->crudApiGet('/footers');
         
-        // Check if response was successful
+        // Check if response was successful, otherwise return error data
         if (!isset($response['success']) || !$response['success']) {
             $errorData = [
                 'error' => $response['message'] ?? 'Failed to load footer data',
@@ -45,7 +48,7 @@ class FooterController extends BaseController
         $contacts = [];
         $socials = [];
         
-        // Process footer items by type
+        // Process footer items by type (address, contacts, socials)
         if (isset($response['data']['data']) && is_array($response['data']['data'])) {
             foreach ($response['data']['data'] as $item) {
                 $footerItem = $this->processFooterItem($item);
@@ -54,7 +57,7 @@ class FooterController extends BaseController
                     case 'alamat':
                         // Ensure the complete address is properly formatted
                         if (isset($footerItem->f_description_id)) {
-                            // Make sure the description has no HTML tags or special characters that could affect display
+                            // Remove unwanted characters from the address description
                             $footerItem->f_description_id = trim($footerItem->f_description_id);
                         }
                         $address = $footerItem;
@@ -69,19 +72,19 @@ class FooterController extends BaseController
             }
         }
         
+        // Structure the footer data for the view
         $footerData = [
             'address' => $address,
             'contacts' => $contacts,
             'socials' => $socials
         ];
         
-        // For debugging
-        if (isset($address->f_description_id)) {
-            // Log the description to check its value
-            // \Illuminate\Support\Facades\Log::info('Address description: ' . $address->f_description_id);
-        }
+        // For debugging: Uncomment to log the address description
+        // if (isset($address->f_description_id)) {
+        //     \Illuminate\Support\Facades\Log::info('Address description: ' . $address->f_description_id);
+        // }
         
-        // Cache the data (only if useCache is true)
+        // Cache the data for 1 hour if caching is enabled
         if ($useCache) {
             Cache::put($cacheKey, $footerData, 60 * 60);
         }
@@ -94,13 +97,16 @@ class FooterController extends BaseController
      *
      * @param array $item The footer item from API
      * @return object The processed footer object
+     *
+     * This method adds the storage URL to the icon path and converts the array to an object.
      */
     private function processFooterItem($item)
     {
         $footerObj = $this->arrayToObject($item);
         
+        // Add storage URL to icon if it exists
         if (!empty($footerObj->f_icon)) {
-            $storageUrl = config('app.storage_url'); // Pastikan ini digunakan
+            $storageUrl = config('app.storage_url');
             $storageUrl = rtrim($storageUrl, '/');
             $footerObj->f_icon = $storageUrl . '/' . ltrim($footerObj->f_icon, '/');
         }
@@ -113,6 +119,8 @@ class FooterController extends BaseController
      *
      * @param array $array The array to convert
      * @return object The converted object
+     *
+     * This helper function recursively converts an array to a stdClass object.
      */
     private function arrayToObject($array)
     {

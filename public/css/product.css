@@ -1,3 +1,11 @@
+/*
+    product.css
+    This stylesheet provides custom styles for the product listing and detail pages, including filter buttons,
+    catalog download section, product grid, product items, and responsive adjustments for mobile devices.
+    It ensures a modern, clean, and interactive UI for product-related views.
+*/
+
+/* Filter container and filter button styles */
 .filter-container {
     display: flex;
     flex-direction: column;
@@ -106,6 +114,7 @@
     }
 }
 
+/* Product grid and product item styles */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

@@ -1,24 +1,42 @@
+<!--
+    index.blade.php
+    
+    This Blade template renders the Home/Landing page, including:
+    - The Hero/Header section with a dynamic title, description, and image
+    - The Why Pazar section with key selling points
+    - The Product Category section with product category cards
+    - The Latest Recipe section with a featured recipe
+    - A pop-up modal for announcements or promotions
+    - All sections are responsive and theme-aware (dark/light)
+    - JavaScript is included for interactivity (main.js, card-height.js, index.js, back-to-top.js)
+    
+    Comments are provided throughout to help programmers understand the structure and logic.
+-->
 @extends('master')
 
 @section('style')
+<!-- Include custom card height styles for consistent card sizing -->
 <link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
-<!-- Hero/Header Section -->
+<!-- Hero/Header Section: Displays the main landing banner with title, description, and call-to-action button -->
 @section('header')
 <div class="landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="grid md:grid-cols-2 gap-8 items-center">
         <div class="text-white">
             @if(isset($header))
+                <!-- Dynamic header title and description based on locale -->
                 <h1 class="text-2xl font-bold mb-4 dark:text-gray-200">{{ app()->getLocale() == 'en' ? $header->h_title_en : $header->h_title_id }}</h1>
                 <p class="text-lg mb-6 dark:text-gray-200">{{ app()->getLocale() == 'en' ? $header->h_description_en : $header->h_description_id }}</p>
             @endif
+            <!-- Button to navigate to the company page -->
             <a href="{{ route(app()->getLocale() . '.company') }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-white' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
                 {{ __('general.see_more') }}
             </a>
         </div>
         <div>
             @if(isset($header) && $header->h_image)
+                <!-- Header image if available -->
                 <img src="{{ $header->h_image }}" alt="Pazar Products" class="rounded-lg shadow-lg">
             @endif
         </div>
@@ -27,7 +45,7 @@
 @endsection
 
 @section('content')
-<!-- Pop-up Modal -->
+<!-- Pop-up Modal: Displays a promotional or informational popup if active -->
 @if(isset($popup) && $popup->pu_is_active)
 <div id="popupModal" class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 hidden">
     <div class="relative bg-transparent rounded-lg shadow-lg max-w-2xl flex flex-col items-center">
@@ -48,7 +66,7 @@
 </div>
 @endif
 
-<!-- Why Pazar Section -->
+<!-- Why Pazar Section: Highlights the unique selling points of Pazar -->
 <section class="why-pazar py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.why_pazar') }}</h2>
@@ -56,6 +74,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
                 @foreach($whyPazarItems as $item)
+                    <!-- Each card represents a reason to choose Pazar -->
                     <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 flex flex-col">
                         <div class="flex items-start mb-2">
                             <div class="flex-shrink-0 mr-2">
@@ -75,7 +94,7 @@
     </div>
 </section>
 
-<!-- Product Category Section -->
+<!-- Product Category Section: Lists product categories with images and descriptions -->
 <section class="product-category py-10 {{ $theme === 'dark' ? 'bg-gray-950' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-20">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.product_category') }}</h2>
@@ -83,6 +102,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
             @if(isset($productCategories) && count($productCategories) > 0)
                 @foreach($productCategories as $category)
+                    <!-- Each card represents a product category -->
                     <div class="category-item {{ $theme === 'dark' ? 'bg-white' : 'bg-gray-300' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
                         <div class="h-48 overflow-hidden">
                             <img src="{{ $category->pc_image ?? 'img/Category/default-category.jpg' }}" alt="{{ $category->pc_title_id }}" class="w-full h-full object-cover">
@@ -105,7 +125,7 @@
     </div>
 </section>
 
-<!-- Latest Recipe Section -->
+<!-- Latest Recipe Section: Showcases the most recent recipe with image and link -->
 @if(isset($latestRecipe))
 <section class="latest-recipe py-10 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-20">
@@ -113,9 +133,11 @@
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 items-center">
             <div>
+                <!-- Recipe image -->
                 <img src="{{ $latestRecipe->r_image }}" alt="{{ $latestRecipe->r_title_id }}" class="rounded-lg shadow-lg w-full h-auto">
             </div>
             <div>
+                <!-- Recipe title and categories -->
                 <h3 class="text-3xl {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }} font-bold mb-4">
                     {{ app()->getLocale() == 'en' ? $latestRecipe->r_title_en : $latestRecipe->r_title_id }}
                 </h3>
@@ -128,6 +150,7 @@
                         {{ app()->getLocale() == 'en' ? $latestRecipe->category_name_en : $latestRecipe->category_name_id }}
                     @endif
                 </p>
+                <!-- Button to view the full recipe -->
                 <a href="{{ route(app()->getLocale() . '.recipe.show', $latestRecipe->slug) }}" class="inline-block bg-custom-lightgreen hover:bg-custom-green {{ $theme === 'dark' ? 'text-white' : 'text-white' }} font-bold py-3 px-8 rounded-lg transition duration-300">
                     {{ __('general.view_recipe') }}
                 </a>
@@ -139,6 +162,7 @@
 @endsection
 
 @section('script')
+<!-- Include main scripts for interactivity and UI behavior -->
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/index.js') }}"></script>

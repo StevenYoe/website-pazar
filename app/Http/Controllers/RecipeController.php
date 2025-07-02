@@ -5,21 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+// RecipeController handles the logic for displaying the recipes page, recipe detail, and processing recipe-related data from the API
 class RecipeController extends BaseController
 {
     /**
-     * Display the recipes page
+     * Display the recipes page with all required data from the API
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        // Get the current locale
+        // Get the current locale (language)
         $locale = app()->getLocale();
         $titleField = 'h_title_' . $locale;
         $descField = 'h_description_' . $locale;
         
-        // Get header for products page using the same approach as IndexController
+        // Get header for recipes page using the same approach as IndexController
         $headerResponse = $this->crudApiGet('/index/data', ['page_name' => 'recipes']);
         $header = null;
         if (isset($headerResponse['success']) && $headerResponse['success'] && isset($headerResponse['data']['header'])) {
@@ -53,11 +54,11 @@ class RecipeController extends BaseController
             foreach ($recipesResponse['data'] as $recipe) {
                 // Process recipe and ensure category information is properly set
                 $processedRecipe = $this->processRecipe($recipe, $categoryLookup);
-                
                 $recipes[] = $processedRecipe;
             }
         }
 
+        // Return the recipes view with the processed data
         return view('recipes', [
             'header' => $header,
             'categories' => $categories,
@@ -75,7 +76,7 @@ class RecipeController extends BaseController
     {
         $headerObj = (object) $header;
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($headerObj->h_image)) {
             $headerObj->h_image = config('app.storage_url') . '/' . $headerObj->h_image;
         }
@@ -93,7 +94,7 @@ class RecipeController extends BaseController
     {
         $categoryObj = (object) $category;
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($categoryObj->rc_image)) {
             $categoryObj->rc_image = config('app.storage_url') . '/' . $categoryObj->rc_image;
         }
@@ -113,12 +114,12 @@ class RecipeController extends BaseController
         // Convert array to object if not already
         $recipeObj = is_array($recipe) ? (object) $recipe : $recipe;
 
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($recipeObj->r_image)) {
             $recipeObj->r_image = config('app.storage_url') . '/' . $recipeObj->r_image;
         }
 
-        // Get current locale for creating proper slug - CONSISTENT WITH PRODUCT
+        // Get current locale for creating proper slug
         $locale = app()->getLocale();
         $titleToUse = $locale === 'en' ?
             ($recipeObj->r_title_en ?? $recipeObj->r_title_id) :
@@ -167,8 +168,8 @@ class RecipeController extends BaseController
     }
     
     /**
-     * Display recipe detail page
-     * 
+     * Display recipe detail page by slug
+     *
      * @param string $slug The recipe slug
      * @return \Illuminate\View\View
      */
@@ -197,11 +198,12 @@ class RecipeController extends BaseController
                 }
             }
             
+            // Loop through all recipes to find the one matching the slug
             foreach ($recipesResponse['data'] as $recipe) {
                 $processedRecipe = $this->processRecipe($recipe, $categoryLookup);
                 $allRecipes[] = $processedRecipe;
                 
-                // Create slug based on current language - SAME AS PRODUCT
+                // Create slug based on current language
                 $titleToUse = $locale === 'en' ? 
                     ($recipe['r_title_en'] ?? $recipe['r_title_id']) : 
                     ($recipe['r_title_id'] ?? $recipe['r_title_en']);
@@ -222,11 +224,12 @@ class RecipeController extends BaseController
             }
         }
         
+        // If recipe not found, return 404
         if (!$foundRecipe) {
             return abort(404);
         }
         
-        // Get random recipes (excluding current recipe)
+        // Get random recipes (excluding current recipe) for recommendations
         $randomRecipes = [];
         $otherRecipes = array_filter($allRecipes, function($recipe) use ($foundRecipe) {
             return ($recipe->r_id !== $foundRecipe->r_id);
@@ -238,6 +241,7 @@ class RecipeController extends BaseController
             $randomRecipes = array_slice($otherRecipes, 0, min(3, count($otherRecipes)));
         }
         
+        // Return the recipe detail view with the found recipe and random recommendations
         return view('recipe-detail', [
             'recipe' => $foundRecipe,
             'randomRecipes' => $randomRecipes

@@ -1,4 +1,11 @@
-/* Vacancy CSS - Main Styling */
+/*
+    vacancy.css
+    This stylesheet provides custom styles for the vacancies listing and detail pages, including filter sections,
+    vacancy cards, urgent tags, share buttons, and responsive adjustments for mobile devices.
+    It ensures a modern, interactive, and accessible UI for job vacancy-related views.
+*/
+
+/* Main section padding for vacancies */
 .vacancies-section {
     padding: 4rem 0;
 }
@@ -58,6 +65,7 @@
 
 /* Title styling */
 .vacancy-item h3 {
+    line-height: 1.3;
     transition: color 0.3s ease;
 }
 
@@ -65,14 +73,21 @@
     color: var(--custom-green);
 }
 
+.vacancy-item .flex-col.space-y-2 {
+    margin-top: 0.5rem;
+}
+
 /* View details link styling */
-.vacancy-item a {
+.vacancy-item a,
+.vacancy-item a.text-custom-green {
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
+    padding-top: 0.5rem;
 }
 
-.vacancy-item a:after {
+.vacancy-item a:after,
+.vacancy-item a.text-custom-green:after {
     content: '';
     position: absolute;
     width: 0;
@@ -83,7 +98,8 @@
     transition: width 0.3s ease;
 }
 
-.vacancy-item:hover a:after {
+.vacancy-item:hover a:after,
+.vacancy-item:hover a.text-custom-green:after {
     width: 100%;
 }
 
@@ -114,7 +130,7 @@
     }
 }
 
-/* Urgent Tag styling - UPDATED */
+/* Urgent Tag styling - for both list and detail page */
 .urgent-tag {
     position: absolute;
     top: -1px;
@@ -151,70 +167,7 @@
     transform: scale(1.2);
 }
 
-/* Enhance existing vacancy-item styles */
-.vacancy-item {
-    border-radius: 8px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    height: 100%;
-}
-
-.vacancy-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
-    border-color: var(--custom-green);
-}
-
-/* Improve spacing and typography */
-.vacancy-item h3 {
-    line-height: 1.3;
-    transition: color 0.3s ease;
-}
-
-.vacancy-item:hover h3 {
-    color: var(--custom-green);
-}
-
-.vacancy-item .flex-col.space-y-2 {
-    margin-top: 0.5rem;
-}
-
-/* Enhance view details link */
-.vacancy-item a.text-custom-green {
-    padding-top: 0.5rem;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-}
-
-.vacancy-item a.text-custom-green:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-color: var(--custom-green);
-    transition: width 0.3s ease;
-}
-
-.vacancy-item:hover a.text-custom-green:after {
-    width: 100%;
-}
-
-/* Urgent Tag for Detail page */
-.vacancy-detail-header {
-    height: 30px;
-    background-color: transparent;
-}
-
-.vacancy-detail-urgent {
-    position: relative;
-    display: inline-block;
-}
-
-/* Share buttons styling - UPDATED */
+/* Share buttons styling */
 .share-buttons {
     display: flex;
     gap: 0.75rem;

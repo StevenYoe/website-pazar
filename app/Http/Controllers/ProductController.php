@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+// ProductController handles the logic for displaying the products page, product detail, and catalog download
 class ProductController extends BaseController
 {
     /**
-     * Display the products page
+     * Display the products page with all required data from the API
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        // Get the current locale
+        // Get the current locale (language)
         $locale = app()->getLocale();
         $titleField = 'h_title_' . $locale;
         $descField = 'h_description_' . $locale;
@@ -52,16 +53,14 @@ class ProductController extends BaseController
         $products = [];
         
         if (isset($productsResponse['success']) && $productsResponse['success'] && isset($productsResponse['data'])) {
-            // Debug the raw response to see what we're getting
-            
+            // Process each product and ensure category information is properly set
             foreach ($productsResponse['data'] as $product) {
-                // Process product and ensure category information is properly set
                 $processedProduct = $this->processProduct($product, $categoryLookup);
-                
                 $products[] = $processedProduct;
             }
         }
 
+        // Return the products view with the processed data
         return view('products', [
             'header' => $header,
             'categories' => $categories,
@@ -79,7 +78,7 @@ class ProductController extends BaseController
     {
         $headerObj = (object) $header;
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($headerObj->h_image)) {
             $headerObj->h_image = config('app.storage_url') . '/' . $headerObj->h_image;
         }
@@ -97,7 +96,7 @@ class ProductController extends BaseController
     {
         $categoryObj = (object) $category;
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($categoryObj->pc_image)) {
             $categoryObj->pc_image = config('app.storage_url') . '/' . $categoryObj->pc_image;
         }
@@ -117,7 +116,7 @@ class ProductController extends BaseController
         // Convert array to object if not already
         $productObj = is_array($product) ? (object) $product : $product;
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($productObj->p_image)) {
             $productObj->p_image = config('app.storage_url') . '/' . $productObj->p_image;
         }
@@ -153,8 +152,8 @@ class ProductController extends BaseController
     }
     
     /**
-     * Display product detail page
-     * 
+     * Display product detail page by slug
+     *
      * @param string $slug The product slug
      * @return \Illuminate\View\View
      */
@@ -183,6 +182,7 @@ class ProductController extends BaseController
                 }
             }
             
+            // Loop through all products to find the one matching the slug
             foreach ($productsResponse['data'] as $product) {
                 $processedProduct = $this->processProduct($product, $categoryLookup);
                 $allProducts[] = $processedProduct;
@@ -208,11 +208,12 @@ class ProductController extends BaseController
             }
         }
         
+        // If product not found, return 404
         if (!$foundProduct) {
             return abort(404);
         }
         
-        // Get random products (excluding current product)
+        // Get random products (excluding current product) for recommendations
         $randomProducts = [];
         $otherProducts = array_filter($allProducts, function($product) use ($foundProduct) {
             return ($product->p_id !== $foundProduct->p_id);
@@ -224,6 +225,7 @@ class ProductController extends BaseController
             $randomProducts = array_slice($otherProducts, 0, min(4, count($otherProducts)));
         }
         
+        // Return the product detail view with the found product and random recommendations
         return view('product-detail', [
             'product' => $foundProduct,
             'randomProducts' => $randomProducts

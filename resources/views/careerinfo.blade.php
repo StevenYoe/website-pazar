@@ -1,8 +1,21 @@
+<!--
+    careerinfo.blade.php
+    
+    This Blade template renders the Career Info page, including:
+    - The header section with a dynamic title and image
+    - The "Working at Pazar" section with a description
+    - The "Why Pazar" section with alternating feature items
+    - The call-to-action section inviting users to view job vacancies
+    - All sections are responsive and theme-aware (dark/light)
+    - JavaScript is included for interactivity (main.js, back-to-top.js)
+    
+    Comments are provided throughout to help programmers understand the structure and logic.
+-->
 @extends('master')
 
 @section('title', __('general.career_info') . ' - Pazar Seasonings')
 
-<!-- Career Info Header Section -->
+<!-- Career Info Header Section: displays the main title and header image for the career info page -->
 @section('header')
 <div class="not-index landing-content max-w-screen-xl mx-auto px-4 py-20">
     <div class="flex flex-col items-center text-center">
@@ -24,7 +37,7 @@
 @endsection
 
 @section('content')
-<!-- Bekerja di Pazar Section -->
+<!-- Working at Pazar Section: shows what it's like to work at Pazar -->
 <section class="py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
@@ -40,7 +53,7 @@
     </div>
 </section>
 
-<!-- Kelebihan Pazar Section -->
+<!-- Why Pazar Section: highlights the advantages of working at Pazar with alternating image/text layout -->
 <section class="py-16 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         @if(isset($workAtPazarWhy))
@@ -51,7 +64,7 @@
         
         @if(isset($careerInfos) && count($careerInfos) > 0)
             @foreach($careerInfos as $index => $info)
-                <!-- Feature Item -->
+                <!-- Feature Item: alternates image/text left and right for each item -->
                 <div class="grid md:grid-cols-2 gap-12 items-center {{ $index < count($careerInfos) - 1 ? 'mb-20' : '' }}">
                     @if($index % 2 == 0)
                         <div>
@@ -84,7 +97,7 @@
     </div>
 </section>
 
-<!-- Call to Action Section -->
+<!-- Call to Action Section: encourages users to view job vacancies -->
 <section class="py-16 bg-custom-green">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         @if(isset($workAtPazarJoin))
@@ -103,6 +116,7 @@
 @endsection
 
 @section('script')
+<!-- JavaScript includes for interactivity: navigation, back-to-top, etc. -->
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 @endsection

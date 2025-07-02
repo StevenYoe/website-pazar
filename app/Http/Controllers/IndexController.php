@@ -5,30 +5,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use stdClass;
 
+// IndexController handles the logic for displaying the homepage and processing homepage-related data from the API
 class IndexController extends BaseController
 {
     /**
-     * Display the index/homepage
+     * Display the index/homepage with all required data from the API
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        // Get the current locale
+        // Get the current locale (language)
         $locale = app()->getLocale();
         $titleField = 'h_title_' . $locale;
         $descField = 'h_description_' . $locale;
 
-        // Use CRUD API to get index page data
-        // Specify that we want the index page header specifically
+        // Use CRUD API to get index page data, specifying the page name
         $response = $this->crudApiGet('/index/data', ['page_name' => 'index']);
 
-        // Check if response was successful
+        // Check if response was successful, otherwise show error
         if (!isset($response['success']) || !$response['success']) {
             return view('index')->with('error', $response['message'] ?? 'Failed to load index data');
         }
 
-        // Extract data from response for view
+        // Prepare data for the view, processing images and converting arrays to objects
         $data = [
             // Popup data - convert array to object if it exists and add storage URL to image
             'popup' => isset($response['data']['popup']) ? $this->processPopup($response['data']['popup']) : null,
@@ -49,6 +49,7 @@ class IndexController extends BaseController
                 $this->processRecipe($response['data']['latest_recipe']) : null,
         ];
 
+        // Return the index view with the processed data
         return view('index', $data);
     }
 
@@ -62,7 +63,7 @@ class IndexController extends BaseController
     {
         $popupObj = $this->arrayToObject($popup);
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($popupObj->pu_image)) {
             $popupObj->pu_image = config('app.storage_url') . '/' . $popupObj->pu_image;
         }
@@ -80,7 +81,7 @@ class IndexController extends BaseController
     {
         $headerObj = $this->arrayToObject($header);
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($headerObj->h_image)) {
             $headerObj->h_image = config('app.storage_url') . '/' . $headerObj->h_image;
         }
@@ -98,7 +99,7 @@ class IndexController extends BaseController
     {
         $categoryObj = $this->arrayToObject($category);
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($categoryObj->pc_image)) {
             $categoryObj->pc_image = config('app.storage_url') . '/' . $categoryObj->pc_image;
         }
@@ -116,7 +117,7 @@ class IndexController extends BaseController
     {
         $itemObj = $this->arrayToObject($item);
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($itemObj->w_image)) {
             $itemObj->w_image = config('app.storage_url') . '/' . $itemObj->w_image;
         }
@@ -126,7 +127,7 @@ class IndexController extends BaseController
 
     /**
      * Process the recipe data to add storage URL to image and create slug
-     * FIXED: Now properly handles category localization
+     * Handles category localization and fallback logic
      *
      * @param array $recipe The recipe data from API
      * @return object The processed recipe object
@@ -135,22 +136,21 @@ class IndexController extends BaseController
     {
         $recipeObj = $this->arrayToObject($recipe);
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists, otherwise set default image
         if (!empty($recipeObj->r_image)) {
             $recipeObj->r_image = config('app.storage_url') . '/' . $recipeObj->r_image;
         } else {
-            // Set default image if r_image is empty
             $recipeObj->r_image = asset('img/Recipes/default-recipe.jpg');
         }
 
         // Get current locale for creating proper slug and category names
         $locale = app()->getLocale();
         
-        // Create slug from title
+        // Create slug from title (prefer Indonesian title if available)
         $titleToUse = !empty($recipeObj->r_title_id) ? $recipeObj->r_title_id : $recipeObj->r_title_en;
         $recipeObj->slug = Str::slug($titleToUse);
 
-        // FIXED SOLUTION: Get categories from API separately to ensure proper localization
+        // Process recipe categories with proper locale handling
         $this->processRecipeCategoriesWithLocale($recipeObj, $locale);
 
         return $recipeObj;
@@ -166,14 +166,14 @@ class IndexController extends BaseController
      */
     private function processRecipeCategoriesWithLocale($recipeObj, $locale)
     {
-        // Initialize default values
+        // Initialize default values for categories
         $recipeObj->category_names = [];
         $recipeObj->all_categories = [];
         $recipeObj->category_name_id = $locale == 'en' ? 'Uncategorized' : 'Tidak Berkategori';
         $recipeObj->category_name_en = 'Uncategorized';
         $recipeObj->category_name = $locale == 'en' ? 'Uncategorized' : 'Tidak Berkategori';
 
-        // Try to get detailed recipe data with categories
+        // Try to get detailed recipe data with categories from the API
         if (isset($recipeObj->r_id)) {
             try {
                 $detailResponse = $this->crudApiGet('/recipes/' . $recipeObj->r_id);
@@ -259,7 +259,6 @@ class IndexController extends BaseController
             $recipeObj->category_names = $locale == 'en' ? $categoryNamesEn : $categoryNamesId;
             $recipeObj->category_name = $locale == 'en' ? $recipeObj->category_name_en : $recipeObj->category_name_id;
         }
-        
         // Final fallback: Use pre-processed data if it exists but re-localize it
         elseif (isset($recipeObj->category_names) && !empty($recipeObj->category_names)) {
             // The pre-processed category_names might be in Indonesian, we need to get the English versions
@@ -291,6 +290,7 @@ class IndexController extends BaseController
             }
         }
 
+        // Log the final result for debugging
         \Log::info('Final category processing result', [
             'recipe_id' => $recipeObj->r_id ?? 'unknown',
             'locale' => $locale,
@@ -305,6 +305,8 @@ class IndexController extends BaseController
      *
      * @param array $array The array to convert
      * @return object The converted object
+     *
+     * This helper function recursively converts an array to a stdClass object, but preserves arrays of primitives.
      */
     private function arrayToObject($array)
     {

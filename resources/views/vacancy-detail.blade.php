@@ -125,6 +125,7 @@
                 <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-md p-6 mb-6">
                     <h3 class="text-lg font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-4">{{ __('general.job_details') }}</h3>
                     <ul class="space-y-3">
+                        <!-- Department info -->
                         <li class="flex items-start">
                             <svg class="w-5 h-5 mr-2 text-custom-green mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
@@ -137,6 +138,7 @@
                                 </span>
                             </div>
                         </li>
+                        <!-- Job type info -->
                         <li class="flex items-start">
                             <svg class="w-5 h-5 mr-2 text-custom-green mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
@@ -149,6 +151,7 @@
                                 </span>
                             </div>
                         </li>
+                        <!-- Work model info -->
                         <li class="flex items-start">
                             <svg class="w-5 h-5 mr-2 text-custom-green mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
@@ -163,6 +166,7 @@
                                 </span>
                             </div>
                         </li>
+                        <!-- Experience info -->
                         <li class="flex items-start">
                             <svg class="w-5 h-5 mr-2 text-custom-green mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"></circle>
@@ -172,7 +176,7 @@
                             <div>
                                 <span class="block text-sm {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.experience') }}</span>
                                 <span class="{{ $theme === 'dark' ? 'text-gray-200' : 'text-gray-800' }}">
-                                    {{ app()->getLocale() == 'en' ? $vacancy->department_name_en : $vacancy->department_name_id }}
+                                    {{ app()->getLocale() == 'en' ? $vacancy->experience_name_en : $vacancy->experience_name_id }}
                                 </span>
                             </div>
                         </li>

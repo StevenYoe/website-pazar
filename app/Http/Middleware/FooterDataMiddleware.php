@@ -7,14 +7,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\FooterController;
 
+// FooterDataMiddleware injects footer data into all views for every request
 class FooterDataMiddleware
 {
     /**
-     * Handle an incoming request.
+     * Handle an incoming request and share footer data with all views
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request  $request The HTTP request object
+     * @param  \Closure  $next The next middleware or request handler
      * @return mixed
+     *
+     * This middleware retrieves footer data from FooterController and shares it with all views.
+     * If an error occurs, it shares an empty data structure to prevent view errors.
      */
     public function handle(Request $request, Closure $next)
     {
@@ -34,6 +38,7 @@ class FooterDataMiddleware
             ]);
         }
         
+        // Continue to the next middleware or request handler
         return $next($request);
     }
 }

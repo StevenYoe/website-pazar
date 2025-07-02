@@ -1,20 +1,27 @@
+/*
+    recipe-detail.css
+    This stylesheet provides custom styles for the recipe detail page, including category tags,
+    related recipe items, aspect ratio containers for images, and responsive adjustments for mobile devices.
+    It ensures a visually consistent and interactive UI for recipe-related views.
+*/
+
 /* Styling for recipe category tag */
 .text-custom-red {
     color: #BF161C;
 }
 
-/* Produk Lainnya section */
+/* Resep Lainnya (Other Recipes) section spacing */
 .mt-16 {
     padding-top: 2rem;
 }
 
-/* recipe item hover effect for related recipes */
+/* Recipe item hover effect for related recipes */
 .recipe-item a:hover {
     color: #BF161C;
     transition: color 0.3s ease;
 }
 
-/* recipe title hover effect in recipe grid */
+/* Recipe title hover effect in recipe grid */
 .recipe-item h3 {
     transition: color 0.3s ease;
 }
@@ -23,7 +30,7 @@
     color: #BF161C;
 }
 
-/* Base aspect ratio container */
+/* Aspect ratio containers for images and media */
 [class*='aspect-'] {
   position: relative;
 }
@@ -53,7 +60,7 @@
   padding-bottom: 100%;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments for mobile devices */
 @media (max-width: 792px) {
     .mt-16 {
         margin-top: 3rem;

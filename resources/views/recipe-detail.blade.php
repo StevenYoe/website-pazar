@@ -3,21 +3,22 @@
 @section('title', (app()->getLocale() == 'en' ? $recipe->r_title_en : $recipe->r_title_id) . ' - Pazar Seasonings')
 
 @section('style')
+<!-- Include recipe detail, recipe, and card height styles for consistent layout -->
 <link href="{{ asset('css/recipe-detail.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/recipe.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
 @section('header')
-<!-- Override with empty header to remove default landing content -->
+<!-- Override with empty header to remove default landing content on recipe detail page -->
 <div class="recipe-detail-header"></div>
 @endsection
 
 @section('content')
-<!-- Recipe Detail Section -->
+<!-- Recipe Detail Section: Displays recipe image, info, and description -->
 <section class="pt-10 pb-12 {{ $theme === 'dark' ? 'bg-gray-900 text-gray-400' : 'bg-white text-gray-900' }}">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Breadcrumb Navigation -->
+        <!-- Breadcrumb Navigation: Shows navigation path for user orientation -->
         <div class="mb-8">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -50,7 +51,7 @@
         </div>
 
         <div class="lg:flex lg:items-start lg:space-x-8">
-            <!-- Recipe Image -->
+            <!-- Recipe Image Section -->
             <div class="lg:w-1/2">
                 <div class="rounded-lg overflow-hidden shadow-lg">
                     <img src="{{ $recipe->r_image }}" alt="{{ $recipe->r_title_id }}" class="w-full h-auto">
@@ -72,7 +73,7 @@
                 @endif
             </div>
             
-            <!-- Recipe Info -->
+            <!-- Recipe Info Section: Title, categories, and description -->
             <div class="mt-10 lg:mt-0 lg:w-1/2">
                 <div class="pb-2">
                     <h1 class="text-3xl {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{!! app()->getLocale() == 'en' ? $recipe->r_title_en : $recipe->r_title_id !!}</h1>
@@ -86,6 +87,7 @@
                 </div>
                     @if(isset($recipe->detail))
                         @if(isset($recipe->detail->rd_desc_id) && !empty($recipe->detail->rd_desc_id))
+                            <!-- Short recipe description -->
                             <div class="py-2">
                                 <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
                                     {!! app()->getLocale() == 'en' ? nl2br(e($recipe->detail->rd_desc_en)) : nl2br(e($recipe->detail->rd_desc_id)) !!}
@@ -94,6 +96,7 @@
                         @endif
                         
                         @if(isset($recipe->detail->rd_ingredients_id) && !empty($recipe->detail->rd_ingredients_id))
+                            <!-- Ingredients list -->
                             <div class="py-2">
                                 <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ __('general.ingredients') }}</h3>
                                 <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
@@ -103,6 +106,7 @@
                         @endif
                             
                         @if(isset($recipe->detail->rd_cook_id) && !empty($recipe->detail->rd_cook_id))
+                            <!-- Preparation steps -->
                             <div class="py-2">
                                 <h3 class="text-lg font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }}">{{ __('general.preparation') }}</h3>
                                 <div class="mt-4 prose prose-sm {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }}">
@@ -115,7 +119,7 @@
             </div>
         </div>
 
-        <!-- Other Recipes section -->
+        <!-- Other Recipes Section: Shows related recipes for cross-promotion -->
         @if(count($randomRecipes) > 0)
         <div class="mt-16 recipe-section">
             <h2 class="text-2xl font-bold text-center {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }} mb-8">{{ __('general.related_recipes') }}</h2>
@@ -150,6 +154,7 @@
 @endsection
 
 @section('script')
+<!-- Include scripts for recipe detail interactivity and UI behavior -->
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>

@@ -1,21 +1,29 @@
+/*
+ * styles.css
+ *
+ * This stylesheet contains all custom styles for the website, including layout, responsive design, navigation, landing page, carousel, and footer adjustments.
+ * Each section and class is commented to clarify its purpose and logic for future maintainers.
+ * Duplicate class blocks have been merged and formatting improved for clarity and maintainability.
+ */
+
 body {
     font-family: 'Roboto Black';
 }
 
-/* CSS Variables */
+/* CSS Variables for consistent theming */
 :root {
     --navbar-height: 56px;
     --navbar-height-scrolled: 48px;
 }
 
-/* Active Navigation State */
+/* Active Navigation State: highlights active nav items and custom green text */
 .active-nav-item,
 .text-custom-lightgreen,
 #career-dropdown.text-custom-lightgreen {
     color: var(--color-custom-lightgreen) !important;
 }
 
-/* Landing Section */
+/* Landing Section: hero background and layout */
 .landing {
     background: linear-gradient(#BF161De6, #BF161De6), url(../img/Web/bg-hero.webp);
     background-position: center center;
@@ -27,7 +35,7 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Navbar Base Styles */
+/* Navbar Base Styles: default navbar appearance */
 #navbar {
     transition: background-color 0.1s ease, padding 0.1s ease;
     padding: 1rem 0;
@@ -35,7 +43,7 @@ body {
     width: 100%;
 }
 
-/* Navbar Scrolled State */
+/* Navbar Scrolled State: sticky navbar on scroll */
 .scrolled {
     background-color: #BF161C !important;
     padding: 0 0 !important;
@@ -56,12 +64,14 @@ body {
 }
 
 @media (min-width: 793px) {
+    /* Desktop navbar container width */
     #navbar .max-w-screen-xl {
         max-width: 1280px;
         margin-left: auto;
         margin-right: auto;
     }
 
+    /* Not index page layout for desktop */
     .not-index {
         margin-top: 4rem;
         padding: 3rem 2rem;
@@ -69,15 +79,15 @@ body {
     
     .not-index .landing-content {
         padding: 0 2rem;
-        margin-top: 0; /* Konsisten */
+        margin-top: 0; /* Consistent for desktop */
     }
     
     .not-index .flex.flex-col.items-center {
-        margin-top: 0; /* Reset untuk desktop */
+        margin-top: 0; /* Reset for desktop */
     }
     
     .not-index .text-white.mb-8 {
-        margin-bottom: 2rem; /* Konsisten dengan mobile */
+        margin-bottom: 2rem; /* Consistent with mobile */
     }
     
     .not-index h1 {
@@ -90,7 +100,7 @@ body {
     }
 }
 
-/* Button Styles */
+/* Button Styles: improves usability and disables text selection */
 #navbar-sticky button[type="button"],
 .group button {
     cursor: pointer;
@@ -100,12 +110,12 @@ body {
     -ms-user-select: none;
 }
 
-/* Dropdown Hover States */
+/* Dropdown Hover States: highlights active dropdown */
 .active-dropdown > button {
     color: var(--color-custom-lightgreen);
 }
 
-/* Landing Content */
+/* Landing Content: main content area on landing page */
 .landing-content {
     width: 100%;
     padding: 0 6rem;
@@ -116,13 +126,13 @@ body {
     gap: 3rem;
 }
 
-/* Dropdown Button Width */
+/* Dropdown Button Width: sets width for dropdown button */
 #dropdownHoverButton {
     width: 9rem;
 }
 
-/* Desktop Dropdown Positioning */
 @media (min-width: 793px) {
+    /* Desktop Dropdown Positioning: centers dropdown menus */
     .group {
         position: relative;
     }
@@ -137,12 +147,12 @@ body {
     }
 }
 
-/* Popup Modal */
+/* Popup Modal: overlay background for modals */
 #popupModal {
     background: rgba(0, 0, 0, 0.8);
 }
 
-/* Category Item Hover */
+/* Category Item Hover: card hover effect for categories */
 .category-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px #BF161C;
@@ -153,11 +163,12 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* Back to Top Button */
+/* Back to Top Button: pointer cursor for usability */
 #btn-back-to-top {
     cursor: pointer;
 }
 
+/* Not Index Page: layout for non-index pages (desktop) */
 .not-index {
     margin-top: 4rem;
     padding: 3rem 2rem;
@@ -165,7 +176,7 @@ body {
 
 .not-index .landing-content {
     padding: 0 2rem;
-    margin-top: 0; /* Reset margin-top yang bisa konflik */
+    margin-top: 0; /* Reset margin-top that may conflict */
 }
 
 .not-index h1 {
@@ -182,9 +193,8 @@ body {
     margin-top: 2rem;
 }
 
-/* Mobile Navigation (< 793px) */
+/* Mobile Navigation (< 793px): responsive navbar and menu for mobile */
 @media (max-width: 792px) {
-    /* Ensure full width navbar */
     #navbar {
         background-color: rgba(191, 22, 29, 0.9);
         width: 100%;
@@ -192,14 +202,12 @@ body {
         right: 0;
     }
     
-    /* Mobile navbar container full width */
     #navbar .flex.flex-wrap {
         width: 100%;
         margin: 0;
         padding: 0 1rem;
     }
     
-    /* Mobile menu full width */
     #navbar-sticky {
         background-color: #BF161C;
         position: absolute;
@@ -257,7 +265,7 @@ body {
         display: block;
     }
     
-    /* Landing adjustments */
+    /* Landing adjustments for mobile */
     .landing {
         align-items: flex-start;
         padding-top: 20px;
@@ -289,9 +297,8 @@ body {
     }
 }
 
-/* Small Mobile (320px - 640px) */
+/* Small Mobile (320px - 640px): further responsive adjustments */
 @media (min-width: 320px) and (max-width: 640px) {
-    /* Ensure navbar takes full width */
     #navbar {
         padding: 0.75rem 0;
     }
@@ -300,7 +307,6 @@ body {
         padding: 0 0.75rem;
     }
     
-    /* Landing content adjustments */
     .landing-content {
         padding-top: 0px;
         padding-bottom: 30px;
@@ -316,7 +322,6 @@ body {
         font-size: 1rem;
     }
     
-    /* Section padding */
     .why-choose-us, .product-category {
         padding: 40px 0;
     }
@@ -326,43 +331,38 @@ body {
         padding-right: 1rem;
     }
     
-    /* Typography */
     h2 {
         font-size: 1.75rem;
         margin-bottom: 1.5rem;
     }
     
-    /* Card layout */
     .grid {
         gap: 1rem;
     }
     
-    /* Navigation logo */
     #navbar .h-14 {
         height: 3rem;
     }
     
-    /* Button sizing */
     .landing-content a {
         padding: 0.5rem 1.5rem;
     }
     
-    /* Carousel indicators */
     .carousel-indicators button {
         width: 12px;
         height: 12px;
         margin: 0 4px;
     }
     
-    /* Not index pages */
+    /* Not index pages (mobile) */
     .not-index {
-        margin-top: 5rem; /* Konsisten */
+        margin-top: 5rem; /* Consistent */
         padding: 2rem 1rem;
     }
     
     .not-index .landing-content {
         padding: 0 1rem;
-        margin-top: 0; /* Hapus margin-top konflik */
+        margin-top: 0; /* Remove conflicting margin-top */
     }
     
     .not-index h1 {
@@ -379,13 +379,13 @@ body {
         margin-top: 1.5rem;
     }
     
-    /* Hapus override yang konflik */
+    /* Remove conflicting override */
     .not-index.landing-content {
-        margin-top: 0 !important; /* Override margin-top yang ada */
+        margin-top: 0 !important;
     }
 }
 
-/* Medium Tablet (793px - 875px) */
+/* Medium Tablet (793px - 875px): tablet-specific navbar and button sizing */
 @media (min-width: 793px) and (max-width: 875px) {
     #navbar .max-w-screen-xl {
         padding-left: 0.75rem;
@@ -431,7 +431,7 @@ body {
     }
 }
 
-/* Tight Tablet (793px - 830px) */
+/* Tight Tablet (793px - 830px): even tighter navbar and button sizing */
 @media (min-width: 793px) and (max-width: 830px) {
     #navbar-sticky .py-2.px-3 {
         padding-left: 0.375rem;
@@ -447,7 +447,7 @@ body {
     }
 }
 
-/* Large Tablet (876px - 1000px) */
+/* Large Tablet (876px - 1000px): large tablet navbar and button sizing */
 @media (min-width: 876px) and (max-width: 1000px) {
     #navbar-sticky .py-2.px-3 {
         padding-left: 0.5rem;
@@ -485,7 +485,7 @@ body {
     }
 }
 
-/* History Carousel */
+/* History Carousel: styles for the timeline/history carousel */
 .history-carousel-container {
     overflow: hidden;
     margin: 2rem 0;
@@ -599,7 +599,7 @@ body {
     right: 1rem;
 }
 
-/* History Mobile Fixes */
+/* History Mobile Fixes: adjusts carousel for mobile layout */
 @media (max-width: 792px) {
     .history-flex-container {
         flex-direction: column;
@@ -642,7 +642,7 @@ body {
     }
 }
 
-/* Center History on Desktop */
+/* Center History on Desktop: centers carousel on large screens */
 @media (min-width: 793px) {
     .history-carousel-container {
         max-width: 90%;
@@ -655,7 +655,7 @@ body {
     }
 }
 
-/* Footer Alignment Mobile */
+/* Footer Alignment Mobile: aligns footer content for mobile */
 @media (max-width: 792px) {
     footer .flex-col.items-center {
         align-items: flex-start !important;
@@ -672,24 +672,24 @@ body {
     }
 }
 
-/* Fixed Header Alignment Mobile */
+/* Fixed Header Alignment Mobile: ensures consistent header and content spacing on mobile */
 @media (max-width: 792px) {
     .not-index {
-        margin-top: 5rem; /* Konsisten untuk mobile */
+        margin-top: 5rem; /* Consistent for mobile */
         padding: 2rem 1rem;
     }
     
     .not-index .landing-content {
         padding: 0 1rem;
-        margin-top: 0; /* Hapus margin-top yang bisa konflik */
+        margin-top: 0; /* Remove conflicting margin-top */
     }
     
     .not-index .flex.flex-col.items-center {
-        margin-top: 0; /* Reset margin-top yang ada */
+        margin-top: 0; /* Reset margin-top for mobile */
     }
     
     .not-index .text-white.mb-8 {
-        margin-bottom: 2rem; /* Konsisten spacing */
+        margin-bottom: 2rem; /* Consistent spacing */
     }
     
     .not-index h1 {

@@ -6,21 +6,32 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
+// LanguageController handles language switching and URL translation for multilingual support
 class LanguageController extends Controller
 {
+    /**
+     * Switch the application's language and redirect to the corresponding localized URL
+     *
+     * @param Request $request The HTTP request object
+     * @param string $locale The target locale ('id' or 'en')
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function switch(Request $request, $locale)
     {
+        // Only allow supported locales
         if (!in_array($locale, ['id', 'en'])) {
             return redirect()->back();
         }
         
+        // Set the application locale and store it in the session
         App::setLocale($locale);
         Session::put('locale', $locale);
         
-        // Get current route info
+        // Get the previous URL and convert it to the new locale
         $currentUrl = $request->header('referer');
         $newUrl = $this->convertUrlToNewLocale($currentUrl, $locale);
         
+        // Redirect to the localized URL
         return redirect($newUrl);
     }
     

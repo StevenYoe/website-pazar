@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+// VacancyController handles the logic for displaying the vacancies listing, vacancy detail, and processing vacancy-related data from the API
 class VacancyController extends BaseController
 {
     /**
-     * Display the vacancies listing page
+     * Display the vacancies listing page with all required data from the API
      *
      * @return \Illuminate\View\View
      */
     public function index()
     {
-        // Get the current locale
+        // Get the current locale (language)
         $locale = app()->getLocale();
         $titleField = 'h_title_' . $locale;
         $descField = 'h_description_' . $locale;
@@ -75,12 +76,13 @@ class VacancyController extends BaseController
         
         if (isset($vacanciesResponse['success']) && $vacanciesResponse['success'] && isset($vacanciesResponse['data'])) {
             foreach ($vacanciesResponse['data'] as $vacancy) {
-                // Process vacancy data
+                // Process vacancy data and ensure all relationships are set
                 $processedVacancy = $this->processVacancy($vacancy, $departmentLookup, $employmentLookup, $experienceLookup);
                 $vacancies[] = $processedVacancy;
             }
         }
 
+        // Return the vacancies view with the processed data
         return view('vacancies', [
             'header' => $header,
             'departments' => $departments,
@@ -91,7 +93,7 @@ class VacancyController extends BaseController
     }
 
     /**
-     * Display a specific vacancy detail
+     * Display a specific vacancy detail by slug
      *
      * @param string $slug The vacancy slug
      * @return \Illuminate\View\View
@@ -131,11 +133,12 @@ class VacancyController extends BaseController
                 }
             }
             
+            // Loop through all vacancies to find the one matching the slug
             foreach ($vacanciesResponse['data'] as $vacancy) {
                 $processedVacancy = $this->processVacancy($vacancy, $departmentLookup, $employmentLookup, $experienceLookup);
                 $allVacancies[] = $processedVacancy;
                 
-                // Create slug based on current language - SAME AS PRODUCT
+                // Create slug based on current language
                 $titleToUse = $locale === 'en' ? 
                     ($vacancy['v_title_en'] ?? $vacancy['v_title_id']) : 
                     ($vacancy['v_title_id'] ?? $vacancy['v_title_en']);
@@ -156,11 +159,12 @@ class VacancyController extends BaseController
             }
         }
         
+        // If vacancy not found, return 404
         if (!$foundVacancy) {
             return abort(404);
         }
         
-        // Get other related vacancies (same department)
+        // Get other related vacancies (same department) for recommendations
         $relatedVacancies = [];
         $otherVacancies = array_filter($allVacancies, function($vacancy) use ($foundVacancy) {
             return ($vacancy->v_id !== $foundVacancy->v_id && 
@@ -173,6 +177,7 @@ class VacancyController extends BaseController
             $relatedVacancies = array_slice($otherVacancies, 0, min(3, count($otherVacancies)));
         }
         
+        // Return the vacancy detail view with the found vacancy and related recommendations
         return view('vacancy-detail', [
             'vacancy' => $foundVacancy,
             'relatedVacancies' => $relatedVacancies
@@ -189,7 +194,7 @@ class VacancyController extends BaseController
     {
         $headerObj = (object) $header;
         
-        // Add storage URL to image if exists
+        // Add storage URL to image if it exists
         if (!empty($headerObj->h_image)) {
             $headerObj->h_image = config('app.storage_url') . '/' . $headerObj->h_image;
         }
@@ -198,7 +203,7 @@ class VacancyController extends BaseController
     }
     
     /**
-     * Process vacancy data
+     * Process vacancy data to add relationships and format fields
      *
      * @param array $vacancy The vacancy data from API
      * @param array $departmentLookup Department lookup table
@@ -211,22 +216,18 @@ class VacancyController extends BaseController
         // Convert array to object if not already
         $vacancyObj = is_array($vacancy) ? (object) $vacancy : $vacancy;
 
-        // Create slug based on current language - CONSISTENT WITH PRODUCT
+        // Create slug based on current language
         $locale = app()->getLocale();
         $titleToUse = $locale === 'en' ?
             ($vacancyObj->v_title_en ?? $vacancyObj->v_title_id) :
             ($vacancyObj->v_title_id ?? $vacancyObj->v_title_en);
         $vacancyObj->slug = Str::slug($titleToUse);
 
-        // Initialize department properties
+        // Initialize department, employment, and experience properties
         $vacancyObj->department_name_id = '';
         $vacancyObj->department_name_en = '';
-        
-        // Initialize employment properties
         $vacancyObj->employment_name_id = '';
         $vacancyObj->employment_name_en = '';
-        
-        // Initialize experience properties
         $vacancyObj->experience_name_id = '';
         $vacancyObj->experience_name_en = '';
 
@@ -275,7 +276,7 @@ class VacancyController extends BaseController
             }
         }
 
-        // Format dates
+        // Format posted and closed dates for display
         if (!empty($vacancyObj->v_posted_date)) {
             $vacancyObj->posted_date_formatted = date('d M Y', strtotime($vacancyObj->v_posted_date));
         }
@@ -288,7 +289,7 @@ class VacancyController extends BaseController
 
         return $vacancyObj;
     }
-
+    
     /**
      * Process the vacancy detail data
      *

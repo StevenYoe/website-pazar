@@ -1,3 +1,10 @@
+/*
+    brand.css
+    This stylesheet customizes the testimonial tab buttons on the brand page to visually match the product filter buttons.
+    It handles both active and inactive tab states, hover effects, and responsive layout for mobile devices.
+    Tailwind utility classes are used for background color, while this CSS manages borders, padding, and other details.
+*/
+
 /* Testimonial Tab Button Styling - Properly Matching Product Filter Style */
 .flex.justify-center.mb-8 .inline-flex[role="group"] {
     box-shadow: none; /* Remove existing shadow */
