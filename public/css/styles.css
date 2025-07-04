@@ -268,7 +268,6 @@ body {
     /* Landing adjustments for mobile */
     .landing {
         align-items: flex-start;
-        padding-top: 20px;
         text-align: center;
         padding-bottom: 3rem;
     }
@@ -356,7 +355,6 @@ body {
     
     /* Not index pages (mobile) */
     .not-index {
-        margin-top: 5rem; /* Consistent */
         padding: 2rem 1rem;
     }
     
