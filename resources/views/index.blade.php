@@ -37,7 +37,7 @@
         <div>
             @if(isset($header) && $header->h_image)
                 <!-- Header image if available -->
-                <img src="{{ $header->h_image }}" alt="Pazar Products" class="rounded-lg shadow-lg">
+                <img src="{{ $header->h_image }}" alt="Pazar Seasonings" class="rounded-lg shadow-lg">
             @endif
         </div>
     </div>

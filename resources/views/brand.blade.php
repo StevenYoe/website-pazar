@@ -32,7 +32,7 @@
         </div>
         @if(isset($header->h_image))
         <div class="w-full max-w-2xl">
-            <img src="{{ $header->h_image }}" alt="Vacancies-Header" class="rounded-lg shadow-lg w-full">
+            <img src="{{ $header->h_image }}" alt="Brand-Header" class="rounded-lg shadow-lg w-full">
         </div>
         @endif
     </div>

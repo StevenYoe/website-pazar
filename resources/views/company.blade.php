@@ -29,7 +29,7 @@
                 </h1>
             @endif
         </div>
-        <div class="w-full max-w-xl">
+        <div class="w-full max-w-2xl">
             @if(isset($header) && $header->h_image)
                 <img src="{{ $header->h_image }}" alt="Company-Overview" class="rounded-lg shadow-lg w-full">
             @endif
