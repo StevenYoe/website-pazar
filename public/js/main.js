@@ -32,29 +32,29 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!landingContent || !navbar || !navbarMenu) return;
 
         const navbarHeight = navbar.offsetHeight; // Get the height of the main fixed navbar
-        let totalOffset = navbarHeight; // Selalu mulai dengan tinggi navbar untuk mendorong konten di bawah nav yang tetap
+        let totalOffset = navbarHeight; // Always start with the navbar height to push content below the fixed nav
 
         const isNonIndexPage = landingContent.classList.contains('not-index');
 
-        // Tentukan padding visual dasar yang diinginkan berdasarkan lebar layar DAN jenis halaman.
-        // Nilai ini menggantikan padding dari Tailwind (mis. py-20) yang ditimpa oleh inline style JS.
+        // Determine the base visual padding based on screen width AND page type.
+        // This value overrides Tailwind's padding (e.g., py-20) which is replaced by this inline JS style.
         let baseVisualPaddingForContent = 0; 
 
-        if (window.innerWidth <= 640) { // Layar mobile sangat kecil (<= 640px)
+        if (window.innerWidth <= 640) { // Very small mobile screens (<= 640px)
             if (isNonIndexPage) {
-                // Untuk halaman non-indeks di layar sangat kecil: 80px (dari py-20) + 40px (ekstra) = 120px
+                // For non-index pages on very small screens: 80px (from py-20) + 40px (extra) = 120px
                 baseVisualPaddingForContent = 120;
-            } else { // Halaman indeks di layar sangat kecil
-                // Halaman indeks tetap 40px seperti permintaan sebelumnya.
+            } else { // Index page on very small screens
+                // Index page stays at 40px as previously requested.
                 baseVisualPaddingForContent = -40;
             }
-        } else { // Layar lebih besar dari 640px (mobile/tablet besar hingga desktop)
+        } else { // Screens larger than 640px (large mobile/tablet to desktop)
             if (isNonIndexPage) {
-                // Untuk halaman non-indeks di layar > 640px: Dikurangi menjadi 40px (sebelumnya 80px)
-                // Ini seharusnya mengatasi masalah "turun banget" pada rentang ini.
+                // For non-index pages on >640px: Reduced to 40px (was previously 80px)
+                // This should fix the "too much drop" issue in this range.
                 baseVisualPaddingForContent = -40; 
-            } else { // Halaman indeks di layar > 640px
-                // Halaman indeks tetap 40px.
+            } else { // Index page on >640px
+                // Index page stays at 40px.
                 baseVisualPaddingForContent = -120;
             }
         }
