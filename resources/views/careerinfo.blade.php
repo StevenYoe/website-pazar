@@ -108,7 +108,7 @@
                 {!! app()->getLocale() == 'en' ? $workAtPazarJoin->wap_description_en : $workAtPazarJoin->wap_description_id !!}
             </p>
         @endif
-        <a href="/vacancies" class="inline-block bg-white hover:bg-gray-100 text-custom-green font-bold py-4 px-8 rounded-lg transition duration-300 text-lg">
+        <a href="{{ route(app()->getLocale() . '.vacancies') }}" class="inline-block bg-white hover:bg-gray-100 text-custom-green font-bold py-4 px-8 rounded-lg transition duration-300 text-lg">
             {{ __('general.view_job') }}
         </a>
     </div>

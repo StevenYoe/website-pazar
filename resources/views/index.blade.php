@@ -102,8 +102,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
             @if(isset($productCategories) && count($productCategories) > 0)
                 @foreach($productCategories as $category)
-                    <!-- Each card represents a product category -->
-                    <div class="category-item {{ $theme === 'dark' ? 'bg-white' : 'bg-gray-300' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
+                    <div class="category-item card-container {{ $theme === 'dark' ? 'bg-white' : 'bg-gray-300' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
                         <div class="h-48 overflow-hidden">
                             <img src="{{ $category->pc_image ?? 'img/Category/default-category.jpg' }}" alt="{{ $category->pc_title_id }}" class="w-full h-full object-cover">
                         </div>
@@ -111,10 +110,10 @@
                             <h3 class="text-xl font-bold mb-2 line-clamp-2">
                                 {{ app()->getLocale() == 'en' ? $category->pc_title_en : $category->pc_title_id }}
                             </h3>
-                            <p class="{{ $theme === 'dark' ? 'text-gray-800' : 'text-gray-600' }} mb-4 flex-grow line-clamp-3">
+                            <p class="{{ $theme === 'dark' ? 'text-gray-800' : 'text-gray-600' }} mb-4 flex-grow">
                                 {{ app()->getLocale() == 'en' ? $category->pc_description_en : $category->pc_description_id }}
                             </p>
-                            <a href="{{ route(app()->getLocale() . '.products') }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">
+                            <a href="{{ app()->getLocale() == 'en' ? '/en/products' : '/id/produk' }}" class="text-custom-green hover:text-custom-lightergreen font-medium text-sm self-end">
                                 {{ __('general.see_more') }} →
                             </a>
                         </div>

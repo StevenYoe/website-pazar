@@ -706,3 +706,27 @@ body {
         margin-top: 1.5rem;
     }
 }
+
+/* Example: Add this to public/css/styles.css */
+@media (min-width: 1440px) { /* For large desktop screens */
+    html {
+        font-size: 18px; /* Increase base font size from default 16px */
+    }
+}
+@media (min-width: 1920px) { /* For very large/widescreen monitors */
+    html {
+        font-size: 20px; /* Further increase base font size */
+    }
+}
+
+/* Example: Adjusting max-width for content */
+@media (min-width: 1440px) {
+    .max-w-screen-xl { /* Apply to elements currently using this class */
+        max-width: 1400px; /* Adjust as needed */
+    }
+}
+@media (min-width: 1920px) {
+    .max-w-screen-xl {
+        max-width: 1600px; /* Adjust as needed */
+    }
+}
