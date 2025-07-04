@@ -46,16 +46,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 baseVisualPaddingForContent = 120;
             } else { // Halaman indeks di layar sangat kecil
                 // Halaman indeks tetap 40px seperti permintaan sebelumnya.
-                baseVisualPaddingForContent = 40;
+                baseVisualPaddingForContent = -40;
             }
         } else { // Layar lebih besar dari 640px (mobile/tablet besar hingga desktop)
             if (isNonIndexPage) {
                 // Untuk halaman non-indeks di layar > 640px: Dikurangi menjadi 40px (sebelumnya 80px)
                 // Ini seharusnya mengatasi masalah "turun banget" pada rentang ini.
-                baseVisualPaddingForContent = 40; 
+                baseVisualPaddingForContent = -40; 
             } else { // Halaman indeks di layar > 640px
                 // Halaman indeks tetap 40px.
-                baseVisualPaddingForContent = 40;
+                baseVisualPaddingForContent = -120;
             }
         }
 
