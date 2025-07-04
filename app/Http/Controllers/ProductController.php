@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 // ProductController handles the logic for displaying the products page, product detail, and catalog download
 class ProductController extends BaseController
@@ -280,7 +281,30 @@ class ProductController extends BaseController
             $fileUrl = config('app.storage_url', 'http://127.0.0.1:8002/storage') . '/catalogs/' . $filename;
         }
         
-        // Simple redirect to corrected file URL
-        return redirect($fileUrl);
+        try {
+            // Download file from the API server
+            $fileResponse = Http::get($fileUrl);
+            
+            if ($fileResponse->successful()) {
+                $filename = basename($fileUrl);
+                $catalogTitle = $catalogData['title'] ?? 'Catalog';
+                
+                // Create a proper filename with catalog title
+                $downloadFilename = Str::slug($catalogTitle) . '_' . $locale . '.pdf';
+                
+                // Return the file as download response
+                return response($fileResponse->body())
+                    ->header('Content-Type', 'application/pdf')
+                    ->header('Content-Disposition', 'attachment; filename="' . $downloadFilename . '"')
+                    ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+                    ->header('Pragma', 'no-cache')
+                    ->header('Expires', '0');
+            } else {
+                return redirect()->back()->with('error', 'Failed to download catalog');
+            }
+        } catch (\Exception $e) {
+            // If HTTP request fails, fallback to redirect
+            return redirect()->back()->with('error', 'Catalog download failed: ' . $e->getMessage());
+        }
     }
 }
