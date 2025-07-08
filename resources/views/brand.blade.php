@@ -157,8 +157,23 @@
                                     @endif
                                 </div>
                                 <div>
-                                    <h4 class="text-lg font-semibold {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
-                                    <p class="text-sm text-custom-lightgreen">Customer</p>
+                                    <!-- Customer name with optional link -->
+                                    @if(!empty($testimonial->t_link))
+                                        <a href="{{ $testimonial->t_link }}" target="_blank" class="text-lg font-semibold {{ $theme === 'dark' ? 'text-gray-200 hover:text-custom-lightgreen' : 'text-black hover:text-custom-green' }} transition-colors duration-200">
+                                            {{ $testimonial->t_name }}
+                                        </a>
+                                    @else
+                                        <h4 class="text-lg font-semibold {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
+                                    @endif
+                                    
+                                    <!-- Display product name instead of "Customer" -->
+                                    @if(!empty($testimonial->t_product_id) || !empty($testimonial->t_product_en))
+                                        <p class="text-sm text-custom-lightgreen">
+                                            {{ app()->getLocale() == 'en' ? ($testimonial->t_product_en ?? $testimonial->t_product_id) : ($testimonial->t_product_id ?? $testimonial->t_product_en) }}
+                                        </p>
+                                    @else
+                                        <p class="text-sm text-custom-lightgreen">Customer</p>
+                                    @endif
                                 </div>
                             </div>
                             <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-800' }} mb-4">
