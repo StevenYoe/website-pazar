@@ -34,7 +34,7 @@
 <!-- Vacancies Section: Shows filter options and job vacancy cards -->
 <section class="py-12 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} vacancies-section">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
-        <!-- Filter Section: Allows users to filter vacancies by department, employment type, and experience -->
+        <!-- Filter Section: Allows users to filter vacancies by department and experience -->
         <div class="filters mb-12 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200' }} rounded-lg shadow-md p-6">
             <h2 class="text-2xl font-bold mb-4 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.filter_vacancies') }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -46,19 +46,6 @@
                         @foreach($departments as $department)
                             <option value="{{ $department->da_id }}">
                                 {{ app()->getLocale() == 'en' ? $department->da_title_en : $department->da_title_id }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                
-                <!-- Employment Type Filter Dropdown -->
-                <div class="filter-group">
-                    <label for="employment-filter" class="block text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-800' }} mb-2">{{ __('general.work_model') }}</label>
-                    <select id="employment-filter" class="block w-full py-2 px-3 border dark:text-black border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-custom-green focus:border-custom-green">
-                        <option value="all">{{ __('general.all_work_models') }}</option>
-                        @foreach($employments as $employment)
-                            <option value="{{ $employment->e_id }}">
-                                {{ app()->getLocale() == 'en' ? $employment->e_title_en : $employment->e_title_id }}
                             </option>
                         @endforeach
                     </select>
@@ -86,7 +73,6 @@
                     <!-- Vacancy card for each job opening -->
                     <div class="vacancy-item {{ $theme === 'dark' ? 'bg-gray-300' : 'bg-gray-100' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden"
                         data-department="{{ $vacancy->v_department_id }}"
-                        data-employment="{{ $vacancy->v_employment_id }}"
                         data-experience="{{ $vacancy->v_experience_id }}">
                         
                         @if(isset($vacancy->v_urgent) && $vacancy->v_urgent)
@@ -116,16 +102,6 @@
                                         </svg>
                                         <span>
                                             {{ app()->getLocale() == 'en' ? $vacancy->department_name_en : $vacancy->department_name_id }}
-                                        </span>
-                                    </div>
-                                    
-                                    <div class="flex items-center">
-                                        <svg class="w-4 h-4 mr-2 text-custom-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                            <circle cx="12" cy="10" r="3"></circle>
-                                        </svg>
-                                        <span>
-                                            {{ app()->getLocale() == 'en' ? $vacancy->employment_name_en : $vacancy->employment_name_id }}
                                         </span>
                                     </div>
                                     

@@ -29,20 +29,12 @@ class VacancyController extends BaseController
             $header = $this->processHeader($headerResponse['data']['header']);
         }
 
-        // Get department, employment, and experience data for filtering
+        // Get department and experience data for filtering
         $departmentsResponse = $this->crudApiGet('/departments/all');
         $departments = [];
         if (isset($departmentsResponse['success']) && $departmentsResponse['success'] && isset($departmentsResponse['data'])) {
             foreach ($departmentsResponse['data'] as $department) {
                 $departments[] = (object) $department;
-            }
-        }
-
-        $employmentsResponse = $this->crudApiGet('/employments/all');
-        $employments = [];
-        if (isset($employmentsResponse['success']) && $employmentsResponse['success'] && isset($employmentsResponse['data'])) {
-            foreach ($employmentsResponse['data'] as $employment) {
-                $employments[] = (object) $employment;
             }
         }
 
@@ -60,11 +52,6 @@ class VacancyController extends BaseController
             $departmentLookup[$department->da_id] = $department;
         }
 
-        $employmentLookup = [];
-        foreach ($employments as $employment) {
-            $employmentLookup[$employment->e_id] = $employment;
-        }
-
         $experienceLookup = [];
         foreach ($experiences as $experience) {
             $experienceLookup[$experience->ex_id] = $experience;
@@ -77,7 +64,7 @@ class VacancyController extends BaseController
         if (isset($vacanciesResponse['success']) && $vacanciesResponse['success'] && isset($vacanciesResponse['data'])) {
             foreach ($vacanciesResponse['data'] as $vacancy) {
                 // Process vacancy data and ensure all relationships are set
-                $processedVacancy = $this->processVacancy($vacancy, $departmentLookup, $employmentLookup, $experienceLookup);
+                $processedVacancy = $this->processVacancy($vacancy, $departmentLookup, $experienceLookup);
                 $vacancies[] = $processedVacancy;
             }
         }
@@ -86,7 +73,6 @@ class VacancyController extends BaseController
         return view('vacancies', [
             'header' => $header,
             'departments' => $departments,
-            'employments' => $employments,
             'experiences' => $experiences,
             'vacancies' => $vacancies
         ]);
@@ -108,20 +94,12 @@ class VacancyController extends BaseController
         $allVacancies = [];
         
         if (isset($vacanciesResponse['success']) && $vacanciesResponse['success'] && isset($vacanciesResponse['data'])) {
-            // Get lookup data for departments, employments, and experiences
+            // Get lookup data for departments and experiences
             $departmentsResponse = $this->crudApiGet('/departments/all');
             $departmentLookup = [];
             if (isset($departmentsResponse['success']) && $departmentsResponse['success'] && isset($departmentsResponse['data'])) {
                 foreach ($departmentsResponse['data'] as $department) {
                     $departmentLookup[$department['da_id']] = (object) $department;
-                }
-            }
-            
-            $employmentsResponse = $this->crudApiGet('/employments/all');
-            $employmentLookup = [];
-            if (isset($employmentsResponse['success']) && $employmentsResponse['success'] && isset($employmentsResponse['data'])) {
-                foreach ($employmentsResponse['data'] as $employment) {
-                    $employmentLookup[$employment['e_id']] = (object) $employment;
                 }
             }
             
@@ -135,7 +113,7 @@ class VacancyController extends BaseController
             
             // Loop through all vacancies to find the one matching the slug
             foreach ($vacanciesResponse['data'] as $vacancy) {
-                $processedVacancy = $this->processVacancy($vacancy, $departmentLookup, $employmentLookup, $experienceLookup);
+                $processedVacancy = $this->processVacancy($vacancy, $departmentLookup, $experienceLookup);
                 $allVacancies[] = $processedVacancy;
                 
                 // Create slug based on current language
@@ -151,7 +129,7 @@ class VacancyController extends BaseController
                     // Get detailed vacancy info
                     $detailResponse = $this->crudApiGet('/vacancies/' . $vacancyId);
                     if (isset($detailResponse['success']) && $detailResponse['success'] && isset($detailResponse['data'])) {
-                        $foundVacancy = $this->processVacancyDetail($detailResponse['data'], $departmentLookup, $employmentLookup, $experienceLookup);
+                        $foundVacancy = $this->processVacancyDetail($detailResponse['data'], $departmentLookup, $experienceLookup);
                         // Add proper slug for current locale
                         $foundVacancy->slug = $vacancySlug;
                     }
@@ -207,11 +185,10 @@ class VacancyController extends BaseController
      *
      * @param array $vacancy The vacancy data from API
      * @param array $departmentLookup Department lookup table
-     * @param array $employmentLookup Employment lookup table
      * @param array $experienceLookup Experience lookup table
      * @return object The processed vacancy object
      */
-    private function processVacancy($vacancy, $departmentLookup = [], $employmentLookup = [], $experienceLookup = [])
+    private function processVacancy($vacancy, $departmentLookup = [], $experienceLookup = [])
     {
         // Convert array to object if not already
         $vacancyObj = is_array($vacancy) ? (object) $vacancy : $vacancy;
@@ -223,11 +200,9 @@ class VacancyController extends BaseController
             ($vacancyObj->v_title_id ?? $vacancyObj->v_title_en);
         $vacancyObj->slug = Str::slug($titleToUse);
 
-        // Initialize department, employment, and experience properties
+        // Initialize department and experience properties
         $vacancyObj->department_name_id = '';
         $vacancyObj->department_name_en = '';
-        $vacancyObj->employment_name_id = '';
-        $vacancyObj->employment_name_en = '';
         $vacancyObj->experience_name_id = '';
         $vacancyObj->experience_name_en = '';
 
@@ -243,21 +218,6 @@ class VacancyController extends BaseController
                 $department = $departmentLookup[$departmentId];
                 $vacancyObj->department_name_id = $department->da_title_id ?? '';
                 $vacancyObj->department_name_en = $department->da_title_en ?? '';
-            }
-        }
-
-        // Process employment info
-        if (isset($vacancyObj->employment) && !empty($vacancyObj->employment)) {
-            $employment = is_array($vacancyObj->employment) ? (object) $vacancyObj->employment : $vacancyObj->employment;
-            $vacancyObj->employment_name_id = isset($employment->e_title_id) ? trim($employment->e_title_id) : '';
-            $vacancyObj->employment_name_en = isset($employment->e_title_en) ? trim($employment->e_title_en) : '';
-        }
-        else if (isset($vacancyObj->v_employment_id) && !empty($employmentLookup)) {
-            $employmentId = $vacancyObj->v_employment_id;
-            if (isset($employmentLookup[$employmentId])) {
-                $employment = $employmentLookup[$employmentId];
-                $vacancyObj->employment_name_id = $employment->e_title_id ?? '';
-                $vacancyObj->employment_name_en = $employment->e_title_en ?? '';
             }
         }
 
@@ -295,12 +255,11 @@ class VacancyController extends BaseController
      *
      * @param array $vacancy The vacancy data from API
      * @param array $departmentLookup Department lookup table
-     * @param array $employmentLookup Employment lookup table
      * @param array $experienceLookup Experience lookup table
      * @return object The processed vacancy detail object
      */
-    private function processVacancyDetail($vacancy, $departmentLookup = [], $employmentLookup = [], $experienceLookup = [])
+    private function processVacancyDetail($vacancy, $departmentLookup = [], $experienceLookup = [])
     {
-        return $this->processVacancy($vacancy, $departmentLookup, $employmentLookup, $experienceLookup);
+        return $this->processVacancy($vacancy, $departmentLookup, $experienceLookup);
     }
 }

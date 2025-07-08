@@ -24,13 +24,11 @@ return [
     'qualifications' => 'Kualifikasi',
     'job_details' => 'Detail Pekerjaan',
     'department' => 'Departemen',
-    'work_model' => 'Model Kerja',
     'job_type' => 'Jenis Pekerjaan',
     'experience' => 'Pengalaman',
     'closing_date' => 'Pendaftaran Ditutup:',
     'filter_vacancies' => 'Filter Lowongan',
     'all_departments' => 'Semua Departemen',
-    'all_work_models' => 'Semua Model Kerja',
     'all_experiences' => 'Semua Pengalaman',
     'no_vacancies' => 'Tidak ada lowongan yang sesuai dengan kriteria
     filter',

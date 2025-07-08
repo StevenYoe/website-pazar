@@ -4,9 +4,8 @@
 // Each section and function is commented to clarify its purpose and logic for future maintainers.
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Filter elements for department, employment, and experience
+    // Filter elements for department and experience
     const departmentFilter = document.getElementById('department-filter');
-    const employmentFilter = document.getElementById('employment-filter');
     const experienceFilter = document.getElementById('experience-filter');
     const vacanciesContainer = document.getElementById('vacancies-container');
     const noResultsDiv = document.getElementById('no-results');
@@ -15,33 +14,29 @@ document.addEventListener('DOMContentLoaded', function() {
     setupShareButtons();
     
     // Only proceed with filter functionality if all filters exist (vacancies page)
-    if (departmentFilter && employmentFilter && experienceFilter) {
+    if (departmentFilter && experienceFilter) {
         // Initial filter check in case filters are pre-selected
         filterVacancies();
         // Add event listeners to filters
         departmentFilter.addEventListener('change', filterVacancies);
-        employmentFilter.addEventListener('change', filterVacancies);
         experienceFilter.addEventListener('change', filterVacancies);
     }
     
     // Filter vacancies based on selected filters
     function filterVacancies() {
         const selectedDepartment = departmentFilter.value;
-        const selectedEmployment = employmentFilter.value;
         const selectedExperience = experienceFilter.value;
         let visibleCount = 0;
         // Get all vacancy items
         const vacancyItems = document.querySelectorAll('.vacancy-item');
         vacancyItems.forEach(function(item) {
             const departmentId = item.getAttribute('data-department');
-            const employmentId = item.getAttribute('data-employment');
             const experienceId = item.getAttribute('data-experience');
             // Check if item matches all selected filters or if 'all' is selected
             const departmentMatch = selectedDepartment === 'all' || departmentId === selectedDepartment;
-            const employmentMatch = selectedEmployment === 'all' || employmentId === selectedEmployment;
             const experienceMatch = selectedExperience === 'all' || experienceId === selectedExperience;
             // Only show items that match all selected filters
-            if (departmentMatch && employmentMatch && experienceMatch) {
+            if (departmentMatch && experienceMatch) {
                 item.style.display = '';
                 visibleCount++;
             } else {

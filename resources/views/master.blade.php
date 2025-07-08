@@ -45,7 +45,6 @@
         <link href="https://fonts.cdnfonts.com/css/roboto" rel="stylesheet">
         
         <!-- Preconnect for performance -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://cdn.jsdelivr.net">
         
         <!-- Multilingual SEO -->
