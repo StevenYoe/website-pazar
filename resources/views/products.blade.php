@@ -6,6 +6,7 @@
 <!-- Include product and card height styles for consistent layout -->
 <link href="{{ asset('css/product.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
+<link href="{{ asset('css/product-search.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
 @section('header')
@@ -35,6 +36,34 @@
             <a href="{{ route(app()->getLocale() . '.products.download-catalog') }}" class="download-catalog-btn inline-block bg-custom-lightergreen hover:bg-custom-green text-white font-bold py-3 px-8 rounded-lg transition duration-300">
                 {{ app()->getLocale() == 'en' ? 'Download Catalog' : 'Unduh Katalog' }}
             </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container mb-6">
+                <div class="relative max-w-md mx-auto">
+                    <input 
+                        type="text" 
+                        id="productSearch" 
+                        placeholder="{{ app()->getLocale() == 'en' ? 'Search products...' : 'Cari produk...' }}"
+                        class="w-full px-4 py-3 pl-12 pr-4 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent {{ $theme === 'dark' ? 'bg-gray-800 text-white border-gray-600' : '' }}"
+                    >
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <!-- Clear search button -->
+                    <button 
+                        type="button" 
+                        id="clearSearch" 
+                        class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-gray-600 hidden"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
             <div class="filter-buttons">
                 <!-- Filter button for all categories -->
                 <button class="filter-btn {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }} active" data-filter="all">{{ __('general.all_categories') }}</button>
@@ -51,13 +80,24 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- No results message -->
+        <div id="noResults" class="text-center py-10 hidden">
+            <p class="text-lg {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }}">
+                {{ app()->getLocale() == 'en' ? 'No products found matching your search.' : 'Tidak ada produk yang ditemukan sesuai pencarian Anda.' }}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="productsGrid">
             @if(count($products) > 0)
                 @foreach($products as $product)
                     <!-- Product card for each product -->
                     <div class="product-item {{ $theme === 'dark' ? 'bg-gray-400' : 'bg-gray-200' }} rounded-lg shadow-sm flex flex-col border border-gray-100 overflow-hidden max-w-xs mx-auto w-full" 
                         data-id="{{ $product->p_id }}" 
-                        data-category="{{ $product->category_name_id }}">
+                        data-category="{{ $product->category_name_id }}"
+                        data-title-id="{{ strtolower($product->p_title_id) }}"
+                        data-title-en="{{ strtolower($product->p_title_en) }}"
+                        data-description-id="{{ strtolower($product->p_description_id) }}"
+                        data-description-en="{{ strtolower($product->p_description_en) }}">
                         <div class="h-48 overflow-hidden">
                             <img src="{{ $product->p_image }}" alt="{{ $product->p_title_id }}" class="w-full h-full object-cover">
                         </div>
@@ -91,5 +131,6 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/product.js') }}"></script>
+<script src="{{ asset('js/product-search.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 @endsection
