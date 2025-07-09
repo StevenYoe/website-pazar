@@ -30,19 +30,55 @@
 <!-- Recipe Section: Shows filter buttons and recipe cards -->
 <section class="py-12 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased recipe-section">
     <div class="max-w-screen-xl mx-auto px-4 md:px-20">
-        <div class="filter-buttons mb-8">
-            <!-- Filter button for all categories -->
-            <button class="filter-btn {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }} active" data-filter="all">{{ __('general.all_categories') }}</button>
-            @if(count($categories) > 0)
-                @foreach($categories as $category)
-                    <!-- Filter button for each recipe category -->
-                    <button class="filter-btn {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }}" data-filter="{{ $category->rc_title_id }}">
-                        {{ app()->getLocale() == 'en' ? $category->rc_title_en : $category->rc_title_id }}
+        <div class="filter-container">
+            <!-- Search Bar -->
+            <div class="search-container mb-6">
+                <div class="relative max-w-md mx-auto">
+                    <input 
+                        type="text" 
+                        id="recipeSearch" 
+                        placeholder="{{ app()->getLocale() == 'en' ? 'Search recipes...' : 'Cari resep...' }}"
+                        class="w-full px-4 py-3 pl-12 pr-4 bg-white border-gray-300 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent"
+                    >
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <!-- Clear search button -->
+                    <button 
+                        type="button" 
+                        id="clearSearch" 
+                        class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-gray-600 hidden"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </button>
-                @endforeach
-            @else
-                <p class="{{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }}">{{ __('general.no_categories') }}</p>
-            @endif
+                </div>
+            </div>
+            
+            <div class="filter-buttons mb-8">
+                <!-- Filter button for all categories -->
+                <button class="filter-btn {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }} active" data-filter="all">{{ __('general.all_categories') }}</button>
+                @if(count($categories) > 0)
+                    @foreach($categories as $category)
+                        <!-- Filter button for each recipe category -->
+                        <button class="filter-btn {{ $theme === 'dark' ? 'bg-transparent' : 'bg-custom-lightergreen' }}" data-filter="{{ $category->rc_title_id }}">
+                            {{ app()->getLocale() == 'en' ? $category->rc_title_en : $category->rc_title_id }}
+                        </button>
+                    @endforeach
+                @else
+                    <p class="{{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }}">{{ __('general.no_categories') }}</p>
+                @endif
+            </div>
+        </div>
+
+        <!-- No results message -->
+        <div id="noResults" class="text-center py-10 hidden">
+            <p class="text-lg {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }}">
+                {{ app()->getLocale() == 'en' ? 'No recipes found matching your search.' : 'Tidak ada resep yang ditemukan sesuai pencarian Anda.' }}
+            </p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -89,5 +125,6 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/recipe.js') }}"></script>
+<script src="{{ asset('js/recipe-search.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 @endsection

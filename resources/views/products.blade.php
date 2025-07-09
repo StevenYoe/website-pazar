@@ -6,7 +6,6 @@
 <!-- Include product and card height styles for consistent layout -->
 <link href="{{ asset('css/product.css') }}" rel="stylesheet" type="text/css" >
 <link href="{{ asset('css/card-height.css') }}" rel="stylesheet" type="text/css" >
-<link href="{{ asset('css/product-search.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
 @section('header')
@@ -44,7 +43,7 @@
                         type="text" 
                         id="productSearch" 
                         placeholder="{{ app()->getLocale() == 'en' ? 'Search products...' : 'Cari produk...' }}"
-                        class="w-full px-4 py-3 pl-12 pr-4 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent {{ $theme === 'dark' ? 'bg-gray-800 text-white border-gray-600' : '' }}"
+                        class="w-full px-4 py-3 pl-12 pr-4 bg-white border-gray-300 text-black border rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent"
                     >
                     <div class="absolute inset-y-0 left-0 flex items-center pl-4">
                         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

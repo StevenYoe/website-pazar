@@ -37,7 +37,41 @@
         <!-- Filter Section: Allows users to filter vacancies by department and experience -->
         <div class="filters mb-12 {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200' }} rounded-lg shadow-md p-6">
             <h2 class="text-2xl font-bold mb-4 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.filter_vacancies') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Search Bar -->
+            <div class="search-container mb-6">
+                <div class="relative max-w-md mx-auto">
+                    <input 
+                        type="text" 
+                        id="vacancySearch" 
+                        placeholder="{{ app()->getLocale() == 'en' ? 'Search vacancies...' : 'Cari lowongan...' }}"
+                        class="w-full px-4 py-3 pl-12 pr-4 border bg-white border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-custom-green focus:border-transparent"
+                    >
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <!-- Clear search button -->
+                    <button 
+                        type="button" 
+                        id="clearSearch" 
+                        class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-gray-600 hidden"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Search hint -->
+                <div class="text-xs {{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-500' }} mt-2 text-center">
+                    {{ app()->getLocale() == 'en' 
+                        ? 'Press Ctrl+K to focus search' 
+                        : 'Tekan Ctrl+K untuk fokus pencarian' }}
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Department Filter Dropdown -->
                 <div class="filter-group">
                     <label for="department-filter" class="block text-sm font-medium {{ $theme === 'dark' ? 'text-gray-300' : 'text-gray-800' }} mb-2">{{ __('general.department') }}</label>
@@ -124,12 +158,18 @@
                     </div>
                 @endforeach
             @else
+                <!-- Message if no vacancies are available -->
+                <div class="col-span-full text-center py-10">
+                    <p class="text-lg {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }}">{{ __('general.no_vacancies') }}</p>
+                </div>
             @endif
         </div>
         
         <!-- No Results Message: Appears if no vacancies match the filters -->
-        <div id="no-results" class="hidden text-center py-10 col-span-full">
-            <p class="text-lg text-gray-500">{{ __('general.no_vacancies') }}</p>
+        <div id="no-results" class="hidden text-center py-10">
+            <p class="text-lg {{ $theme === 'dark' ? 'text-gray-500' : 'text-black' }}">
+                {{ app()->getLocale() == 'en' ? 'No vacancies found matching your criteria.' : 'Tidak ada lowongan yang ditemukan sesuai kriteria Anda.' }}
+            </p>
         </div>
     </div>
 </section>
@@ -140,5 +180,6 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/card-height.js') }}"></script>
 <script src="{{ asset('js/vacancy.js') }}"></script>
+<script src="{{ asset('js/vacancy-search.js') }}"></script>
 <script src="{{ asset('js/back-to-top.js') }}"></script>
 @endsection

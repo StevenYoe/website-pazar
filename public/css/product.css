@@ -14,6 +14,11 @@
     margin-bottom: 3rem;
 }
 
+/* Search container spacing */
+.search-container {
+    margin-bottom: 0;
+}
+
 .filter-buttons {
     display: flex;
     justify-content: center;
@@ -176,8 +181,20 @@
         padding: 0 1rem;
     }
     
+    /* Ensure proper order on mobile: Download button -> Search bar -> Filter buttons */
+    .download-catalog-btn {
+        order: 1;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .search-container {
+        order: 2;
+        width: 100%;
+    }
+    
     .filter-buttons {
-        order: 2; /* Move filter buttons below the download button on mobile */
+        order: 3;
     }
 
     .section-title {
@@ -209,11 +226,5 @@
         flex-direction: column;
         align-items: center;
         gap: 0.75rem;
-    }
-    
-    .download-catalog-btn {
-        order: 1; /* Move download button above the filters on mobile */
-        width: 100%;
-        text-align: center;
     }
 }
