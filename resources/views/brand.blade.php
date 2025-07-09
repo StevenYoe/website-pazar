@@ -177,7 +177,7 @@
                                 </div>
                             </div>
                             <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-800' }} mb-4">
-                                {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
+                                {!! app()->getLocale() == 'en' ? nl2br(e($testimonial->t_description_en)) : nl2br(e($testimonial->t_description_id)) !!}
                             </p>
                         </div>
                     @endforeach
@@ -200,7 +200,7 @@
                                 <div class="md:w-2/5 md:pl-8">
                                     <h4 class="text-xl font-bold mb-4 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
                                     <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-800' }}">
-                                        {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
+                                        {!! app()->getLocale() == 'en' ? nl2br(e($testimonial->t_description_en)) : nl2br(e($testimonial->t_description_id)) !!}
                                     </p>
                                 </div>
                             </div>
@@ -215,7 +215,7 @@
                                 <div class="md:w-2/5 md:pl-8 md:pr-0">
                                     <h4 class="text-xl font-bold mb-4 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ $testimonial->t_name }}</h4>
                                     <p class="{{ $theme === 'dark' ? 'text-gray-400' : 'text-gray-800' }}">
-                                        {{ app()->getLocale() == 'en' ? $testimonial->t_description_en : $testimonial->t_description_id }}
+                                        {!! app()->getLocale() == 'en' ? nl2br(e($testimonial->t_description_en)) : nl2br(e($testimonial->t_description_id)) !!}
                                     </p>
                                 </div>
                             </div>
