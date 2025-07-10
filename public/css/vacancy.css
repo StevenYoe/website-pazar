@@ -32,7 +32,7 @@
     box-shadow: 0 0 0 2px rgba(72, 187, 120, 0.2);
 }
 
-/* Vacancy Card Styling */
+/* Vacancy Card Styling - Fixed height and alignment */
 .vacancy-item {
     border-radius: 8px;
     overflow: hidden;
@@ -40,12 +40,57 @@
     border: 2px solid transparent;
     height: 100%;
     position: relative; /* For absolute positioning of urgent tag */
+    display: flex;
+    flex-direction: column;
 }
 
 .vacancy-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
     border-color: var(--custom-green);
+}
+
+/* Make the card content area flex to push "See more" to bottom */
+.vacancy-item .p-6 {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Make the card content area flex to push "See more" to bottom */
+.vacancy-item .p-6 {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Title stays at top */
+.vacancy-item h3 {
+    line-height: 1.3;
+    transition: color 0.3s ease;
+    margin-bottom: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* Content area - department and experience info */
+.vacancy-item .p-6 > div:nth-child(2) {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Keep the department and experience info at the top of content area */
+.vacancy-item .p-6 > div:nth-child(2) > p:first-child {
+    margin-bottom: 1rem;
+}
+
+.vacancy-item .p-6 > div:nth-child(2) > .flex-col.space-y-2 {
+    margin-bottom: 0;
 }
 
 /* Tag styling */
@@ -64,26 +109,19 @@
 }
 
 /* Title styling */
-.vacancy-item h3 {
-    line-height: 1.3;
-    transition: color 0.3s ease;
-}
-
 .vacancy-item:hover h3 {
     color: var(--custom-green);
 }
 
-.vacancy-item .flex-col.space-y-2 {
-    margin-top: 0.5rem;
-}
-
-/* View details link styling */
+/* View details link styling - Always at bottom */
 .vacancy-item a,
 .vacancy-item a.text-custom-green {
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
     padding-top: 0.5rem;
+    margin-top: auto;
+    align-self: flex-end;
 }
 
 .vacancy-item a:after,
@@ -150,12 +188,6 @@
 .vacancy-item:hover .urgent-tag span {
     background-color: #f56565;
     color: white;
-}
-
-/* Make sure content is properly positioned inside vacancy-item */
-.vacancy-item .p-6 {
-    position: relative;
-    z-index: 1;
 }
 
 /* Icon styling */

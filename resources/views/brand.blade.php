@@ -40,16 +40,16 @@
 @endsection
 
 @section('content')
-<!-- Why Pazar section: highlights key reasons to choose Pazar -->
+<!-- Why Pazar section: highlights key reasons to choose Pazar (max 5 per row, centered) -->
 <section class="why-pazar py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-gray-200' : 'text-black' }}">{{ __('general.why_pazar') }}</h2>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
+        @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
+            <div class="flex flex-wrap justify-center gap-6">
                 @foreach($whyPazarItems as $item)
-                    {{-- Card for each selling point --}}
-                    <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 flex flex-col">
+                    {{-- Each card with consistent width and flexible layout --}}
+                    <div class="flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(20%-19.2px)] max-w-xs {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 flex flex-col">
                         <div class="flex items-start mb-2">
                             <div class="flex-shrink-0 mr-2">
                                 <img src="{{ $item->w_image }}" alt="{{ $item->w_title_id }}" class="w-10 h-10">
@@ -63,8 +63,8 @@
                         </p>
                     </div>
                 @endforeach
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
 </section>
 
@@ -139,13 +139,13 @@
             </div>
         </div>
         
-        <!-- Customer testimonials tab content -->
+        <!-- Customer testimonials tab content (max 3 per row, centered) -->
         <div id="customerTestimonials" class="testimonial-content">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @if(isset($customerTestimonials) && count($customerTestimonials) > 0)
+            @if(isset($customerTestimonials) && count($customerTestimonials) > 0)
+                <div class="flex flex-wrap justify-center gap-8">
                     @foreach($customerTestimonials as $index => $testimonial)
-                        <!-- Each customer testimonial card -->
-                        <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 relative">
+                        <!-- Each customer testimonial card with consistent width -->
+                        <div class="flex-none w-full md:w-[calc(50%-16px)] lg:w-[calc(33.333%-21.33px)] max-w-sm {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 relative">
                             <div class="flex items-center mb-4">
                                 <div class="h-10 w-10 mr-4">
                                     @if($testimonial->t_image)
@@ -181,8 +181,8 @@
                             </p>
                         </div>
                     @endforeach
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
         
         <!-- Chef testimonials tab content -->

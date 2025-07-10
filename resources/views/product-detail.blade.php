@@ -86,30 +86,40 @@
         @if(isset($product->detail))
         <div class="mt-10 pt-6">
             <h3 class="text-xl font-medium {{ $theme === 'dark' ? 'text-white' : 'text-gray-900' }} text-center mb-6">{{ __('general.buy_now') }}</h3>
-            <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 max-w-2xl mx-auto">
-                @if(!empty($product->detail->pd_link_shopee))
-                <a href="{{ $product->detail->pd_link_shopee }}" target="_blank">
-                    <img src="{{ config('app.storage_url') }}/webs/Shopee.png" alt="Shopee" class="w-full transition-opacity">
-                </a>
-                @endif
-                
-                @if(!empty($product->detail->pd_link_tokopedia))
-                <a href="{{ $product->detail->pd_link_tokopedia }}" target="_blank">
-                    <img src="{{ config('app.storage_url') }}/webs/Tokopedia.png" alt="Tokopedia" class="w-full transition-opacity">
-                </a>
-                @endif
-                
-                @if(!empty($product->detail->pd_link_blibli))
-                <a href="{{ $product->detail->pd_link_blibli }}" target="_blank">
-                    <img src="{{ config('app.storage_url') }}/webs/Blibli.png" alt="Blibli" class="w-full transition-opacity">
-                </a>
-                @endif
-                
-                @if(!empty($product->detail->pd_link_lazada))
-                <a href="{{ $product->detail->pd_link_lazada }}" target="_blank">
-                    <img src="{{ config('app.storage_url') }}/webs/Lazada.png" alt="Lazada" class="w-full transition-opacity">
-                </a>
-                @endif
+            <div class="flex justify-center items-center">
+                <div class="flex flex-wrap justify-center gap-4 max-w-2xl">
+                    @if(!empty($product->detail->pd_link_shopee))
+                    <div class="w-32 sm:w-36">
+                        <a href="{{ $product->detail->pd_link_shopee }}" target="_blank">
+                            <img src="{{ config('app.storage_url') }}/webs/Shopee.png" alt="Shopee" class="w-full transition-opacity hover:opacity-80">
+                        </a>
+                    </div>
+                    @endif
+                    
+                    @if(!empty($product->detail->pd_link_tokopedia))
+                    <div class="w-32 sm:w-36">
+                        <a href="{{ $product->detail->pd_link_tokopedia }}" target="_blank">
+                            <img src="{{ config('app.storage_url') }}/webs/Tokopedia.png" alt="Tokopedia" class="w-full transition-opacity hover:opacity-80">
+                        </a>
+                    </div>
+                    @endif
+                    
+                    @if(!empty($product->detail->pd_link_blibli))
+                    <div class="w-32 sm:w-36">
+                        <a href="{{ $product->detail->pd_link_blibli }}" target="_blank">
+                            <img src="{{ config('app.storage_url') }}/webs/Blibli.png" alt="Blibli" class="w-full transition-opacity hover:opacity-80">
+                        </a>
+                    </div>
+                    @endif
+                    
+                    @if(!empty($product->detail->pd_link_lazada))
+                    <div class="w-32 sm:w-36">
+                        <a href="{{ $product->detail->pd_link_lazada }}" target="_blank">
+                            <img src="{{ config('app.storage_url') }}/webs/Lazada.png" alt="Lazada" class="w-full transition-opacity hover:opacity-80">
+                        </a>
+                    </div>
+                    @endif
+                </div>
             </div>
         </div>
         @endif

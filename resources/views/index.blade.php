@@ -66,16 +66,16 @@
 </div>
 @endif
 
-<!-- Why Pazar Section: Highlights the unique selling points of Pazar -->
+<!-- Why Pazar Section: Highlights the unique selling points of Pazar (max 5 per row, centered) -->
 <section class="why-pazar py-16 {{ $theme === 'dark' ? 'bg-gray-900' : 'bg-white' }} antialiased">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.why_pazar') }}</h2>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
+        @if(isset($whyPazarItems) && count($whyPazarItems) > 0)
+            <div class="flex flex-wrap justify-center gap-6">
                 @foreach($whyPazarItems as $item)
-                    <!-- Each card represents a reason to choose Pazar -->
-                    <div class="{{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 flex flex-col">
+                    <!-- Each card with consistent width and flexible layout -->
+                    <div class="flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(20%-19.2px)] max-w-xs {{ $theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100' }} rounded-lg shadow-sm p-6 flex flex-col">
                         <div class="flex items-start mb-2">
                             <div class="flex-shrink-0 mr-2">
                                 <img src="{{ $item->w_image }}" alt="{{ $item->w_title_id }}" class="w-10 h-10">
@@ -89,24 +89,24 @@
                         </p>
                     </div>
                 @endforeach
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
 </section>
 
-<!-- Product Category Section: Lists product categories with images and descriptions -->
+<!-- Product Category Section: Lists product categories with images and descriptions (max 4 per row, centered) -->
 <section class="product-category py-10 {{ $theme === 'dark' ? 'bg-gray-950' : 'bg-white' }} antialiased">
-    <div class="max-w-screen-xl mx-auto px-20">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold text-center mb-12 {{ $theme === 'dark' ? 'text-white' : 'text-black' }}">{{ __('general.product_category') }}</h2>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
-            @if(isset($productCategories) && count($productCategories) > 0)
+        @if(isset($productCategories) && count($productCategories) > 0)
+            <div class="flex flex-wrap justify-center gap-8">
                 @foreach($productCategories as $category)
-                    <div class="category-item card-container {{ $theme === 'dark' ? 'bg-white' : 'bg-gray-300' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden max-w-xs mx-auto w-full">
+                    <div class="flex-none w-full sm:w-[calc(50%-16px)] lg:w-[calc(25%-24px)] max-w-xs {{ $theme === 'dark' ? 'bg-white' : 'bg-gray-300' }} rounded-lg shadow-sm flex flex-col border border-gray-200 overflow-hidden">
                         <div class="h-48 overflow-hidden">
                             <img src="{{ $category->pc_image ?? 'img/Category/default-category.jpg' }}" alt="{{ $category->pc_title_id }}" class="w-full h-full object-cover">
                         </div>
-                        <div class="p-6 flex flex-col">
+                        <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-xl font-bold mb-2 line-clamp-2">
                                 {{ app()->getLocale() == 'en' ? $category->pc_title_en : $category->pc_title_id }}
                             </h3>
@@ -119,8 +119,8 @@
                         </div>
                     </div>
                 @endforeach
-            @endif
-        </div>
+            </div>
+        @endif
     </div>
 </section>
 
