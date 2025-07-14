@@ -118,7 +118,7 @@
 
                 <!-- Apply Button -->
                 <div class="mt-6">
-                    <a href="mailto:careers@company.com?subject=Application for {{ $vacancy->v_title_en }}" class="inline-block bg-custom-green hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <a href="mailto:adm.hrga@pazarseasonings.com?subject=Application for {{ $vacancy->v_title_en }}" class="inline-block bg-custom-green hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
                         {{ __('general.apply_now') }}
                     </a>
                 </div>
