@@ -87,33 +87,38 @@
                     </div>
                 </div>
 
-                <!-- Job Description -->
+                @if((app()->getLocale() == 'en' && !empty($vacancy->v_description_en)) || (app()->getLocale() == 'id' && !empty($vacancy->v_description_id)))
                 <div class="mb-6">
                     <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">{{ __('general.job_description') }}</h2>
                     <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
-                        {{ app()->getLocale() == 'en' ? $vacancy->v_description_en : $vacancy->v_description_id }}
+                        {!! app()->getLocale() == 'en' ? nl2br(e($vacancy->v_description_en)) : nl2br(e($vacancy->v_description_id)) !!}
                     </div>
                 </div>
-
-                <!-- Job Responsibilities -->
-                <div class="mb-6">
-                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">{{ __('general.main_responsibilities') }}</h2>
-                    <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
-                        {{ app()->getLocale() == 'en' ? $vacancy->v_responsibilities_en : $vacancy->v_responsibilities_id }}
-                    </div>
-                </div>
+                @endif
 
                 <!-- Job Requirements -->
+                @if((app()->getLocale() == 'en' && !empty($vacancy->v_requirement_en)) || (app()->getLocale() == 'id' && !empty($vacancy->v_requirement_id)))
                 <div class="mb-6">
                     <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">{{ __('general.qualifications') }}</h2>
                     <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
-                        {{ app()->getLocale() == 'en' ? $vacancy->v_requirement_en : $vacancy->v_requirement_id }}
+                        {!! app()->getLocale() == 'en' ? nl2br(e($vacancy->v_requirement_en)) : nl2br(e($vacancy->v_requirement_id)) !!}
                     </div>
                 </div>
+                @endif
+
+                <!-- Job Responsibilities -->
+                @if((app()->getLocale() == 'en' && !empty($vacancy->v_responsibilities_en)) || (app()->getLocale() == 'id' && !empty($vacancy->v_responsibilities_id)))
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold {{ $theme === 'dark' ? 'text-white' : 'text-black' }} mb-2">{{ __('general.main_responsibilities') }}</h2>
+                    <div class="prose prose-sm sm:prose lg:prose-lg max-w-none dark:prose-dark">
+                        {!! app()->getLocale() == 'en' ? nl2br(e($vacancy->v_responsibilities_en)) : nl2br(e($vacancy->v_responsibilities_id)) !!}
+                    </div>
+                </div>
+                @endif
 
                 <!-- Apply Button -->
                 <div class="mt-6">
-                    <a href="mailto:careers@company.com?subject=Application for {{ $vacancy->v_title_id }}" class="inline-block bg-custom-green hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <a href="mailto:careers@company.com?subject=Application for {{ $vacancy->v_title_en }}" class="inline-block bg-custom-green hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
                         {{ __('general.apply_now') }}
                     </a>
                 </div>

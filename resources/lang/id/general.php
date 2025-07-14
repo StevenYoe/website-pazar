@@ -21,7 +21,7 @@ return [
     'link_copied' => 'Link disalin!',
     'job_description' => 'Deskripsi Pekerjaan',
     'main_responsibilities' => 'Tanggung Jawab Utama',
-    'qualifications' => 'Kualifikasi',
+    'qualifications' => 'Kualifikasi/Persyaratan',
     'job_details' => 'Detail Pekerjaan',
     'department' => 'Departemen',
     'job_type' => 'Jenis Pekerjaan',

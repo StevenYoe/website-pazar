@@ -21,7 +21,7 @@ return [
     'link_copied' => 'Link copied!',
     'job_description' => 'Job Description',
     'main_responsibilities' => 'Main Responsibilities',
-    'qualifications' => 'Qualifications',
+    'qualifications' => 'Qualifications/Requirements',
     'job_details' => 'Job Details',
     'department' => 'Department',
     'job_type' => 'Job Type',
