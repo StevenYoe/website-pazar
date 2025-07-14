@@ -262,7 +262,6 @@
                                             <li><a href="https://www.blibli.com/merchant/pazar-seasonings/PAS-70580" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Blibli</a></li>
                                             <li><a href="https://www.lazada.co.id/shop/pazar-seasonings/" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Lazada</a></li>
                                             <li><a href="https://www.tiktok.com/@pazar.seasonings" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Tiktok Shop</a></li>
-                                            <li><a href="https://www.bukalapak.com/u/pazarseasonings_113090" target="_blank" class="block px-4 py-2 hover:bg-custom-lightergreen {{ $theme === 'dark' ? 'hover:bg-custom-lightergreen hover:text-white' : 'hover:bg-custom-lightergreen hover:text-white' }}">Bukalapak</a></li>
                                         </ul>
                                     </div>
                                 </div>
