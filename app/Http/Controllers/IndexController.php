@@ -146,8 +146,10 @@ class IndexController extends BaseController
         // Get current locale for creating proper slug and category names
         $locale = app()->getLocale();
         
-        // Create slug from title (prefer Indonesian title if available)
-        $titleToUse = !empty($recipeObj->r_title_id) ? $recipeObj->r_title_id : $recipeObj->r_title_en;
+        // Create slug from title based on current locale (same logic as RecipeController)
+        $titleToUse = $locale === 'en' ?
+            ($recipeObj->r_title_en ?? $recipeObj->r_title_id) :
+            ($recipeObj->r_title_id ?? $recipeObj->r_title_en);
         $recipeObj->slug = Str::slug($titleToUse);
 
         // Process recipe categories with proper locale handling
