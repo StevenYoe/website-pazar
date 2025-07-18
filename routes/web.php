@@ -110,5 +110,5 @@ Route::get('/vacancies', function() { return redirect('/id/lowongan'); });
 
 // Fallback for all other routes (shows custom 404 page)
 Route::fallback(function () {
-    return view('404');
+    return response()->view('404', [], 404);
 });

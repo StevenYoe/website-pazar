@@ -247,14 +247,18 @@ All major sections, styles, and scripts are commented to help programmers unders
             <!-- Error code with glitch effect -->
             <div class="error-code glitch">404</div>
             <!-- Error title and message (localized) -->
-            <h1 class="error-title">{{ __('errors.404_title') }}</h1>
+            <h1 class="error-title">{{ __('errors.404_title') ?? 'Page Not Found' }}</h1>
             <p class="error-message">
-                {{ __('errors.404_message') }}
+                {{ __('errors.404_message') ?? 'The page you are looking for could not be found.' }}
             </p>
             <!-- Navigation buttons: go home or go back -->
             <div class="buttons-container">
-                <a href="{{ route('index') }}" class="btn btn-primary">{{ __('errors.go_home') }}</a>
-                <button class="btn btn-secondary" onclick="goBack()">{{ __('errors.go_back') }}</button>
+                @php
+                    $locale = app()->getLocale();
+                    $homeRoute = $locale === 'en' ? 'en.index' : 'id.index';
+                @endphp
+                <a href="{{ route($homeRoute) }}" class="btn btn-primary">{{ __('errors.go_home') ?? 'Go Home' }}</a>
+                <button class="btn btn-secondary" onclick="goBack()">{{ __('errors.go_back') ?? 'Go Back' }}</button>
             </div>
         </div>
     </div>
@@ -264,7 +268,11 @@ All major sections, styles, and scripts are commented to help programmers unders
             if (window.history.length > 1) {
                 window.history.back();
             } else {
-                window.location.href = '{{ route('index') }}';
+                @php
+                    $locale = app()->getLocale();
+                    $homeRoute = $locale === 'en' ? 'en.index' : 'id.index';
+                @endphp
+                window.location.href = '{{ route($homeRoute) }}';
             }
         }
         // Add interactive sparkle effects on mouse move

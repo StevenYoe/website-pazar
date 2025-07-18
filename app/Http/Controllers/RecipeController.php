@@ -224,9 +224,9 @@ class RecipeController extends BaseController
             }
         }
         
-        // If recipe not found, return 404
-        if (!$foundRecipe) {
-            return abort(404);
+        // If recipe not found, return custom 404 page
+        if (!$foundProduct) {
+            return response()->view('404', [], 404);
         }
         
         // Get random recipes (excluding current recipe) for recommendations

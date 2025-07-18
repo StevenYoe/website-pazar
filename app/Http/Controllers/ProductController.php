@@ -209,9 +209,9 @@ class ProductController extends BaseController
             }
         }
         
-        // If product not found, return 404
+        // If product not found, return custom 404 page
         if (!$foundProduct) {
-            return abort(404);
+            return response()->view('404', [], 404);
         }
         
         // Get random products (excluding current product) for recommendations
