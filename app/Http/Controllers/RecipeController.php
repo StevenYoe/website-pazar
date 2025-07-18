@@ -225,7 +225,7 @@ class RecipeController extends BaseController
         }
         
         // If recipe not found, return custom 404 page
-        if (!$foundProduct) {
+        if (!$foundRecipe) {
             return response()->view('404', [], 404);
         }
         

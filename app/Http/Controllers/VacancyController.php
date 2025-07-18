@@ -138,7 +138,7 @@ class VacancyController extends BaseController
         }
         
         // If vacancy not found, return custom 404 page
-        if (!$foundProduct) {
+        if (!$foundVacancy) {
             return response()->view('404', [], 404);
         }
         
