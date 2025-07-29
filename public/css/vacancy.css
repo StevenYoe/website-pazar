@@ -124,8 +124,17 @@
     align-self: flex-end;
 }
 
-.vacancy-item a:after,
-.vacancy-item a.text-custom-green:after {
+/* View details link styling - Always at bottom */
+.vacancy-item .see-more-link {
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    padding-top: 0.5rem;
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+.vacancy-item .see-more-link:after {
     content: '';
     position: absolute;
     width: 0;
@@ -136,9 +145,19 @@
     transition: width 0.3s ease;
 }
 
-.vacancy-item:hover a:after,
-.vacancy-item:hover a.text-custom-green:after {
+.vacancy-item:hover .see-more-link:after {
     width: 100%;
+}
+
+/* Title link styling - tanpa garis bawah */
+.vacancy-item h3 a {
+    transition: color 0.3s ease;
+    text-decoration: none;
+    position: relative;
+}
+
+.vacancy-item h3 a:after {
+    display: none; /* Matikan pseudo-element untuk title */
 }
 
 /* No results styling */
